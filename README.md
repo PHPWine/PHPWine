@@ -183,7 +183,7 @@ new \HtmlDfn;    [ dfn(); ]     |  new \HtmlDiv;  [ div(); ]      |  new \HtmlDa
 new \HtmlDl;     [ dl(); ]      |  new \HtmlDt;   [ dt(); ]       |  new \HtmlEm; [ em(); ]
 new \HtmlForm;   [ form(); ]    |  new \HtmlImg;  [ img(); ]      |  new \HtmlFooter;  [ footer(); ]
 new \HtmlIns;    [ ins(); ]     |  new \HtmlHead; [ head(); ]     |  new \HtmlKbd; [ kbd(); ]
-new \HtmlLi;     [ li(); ]      |  new \HtmlALink; [ alink(); ]   |  new \HtmlFigCaption; [ figcaption(); ] 
+new \HtmlLi;     [ li(); ]      |  new \HtmlLink; [ alink(); ]   |  new \HtmlFigCaption; [ figcaption(); ] 
 new \HtmlMain;   [ main(); ]    |  new \HtmlLabel;[ label(); ]    |  new \HtmlDialog; [ dialog(); ] 
 new \HtmlMark;   [ mark(); ]    |  new \HtmlOl;   [ ol(); ]       |  new \HtmlLegend; [ legend(); ]
 new \HtmlQ;      [ q(); ]       |  new \HtmlPre;  [ pre(); ]      |  new \HtmlOptGroup; [ optgroup(); ]
@@ -197,7 +197,7 @@ new \HtmlTr;     [ tr(); ]      |  new \HtmlUl;   [ ul(); ]         | new \HtmlW
 new \HtmlTable;  [ table(); ]   |  new \HtmlFigure;  [ figure(); ]  | new \HtmlIframe; [ iframe(); ] 
 new \HtmlItalic; [ italic(); ]  |  new \HtmlObject;  [ object(); ]  | new \HtmlTextarea; [ textarea(); ]
 new \HtmlScript; [ script(); ]  |  new \HtmlSection; [ section(); ] | new \HtmlTitle; [ title(); ]
-new \HtmlTbody;  [ tbody(); ]   |  new \HtmlThead;   [ thead(); ]   | new \HtmlTitle; [ video(); ]
+new \HtmlTbody;  [ tbody(); ]   |  new \HtmlThead;   [ thead(); ]   | new \HtmlVideo; [ video(); ]
 new \HtmlTemplate; [ template(); ]  |  new \HtmlStrong;  [ strong(); ] 
 new \HtmlSummary;[ summary(); ] |  new \HtmlTfooter  [ tfooter(); ];
 ```
@@ -209,7 +209,7 @@ new \HtmlSummary;[ summary(); ] |  new \HtmlTfooter  [ tfooter(); ];
   $childElement = [ CHILD => [
   
     ['div', ATTR  => ['class' =>'demo'] , VALUE => [ H1('Hello!') ]],  
-    ['p'  , VALUE => ["This is the array values!"] 
+    ['div', VALUE => ["This is the array values!"] 
           , INNER => [
 
         ['p'   , VALUE => ["Hello"] , ATTR => ['class' =>'demo'] ],
@@ -242,53 +242,40 @@ new \HtmlSummary;[ summary(); ] |  new \HtmlTfooter  [ tfooter(); ];
 ```
 
 ```PHP
-  // @since wine v 1.4 
-  echo div([ CHILD => [
-  
-  ['div', ATTR  => ['class' =>'demo'] , VALUE => [ H1('Hello!') ]],  
-  ['p'  , VALUE => ["This is the array values!"] 
-        , INNER => [
-          
-      ['elem_sort' => function() { // Inner Layer Child Elem Array ConditionaL
+    // @since wine v 1.4 
+    echo div([ CHILD => [
 
-       $say_inner      =  [ ['div', VALUE => ["Say hi!"], ATTR => ['class'=>'say_inner'] ] ];
-       $dont_say_inner =  [ ['div', VALUE => ["Don't say hi!"], ATTR => ['class'=>'dont_say_inner'] ] ];
+        ['elem_sort' => function() { 
 
-       return ( true ) ? $say_inner : $dont_say_inner;
-      
-      }],            
-      ['p'   , ATTR  => ['class' =>'demo'], VALUE => ["Hello"] ],
-      ['SPAN', VALUE => ["World"], ATTR => ['class' =>'demo'] ]
+            $one = ['div', ATTR => ['class'=>'demo', 'id'=>'my_id'], VALUE => [ div(function() {
 
-  ]],
-  ['elem_sort' => function() { // Child Layer elem_sort / Conditional
+                // condition
+                return 'Helo';
+        
+            })]];
 
-      if( true ) {
+            $two = ['div', INNER => [
 
-        $condition =  [
+                ['elem_sort' => function() {
 
-          ['div', VALUE => ["Say hi! "]    , ATTR => [ 'class' =>'say'] ],
-          ['div', VALUE => ["Say hello! "] , ATTR => [ 'class' =>'say'] ] 
-              
-        ];
+                $inner_one = ['p'   , VALUE => ["Hello"], ATTR => ['class' =>'demo_inner_a'] ];
+                $inner_two = ['SPAN', VALUE => ["World"], ATTR => ['class' =>'demo_inner_b'] ];
 
-      } else {
+                return  [ ( false ) ?  $inner_one : $inner_two ]; 
 
-        $condition = [
+                }]
 
-          ['div', VALUE => ["Don't say hi! "]    , ATTR => [ 'class'=>'dpnt_say_child_layer'] ],
-          ['div', VALUE => ["Don't say hello! "] , ATTR => [ 'class'=>'dpnt_say_child_layer'] ] 
-          
-        ];
+            ]];
 
-      }
+            return [
 
-      return ($condition);
+            ( false ) ? $one : $two
 
-  }]
+            ];
+        
+        }],
 
- ]]);
-
+    ]]);
 ```
 
 <h3>Functions and Constant:</h3>
@@ -323,6 +310,15 @@ new \HtmlSummary;[ summary(); ] |  new \HtmlTfooter  [ tfooter(); ];
 
 </ul>
 
+<hr /> 
+
+<h2>Installing PHPWine v1.4 : | <a href="https://www.youtube.com/watch?v=QcwzWYupqd0&list=PLz1uhXS-qzpR3zRoq0IXvBmPofuTyR87J&index=1"> Watch PHPWine Playlist Click here > </a>
+</h2>
+<center>
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/svSWQ3ESKPg/0.jpg)](https://www.youtube.com/watch?v=svSWQ3ESKPg&list=PLz1uhXS-qzpR3zRoq0IXvBmPofuTyR87J&index=3)
+
+</center>
 <hr /> 
 
 <h2>Thanks To:</h2>
