@@ -60,6 +60,38 @@ PHPWine (Vanilla Flavour) is a PHP Library design cross PHP Platform and framewo
  }; 
 ```
 
+<h3>Authentication and handling form validation Installation:</h3>
+
+```PHP
+  require dirname(__FILE__) . DIRECTORY_SEPARATOR .'vendor/autoload.php';  
+
+  use \PHPWineVanillaFlavour\Wine\System\Auth;
+  use \PHPWineVanillaFlavour\Wine\System\Request;
+  use \PHPWineVanillaFlavour\Wine\System\Validate;
+  use \PHPWineVanillaFlavour\Plugins\PHPCrud\Crud\Vanilla;
+
+ $portal = new class {
+        
+    public function __construct() {
+
+     /**
+      * Defined If the session is true or active then redirect to certain page!
+      * @since 04.05.21
+      * @since v1.0
+      **/ 
+     AUTH::USERAUTH('dashboard', true); 
+
+     new \PHPWineVanillaFlavour\Wine\Optimizer\Html;
+     new \PHPWineVanillaFlavour\Wine\Optimizer\EnhancerElem; 
+     new \PHPWineVanillaFlavour\Wine\Optimizer\HtmlH1;  
+     new \PHPWineVanillaFlavour\Wine\Optimizer\HtmlDiv;
+     new \PHPWineVanillaFlavour\Wine\Optimizer\HtmlUl;
+      
+    }
+
+ }; 
+```
+
 <h3>Dependencies Installation:</h3>
 
 ```PHP
