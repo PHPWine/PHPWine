@@ -208,7 +208,6 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
 
   }
  
-  
  /**
   *
   * Defined secondary function vanilla into array error messages
@@ -221,6 +220,15 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
     return implode($request);
   }
   
+ /**
+  *
+  * Defined validatte post from v2 
+  * @since 10.15.21
+  * @since v1.3
+  * 
+ **/
+  private static function VALIDATE_POST( mixed $VALIDATE_POST ) { return ($_POST[$VALIDATE_POST]);}
+
  /**
   *
   * Defined RETURN_ERRORS() methods catch single data type for form file registration.
@@ -298,7 +306,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
             $VALIDLESSTHAN_ID             =  $valid_type[LESS_THAN][0];
             $VALIDLESSTHAN_ARG            =  $valid_type[LESS_THAN][1];
             $VALIDERROR_VALIDLESSTHAN_MSG =  $valid_type[LESS_THAN][2];
-            $VALIDLESSTHAN                =  $_POST[$VALIDLESSTHAN_ID];
+            $VALIDLESSTHAN                =  self::VALIDATE_POST($VALIDLESSTHAN_ID); 
 
             if( strlen($VALIDLESSTHAN) < $VALIDLESSTHAN_ARG ) : return $VALIDERROR_VALIDLESSTHAN_MSG;   endif;
     
@@ -352,8 +360,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
           $VALIDGREATER_THAN_ID        =  $valid_type[GREATER_THAN][0];
           $VALIDGREATER_THAN_ID_ARG    =  $valid_type[GREATER_THAN][1];
           $VALIDERROR_GREATER_THAN_MGS =  $valid_type[GREATER_THAN][2];
-          $VALIDGREATER_THAN           =  $_POST[$VALIDGREATER_THAN_ID];
- 
+          $VALIDGREATER_THAN           =  self::VALIDATE_POST($VALIDGREATER_THAN_ID);
           if(strlen( $VALIDGREATER_THAN  ) > $VALIDGREATER_THAN_ID_ARG)  : return $VALIDERROR_GREATER_THAN_MGS; endif;
  
          endif; // CHECK VALID LENGTH GREATER THAN
@@ -406,7 +413,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
             $VALIDMINLENGTH_ID      =  $valid_type[MINLENGTH][0];
             $VALIDMINLENGTH_ARG     =  $valid_type[MINLENGTH][1];
             $VALIDERROR_MINLENGTH   =  $valid_type[MINLENGTH][2];
-            $VALIDMINLENGTH         =  $_POST[$VALIDMINLENGTH_ID];
+            $VALIDMINLENGTH         =  self::VALIDATE_POST($VALIDMINLENGTH_ID);
   
             if(strlen($VALIDMINLENGTH) <= $VALIDMINLENGTH_ARG) : return $VALIDERROR_MINLENGTH; endif;
 
@@ -461,7 +468,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
             $VALIDMAXLENGTH_ID      =  $valid_type[MAXLENGTH][0];
             $VALIDMAXLENGTH_ARG     =  $valid_type[MAXLENGTH][1];
             $VALIDERROR_MAXLENGTH   =  $valid_type[MAXLENGTH][2];
-            $VALIDMAXLENGTH         =  $_POST[$VALIDMAXLENGTH_ID];
+            $VALIDMAXLENGTH         =  self::VALIDATE_POST($VALIDMAXLENGTH_ID);
 
            if(strlen($VALIDMAXLENGTH) >= $VALIDMAXLENGTH_ARG)  : return $VALIDERROR_MAXLENGTH; endif;
 
@@ -515,7 +522,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
             $EQUALTO_ID          =  $valid_type[EQUALTO][0];
             $EQUALTO_ARG         =  $valid_type[EQUALTO][1];
             $VALIDERROR_EQUALTO  =  $valid_type[EQUALTO][2];
-            $EQUALTO             =  $_POST[$EQUALTO_ID];
+            $EQUALTO             =  self::VALIDATE_POST($EQUALTO_ID);
 
           if(strlen($EQUALTO) == $EQUALTO_ARG)  : return  $VALIDERROR_EQUALTO; endif;
 
@@ -569,7 +576,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
           $EQUAL_STRICT_ID         =  $valid_type[EQUAL_STRICT][0];
           $EQUAL_STRICT_ARG        =  $valid_type[EQUAL_STRICT][1];
           $VALIDERROR_EQUAL_STRICT =  $valid_type[EQUAL_STRICT][2];
-          $EQUAL_STRICT            =  $_POST[$EQUAL_STRICT_ID];
+          $EQUAL_STRICT            =  self::VALIDATE_POST($EQUAL_STRICT_ID);
 
           if(strlen($EQUAL_STRICT) === $EQUAL_STRICT_ARG )  : return $VALIDERROR_EQUAL_STRICT; endif;
 
@@ -612,7 +619,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
     
           $VALID_EMAIL_ID         =  $valid_type[VALID_EMAIL][0];
           $VALIDERROR_VALID_EMAIL =  $valid_type[VALID_EMAIL][1];
-          $VALID_EMAIL            =  $_POST[$VALID_EMAIL_ID];
+          $VALID_EMAIL            =  self::VALIDATE_POST($VALID_EMAIL_ID);
     
           if(!filter_var($VALID_EMAIL , FILTER_VALIDATE_EMAIL)) : return  $VALIDERROR_VALID_EMAIL; endif;
 
@@ -655,7 +662,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
 
           $VALIDSTRING_ID       =  $valid_type[STRINGTYPE][0];
           $VALIDERROR_STRING    =  $valid_type[STRINGTYPE][1];
-          $VALIDSTRING          =  $_POST[$VALIDSTRING_ID];
+          $VALIDSTRING          =  self::VALIDATE_POST($VALIDSTRING_ID);
 
         if(!preg_match("/^[a-zA-Z-' ]*$/", $VALIDSTRING)) : return $VALIDERROR_STRING; endif;
 
@@ -698,7 +705,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
 
          $VALIDNUMERIC_ID      =  $valid_type[NUMERICTYPE][0];
          $VALIDERROR_NUMERIC   =  $valid_type[NUMERICTYPE][1];
-         $VALIDNUMERIC         =  $_POST[$VALIDNUMERIC_ID];
+         $VALIDNUMERIC         =  self::VALIDATE_POST($VALIDNUMERIC_ID);
 
         if (!is_numeric($VALIDNUMERIC)) : return $VALIDERROR_NUMERIC; 
         endif;
@@ -742,7 +749,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
        
          $VALIDINTIGERTYPE_ID      =  $valid_type[INTEGERTYPE][0];
          $VALIDERROR_INTIGERTYPE   =  $valid_type[INTEGERTYPE][1];
-         $VALIDINTIGERTYPE         =  $_POST[$VALIDINTIGERTYPE_ID];
+         $VALIDINTIGERTYPE         =  self::VALIDATE_POST($VALIDINTIGERTYPE_ID);
 
         if(!is_integer( $VALIDINTIGERTYPE)) : return $VALIDERROR_INTIGERTYPE; 
         endif;
@@ -786,7 +793,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
 
          $VALIDFLOAT_ID         =  $valid_type[FLOATTYPE][0];
          $VALIDERROR_FLOAT      =  $valid_type[FLOATTYPE][1];
-         $VALIDFLOAT            =  $_POST[$VALIDFLOAT_ID];
+         $VALIDFLOAT            =  self::VALIDATE_POST($VALIDFLOAT_ID);
 
          if(!is_float($VALIDFLOAT)) : return $VALIDERROR_FLOAT; 
          endif;
@@ -830,7 +837,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
   
            $VALIDCONTAIN_UPPERCASE_ID         =  $valid_type[CONTAIN_UPPERCASE][0];
            $VALIDERROR_CONTAIN_UPPERCASE      =  $valid_type[CONTAIN_UPPERCASE][1];
-           $VALIDCONTAIN_UPPERCASE            =  $_POST[$VALIDCONTAIN_UPPERCASE_ID];
+           $VALIDCONTAIN_UPPERCASE            =  self::VALIDATE_POST($VALIDCONTAIN_UPPERCASE_ID);
   
            if(!preg_match('@[A-Z]@', $VALIDCONTAIN_UPPERCASE)) : return $VALIDERROR_CONTAIN_UPPERCASE; 
            endif;
@@ -874,7 +881,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
   
            $VALIDCONTAIN_LOWERCASE_ID         =  $valid_type[CONTAIN_LOWERCASE][0];
            $VALIDERROR_CONTAIN_LOWERCASE      =  $valid_type[CONTAIN_LOWERCASE][1];
-           $VALIDCONTAIN_LOWERCASE            =  $_POST[$VALIDCONTAIN_LOWERCASE_ID ];
+           $VALIDCONTAIN_LOWERCASE            =  self::VALIDATE_POST($VALIDCONTAIN_LOWERCASE_ID);
   
            if(!preg_match('@[a-z]@',  $VALIDCONTAIN_LOWERCASE)) : return  $VALIDERROR_CONTAIN_LOWERCASE ; 
            endif;
@@ -918,7 +925,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
   
            $VALIDCONTAIN_NUMBER_ID         =  $valid_type[CONTAIN_NUMBER][0];
            $VALIDERROR_CONTAIN_NUMBER      =  $valid_type[CONTAIN_NUMBER][1];
-           $VALIDCONTAIN_NUMBER            =  $_POST[ $VALIDCONTAIN_NUMBER_ID ];
+           $VALIDCONTAIN_NUMBER            =  self::VALIDATE_POST($VALIDCONTAIN_NUMBER_ID);
   
            if(!preg_match('@[0-9]@', $VALIDCONTAIN_NUMBER )) : return   $VALIDERROR_CONTAIN_NUMBER ; 
            endif;
@@ -962,7 +969,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
   
            $VALIDCONTAIN_SPECIALCHAR_ID         =  $valid_type[CONTAIN_SPECIALCHAR][0];
            $VALIDERROR_CONTAIN_SPECIALCHAR      =  $valid_type[CONTAIN_SPECIALCHAR][1];
-           $VALIDCONTAIN_SPECIALCHAR            =  $_POST[ $VALIDCONTAIN_SPECIALCHAR_ID  ];
+           $VALIDCONTAIN_SPECIALCHAR            =  self::VALIDATE_POST($VALIDCONTAIN_SPECIALCHAR_ID);
   
            if( !preg_match('@[^\w]@', $VALIDCONTAIN_SPECIALCHAR )) : return   $VALIDERROR_CONTAIN_SPECIALCHAR; 
            endif;
@@ -1006,7 +1013,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
 
         $VALIDATE_VALIDPASSORD_REQUEST_DEFAULT   =  $valid_type[VALIDPASSWORD][0];
         $VALIDATE_VALIDPASSORD_REQUEST_ERROR     =  $valid_type[VALIDPASSWORD][1];
-        $VALIDATE_VALIDPASSWORD                  =  $_POST[$VALIDATE_VALIDPASSORD_REQUEST_DEFAULT];
+        $VALIDATE_VALIDPASSWORD                  =  self::VALIDATE_POST($VALIDATE_VALIDPASSORD_REQUEST_DEFAULT);
     
         if( !preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $VALIDATE_VALIDPASSWORD )) : return $VALIDATE_VALIDPASSORD_REQUEST_ERROR; 
         endif;
@@ -1051,7 +1058,7 @@ protected static function BIND_SESSION_ENCRYPTDATA_REQUEST($BIND_SESSION_ENCRYPT
 
         $VALIDATE_NULL_OR_EMPTY_ID        =  $valid_type[INPUTFIELD_EMPTY][0];
         $VALIDATE_NULL_OR_EMPTY_ERROR     =  $valid_type[INPUTFIELD_EMPTY][1];
-        $VALIDATE_NULL_OR_EMPTY           =  $_POST[ $VALIDATE_NULL_OR_EMPTY_ID ];
+        $VALIDATE_NULL_OR_EMPTY           =  self::VALIDATE_POST($VALIDATE_NULL_OR_EMPTY_ID);
     
         if(  !isset( $VALIDATE_NULL_OR_EMPTY ) || empty( $VALIDATE_NULL_OR_EMPTY ) || is_null( $VALIDATE_NULL_OR_EMPTY ) ) : return $VALIDATE_NULL_OR_EMPTY_ERROR; 
         endif;
