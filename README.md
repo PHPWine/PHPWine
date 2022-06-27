@@ -317,7 +317,8 @@ new \PHPWineVanillaFlavour\Wine\Optimizer\HtmlUl;
 new \PHPWineVanillaFlavour\Wine\Optimizer\HtmlLi;
 
 new \PHPWineVanillaFlavour\Plugins\PHPCrud\Crud\Wine\VanillaExtract;
-
+         
+    // Counter
     echo div([ CHILD => [
 
         ['elem_sort' => function() { $dd = [];
@@ -346,6 +347,41 @@ new \PHPWineVanillaFlavour\Plugins\PHPCrud\Crud\Wine\VanillaExtract;
     <li> 6 </li>
   </ul>
   <div>Hello World</div>
+</div>
+```
+
+```PHP
+// loop through it Navigation menu since wine v1.4 
+echo div([ CHILD => [
+
+   ['div', VALUE => ['Branding Goes Here']],
+   ['elem_sort' => function() { 
+
+       return [ ['nav', VALUE => [ ul(function() { 
+
+         $dd = []; foreach( ['Home','About','Services','Blog','Contact'] as $value ) { $dd[] = li( alink($value,[['href'],['#']]) ); } return wine_extract($dd);
+     
+        })]] 
+
+      ];
+
+   }]
+
+]]);
+```
+```HTML
+<!-- HTML rendered, End result --> 
+<div>
+  <div>Branding Goes Here</div>
+  <nav>
+  <ul>
+    <li><a href="#"> Home </a></li>
+    <li><a href="#"> About </a></li>
+    <li><a href="#"> Services </a></li>
+    <li><a href="#"> Blog </a></li>
+    <li><a href="#"> Contact </a></li>
+  </ul>
+  </nav>
 </div>
 ```
 
