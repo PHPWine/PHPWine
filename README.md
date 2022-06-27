@@ -22,7 +22,7 @@ PHPWine (Vanilla Flavour) is a PHP Library design cross PHP Platform and framewo
 - PHPHtml-Optimizer / Code Designer
 - Advance Form Builder 
 - Handling Form Validation_V2 ```@since v1.2```
-- BASIC Authentication
+- BASIC Authentication 
 - HTMLMinifier ```@since v1.2```
 
 <h3>Downloading Library/Dependencies:</h3>
