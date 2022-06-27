@@ -309,6 +309,31 @@ new \HtmlSummary;[ summary(); ] |  new \HtmlTfooter  [ tfooter(); ];
     ]]);
 ```
 
+```PHP
+// Helper loop data within CHILD and INNER Layer @since wine v1.4 
+new \PHPWineVanillaFlavour\Wine\Optimizer\Html; 
+new \PHPWineVanillaFlavour\Wine\Optimizer\HtmlDiv;
+new \PHPWineVanillaFlavour\Wine\Optimizer\HtmlUl;
+new \PHPWineVanillaFlavour\Wine\Optimizer\HtmlLi;
+
+new \PHPWineVanillaFlavour\Plugins\PHPCrud\Crud\Wine\VanillaExtract;
+
+    echo div([ CHILD => [
+
+        ['elem_sort' => function() { $dd = [];
+
+          foreach( [1,2,3,4,5,6,7,8,9] as $value ) {
+
+            $dd[] = li($value);
+          
+          } return [ ['ul', VALUE => [wine_extract($dd)]] ];
+
+        }],
+        ['div', VALUE => ['Hello World']]
+
+   ]]);
+```
+
 <h3>Functions and Constant:</h3>
 <p>Support only plain PHPWine ``` @since v1.2.1.0 ```. </p>
 
