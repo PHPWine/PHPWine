@@ -322,7 +322,7 @@ new \PHPWineVanillaFlavour\Plugins\PHPCrud\Crud\Wine\VanillaExtract;
 
         ['elem_sort' => function() { $dd = [];
 
-          foreach( [1,2,3,4,5,6,7,8,9] as $value ) {
+          foreach( [1,2,3,4,5,6] as $value ) {
 
             $dd[] = li($value);
           
@@ -332,6 +332,21 @@ new \PHPWineVanillaFlavour\Plugins\PHPCrud\Crud\Wine\VanillaExtract;
         ['div', VALUE => ['Hello World']]
 
    ]]);
+```
+
+```HTML
+<!-- HTML rendered, End result --> 
+<div>
+  <ul>
+    <li> 1 </li>
+    <li> 2 </li>
+    <li> 3 </li>
+    <li> 4 </li>
+    <li> 5 </li>
+    <li> 6 </li>
+  </ul>
+  <div>Hello World</div>
+</div>
 ```
 
 <h3>Functions and Constant:</h3>
