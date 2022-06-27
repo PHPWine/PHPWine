@@ -362,27 +362,6 @@ new \PHPWineVanillaFlavour\Plugins\PHPCrud\Crud\Wine\VanillaExtract;
  define('PHPCRUD_DEBUG_ERRORS', true ); 
 ```
 
-<h3>PHPWine Plugins + (FrontEnd Frameworks) :</h3>
-<h5>Wants to become a contributor in PHPWine Plugins?, Let's talk email me at: syncdevprojects@gmail.com</h5>
- <ul>
-  <li><a href="https://github.com/nielsofficeofficial/PHPCrud">PHPCRUD: </a><span> Extend PHPWine Features crud </span>
-      <sup style="font-size: 10px;"><i>Contributed by: <a href="https://nielsoffice197227997.wordpress.com/">Leinner</a></i></sup>
-  </li>
-    <li><a href="https://github.com/nielsofficeofficial/PHPCrud-sample-data">PHPCrud-sample-data >=+ v1.3.1  </a><span> Sample data PHPCrud snippet </span>
-      <sup style="font-size: 10px;"><i>Contributed by: <a href="https://nielsoffice197227997.wordpress.com/">Leinner</a></i></sup>
-  </li>
-   <li><a href="https://github.com/nielsofficeofficial/PHPCrud_RESTAPI-Template">PHPCRUD_RESTAPI-Template: >=+ v1.3.1 </a><span> Rest-api using PHPCrud snippet </span>
-      <sup style="font-size: 10px;"><i>Contributed by: <a href="https://nielsoffice197227997.wordpress.com/">Leinner</a></i></sup>
-  </li>
- 
-   <li><a href="https://github.com/nielsofficeofficial/PHPPortal">PHPPortal : </a><span> Wine Portal/Login System snippet. </span>
-    <sup style="font-size: 10px;"><i>Contributed by: <a href="https://nielsoffice197227997.wordpress.com/">Leinner</a></i></sup>
-   </li>
-
-</ul>
-
-<hr /> 
-
 <h2>Installing PHPWine v1.4 : | <a href="https://www.youtube.com/watch?v=QcwzWYupqd0&list=PLz1uhXS-qzpR3zRoq0IXvBmPofuTyR87J&index=1"> Watch PHPWine Playlist Click here > </a>
 </h2>
 <center>
