@@ -366,11 +366,8 @@ echo div([ CHILD => [
          $dd = []; foreach( ['Home','About','Services','Blog','Contact'] as $value ) { $dd[] = li( alink($value,[['href'],['#']]) ); } return wine_extract($dd);
      
         })]] 
-
       ];
-
    }]
-
 ]]);
 ```
 ```HTML
