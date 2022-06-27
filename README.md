@@ -355,7 +355,7 @@ new \PHPWineVanillaFlavour\Plugins\PHPCrud\Crud\Wine\VanillaExtract;
 echo div([ CHILD => [
 
    ['div', VALUE => ['Branding Goes Here']],
-   ['elem_sort' => function() { 
+   ['elem_sort'  => function() { 
 
        return [ ['nav', VALUE => [ ul(function() { 
 
