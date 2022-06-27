@@ -351,6 +351,10 @@ new \PHPWineVanillaFlavour\Plugins\PHPCrud\Crud\Wine\VanillaExtract;
 ```
 
 ```PHP
+
+
+new \PHPWineVanillaFlavour\Wine\Optimizer\HtmlLink;
+
 // loop through it Navigation menu since wine v1.4 | Prototype
 echo div([ CHILD => [
 
