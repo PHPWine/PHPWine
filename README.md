@@ -359,15 +359,13 @@ new \PHPWineVanillaFlavour\Wine\Optimizer\HtmlLink;
 echo div([ CHILD => [
 
    ['div', VALUE => ['Branding Goes Here']],
-   ['elem_sort'  => function() { 
+   ['nav', VALUE => [ ul(function() { 
 
-       return [ ['nav', VALUE => [ ul(function() { 
-
-         $dd = []; foreach( ['Home','About','Services','Blog','Contact'] as $value ) { $dd[] = li( alink($value,[['href'],['#']]) ); } return wine_extract($dd);
+      $dd = []; foreach( ['Home','About','Services','Blog','Contact'] as $value ) { $dd[] = li( alink($value,[['href'],['#']]) ); } 
+      
+      return wine_extract($dd);
      
-        })]] 
-      ];
-   }]
+     })]] 
 ]]);
 ```
 ```HTML
