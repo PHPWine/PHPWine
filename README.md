@@ -351,7 +351,7 @@ new \PHPWineVanillaFlavour\Plugins\PHPCrud\Crud\Wine\VanillaExtract;
 ```
 
 ```PHP
-// loop through it Navigation menu since wine v1.4 
+// loop through it Navigation menu since wine v1.4 | Prototype
 echo div([ CHILD => [
 
    ['div', VALUE => ['Branding Goes Here']],
