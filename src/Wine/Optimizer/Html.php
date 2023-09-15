@@ -844,9 +844,9 @@ class Html
      # FOR EACH CHILD VALUE THE LOOP AND RETURN THE DATA
      foreach ($value[SELF::CHILD_MANDATORY_KEY] as $key => $values) {
 
-      // If the elemt set as elem_sort AND not callable
-         if (isset($values[0]) && $values[0] === 'elem_sort') {
-             print "Helper: Array Child Element must be type of callable ex. [ 'elem_sort' => function() { ...  } ] ";
+      // If the elemt set as try AND not callable
+         if (isset($values[0]) && $values[0] === 'try') {
+             print "Helper: Array Child Element must be type of callable ex. [ 'try' => function() { ...  } ] ";
              $this->trace_element_child_array_errors(
                  $values[0],
                  $values[0],
@@ -854,7 +854,7 @@ class Html
              );
          }
       
-         if ((isset($values[0])) ? (($values[0] === 'elem_sort') ? $values[0] : '') :  $get_wine = $validate_request_api_vanilla_wine($values['elem_sort'])) {
+         if ((isset($values[0])) ? (($values[0] === 'try') ? $values[0] : '') :  $get_wine = $validate_request_api_vanilla_wine($values['try'])) {
              for ($i = 0; $i < count($get_wine); $i++) {
                
                  // if the child from return value is empty
@@ -904,7 +904,7 @@ class Html
                      $this->trace_element_child_array_errors_isset($get_wine[$i][SELF::INNER_MANDATORY_KEY][0], $get_wine[$i]);
                  }
 
-                 // End of elem_sort array validation child elements
+                 // End of try array validation child elements
                  $next_child[] = $this->_setENDGATE();
 
                  $elemInlineNon_wClosingTag =  (in_array(strtolower($get_wine[ $i ][0]), $this->htm_L)) ? '' : $this->_setGATE().$this->_setENDS() . strtolower($get_wine[ $i ][0])  . $this-> _setENDGATE() . $this->_getBREAK();
@@ -913,16 +913,16 @@ class Html
                  $next_child[] = $this->get_values_next_child_inner(SELF::INNER_MANDATORY_KEY, $get_wine[ $i ]);
                  $next_child[] = (isset($elemInlineNon_wClosingTag))? $elemInlineNon_wClosingTag : '';
 
-             } // end of elem_sort for loop !
+             } // end of try for loop !
 
          } else {
          
-             // if elem_sort return [ empty ]
+             // if try return [ empty ]
              if (!isset($values[0])) :
 
               print "Helper: cannot be empty must be return array child element
               <br /> ex:
-              <br /> ['elem_sort' => function() {
+              <br /> ['try' => function() {
               <br />   
               <br />   return [
               <br />     // element goes here ... 
@@ -1613,25 +1613,45 @@ class Html
         # CHECK_IF_PARAM_JS_HAVE_TRUE_THEN
         if ($attr == true) {
             # GET_ARRAY_OF_DATA_FROM_APPS_ATT_COMBINE
+
+            /**
+             * Defined: Get Key attributes
+             * @since 1.0.0.0 supprt PHPWine v2.0
+             * @since 10.20.2022 **/
+            $attr_keys   = array_keys($attr);
+
+            /**
+             * Defined: Value Key attributes
+             * @since 1.0.0.0 supprt PHPWine v2.0
+             * @since 10.20.2022 **/
+            $attr_values = array_values($attr);
+
+            /**
+             * Defined: set attributes
+             * @since 1.0.0.0 supprt PHPWine v2.0
+             * @since 10.20.2022 **/
+            $attrs       = [ $attr_keys , $attr_values ];
+
             /**
               *
               * SET_FUNCTION_CONCAT_THEN_RETURN
               * @method function apps_att
               *
               **/
-            $apps_attributes = $this->apps_att($attr);
+            $apps_attributes = $this->apps_att($attrs);
 
-            foreach ($apps_attributes as $attr_name => $attr_value) {
+            foreach ($apps_attributes as $attrName => $attrValue) {
          
          # SET_RETUNR_DATA_EMPTY_ARRAY
-                $htmlattr[] = $this->_tagSPACER().$attr_name
+                $htmlattr[] = $this->_tagSPACER().$attrName
                       
                       .$this->_getES()
                       .$this->_getDQUOTE()
    
-                      .$attr_value
+                      .$attrValue
                       
                       .$this->_getDQUOTE();
+
             }
         }
 
@@ -2196,6 +2216,7 @@ class Html
         $elem     = strtolower($elem);
 
         # GET STRING_ELEMENT_ATTR_RETURN
+
         $ElementAttr__ = $this->new_setHTMLattr($attr, $id, $class);
    
         # THEN RETURN ALL TRUE? RETURN FUNCTION CUSTOM MODIFIED HTML
@@ -2444,8 +2465,8 @@ class Html
             # GET THE VALUE OF THE ARRAY KEY
             foreach ($array[$getInner] as $key => $values) {
 
-              if (isset($values[0]) && $values[0] === 'elem_sort') {
-                    print "Helper: Array Child Element must be type of callable ex. [ 'elem_sort' => function() { ...  } ] ";
+              if (isset($values[0]) && $values[0] === 'try') {
+                    print "Helper: Array Child Element must be type of callable ex. [ 'try' => function() { ...  } ] ";
                     $this->trace_element_child_array_errors(
                         $values[0],
                         $values[0],
@@ -2453,10 +2474,10 @@ class Html
                     );
                 }
 
-                if (!isset($values['elem_sort'])  && is_null($values[0])) {
+                if (!isset($values['try'])  && is_null($values[0])) {
                     print "<pre> Helper: INNER => [  ] !cannot be empty : 
                     <br/> 
-                    <br/> ex. [ 'elem_sort' => function() { 
+                    <br/> ex. [ 'try' => function() { 
                     <br/>     
                     <br/>       ['div', INNER => [
                     <br/>
@@ -2473,7 +2494,7 @@ class Html
                     );
                 }
 
-                if ((isset($values[0])) ? (($values[0] === 'elem_sort') ? $values[0] : '') :  $get_wine = $validate_request_api_vanilla_wine_inner($values['elem_sort'])) {
+                if ((isset($values[0])) ? (($values[0] === 'try') ? $values[0] : '') :  $get_wine = $validate_request_api_vanilla_wine_inner($values['try']?? [])) {
                     for ($i = 0; $i < count($get_wine); $i++) {
         
                         // if the child from return value is empty
@@ -2483,7 +2504,7 @@ class Html
 
                        print "<pre> Helper:  !cannot be empty : INNER => [ 
                           
-                       ['elem_sort' =>function() {
+                       ['try' =>function() {
                               
                         return [
                             []  <i> // must be [ 'element' ] </i>
@@ -2532,12 +2553,12 @@ class Html
 
                 } else {
 
-                  // if elem_sort return [ empty ]
+                  // if try return [ empty ]
                   if (!isset($values[0])) :  // if( !isset( $values[0] ) ) :
 
                     print "<pre>Helper: cannot be empty must be return array child element
                     <br /> ex:
-                    <br /> ['elem_sort' => function() {
+                    <br /> ['try' => function() {
                     <br />   
                     <br />   return [
                     <br />     // element goes here ... 
@@ -2600,14 +2621,14 @@ class Html
     private function cpe_Filehandler_Val(array|string|callable $tagVHtml__ = null, string $ValElem__ = null, array|string $ValEAttr__ = null) : bool|string
     {
   
-       // installing request error handler for instances
+        // installing request error handler for instances
         $request    = new \PHPWineVanillaFlavour\Wine\System\Request();
   
         # CHECK IF THERE IS ARRAY AND IF THERE IS A REQUIRE ARAAY KEY NEXT_CHILD ?
         # THEN GET THE VALUE AND LOOP IT THROUGH AN ARRAY AND RETURN THE DATAS
         if (is_array($tagVHtml__) && array_key_exists(SELF::CHILD_MANDATORY_KEY, $tagVHtml__)) {
            
-      // COOKED THE INGREDIENTS
+           // COOKED THE INGREDIENTS
             $tagVHtml__ = $this->get_value_child_optimizer($tagVHtml__);
 
             // DESIGNATE THE DATA APPROPRIATELY

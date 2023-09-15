@@ -3,7 +3,7 @@
     "type": "library",
     "description": "PHP code encrypted, PHP Library, Code designer and Optimizer, Html-minifier Advance Form builder, Form Validation and more...",
     "keywords": ["PHPWine","phphtml-optimizer","Basic Authentication","Handling Form Validation","PHPOptimizer","Advance Form Builder"],
-    "homepage": "https://github.com/PHPWine/PHPWine",
+    "homepage": "https://github.com/nielsofficeofficial/PHPWine",
     "license": "MIT",
     "authors": [
         {
@@ -27,8 +27,6 @@
     },
     "require": {
         
-        "guzzlehttp/guzzle": "^7.0",
-        "altorouter/altorouter": "1.1.0",
         "php": ">=8.0"
         
     }
