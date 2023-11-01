@@ -27,10 +27,12 @@ NOTE: Class cannot be extended for security reasons. All properties and methods 
     Class YourDoctrineName { ... } /* Here you will create a reusable element such as a parent, a parent with a child, it base on layout structure etc...  */
  
  // 2) Build your main App class 
-   Class YourMainApp extends YourDoctrineName { ... } /* Extend your doctrine so you can supply to your component  */
-
+   /* This is the complete structure of the main component like header, hero section etc... Extend your doctrine so you can supply to your component  */
+   Class YourMainApp extends YourDoctrineName { ... }  // Class Header extends YourDoctrineName { ... } Class Hero extends YourDoctrineName { ... }
+   ...
  // 3) Build your component      
-   YourComponents Extends YourMainApp { ... } /* Here your component to complete the your HTML sections */
+   /* Here is your component to complete your HTML sections */
+   YourComponents Extends YourMainApp { ... } 
    ...
 
 ```
