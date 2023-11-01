@@ -25,7 +25,7 @@ NOTE: Class cannot be extended for security reasons. All properties and methods 
  // Procedures:
  // 1) Build your doctrine.
     /* Here you will create a reusable element such as a parent, a parent with a child, it base on layout structure etc...  */
-    /* Might be each project or pages have own doctrine  */
+    /* Might be each project or page have own doctrine it depends on consistency of the layout structure  */
     Class YourDoctrineName { ... } 
  
  // 2) Build your main App class 
