@@ -28,11 +28,15 @@ NOTE: Class cannot be extended for security reasons. All properties and methods 
  
  // 2) Build your main App class 
    /* This is the complete structure of the main component like header, hero section etc... Extend your doctrine so you can supply to your component  */
-   Class YourMainApp extends YourDoctrineName { ... }  // Class Header extends YourDoctrineName { ... } Class Hero extends YourDoctrineName { ... }
+   Class YourMainApp extends YourDoctrineName { ... }  
+   // Class Header extends YourDoctrineName { ... } 
+   // Class Hero extends YourDoctrineName { ... }
    ...
  // 3) Build your component      
    /* Here is your component to complete your HTML sections */
    YourComponents Extends YourMainApp { ... } 
+   // Branding Extend Header { ... }
+   // Menu Extend Header { ... }
    ...
 
 ```
