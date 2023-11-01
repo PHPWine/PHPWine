@@ -22,6 +22,20 @@ NOTE: Class cannot be extended for security reasons. All properties and methods 
 ```
 
 ```PHP
+ // Procedures:
+ // 1) Build your doctrine.
+    Class YourDoctrineName { ... } /* Here you will create a reusable element such as a parent, a parent with a child, it base on layout structure etc...  */
+ 
+ // 2) Build your main App class 
+   Class YourMainApp extends YourDoctrineName { ... } /* Extend your doctrine so you can supply to your component  */
+
+ // 3) Build your component      
+   YourComponents Extends YourMainApp { ... } /* Here your component to complete the your HTML sections */
+   ...
+
+```
+
+```PHP
  # Installation 
   add_action('init', function() {
      __initActions(' classes ', true ); /* set true second argument if the file is class */
