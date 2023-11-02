@@ -16,9 +16,9 @@
     "require": {
         "php": ">=8.0.0"
     },
-    "autoload": {
-        "psr-0": {
-            "PHPWine": "wine"
-        }
+    "autoload" : {
+        "psr-4" : {
+            "PHPWineOptimizedHtml\\" : "src/"
+        },
     }
 }
