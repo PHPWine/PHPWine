@@ -1,5 +1,5 @@
 {
-    "name": "PHPWine/OptimizedHtml",
+    "name": "phpwine/optimizedhtml",
     "type": "library",
     "description": "HTML Frontend Framework Design for backend OptimizedHTML PHPWine written in PHP (Hypertext Preprocessor)",
     "keywords": ["Optimizer","HTML"],
