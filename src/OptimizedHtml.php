@@ -648,8 +648,8 @@ class OptimizedHtml
          * Defined : public element constant HTML
          * @since: v1.2.7
          * DT: 10.30.2023 **/
-        if (!defined("class")) {
-            define("class", "class");
+        if (!defined("classes")) {
+            define("classes", "class");
         }
 
         /**
