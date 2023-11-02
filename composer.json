@@ -2,23 +2,25 @@
     "name": "phpwine/optimizedhtml",
     "type": "library",
     "description": "HTML Frontend Framework Design for backend OptimizedHTML PHPWine written in PHP (Hypertext Preprocessor)",
-    "keywords": ["Optimizer","HTML"],
-    "homepage": "https://github.com/PHPWine/PHPWine",
+    "keywords": ["HTML","Optimizer","PHPLibrary"],
+    "homepage": "https://github.com/nielsofficeofficial/PHPWine",
     "license": "MIT",
     "authors": [
         {
-            "name": "Leinner zednanref",
+            "name": "Leinner Zednanref",
             "email": "nielsoffice.wordpress.php@gmail.com",
-            "homepage": "https://phpwine.github.io/documents/",
+            "homepage": "https://nielsoffice197227997.wordpress.com/",
             "role": "Author and Maintainer"
-        }
+        } 
     ],
-    "require": {
-        "php": ">=8.0.0"
-    },
     "autoload" : {
         "psr-4" : {
             "PHPWineOptimizedHtml\\" : "src/"
-        }
+        }    
+     },
+    "require": {
+        
+        "php": ">=8.0"
+        
     }
 }
