@@ -1,5 +1,7 @@
 <?php
 
+ namespace PHPWineOptimizedHtml;
+
 /**
  * @copyright (c) 2023 Optimized Html Cooked by nielsoffice
  *
@@ -1577,14 +1579,6 @@ class OptimizedHtml
             define("u", "u");
         }
 
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("ul")) {
-            define("ul", "ul");
-        }
 
         /**
          * @constant
@@ -1631,7 +1625,7 @@ class OptimizedHtml
          * @since: v1.0
          * DT: 10.26.2023 **/
         if (empty($tag)) {
-            throw new Exception(
+            throw new \Exception(
                 "HTML Element not found as the first argument of wine method"
             );
             exit();
