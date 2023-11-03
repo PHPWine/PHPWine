@@ -34,7 +34,7 @@
  * @link      https://github.com/WPExtension/WPOptimizedHtml/
  * @link      https://github.com/WPExtension/blob/WPOptimizedHtml/README.md
  * @link      https://www.facebook.com/nielsofficeofficial
- * @version   v1.2.8
+ * @version   v1.3.1
  * @since     10.26.2023
  * @since     10.30.2023
  *
@@ -45,6 +45,21 @@ class OptimizedHtml
     /**
      * @var Array init inline HTML no closing tag
      * @property
+     * 
+     * --------------------------------------------------------------------------------------------
+     * These are list of input html tag which having no closing tag
+     * These list are being use when the element that you want to use is one of these 
+     * then wine return to you a condition that auto matically remove the closing tag in your
+     * html and assign a single closing tag for this inline html
+     * 
+     * The sample of this guys are actually in the array below 
+     * 
+     * Instance you are suing input data wine will return to you the approriate html
+     * <input type="text" />
+     * 
+     * These list means is condition that if one of these array are being call then remove the closing tag
+     * like: <div> "</div>"
+     * 
      * Defined : html entities
      * @since: v1.0
      * DT: 10.26.2023 **/
@@ -63,6 +78,204 @@ class OptimizedHtml
         "area",
         "DOCTYPE html",
     ];
+
+    /**
+     * @var Array|Constant 
+     * @property
+     * 
+     * Note: This provides list of array are the constant that registered available to the front end
+     * without using the class itself 
+     * 
+     * --------------------------------------------------------------------------------------------
+     *  ex. $tag = new OptimizedHtml();
+     *  $tag::div < these are elements that will available for us to use the html element >
+     *  but still required to init the class PHPWine in order this to works as this lists are
+     *  only available in public __construct() method
+     * 
+     * before you will use string which seems not good in layout but as these lists are being 
+     * registered you can use the constant as follow 
+     * 
+     * ex. calling the elements
+     * wine('element', $value);
+     * 
+     * You can now use the tag without string that look and feel merge as wine 
+     * link wine(div, $value)
+     * 
+     * --------------------------------------------------------------------------------------------
+     * 
+     * Also you can do that in child array method these list is not only available to the wine method
+     * this also can be use to child array of wine method itself
+     * 
+     * ex. instead of assigning the array child of string element? you can use this constant providers 
+     * registered already within the class of PHPWine or OptimizedHtml
+     * 
+     * like: [
+     *   child => [
+     *    / FROM ['div'] /
+     *     TO [div]
+     *  ]
+     * ]
+     * 
+     * Which look nice and clean feel like it is merging with the layout of youre codes
+     * you can check to documentation which are avaialable registered providers for you
+     * link: https://phpwine.github.io/documents/
+     * 
+     * Also you can submit your concers and request with the submit bug in documentation menu
+     * Link: https://github.com/PHPWine/PHPWine/issues/new
+     * 
+     * Defined : html constant providers for arrays and wine element
+     * 
+     * @since: v1.3.1
+     * DT: 11.03.2023 **/
+    private $providers = [
+ 
+        "alt"
+       ,"controls"
+       ,"dir"
+       ,"for"
+       ,"href"
+       ,"height"
+       ,"id"
+       ,"list"
+       ,"max"
+       ,"min"
+       ,"name"
+       ,"style"
+       ,"script"
+       ,"src"
+       ,"type"
+       ,"target"
+       ,"val"
+       ,"width"
+       ,"a"
+       ,"action"
+       ,"area"
+       ,"abbr"
+       ,"address"
+       ,"article"
+       ,"aside"
+       ,"audio"
+       ,"base"
+       ,"b"
+       ,"bdi"
+       ,"bdo"
+       ,"blockquote"
+       ,"br"
+       ,"button"
+       ,"body"
+       ,"coords"
+       ,"content"
+       ,"cite"
+       ,"canvas"
+       ,"caption"
+       ,"code"
+       ,"col"
+       ,"cols"
+       ,"colgroup"
+       ,"circle"
+       ,"cx"
+       ,"cy"
+       ,"del"
+       ,"div"
+       ,"dfn"
+       ,"dialog"
+       ,"details"
+       ,"data"
+       ,"datalist"
+       ,"dl"
+       ,"dt"
+       ,"datetime"
+       ,"em"
+       ,"embed"
+       ,"fill"
+       ,"fieldset"
+       ,"figure"
+       ,"figcaption"
+       ,"footer"
+       ,"form"
+       ,"hr"
+       ,"h1"
+       ,"h2"
+       ,"h3"
+       ,"h4"
+       ,"h5"
+       ,"h6"
+       ,"head"
+       ,"html"
+       ,"img"
+       ,"input"
+       ,"i"
+       ,"iframe"
+       ,"ins"
+       ,"kbd"
+       ,"legend"
+       ,"label"
+       ,"link"
+       ,"lang"
+       ,"li"
+       ,"media"
+       ,"meter"
+       ,"mark"
+       ,"meta"
+       ,"main"
+       ,"method"
+       ,"map"
+       ,"nav"
+       ,"noscript"
+       ,"oninput"
+       ,"optgroup"
+       ,"option"
+       ,"output"
+       ,"object"
+       ,"ol"
+       ,"open"
+       ,"p"
+       ,"param"
+       ,"picture"
+       ,"pre"
+       ,"progress"
+       ,"q"
+       ,"r"
+       ,"ruby"
+       ,"rp"
+       ,"rt"
+       ,"rows"
+       ,"samp"
+       ,"small"
+       ,"span"
+       ,"strong"
+       ,"sub"
+       ,"summary"
+       ,"sup"
+       ,"svg"
+       ,"s"
+       ,"select"
+       ,"shape"
+       ,"summary"
+       ,"src"
+       ,"source"
+       ,"stroke"
+       ,"stroke-width"
+       ,"tfoot"
+       ,"th"
+       ,"thead"
+       ,"tr"
+       ,"track"
+       ,"tt"
+       ,"title"
+       ,"table"
+       ,"tbody"
+       ,"td"
+       ,"template"
+       ,"textarea"
+       ,"ul"
+       ,"usemap"
+       ,"u"
+       ,"var"
+       ,"video"
+       ,"wbr"
+   
+   ];
 
     /**
      * @var Constant|Array
@@ -170,6 +383,7 @@ class OptimizedHtml
 
     public function __construct(bool $disable_html = false)
     {
+
         /**
          * @var String init remove html
          * @property
@@ -177,6 +391,14 @@ class OptimizedHtml
          * @since: v1.2.2
          * DT: 10.29.2023 **/
         $this->disable_html = $disable_html;
+
+        /**
+         * @var Constant providers list
+         * @property
+         * Defined : Registered constant
+         * @since: v1.3.1
+         * DT: 11.03.2023 **/
+        $this->providers($this->providers);
 
         /**
          * @var String init list html
@@ -256,1360 +478,51 @@ class OptimizedHtml
             define("__", "__");
         }
 
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("a")) {
-            define("a", "&#97;");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("abbr")) {
-            define("abbr", "abbr");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("address")) {
-            define("address", "address");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("article")) {
-            define("article", "article");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("aside")) {
-            define("aside", "aside");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("audio")) {
-            define("audio", "audio");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("controls")) {
-            define("controls", "controls");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("src")) {
-            define("src", "src");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("type ")) {
-            define("type ", "type");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("p")) {
-            define("p", "p");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("b")) {
-            define("b", "b");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("base")) {
-            define("base", "base ");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("target")) {
-            define("target", "target");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("href")) {
-            define("href", "href");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("width")) {
-            define("width", "width");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("height")) {
-            define("height", "height");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("alt")) {
-            define("alt", "alt");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("style")) {
-            define("style", "style");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("script")) {
-            define("script", "script");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("ul")) {
-            define("ul", "ul");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("li")) {
-            define("li", "li");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("bdi")) {
-            define("bdi", "bdi");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("bdo")) {
-            define("bdo", "bdo");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("dir")) {
-            define("dir", "dir");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("blockquote")) {
-            define("blockquote", "blockquote");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("cite")) {
-            define("cite", "cite");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("body")) {
-            define("body", "body");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("head")) {
-            define("head", "head");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("title")) {
-            define("title", "title");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("br")) {
-            define("br", "br");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("button")) {
-            define("button", "button");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("canvas")) {
-            define("canvas", "canvas");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("caption")) {
-            define("caption", "caption");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("code")) {
-            define("code", "code");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("col")) {
-            define("col", "col");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("colgroup")) {
-            define("colgroup", "colgroup");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("data")) {
-            define("data", "data");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("value")) {
-            define("value", "value");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("datalist")) {
-            define("datalist", "datalist");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("for")) {
-            define("for", "for");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("list")) {
-            define("list", "list");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("name")) {
-            define("name", "name");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("id")) {
-            define("id", "id");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
         if (!defined("classes")) {
             define("classes", "class");
         }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("dl")) {
-            define("dl", "dl");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("dt")) {
-            define("dt", "dt");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("del")) {
-            define("del", "del");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("ins")) {
-            define("ins", "ins");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("details")) {
-            define("details", "details");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("summary")) {
-            define("summary", "summary");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("dfn")) {
-            define("dfn", "dfn");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("dialog")) {
-            define("dialog", "dialog");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("open")) {
-            define("open", "open");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("div")) {
-            define("div", "div");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("em")) {
-            define("em", "em");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("embed")) {
-            define("embed", "embed");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("fieldset")) {
-            define("fieldset", "fieldset");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("figure")) {
-            define("figure", "figure");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("figcaption")) {
-            define("figcaption", "figcaption");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("footer")) {
-            define("footer", "footer");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("form")) {
-            define("form", "form");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("action")) {
-            define("action", "action");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("method")) {
-            define("method", "method");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("h1")) {
-            define("h1", "h1");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("h2")) {
-            define("h2", "h2");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("h3")) {
-            define("h3", "h3");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("h4")) {
-            define("h4", "h4");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("h5")) {
-            define("h5", "h5");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("h6")) {
-            define("h6", "h6");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("html")) {
-            define("html", "html");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("lang")) {
-            define("lang", "lang");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("hr")) {
-            define("hr", "hr");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("br")) {
-            define("br", "br");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("i")) {
-            define("i", "i");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("iframe")) {
-            define("iframe", "iframe");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("title")) {
-            define("title", "title");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("img")) {
-            define("img", "img");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("input")) {
-            define("input", "input");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("del")) {
-            define("del", "del");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("kbd")) {
-            define("kbd", "kbd");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("label")) {
-            define("label", "label");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("legend")) {
-            define("legend", "legend");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("link")) {
-            define("link", "link");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("main")) {
-            define("main", "main");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("map")) {
-            define("map", "map");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("usemap")) {
-            define("usemap", "usemap");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("coords")) {
-            define("coords", "coords");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("shape")) {
-            define("shape", "shape");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("area")) {
-            define("area", "area");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("mark")) {
-            define("mark", "mark");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("meta")) {
-            define("meta", "meta");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("content")) {
-            define("content", "content");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("meter")) {
-            define("meter", "meter");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("min")) {
-            define("min", "min");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("max")) {
-            define("max", "max");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("nav")) {
-            define("nav", "nav");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("noscript")) {
-            define("noscript", "noscript");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("object")) {
-            define("object", "object");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("ol")) {
-            define("ol", "ol");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("optgroup")) {
-            define("optgroup", "optgroup");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("select")) {
-            define("select", "select");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("option")) {
-            define("option", "option");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("output")) {
-            define("output", "output");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("oninput")) {
-            define("oninput", "oninput");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("param")) {
-            define("param", "param");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("picture")) {
-            define("picture", "picture");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("srcset")) {
-            define("srcset", "srcset");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("media")) {
-            define("media", "media");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("source")) {
-            define("source", "source");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("pre")) {
-            define("pre", "pre");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("progress")) {
-            define("progress", "progress");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("q")) {
-            define("q", "q");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("ruby")) {
-            define("ruby", "ruby");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("rp")) {
-            define("rp", "rp");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("rt")) {
-            define("rt", "rt");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("s")) {
-            define("s", "s");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("samp")) {
-            define("samp", "samp");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("small")) {
-            define("small", "small");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("span")) {
-            define("span", "span");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("strong")) {
-            define("strong", "strong");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("sub")) {
-            define("sub", "sub");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("summary")) {
-            define("summary", "summary");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("sup")) {
-            define("sup", "sup");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("svg")) {
-            define("svg", "svg");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("circle")) {
-            define("circle", "circle");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("cx")) {
-            define("cx", "cx");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("cy")) {
-            define("cy", "cy");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("r")) {
-            define("r", "r");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("stroke")) {
-            define("stroke", "stroke");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("stroke-width")) {
-            define("stroke-width", "stroke-width");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("fill")) {
-            define("fill", "fill");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("table")) {
-            define("table", "table");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("tbody")) {
-            define("tbody", "tbody");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("td")) {
-            define("td", "td");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("template")) {
-            define("template", "template");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("textarea")) {
-            define("textarea", "textarea");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("rows")) {
-            define("rows", "rows");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("cols")) {
-            define("cols", "cols");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("tfoot")) {
-            define("tfoot", "tfoot");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("th")) {
-            define("th", "th");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("thead")) {
-            define("thead", "thead");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("time")) {
-            define("time", "time");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("datetime")) {
-            define("datetime", "datetime");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("tr")) {
-            define("tr", "tr");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("track")) {
-            define("track", "track");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("tt")) {
-            define("tt", "tt");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("u")) {
-            define("u", "u");
-        }
-
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("var")) {
-            define("var", "var");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("video")) {
-            define("video", "video");
-        }
-
-        /**
-         * @constant
-         * Defined : public element constant HTML
-         * @since: v1.2.7
-         * DT: 10.30.2023 **/
-        if (!defined("wbr")) {
-            define("wbr", "wbr");
-        }
+        
     }
 
     /**
      * @method
+     * 
+     * --------------------------------------------------------------------------------------------
+     * 
+     * Wine method is a primary public method that will use to generate and optimized html
+     * you can generate the all element fully optimized tag, it have a parameters such as
+     * 
+     * @string : $tag Which html element are you trying or want to use ?? 
+     * like ex. div, ul, li, p, spane and etc...
+     * 
+     * @string : value this means you can just add a string value to the $content
+     * like ex. <div>Your content is string...</div>
+     * 
+     * To do that you just invoke the wine like print wine(div,'Your content is string...');  
+     * 
+     * @callable : Means this is a callback function instead of putting dirrectly the value
+     * you just assign a string value to make a function return;
+     * 
+     * like ex: prinmt wine(div, 'my_call_back_func');
+     * 
+     * Now you can create your call function
+     * like: function my_call_back_func() {
+     *   
+     *   return "Your content is string...";
+     *   
+     * }
+     * 
+     * NOTE: that callable function accept string value only!
+     * 
+     * @array :  This use when you create a child using resevred keyword
+     * TO know more about reserve keyword just please checkout our documentation
+     * search to searchbox the "Reserve Keywords"
+     * Link: https://phpwine.github.io/documents/
+     * 
+     * @bool enable HTML is current false which means the HTML is interfreted 
+     * by the browser and if you want to enale html just add "true" then wine 
+     * return you a string version of HTML that you can use for your client approval 
+     * 
      * Defined : public method use optimized html with wine
      * @since: v1.0
      * DT: 10.26.2023 **/
@@ -1641,6 +554,21 @@ class OptimizedHtml
 
     /**
      * @method
+     * 
+     * --------------------------------------------------------------------------------------------
+     * Do you remember we have a call_back in wine? are you wonder why we need this? 
+     * you can actually use this to your array value child when you have create a html template
+     * or your html is overload on inside the method with this you can extract the inner html 
+     * inside the method you created
+     * Like sample: https://github.com/PHPWine/documents/tree/main/Demo
+     * 
+     * The param first is
+     * @class which is the object itself
+     * 
+     * @string || Callable 
+     * 
+     * @arguments which is mixed 
+     * 
      * Defined : public method use value /instead value => []/
      * @since: v1.2.6
      * DT: 10.26.2023 **/
@@ -1663,6 +591,17 @@ class OptimizedHtml
 
     /**
      * @method
+     * 
+     * --------------------------------------------------------------------------------------------
+     * The magic method similar to value the different is the value is become 
+     * areguments once the filter or call back method is already defined.
+     * 
+     * @object 
+     * 
+     * @string|callable
+     * 
+     * @argument which is mixed
+     * 
      * Defined : public method filtered current value and replace/
      * @since: v1.2.8
      * DT: 10.26.2023 **/
@@ -1699,6 +638,20 @@ class OptimizedHtml
   
    }
   
+   /**
+    * @method
+    * Defined : Private method provider constant html tag
+    * @since: v1.0
+    * DT: 10.26.2023 **/
+   private function providers($providers) : void {
+    
+    foreach ($providers as $element) {
+     
+      if( !defined($element)) { define($element, $element); }
+    
+    }
+
+   }
 
     /**
      * @method
@@ -1712,16 +665,19 @@ class OptimizedHtml
         if (is_array($attr) && !is_null($attr)) {
             // Loop it if this is an array then assigned to you html tag
             $html_attr = [];
+
             foreach ($attr as $attr_name => $attr_value) {
                 // sanitized removed spacing extra!
-                $attr_set_element = preg_replace("/\s+/", "", '%s="%s"');
+                $attr_set_element = '%s="%s"';
                 $html_attr[] = sprintf(
                     $attr_set_element,
                     $attr_name,
                     $attr_value
-                );
+                );            
             }
-            return implode("", $html_attr);
+
+           return implode(" ", $html_attr);
+
         } else {
             // Else print the string as is!
             $element_attr = preg_replace("/\s+/", "", "%s");
