@@ -31,12 +31,12 @@
  *
  * @author    Leinner Zednanref <nielsoffice.wordpress.php@gmail.com>
  * @license   MIT License
- * @link      https://github.com/WPExtension/WPOptimizedHtml/
- * @link      https://github.com/WPExtension/blob/WPOptimizedHtml/README.md
- * @link      https://www.facebook.com/nielsofficeofficial
- * @version   v1.3.2
+ * @link      https://github.com/PHPWine/PHPWine/tree/main
+ * @link      https://github.com/PHPWine/PHPWine/README.md
+ * @link      https://phpwine.github.io/documents/
+ * @version   v1.3.4
  * @since     10.26.2023
- * @since     10.30.2023
+ * @since     11.05.2023
  *
  */
 
@@ -49,7 +49,7 @@ class OptimizedHtml
      * --------------------------------------------------------------------------------------------
      * These are list of input html tag which having no closing tag
      * These list are being use when the element that you want to use is one of these 
-     * then wine return to you a condition that auto matically remove the closing tag in your
+     * then wine return to you a condition that automatically remove the closing tag in your
      * html and assign a single closing tag for this inline html
      * 
      * The sample of this guys are actually in the array below 
@@ -294,6 +294,16 @@ class OptimizedHtml
     ];
 
     /**
+     * @var Array extras 
+     * @property
+     * Defined : app assets function version
+     * @since: v1.3.4
+     * DT: 11.05.2023 **/
+    private $extras = [
+      'func' => __DIR__ . '/wine/PHPWine.php'  
+    ];
+
+    /**
      * @var String init opening html
      * @property
      * Defined : html entities
@@ -478,6 +488,11 @@ class OptimizedHtml
             define("__", "__");
         }
 
+        /**
+         * @constant
+         * Defined : public constant attr class
+         * @since: v1.3.2
+         * DT: 10.29.2023 **/
         if (!defined("classes")) {
             define("classes", "class");
         }
@@ -645,10 +660,17 @@ class OptimizedHtml
     * DT: 10.26.2023 **/
    private function providers($providers) : void {
     
-    foreach ($providers as $element) {
-     
-      if( !defined($element)) { define($element, $element); }
-    
+    foreach ($providers as $element) 
+    {
+      if(!defined($element)) 
+      { 
+         define($element, $element); 
+      }
+    }
+
+    if(file_exists($this->extras['func']))  
+    {
+      require_once  $this->extras['func'];
     }
 
    }
