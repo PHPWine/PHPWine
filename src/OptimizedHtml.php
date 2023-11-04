@@ -34,7 +34,7 @@
  * @link      https://github.com/WPExtension/WPOptimizedHtml/
  * @link      https://github.com/WPExtension/blob/WPOptimizedHtml/README.md
  * @link      https://www.facebook.com/nielsofficeofficial
- * @version   v1.3.1
+ * @version   v1.3.2
  * @since     10.26.2023
  * @since     10.30.2023
  *
@@ -573,9 +573,9 @@ class OptimizedHtml
      * @since: v1.2.6
      * DT: 10.26.2023 **/
     public function value(
-        object $class,
-        string|callable $call_back,
-        mixed ...$args
+        object $class = null,
+        string|callable $call_back = null,
+        mixed ...$args 
     ) {
         /**
          * @method
@@ -606,8 +606,8 @@ class OptimizedHtml
      * @since: v1.2.8
      * DT: 10.26.2023 **/
     public function magic(
-      object $class,
-      string|callable $call_back,
+      object $class = null,
+      string|callable $call_back = null,
       mixed ...$current_value
     ) {
 
