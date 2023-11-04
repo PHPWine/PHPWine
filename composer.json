@@ -3,13 +3,13 @@
     "type": "library",
     "description": "HTML Frontend Framework Design for backend OptimizedHTML PHPWine written in PHP (Hypertext Preprocessor)",
     "keywords": ["HTML","Optimizer","PHPLibrary"],
-    "homepage": "https://github.com/nielsofficeofficial/PHPWine",
+    "homepage": "https://phpwine.github.io/documents/",
     "license": "MIT",
     "authors": [
         {
             "name": "Leinner Zednanref",
             "email": "nielsoffice.wordpress.php@gmail.com",
-            "homepage": "https://nielsoffice197227997.wordpress.com/",
+            "homepage": "https://phpwine.github.io/documents/",
             "role": "Author and Maintainer"
         } 
     ],
