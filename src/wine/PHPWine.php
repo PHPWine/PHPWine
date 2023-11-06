@@ -1,6 +1,9 @@
 <?php
-use PHPWineOptimizedHtml\OptimizedHtml;
-$require_file = dirname(__DIR__) . "/OptimizedHtml.php";
+ 
+ use PHPWineOptimizedHtml\OptimizedHtml;
+
+ $require_file = dirname(__DIR__) . "/OptimizedHtml.php";
+
 /**
  * @copyright (c) 2023 Optimized Html Cooked by nielsoffice
  *
@@ -215,15 +218,16 @@ if (file_exists($require_file)) {
                 $tag = local_provider()["dp"];
             }
             // invoke into function version
+            $located = "init";
             $optimized = local_provider([
-                "init" => [
+              $located => [
                     $tag, // @param
                     $content, // @param
                     $attr, // @param
                     $enable_html,
                     // @param
                 ],
-            ])["init"];
+            ])[$located];
             return $optimized;
         }
         /**
@@ -255,13 +259,14 @@ if (file_exists($require_file)) {
             // @param thordly arguments
             mixed ...$args
         ) {
+            $located = "cbv";
             $optimized = local_provider([
-                "cbv" => [
+              $located => [
                     $class, // @param
                     $call_back, // @param
                     $args, // @param
                 ],
-            ])["cbv"];
+            ])[$located];
             return $optimized;
         }
         /**
@@ -293,15 +298,15 @@ if (file_exists($require_file)) {
              *  Init OptimizedHtml
              *  DT: 05.11.2023
              *  Defined: Value method function version
-             *
-             */
+             **/
+            $located = "cbm";
             $optimized = local_provider([
-                "cbm" => [
+              $located => [
                     $class, // @param
                     $call_back, // @param
                     $current_value, // @param
                 ],
-            ])["cbm"];
+            ])[$located];
             return $optimized;
         }
     } else {

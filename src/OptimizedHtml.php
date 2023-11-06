@@ -1,5 +1,7 @@
 <?php
-namespace PHPWineOptimizedHtml;
+
+ namespace PHPWineOptimizedHtml;
+
 /**
  * @copyright (c) 2023 Optimized Html Cooked by nielsoffice
  *
