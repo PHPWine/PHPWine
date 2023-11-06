@@ -1,6 +1,8 @@
 <?php
-namespace PHPWineOptimizedHtml;
-/**
+
+ namespace PHPWineOptimizedHtml;
+
+ /**
  * @copyright (c) 2023 Optimized Html Cooked by nielsoffice
  *
  * MIT License
@@ -326,7 +328,7 @@ class OptimizedHtml
      * @since: v1.0
      * DT: 10.26.2023 *
      */
-    private $collected;
+    private $space;
     /**
      * @var String init content value
      * @property
@@ -408,7 +410,7 @@ class OptimizedHtml
          * @since: v1.0
          * DT: 10.26.2023 *
          */
-        $entity = ["&lt;", "&gt;", "/"];
+        $entity = ["&lt;", "&gt;", "/", " "];
         /**
          * @var String init property opening html
          * @property
@@ -433,6 +435,14 @@ class OptimizedHtml
          * DT: 10.26.2023 *
          */
         $this->e_end = $entity[2];
+        /**
+         * @var String init space html
+         * @property
+         * Defined : html entities
+         * @since: v1.0
+         * DT: 10.26.2023 *
+         */
+        $this->space = $entity[3];
         /**
          * @contant
          * Defined : public constant for child array key child
@@ -845,12 +855,10 @@ class OptimizedHtml
                         implode("", $data_elem_attr)
                     );
                     if (in_array($ca_key[0], $this->end_tag)) {
-                        $array_child_entities[] =
-                            $this->e_open .
-                            $ca_key[0] .
-                            $prepare_openingf .
-                            " /" .
-                            $this->e_close;
+                        $array_child_entities[] = $this->___ilHtml(
+                            $ca_key[0],
+                            $prepare_openingf
+                        );
                         // array element tag m-entity
                     } else {
                         // appened if the value is array do implode
@@ -860,11 +868,10 @@ class OptimizedHtml
                             $designated = $ca_key[0];
                         }
                         if ($ca_key[0] !== self::__) {
-                            $array_child_entities[] =
-                                $this->e_open .
-                                $designated .
-                                $prepare_openingf .
-                                $this->e_close;
+                            $array_child_entities[] = $this->___opHtml(
+                                $designated,
+                                $prepare_openingf
+                            );
                         }
                         // sanitized value to string all child re-rendered
                         $__childElementValue = "%s";
@@ -924,11 +931,9 @@ class OptimizedHtml
                         }
                         if ($ca_key[0] !== self::__) {
                             // close html markup
-                            $array_child_entities[] =
-                                $this->e_open .
-                                $this->e_end .
-                                $ca_key[0] .
-                                $this->e_close;
+                            $array_child_entities[] = $this->___cxHtml(
+                                $ca_key[0]
+                            );
                         }
                     }
                 }
@@ -984,12 +989,10 @@ class OptimizedHtml
                 implode("", $data_elem_attr)
             );
             if (in_array($try_val[0], $this->end_tag)) {
-                $array_child_entities[] =
-                    $this->e_open .
-                    $try_val[0] .
-                    $prepare_openingf .
-                    " /" .
-                    $this->e_close;
+                $array_child_entities[] = $this->___ilHtml(
+                    $try_val[0],
+                    $prepare_openingf
+                );
             } else {
                 if (empty($try_val[0]) || is_null($try_val[0])) {
                     $designated = $this->providers[47];
@@ -997,11 +1000,10 @@ class OptimizedHtml
                     $designated = $try_val[0];
                 }
                 if ($try_val[0] !== self::__) {
-                    $array_child_entities[] =
-                        $this->e_open .
-                        $designated .
-                        $prepare_openingf .
-                        $this->e_close;
+                    $array_child_entities[] = $this->___opHtml(
+                        $designated,
+                        $prepare_openingf
+                    );
                 }
                 // sanitized value to string all child re-rendered
                 $__childElementValue = "%s";
@@ -1020,16 +1022,57 @@ class OptimizedHtml
                 }
                 // close html markup
                 if ($try_val[0] !== self::__) {
-                    $array_child_entities[] =
-                        $this->e_open .
-                        $this->e_end .
-                        $try_val[0] .
-                        $this->e_close;
+                    $array_child_entities[] = $this->___cxHtml($try_val[0]);
                 }
             }
         }
         /** / end of foreac */
         return $array_child_entities;
+    }
+    /**
+     * @method
+     * Defined : private assets html
+     * @since: v1.0
+     * DT: 11.07.2023 *
+     */
+    protected function ___ilHtml(
+        string $element_tag,
+        string $element_attr
+    ): string {
+        $__element =
+            $this->e_open .
+            $element_tag .
+            $element_attr .
+            $this->space .
+            $this->e_end .
+            $this->e_close;
+        return $__element;
+    }
+    /**
+     * @method
+     * Defined : private assets html
+     * @since: v1.0
+     * DT: 11.07.2023 *
+     */
+    protected function ___cxHtml(string $element_tag): string
+    {
+        $__element =
+            $this->e_open . $this->e_end . $element_tag . $this->e_close;
+        return $__element;
+    }
+    /**
+     * @method
+     * Defined : private assets html
+     * @since: v1.0
+     * DT: 11.07.2023 *
+     */
+    protected function ___opHtml(
+        string $element_tag,
+        string $element_attr
+    ): string {
+        $__element =
+            $this->e_open . $element_tag . $element_attr . $this->e_close;
+        return $__element;
     }
     /**
      * @method
