@@ -53,7 +53,7 @@ class OptimizedHtml
      *
      * The sample of this guys are actually in the array below
      *
-     * Instance you are suing input data wine will return to you the approriate html
+     * Instance you are using input data wine will return to you the approriate html
      * <input type="text" />
      *
      * These list means is condition that if one of these array are being call then remove the closing tag
@@ -800,13 +800,13 @@ class OptimizedHtml
                     else {
                         return implode("", $array_child_entities);
                     }
-                    ###### END TRY METHOD
+                    // End try
                 }
             } else {
                 $array_child_entities = [];
                 // Iterate value and attributes
                 foreach ($child_key_array as $ca_key) {
-                    #### try first layert
+                    // try first layer
                     if (
                         array_key_exists(self::please, $ca_key) &&
                         is_callable($ca_key[self::please])
@@ -814,7 +814,7 @@ class OptimizedHtml
                         if (!is_array($ca_key[self::please]()[0])) {
                             return implode("", $ca_key[self::please]());
                         } else {
-                            #### try first layer
+                            // One layer
                             // I should use array element child ['div', attr => [] ... ]
                             $array_child_entities = $this->array_child_element(
                                 $ca_key
@@ -827,10 +827,10 @@ class OptimizedHtml
                             else {
                                 return implode("", $array_child_entities);
                             }
-                            ### END try first layer
+                            // END try first layer
                         }
                     }
-                    ### end try
+                    // end try
                     // Get attribute assign from child array
                     $data_elem_attr = [];
                     if (array_key_exists(self::attr, $ca_key)) {
@@ -878,7 +878,7 @@ class OptimizedHtml
                                 ) &&
                                 is_callable($ca_key[self::value][self::please])
                             ) {
-                                ### try in value
+                                // try third layer
                                 if (
                                     !is_array(
                                         $ca_key[self::value][self::please]()[0]
@@ -897,7 +897,7 @@ class OptimizedHtml
                                     if (count($array_child_entities) < 0) {
                                         return "";
                                     }
-                                    // elseimplode array to string!
+                                    // else implode array to string!
                                     else {
                                         return implode(
                                             "",
@@ -905,7 +905,7 @@ class OptimizedHtml
                                         );
                                     }
                                 }
-                                ### end of try in value
+                                // end of try third
                             } elseif (is_array($ca_key[self::value])) {
                                 $array_child_entities[] = sprintf(
                                     $__childElementValue,
