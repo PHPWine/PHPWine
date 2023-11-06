@@ -57,7 +57,7 @@ if (file_exists($require_file)) {
          * @since: v1.3.4
          * DT: 11.06.2023 *
          */
-        function local_provider(array $__w = [])
+        function local_provider(array $__w = [], mixed ...$vm)
         {
             $wine = new class extends \PHPWineOptimizedHtml\OptimizedHtml {
                 public $wine;
@@ -88,12 +88,35 @@ if (file_exists($require_file)) {
                  *  Init local provider wine
                  *  DT: 06.11.2023
                  *  Defined: wine method
-                 **/
+                 *
+                 */
                 public function __w($t = null, $c = null, $a = null, $e = false)
                 {
                     return $this->wine->wine($t, $c, $a, $e);
                 }
+                public function __v($t = null, $c = null, ...$a)
+                {
+                    return $this->wine->value($t, $c, ...$a);
+                }
+                public function __m($t = null, $c = null, ...$a)
+                {
+                    return $this->wine->magic($t, $c, ...$a);
+                }
             };
+            if (array_key_exists($wine::LP[2], $__w)) {
+                $cbv = $wine->__v(
+                    $__w[$wine::LP[2]][0],
+                    $__w[$wine::LP[2]][1] ?? "",
+                    ...$vm
+                );
+            }
+            if (array_key_exists($wine::LP[3], $__w)) {
+                $cbm = $wine->__m(
+                    $__w[$wine::LP[3]][0],
+                    $__w[$wine::LP[3]][1] ?? "",
+                    ...$vm
+                );
+            }
             return [
                 $wine::LP[0] => $wine->get_section_element_from_provider(),
                 $wine::LP[1] => $wine->__w(__, [
@@ -105,13 +128,15 @@ if (file_exists($require_file)) {
                                     $__w[$wine::LP[1]][0],
                                     $__w[$wine::LP[1]][1],
                                     $__w[$wine::LP[1]][2],
-                                    $__w[$wine::LP[1]][3] 
+                                    $__w[$wine::LP[1]][3]
                                 );
                             }
                             return $init;
                         },
                     ],
-                ])
+                ]),
+                $wine::LP[2] => $cbv ?? null,
+                $wine::LP[3] => $cbm ?? null,
             ];
         }
         /**
@@ -172,7 +197,7 @@ if (file_exists($require_file)) {
             // invoke into function version
             $located = "init";
             $optimized = local_provider([
-              $located => [
+                $located => [
                     $tag, // @param
                     $content, // @param
                     $attr, // @param
@@ -211,17 +236,17 @@ if (file_exists($require_file)) {
             // @param thordly arguments
             mixed ...$args
         ) {
-          
-            $optimized =  new OptimizedHtml;
-            $opti = $optimized->value(
-    
-              $class, // @param
-              $call_back, // @param
-              ...$args, // @param
-           
-            );
+            $located = "cbv";
+            $optimized = local_provider([
+                $located => [
+                  $class, // @param
+                  $call_back, // @param
+                  ],
+              ],
+              ...$args
+            )[$located];
+            return $optimized;
 
-            return $opti;
         }
         /**
          * @functions
@@ -252,17 +277,19 @@ if (file_exists($require_file)) {
              *  Init OptimizedHtml
              *  DT: 05.11.2023
              *  Defined: Value method function version
-             **/
-            $optimized =  new OptimizedHtml;
-            $opti = $optimized->magic(
-    
-              $class, // @param
-              $call_back, // @param
-              ...$current_value, // @param
-           
-            );
+             *
+             */
+            $located = "cbm";
+            $optimized = local_provider([
+                $located => [
+                   $class, // @param
+                   $call_back, // @param
 
-            return $opti;
+                  ],
+              ],
+             ...$current_value
+            )[$located];
+            return $optimized;
         }
     } else {
         throw new \Exception("\wine class is already exists!");
