@@ -52,8 +52,11 @@ if(file_exists($require_file)) {
   require_once  $require_file;
 
 } else {
-  print "\PHPWineOptimizedHtml not found!";
-  exit;
+
+  throw new \Exception(
+    "\PHPWineOptimizedHtml not found!"
+  );
+  exit();
 }
 
 /**
@@ -99,7 +102,7 @@ if(file_exists($require_file)) {
  * @since: v1.0
  * DT: 10.26.2023 **/
 
-  function wine(string $tag,
+  function wine(string|null $tag,
 
   // @param first content string|callable|array
   string|callable|array $content = [],
@@ -112,6 +115,10 @@ if(file_exists($require_file)) {
  
   ) {
 
+    if(is_null($tag) || empty($tag)) {
+      $tag = 'section';
+    }
+
     /**
      *  Init OptimizedHtml
      *  DT: 05.11.2023
@@ -123,7 +130,9 @@ if(file_exists($require_file)) {
     $wine = $function_wine->wine($tag,
      
      $content, // @param
+
      $attr, // @param
+     
      $enable_html // @param
   
     );
@@ -177,6 +186,7 @@ if(file_exists($require_file)) {
     $wine = $function_wine->value($class,
  
      $call_back, // @param
+
      $args // @param
     
     );
@@ -226,6 +236,7 @@ if(file_exists($require_file)) {
     $wine = $function_wine->magic($class,
    
      $call_back, // @param
+
      $current_value // @param
    
     );

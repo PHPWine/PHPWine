@@ -542,7 +542,7 @@ class OptimizedHtml
      * @since: v1.0
      * DT: 10.26.2023 **/
     public function wine(
-        string $tag,
+        string|null $tag,
         string|callable|array $content = [],
         string|array $attr = [],
         $enable_html = false
@@ -550,13 +550,10 @@ class OptimizedHtml
         /**
          * @var
          * Defined : check mnandatory element assign for html
-         * @since: v1.0
-         * DT: 10.26.2023 **/
-        if (empty($tag)) {
-            throw new \Exception(
-                "HTML Element not found as the first argument of wine method"
-            );
-            exit();
+         * @since: v1.3.4
+         * DT: 11.06.2023 **/
+        if(is_null($tag) || empty($tag)) {
+            $tag = 'section';
         }
 
         /**
@@ -859,7 +856,7 @@ class OptimizedHtml
                             if (count($array_child_entities) < 0) {
                                 return "";
                             }
-                            // elseimplode array to string!
+                            // else implode array to string!
                             else {
                                 return implode("", $array_child_entities);
                             }
@@ -895,9 +892,15 @@ class OptimizedHtml
                             $this->e_close;
                     } else {
                         // appened if the value is array do implode
+                        if(empty($ca_key[0]) || is_null($ca_key[0])) { 
+                            $designated = $this->providers[47];
+                        } else {
+                            $designated = $ca_key[0];
+                        }
+                        
                         $array_child_entities[] =
                             $this->e_open .
-                            $ca_key[0] .
+                            $designated . 
                             $prepare_openingf .
                             $this->e_close;
 
