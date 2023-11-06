@@ -1,7 +1,5 @@
 <?php
-
- namespace PHPWineOptimizedHtml;
-
+namespace PHPWineOptimizedHtml;
 /**
  * @copyright (c) 2023 Optimized Html Cooked by nielsoffice
  *
@@ -924,12 +922,14 @@ class OptimizedHtml
                                 return implode("", $array_child_entities);
                             }
                         }
-                        // close html markup
-                        $array_child_entities[] =
-                            $this->e_open .
-                            $this->e_end .
-                            $ca_key[0] .
-                            $this->e_close;
+                        if ($ca_key[0] !== self::__) {
+                            // close html markup
+                            $array_child_entities[] =
+                                $this->e_open .
+                                $this->e_end .
+                                $ca_key[0] .
+                                $this->e_close;
+                        }
                     }
                 }
                 if (count($array_child_entities) < 0) {
@@ -1019,8 +1019,13 @@ class OptimizedHtml
                     }
                 }
                 // close html markup
-                $array_child_entities[] =
-                    $this->e_open . $this->e_end . $try_val[0] . $this->e_close;
+                if ($try_val[0] !== self::__) {
+                    $array_child_entities[] =
+                        $this->e_open .
+                        $this->e_end .
+                        $try_val[0] .
+                        $this->e_close;
+                }
             }
         }
         /** / end of foreac */
