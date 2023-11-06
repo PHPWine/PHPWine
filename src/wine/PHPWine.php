@@ -89,27 +89,9 @@ if (file_exists($require_file)) {
                  *  DT: 06.11.2023
                  *  Defined: wine method
                  **/
-                public function __w($t = null, $c = [], $a = null, $e = null)
+                public function __w($t = null, $c = null, $a = null, $e = false)
                 {
                     return $this->wine->wine($t, $c, $a, $e);
-                }
-                /**
-                 *  Init local provider value
-                 *  DT: 06.11.2023
-                 *  Defined: wine method
-                 **/
-                public function __v($t = null, $c = [], ...$a)
-                {
-                    return $this->wine->value($t, $c, $a);
-                }
-                /**
-                 *  Init local provider magic
-                 *  DT: 06.11.2023
-                 *  Defined: wine method
-                 **/
-                public function __m($t = null, $c = [], ...$a)
-                {
-                    return $this->wine->magic($t, $c, $a);
                 }
             };
             return [
@@ -121,45 +103,15 @@ if (file_exists($require_file)) {
                             if (array_key_exists($wine::LP[1], $__w)) {
                                 $init[] = $wine->__w(
                                     $__w[$wine::LP[1]][0],
-                                    $__w[$wine::LP[1]][1] ?? "",
-                                    $__w[$wine::LP[1]][2] ?? null,
-                                    $__w[$wine::LP[1]][3] ?? null
+                                    $__w[$wine::LP[1]][1],
+                                    $__w[$wine::LP[1]][2],
+                                    $__w[$wine::LP[1]][3] 
                                 );
                             }
                             return $init;
                         },
                     ],
-                ]),
-                $wine::LP[2] => $wine->__w(__, [
-                    child => [
-                        please => function () use ($wine, $__w) {
-                            $cbv = [];
-                            if (array_key_exists($wine::LP[2], $__w)) {
-                                $init[] = $wine->__v(
-                                    $__w[$wine::LP[2]][0],
-                                    $__w[$wine::LP[2]][1] ?? "",
-                                    $__w[$wine::LP[2]][2] ?? []
-                                );
-                            }
-                            return $cbv;
-                        },
-                    ],
-                ]),
-                $wine::LP[3] => $wine->__w(__, [
-                    child => [
-                        please => function () use ($wine, $__w) {
-                            $cbv = [];
-                            if (array_key_exists($wine::LP[3], $__w)) {
-                                $init[] = $wine->__m(
-                                    $__w[$wine::LP[3]][0],
-                                    $__w[$wine::LP[3]][1] ?? "",
-                                    $__w[$wine::LP[3]][2] ?? []
-                                );
-                            }
-                            return $cbv;
-                        },
-                    ],
-                ]),
+                ])
             ];
         }
         /**
@@ -259,15 +211,17 @@ if (file_exists($require_file)) {
             // @param thordly arguments
             mixed ...$args
         ) {
-            $located = "cbv";
-            $optimized = local_provider([
-              $located => [
-                    $class, // @param
-                    $call_back, // @param
-                    $args, // @param
-                ],
-            ])[$located];
-            return $optimized;
+          
+            $optimized =  new OptimizedHtml;
+            $opti = $optimized->value(
+    
+              $class, // @param
+              $call_back, // @param
+              $args, // @param
+           
+            );
+
+            return $opti;
         }
         /**
          * @functions
@@ -299,15 +253,16 @@ if (file_exists($require_file)) {
              *  DT: 05.11.2023
              *  Defined: Value method function version
              **/
-            $located = "cbm";
-            $optimized = local_provider([
-              $located => [
-                    $class, // @param
-                    $call_back, // @param
-                    $current_value, // @param
-                ],
-            ])[$located];
-            return $optimized;
+            $optimized =  new OptimizedHtml;
+            $opti = $optimized->magic(
+    
+              $class, // @param
+              $call_back, // @param
+              $current_value, // @param
+           
+            );
+
+            return $opti;
         }
     } else {
         throw new \Exception("\wine class is already exists!");
