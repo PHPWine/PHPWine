@@ -217,7 +217,7 @@ if (file_exists($require_file)) {
     
               $class, // @param
               $call_back, // @param
-              $args, // @param
+              ...$args, // @param
            
             );
 
@@ -258,7 +258,7 @@ if (file_exists($require_file)) {
     
               $class, // @param
               $call_back, // @param
-              $current_value, // @param
+              ...$current_value, // @param
            
             );
 
