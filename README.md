@@ -58,28 +58,7 @@ NOTE: Class cannot be extended for security reasons. All properties and methods 
  !-- Result @since v1.2.2 --> 
  <div> Hello World </div>
 ```
-```PHP
- // What's New in v1.2.5
- * Optimized Core file
- * Redefined constant availability outside of class
- // ex. 
- child | attr | value | please | string with "try" 
-...{
 
- return $this->elem->wine( __, [ 
-   child => [[
-    'div', 
-    attr  => ['class'=>'m-faq-left'], 
-    value => [
-      $this->elem->wine('h1','The title')
-     .$this->elem->wine('div','The long description')
-   ]]   
-  ]
-]);
-
-}
-
-```
 ```PHP
 // Procedural extends app or component | coffee no sugar
 print wine(__, [ 
