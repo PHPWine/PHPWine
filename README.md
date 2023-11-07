@@ -4,24 +4,6 @@ Optimized HTML this will use for view section can also be used within your busin
 NOTE: Class cannot be extended for security reasons. All properties and methods are private.
 
 ```PHP
- // @stable v1.2.8
- // Reserve keyword constant 
- child | value | attr | __ | please | "try" | < all valid HTML 5 element & HTML attribute like ex. < class > and < id > >
-
- // Methods 
- // This method generates HTML ( string|callable|array )
- wine( string $tag, string|callable|array $content = [], string|array $attr = [], $enable_html = false );
-
- // This method accept call-back function and arguments 
- // Demo Callback method : https://github.com/WPExtension/OptimizedHtml/blob/main/Demo/componentLogo.php
- value( object $class, string|callable $call_back, mixed ...$args );
-
- // This method filter current assigned value and replace
- magic( object $class, string|callable $call_back, mixed ...$current_value );
-
-```
-
-```PHP
  // Procedures:
  // 1) Build your doctrine.
     /* Here you will create a reusable element such as a parent, a parent with a child, it base on layout structure etc...  */
