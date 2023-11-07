@@ -2,11 +2,11 @@
  
  namespace PHPWineOptimizedHtml;
  
- ini_set("display_errors", 1);
- ini_set("display_startup_errors", 1);
+ ini_set('display_errors', 1);
+ ini_set('display_startup_errors', 1);
  error_reporting(E_ALL);
 
-/**
+ /**
  * @copyright (c) 2023 Optimized Html Cooked by nielsoffice
  *
  * MIT License
@@ -38,7 +38,7 @@
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v1.3.7
+ * @version   v1.3.8
  * @since     10.26.2023
  * @since     11.05.2023
  *
@@ -502,6 +502,7 @@ class OptimizedHtml
         if (!defined("__")) {
             define("__", "__");
         }
+
     }
     /**
      * @method
@@ -552,6 +553,7 @@ class OptimizedHtml
         string|array $attr = null,
         $enable_html = false
     ) {
+
         /**
          * @var
          * Defined : check mnandatory element assign for html
@@ -594,7 +596,7 @@ class OptimizedHtml
         object $class = null,
         string|callable $call_back = null,
         mixed ...$args
-    ): mixed {
+    ) : mixed {
         /**
          * @method
          * Defined : call back value from method
@@ -628,7 +630,7 @@ class OptimizedHtml
         object $class = null,
         string|callable $call_back = null,
         mixed ...$current_value
-    ): mixed {
+    ) : mixed {
         if (method_exists($class, $call_back)) {
             /**
              * @method
@@ -641,7 +643,9 @@ class OptimizedHtml
                 null,
                 call_user_func([$class, $call_back], ...$current_value)
             );
-        } elseif (function_exists($call_back)) {
+
+        } else if( function_exists($call_back) ) {
+
             /**
              * @condition
              * Defined : call back value from function if exist and current value as argument
@@ -649,6 +653,7 @@ class OptimizedHtml
              * DT: 11.08.2023 *
              */
             return call_user_func($call_back, ...$current_value);
+
         } else {
             /**
              * @method
@@ -677,18 +682,29 @@ class OptimizedHtml
      * DT: 10.26.2023 *
      */
     public function attr(
-        object $object = null,
-        string|callable $call_back = null,
-        mixed ...$attr
-    ): string|array {
+    
+      object $object = null,
+      string|callable $call_back = null,
+      mixed ...$attr 
+      
+      ) : array {
+    
         /**
          * @return
          * Defined : reutrn the value if the attribute method or function exists!
          * @since: v1.3.7
          * DT: 11.08.2023 *
-         */
-        return $this->wine_attribute_hook(true, $object, $call_back, ...$attr);
+         */        
+         return $this->wine_attribute_hook(
+          true, 
+          $object, 
+          $call_back, 
+          ...$attr
+      
+        );
+          
     }
+
     /**
      * @method
      * Defined : Private method Optimized html
@@ -718,7 +734,7 @@ class OptimizedHtml
         // print to string
         $prepare_openingf = sprintf($__sanitizeString, $element, $attr_element);
         if (in_array($element, $this->end_tag)) {
-            return $this->___ilHtml($element, $attr_element);
+           return $this->___ilHtml($element, $attr_element); 
         } elseif ($element === self::__) {
             // append html content to string or html entity
             $prepare = "";
@@ -739,6 +755,7 @@ class OptimizedHtml
             $__prepare_close = html_entity_decode(
                 $this->e_open . $this->e_end . $element . $this->e_close
             );
+
             // clean object to print html on the browser
             ob_start();
             // append on it each
@@ -814,7 +831,7 @@ class OptimizedHtml
                         array_key_exists(self::please, $ca_key) &&
                         is_callable($ca_key[self::please])
                     ) {
-                        if (!is_array($ca_key[self::please]()[0] ?? "")) {
+                        if (!is_array($ca_key[self::please]()[0]?? "")) {
                             return implode("", $ca_key[self::please]());
                         } else {
                             // One layer
@@ -837,19 +854,22 @@ class OptimizedHtml
                     // Get attribute assign from child array
                     $data_elem_attr = [];
                     if (array_key_exists(self::attr, $ca_key)) {
-                        if (isset($ca_key[self::attr][0])) {
-                            $attribute_hooks = $ca_key[self::attr][0];
+
+                        if( isset($ca_key[self::attr][0])) {
+                          $attribute_hooks = $ca_key[self::attr][0];
                         } else {
-                            $attribute_hooks = $ca_key[self::attr];
+                          $attribute_hooks = $ca_key[self::attr];
                         }
-                        if (is_array($attribute_hooks)) {
-                            foreach ($attribute_hooks as $key_attr => $v) {
-                                $data_elem_attr[] =
-                                    $this->space . $key_attr . "=\"$v\"";
-                            }
-                        } else {
-                            $data_elem_attr[] = $this->space . $attribute_hooks;
+                           
+                       if( is_array($attribute_hooks)) 
+                       {
+                        foreach ($attribute_hooks as $key_attr => $v) { 
+                           $data_elem_attr[] = $this->space . $key_attr . "=\"$v\""; 
                         }
+                      } else 
+                       {
+                        $data_elem_attr[] = $this->space.$attribute_hooks;
+                       }
                     } elseif (!array_key_exists(self::attr, $ca_key)) {
                         $data_elem_attr[] = "";
                     }
@@ -894,10 +914,11 @@ class OptimizedHtml
                                         $ca_key[self::value][self::please]()[0]
                                     )
                                 ) {
-                                    return implode(
-                                        "",
-                                        $ca_key[self::value][self::please]()
-                                    );
+                                    return false;
+                                    return implode("",
+                                       $ca_key[self::value][self::please]()
+                                     );
+                                   
                                 } else {
                                     // I should use array element child ['div', attr => [] ... ]
                                     $array_child_entities = $this->array_child_element(
@@ -947,11 +968,13 @@ class OptimizedHtml
                 } else {
                     return implode("", $array_child_entities);
                 }
-            }
-        } else {
+            } 
+
+        }  else {
             return "";
         } /* END Else from array try func! */
     }
+
     /**
      * @method
      * Defined : private assets html
@@ -961,7 +984,7 @@ class OptimizedHtml
     protected function ___ilHtml(
         string $element_tag,
         string $element_attr
-    ): string {
+    ) : string {
         $__element =
             $this->e_open .
             $element_tag .
@@ -977,8 +1000,9 @@ class OptimizedHtml
      * @since: v1.0
      * DT: 11.07.2023 *
      */
-    protected function ___cxHtml(string $element_tag): string
-    {
+    protected function ___cxHtml( 
+        string $element_tag 
+     ): string {
         $__element =
             $this->e_open . $this->e_end . $element_tag . $this->e_close;
         return $__element;
@@ -997,55 +1021,67 @@ class OptimizedHtml
             $this->e_open . $element_tag . $element_attr . $this->e_close;
         return $__element;
     }
-    /**
-     *
+
+   /**
+     * 
      * @method
      * Defined : protected extension provider
      * @since: v1.3.6
-     * DT: 11.7.2023 *
-     */
-    protected function wine_attribute_hook(
-        bool $development = false,
-        object $object = null,
-        string|callable $method = null,
-        mixed ...$args
+     * DT: 11.7.2023 **/
+    protected function wine_attribute_hook( 
+      bool $development = false,
+      object $object = null,
+      string|callable $method = null,
+      mixed ...$args
     ) {
-        if ($development === true) {
-            if (method_exists($object, $method)) {
-                /**
-                 * @method
-                 * Defined : call back value from method if exist and current value as argument
-                 * @since: v1.0
-                 * DT: 10.30.2023 *
-                 */
-                /* hooks argment turn into value like magic wine */
-                return call_user_func([$object, $method], ...$args);
-            } elseif (function_exists($method)) {
-                /**
-                 * @condition
-                 * Defined : call back value from function if exist and current value as argument
-                 * @since: v1.3.7
-                 * DT: 11.08.2023 *
-                 */
-                return call_user_func($method, ...$args);
-            } else {
-                /**
-                 * @method
-                 * Defined : Only if the emthod is not exist then this is the current value
-                 * @since: v1.0
-                 * DT: 10.30.2023 *
-                 */
-                //If the attribute in hook is a string then print as is
-                if (is_string(...$args)) {
-                    return implode("", $args);
-                } elseif (is_array($args[0])) {
-                    return $this->set_attributes_html($args[0]);
-                }
-            }
-        } else {
+
+      if( $development === true ) {
+
+        if (method_exists($object, $method)) {
+            /**
+             * @method
+             * Defined : call back value from method if exist and current value as argument
+             * @since: v1.0
+             * DT: 10.30.2023 *
+             */
+            /* hooks argment turn into value like magic wine */
             return call_user_func([$object, $method], ...$args);
+           
+        } else if( function_exists($method) ) {
+
+            /**
+             * @condition
+             * Defined : call back value from function if exist and current value as argument
+             * @since: v1.3.7
+             * DT: 11.08.2023 *
+             */
+            return call_user_func($method, ...$args);
+
+        } else {
+            /**
+             * @method
+             * Defined : Only if the emthod is not exist then this is the current value
+             * @since: v1.0
+             * DT: 10.30.2023 *
+             */
+            //If the attribute in hook is a string then print as is
+           if( is_string(...$args) ) 
+            {
+              return implode("",$args); 
+            } 
+            else if( is_array($args[0])) 
+             {
+              return $this->set_attributes_html($args[0]);
+             }
+
         }
+       
+      } else {
+        return call_user_func([$object, $method], ...$args);
+      } 
+      
     }
+
     /**
      * @method
      * Defined : private inner Html method hand;er
@@ -1065,6 +1101,7 @@ class OptimizedHtml
             return "<$elem>$value</$elem>";
         }
     }
+
     /**
      * @method
      * Defined : private array_child_element content
@@ -1080,7 +1117,7 @@ class OptimizedHtml
             $data_elem_attr = [];
             if (array_key_exists(self::attr, $try_val)) {
                 foreach ($try_val[self::attr] as $key_attr => $v) {
-                    $data_elem_attr[] = $key_attr . "=\"$v\"";
+                    $data_elem_attr[] = $this->space. $key_attr . "=\"$v\"";
                 }
             }
             // Sanitized and print string
@@ -1130,14 +1167,16 @@ class OptimizedHtml
         /** / end of foreac */
         return $array_child_entities;
     }
+
     /**
      * @method
      * Defined : Private method assigned set attribute html dynamic
      * @since: v1.0
      * DT: 10.26.2023 *
      */
-    protected function set_attributes_html(string|array|null $attr)
-    {
+    protected function set_attributes_html(string|array|null $attr )
+    {   
+
         // Can be string or array
         // If any of those data type will accept and print into the browser
         if (is_array($attr) && !is_null($attr)) {
@@ -1152,14 +1191,17 @@ class OptimizedHtml
                     $attr_value
                 );
             }
+            
             return implode(" ", $html_attr);
+
         } else {
             // Else print the string as is!
-            $element_attr = preg_replace("/\s+/", "", "%s");
+            $element_attr = preg_replace("/\s+/","", "%s");
             $html_attr = sprintf($element_attr, $attr);
             return $html_attr;
         }
     }
+
     /**
      * @method
      * Defined : private optmized content
@@ -1199,6 +1241,7 @@ class OptimizedHtml
             return $__content;
         }
     }
+   
     /**
      * @method
      * Defined : Private method provider constant html tag
