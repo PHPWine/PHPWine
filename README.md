@@ -81,20 +81,35 @@ NOTE: Class cannot be extended for security reasons. All properties and methods 
 
 ```
 ```PHP
-// What's New in v1.2.6 & v1.2.7
+// Procedural extends app or component | coffee no sugar
+print wine(__, [ 
+        
+  child => [ 
+  
+  ['div', value => [ please => function() {
 
-...{
- [div, value => [$this->elem->value($this, 'MyCallbackMethod', 50 )]]  
-}
-... 
-public function MyCallbackMethod( $amount ) {
+    $new = new class () extends \PHPWineOptimizedHtml\OptimizedHtml {
+
+      public function my_value_in_array() {
+        return "Coffee";
+      }
+
+      public function my_filter() {
+        return "No sugar!";
+      }
+
+    };
+
+    return [
+      
+      ['div', value => [value($new,'my_value_in_array')]],
+      ['div', value => [magic($new,'my_filter',value($new,'my_value_in_array'))]]
+  
+    ];
+
+  }]]
  
-return $this->elem->wine(__, [ 
- $this->elem::child => [
-   [div, value => ['Yes Hello There! : ' . $amount], attr =>[ 'class' => 'f1'] ]  
- ]]);
-    
-}
+]]);
 ```
 
 <hr /> 
