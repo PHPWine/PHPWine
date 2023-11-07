@@ -88,7 +88,7 @@ print wine(__, [
   
   ['div', value => [ please => function() {
 
-    $new = new class () extends \PHPWineOptimizedHtml\OptimizedHtml {
+    $new = new class () extends \Namespace\Classname {
 
       public function my_value_in_array() {
         return "Coffee";
