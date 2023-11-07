@@ -38,7 +38,7 @@
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v1.3.4
+ * @version   v1.3.5
  * @since     10.26.2023
  * @since     11.05.2023
  *
@@ -674,11 +674,11 @@ class OptimizedHtml
      * @since: v1.0
      * DT: 10.26.2023 *
      */
-    private function set_attributes_html(string|array $attr = null)
+    private function set_attributes_html(string|array|null $attr = [])
     {
         // Can be string or array
         // If any of those data type will accept and print into the browser
-        if (is_array($attr) && !is_null($attr)) {
+        if (is_array($attr) || !is_null($attr)) {
             // Loop it if this is an array then assigned to you html tag
             $html_attr = [];
             foreach ($attr as $attr_name => $attr_value) {
@@ -704,11 +704,11 @@ class OptimizedHtml
      * @since: v1.0
      * DT: 10.26.2023 *
      */
-    private function optimized_html(
-        string $tag,
-        string|array $attr = null,
-        string|callable|array $content,
-        $disable_html = false
+    protected function optimized_html(
+        string|null $tag,
+        string|array|null $attr,
+        string|callable|array|null $content,
+        bool $disable_html = false
     ) {
         // Verifying tag element required to assign!
         $element = (string) strtolower($tag);
@@ -946,7 +946,10 @@ class OptimizedHtml
                 } else {
                     return implode("", $array_child_entities);
                 }
-            }
+            } 
+
+        }  else {
+            return "";
         } /* END Else from array try func! */
     }
     /**
@@ -1085,8 +1088,8 @@ class OptimizedHtml
      * DT: 10.26.2023 *
      */
     private function optimized_content(
-        string|callable|array $content = [],
-        $disable_html = false
+        string|callable|array|null $content,
+        bool $disable_html = false
     ) {
         // verify if content is array to create array child
         if (is_array($content)) {

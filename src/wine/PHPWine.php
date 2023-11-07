@@ -1,12 +1,12 @@
 <?php
 
- ini_set('display_errors', 1);
- ini_set('display_startup_errors', 1);
- error_reporting(E_ALL);
- 
- use PHPWineOptimizedHtml\OptimizedHtml;
+ini_set("display_errors", 1);
+ini_set("display_startup_errors", 1);
+error_reporting(E_ALL);
 
- $require_file = dirname(__DIR__) . "/OptimizedHtml.php";
+use PHPWineOptimizedHtml\OptimizedHtml;
+
+$require_file = dirname(__DIR__) . "/OptimizedHtml.php";
 
 /**
  * @copyright (c) 2023 Optimized Html Cooked by nielsoffice
@@ -40,7 +40,7 @@
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v1.3.4
+ * @version   v1.3.5
  * @since     10.26.2023
  * @since     11.05.2023
  *
@@ -94,25 +94,59 @@ if (file_exists($require_file)) {
                  *  Defined: wine method
                  *
                  */
-                public function __w($t = null, $c = null, $a = null, $e = false)
-                {
-                    return $this->wine->wine($t, $c, $a, $e);
+                public function __w(
+                    string $t = null,
+                    string|callable|array $c = null,
+                    string|array $a = null,
+                    bool $e = false
+                ) {
+                    return $this->wine->optimized_html($t, $a, $c, $e);
                 }
                 /**
                  *  Init local provider value /content
                  *  DT: 06.11.2023
                  *  Defined: wine method ***/
-                public function __v($t = null, $c = null, ...$a)
-                {
-                    return $this->wine->value($t, $c, ...$a);
+                public function __v(
+                    object|null $t = null,
+                    string|callable $c = "",
+                    mixed ...$a
+                ) {
+                    return $this->wine->optimized_html(
+                        __,
+                        null,
+                        call_user_func([$t, $c], ...$a)
+                    );
                 }
                 /**
                  *  Init local provider magic filter
                  *  DT: 06.11.2023
                  *  Defined: wine method ***/
-                public function __m($t = null, $c = null, ...$a)
-                {
-                    return $this->wine->magic($t, $c, ...$a);
+                public function __m(
+                    object|null $t = null,
+                    string|callable $c = "",
+                    mixed ...$a
+                ) {
+                    if (method_exists($t, $c)) {
+                        /**
+                         * @method
+                         * Defined : call back value from method if exist and current value as argument
+                         * @since: v1.0
+                         * DT: 10.30.2023 *
+                         */
+                        return $this->optimized_html(
+                            __,
+                            null,
+                            call_user_func([$t, $c], ...$a)
+                        );
+                    } else {
+                        /**
+                         * @method
+                         * Defined : Only if the emthod is not exist then this is the current value
+                         * @since: v1.0
+                         * DT: 10.30.2023 *
+                         */
+                        return $this->optimized_html(__, null, ...$a);
+                    }
                 }
             };
             if (array_key_exists($wine::LP[2], $__w)) {
@@ -137,10 +171,10 @@ if (file_exists($require_file)) {
                             $init = [];
                             if (array_key_exists($wine::LP[1], $__w)) {
                                 $init[] = $wine->__w(
-                                    $__w[$wine::LP[1]][0],
-                                    $__w[$wine::LP[1]][1],
-                                    $__w[$wine::LP[1]][2],
-                                    $__w[$wine::LP[1]][3]
+                                    $__w[$wine::LP[1]][0] ?? "",
+                                    $__w[$wine::LP[1]][1] ?? "",
+                                    $__w[$wine::LP[1]][2] ?? "",
+                                    $__w[$wine::LP[1]][3] ?? false
                                 );
                             }
                             return $init;
@@ -249,16 +283,16 @@ if (file_exists($require_file)) {
             mixed ...$args
         ) {
             $located = "cbv";
-            $optimized = local_provider([
-                $located => [
-                  $class, // @param
-                  $call_back, // @param
-                  ],
-              ],
-              ...$args
+            $optimized = local_provider(
+                [
+                    $located => [
+                        $class, // @param
+                        $call_back, // @param
+                    ],
+                ],
+                ...$args
             )[$located];
             return $optimized;
-
         }
         /**
          * @functions
@@ -292,14 +326,14 @@ if (file_exists($require_file)) {
              *
              */
             $located = "cbm";
-            $optimized = local_provider([
-                $located => [
-                   $class, // @param
-                   $call_back, // @param
-
-                  ],
-              ],
-             ...$current_value
+            $optimized = local_provider(
+                [
+                    $located => [
+                        $class, // @param
+                        $call_back, // @param
+                    ],
+                ],
+                ...$current_value
             )[$located];
             return $optimized;
         }
