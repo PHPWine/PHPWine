@@ -101,7 +101,7 @@ if (file_exists($require_file)) {
                 /**
                  *  Init local provider value /content
                  *  DT: 06.11.2023
-                 *  Defined: wine method **/
+                 *  Defined: wine method ***/
                 public function __v($t = null, $c = null, ...$a)
                 {
                     return $this->wine->value($t, $c, ...$a);
@@ -109,7 +109,7 @@ if (file_exists($require_file)) {
                 /**
                  *  Init local provider magic filter
                  *  DT: 06.11.2023
-                 *  Defined: wine method **/
+                 *  Defined: wine method ***/
                 public function __m($t = null, $c = null, ...$a)
                 {
                     return $this->wine->magic($t, $c, ...$a);
