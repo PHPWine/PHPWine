@@ -4,6 +4,29 @@ Optimized HTML this will use for view section can also be used within your busin
 NOTE: Class cannot be extended for security reasons. All properties and methods are private.
 
 ```PHP
+ /* Installation via composer */ 
+ /* required version *v1.3.6 */
+ composer require phpwine/optimizedhtml v1.3.6
+```
+```PHP
+ # Installation 
+  add_action('init', function() {
+     __initActions(' classes ', true ); /* set true second argument if the file is class */
+ });
+
+# Structure
+ |- init
+     |- classes
+         |- OptimizedHtml.php  /* If class not found rename to: AOptimizedHtml.php | alphabetical higher is "A" */ 
+         |- init-custom-action.php /* Here put all HTML */
+            ...
+
+```
+ <br /> For more information installation link here : https://github.com/WPExtension/WPSPATheme
+ <br /> <a href="https://github.com/WPExtension/WPSPATheme"> Installation guide > </a>
+
+
+```PHP
  // Procedures:
  // 1) Build your doctrine.
     /* Here you will create a reusable element such as a parent, a parent with a child, it base on layout structure etc...  */
@@ -24,23 +47,6 @@ NOTE: Class cannot be extended for security reasons. All properties and methods 
    ...
 
 ```
-
-```PHP
- # Installation 
-  add_action('init', function() {
-     __initActions(' classes ', true ); /* set true second argument if the file is class */
- });
-
-# Structure
- |- init
-     |- classes
-         |- OptimizedHtml.php  /* If class not found rename to: AOptimizedHtml.php | alphabetical higher is "A" */ 
-         |- init-custom-action.php /* Here put all HTML */
-            ...
-
-```
- <br /> For more information installation link here : https://github.com/WPExtension/WPSPATheme
- <br /> <a href="https://github.com/WPExtension/WPSPATheme"> Installation guide > </a>
 
 ```PHP
 // What's New in v1.2.6 & v1.2.7 & v1.2.8
