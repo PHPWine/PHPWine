@@ -38,7 +38,7 @@
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v1.3.5
+ * @version   v1.3.6
  * @since     10.26.2023
  * @since     11.05.2023
  *
@@ -1080,6 +1080,19 @@ class OptimizedHtml
         $__element =
             $this->e_open . $element_tag . $element_attr . $this->e_close;
         return $__element;
+    }
+
+   /**
+     * @method
+     * Defined : protected extension provider
+     * @since: v1.3.6
+     * DT: 11.7.2023 **/
+    protected function wine_cb_method(
+      object $object = null,
+      string|callable $method = null,
+      mixed ...$args
+    ) {
+      return call_user_func([$object, $method], ...$args);
     }
     /**
      * @method

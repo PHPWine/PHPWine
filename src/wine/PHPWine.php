@@ -40,7 +40,7 @@ $require_file = dirname(__DIR__) . "/OptimizedHtml.php";
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v1.3.5
+ * @version   v1.3.6
  * @since     10.26.2023
  * @since     11.05.2023
  *
@@ -94,7 +94,7 @@ if (file_exists($require_file)) {
                  *  Defined: wine method
                  *
                  */
-                public function __w(
+                public function wine_generate_optimized_element(
                     string $t = null,
                     string|callable|array $c = null,
                     string|array $a = null,
@@ -106,24 +106,24 @@ if (file_exists($require_file)) {
                  *  Init local provider value /content
                  *  DT: 06.11.2023
                  *  Defined: wine method ***/
-                public function __v(
-                    object|null $t = null,
-                    string|callable $c = "",
+                public function wine_local_provider_assigned_value(
+                    object $t = null,
+                    string|callable $c = null,
                     mixed ...$a
                 ) {
                     return $this->wine->optimized_html(
                         __,
                         null,
-                        call_user_func([$t, $c], ...$a)
+                        $this->wine->wine_cb_method($t, $c, ...$a)
                     );
                 }
                 /**
                  *  Init local provider magic filter
                  *  DT: 06.11.2023
                  *  Defined: wine method ***/
-                public function __m(
-                    object|null $t = null,
-                    string|callable $c = "",
+                public function wine_local_provider_filter_content(
+                    object $t = null,
+                    string|callable $c = null,
                     mixed ...$a
                 ) {
                     if (method_exists($t, $c)) {
@@ -136,7 +136,7 @@ if (file_exists($require_file)) {
                         return $this->optimized_html(
                             __,
                             null,
-                            call_user_func([$t, $c], ...$a)
+                            $this->wine->wine_cb_method($t, $c, ...$a)
                         );
                     } else {
                         /**
@@ -150,27 +150,27 @@ if (file_exists($require_file)) {
                 }
             };
             if (array_key_exists($wine::LP[2], $__w)) {
-                $cbv = $wine->__v(
-                    $__w[$wine::LP[2]][0],
+                $cbv = $wine->wine_local_provider_assigned_value(
+                    $__w[$wine::LP[2]][0] ?? "",
                     $__w[$wine::LP[2]][1] ?? "",
                     ...$vm
                 );
             }
             if (array_key_exists($wine::LP[3], $__w)) {
-                $cbm = $wine->__m(
-                    $__w[$wine::LP[3]][0],
+                $cbm = $wine->wine_local_provider_filter_content(
+                    $__w[$wine::LP[3]][0] ?? "",
                     $__w[$wine::LP[3]][1] ?? "",
                     ...$vm
                 );
             }
             return [
                 $wine::LP[0] => $wine->get_section_element_from_provider(),
-                $wine::LP[1] => $wine->__w(__, [
+                $wine::LP[1] => $wine->wine_generate_optimized_element(__, [
                     child => [
                         please => function () use ($wine, $__w) {
                             $init = [];
                             if (array_key_exists($wine::LP[1], $__w)) {
-                                $init[] = $wine->__w(
+                                $init[] = $wine->wine_generate_optimized_element(
                                     $__w[$wine::LP[1]][0] ?? "",
                                     $__w[$wine::LP[1]][1] ?? "",
                                     $__w[$wine::LP[1]][2] ?? "",
