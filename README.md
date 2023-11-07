@@ -112,7 +112,7 @@ print wine(__, [
 ]]);
 ```
 Logs <br />
-```v1.3.8 [FIXED] : Class name attribute space | 08.11.2023 ```
+```v1.3.8 [FIXED] : Class name attribute space child array | 08.11.2023 ```
 
 <hr /> 
 
