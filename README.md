@@ -4,22 +4,27 @@ Optimized HTML this will use for view section can also be used within your busin
 NOTE: Class cannot be extended for security reasons. All properties and methods are private.
 
 ```PHP
- // @stable v1.2.8
- // Reserve keyword constant 
- child | value | attr | __ | please | "try" | < all valid HTML 5 element & HTML attribute like ex. < class > and < id > >
+ /* Installation via composer */ 
+ /* required version *v1.3.6 */
+ composer require phpwine/optimizedhtml v1.3.6
+```
+```PHP
+ # Installation 
+  add_action('init', function() {
+     __initActions(' classes ', true ); /* set true second argument if the file is class */
+ });
 
- // Methods 
- // This method generates HTML ( string|callable|array )
- wine( string $tag, string|callable|array $content = [], string|array $attr = [], $enable_html = false );
-
- // This method accept call-back function and arguments 
- // Demo Callback method : https://github.com/WPExtension/OptimizedHtml/blob/main/Demo/componentLogo.php
- value( object $class, string|callable $call_back, mixed ...$args );
-
- // This method filter current assigned value and replace
- magic( object $class, string|callable $call_back, mixed ...$current_value );
+# Structure
+ |- init
+     |- classes
+         |- OptimizedHtml.php  /* If class not found rename to: AOptimizedHtml.php | alphabetical higher is "A" */ 
+         |- init-custom-action.php /* Here put all HTML */
+            ...
 
 ```
+ <br /> For more information installation link here : https://github.com/WPExtension/WPSPATheme
+ <br /> <a href="https://github.com/WPExtension/WPSPATheme"> Installation guide > </a>
+
 
 ```PHP
  // Procedures:
@@ -42,23 +47,6 @@ NOTE: Class cannot be extended for security reasons. All properties and methods 
    ...
 
 ```
-
-```PHP
- # Installation 
-  add_action('init', function() {
-     __initActions(' classes ', true ); /* set true second argument if the file is class */
- });
-
-# Structure
- |- init
-     |- classes
-         |- OptimizedHtml.php  /* If class not found rename to: AOptimizedHtml.php | alphabetical higher is "A" */ 
-         |- init-custom-action.php /* Here put all HTML */
-            ...
-
-```
- <br /> For more information installation link here : https://github.com/WPExtension/WPSPATheme
- <br /> <a href="https://github.com/WPExtension/WPSPATheme"> Installation guide > </a>
 
 ```PHP
 // What's New in v1.2.6 & v1.2.7 & v1.2.8
