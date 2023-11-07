@@ -1,12 +1,12 @@
 <?php
 
-ini_set("display_errors", 1);
-ini_set("display_startup_errors", 1);
-error_reporting(E_ALL);
+ ini_set("display_errors", 1);
+ ini_set("display_startup_errors", 1);
+ error_reporting(E_ALL);
 
-use PHPWineOptimizedHtml\OptimizedHtml;
+ use PHPWineOptimizedHtml\OptimizedHtml;
 
-$require_file = dirname(__DIR__) . "/OptimizedHtml.php";
+ $require_file = dirname(__DIR__) . "/OptimizedHtml.php";
 
 /**
  * @copyright (c) 2023 Optimized Html Cooked by nielsoffice
@@ -40,7 +40,7 @@ $require_file = dirname(__DIR__) . "/OptimizedHtml.php";
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v1.3.6
+ * @version   v1.3.7
  * @since     10.26.2023
  * @since     11.05.2023
  *
@@ -48,6 +48,7 @@ $require_file = dirname(__DIR__) . "/OptimizedHtml.php";
 if (file_exists($require_file)) {
     // require the file class
     require_once $require_file;
+
     /**
      * @init
      * Defined : Check if the main file is exits!
@@ -65,7 +66,7 @@ if (file_exists($require_file)) {
         {
             $wine = new class extends \PHPWineOptimizedHtml\OptimizedHtml {
                 public $wine;
-                public const LP = ["dp", "init", "cbv", "cbm"];
+                public const LP = ["dp", "init", "cbv", "cbm", "attr"];
                 /**
                  *  Init local provider wine
                  *  DT: 06.11.2023
@@ -94,7 +95,7 @@ if (file_exists($require_file)) {
                  *  Defined: wine method
                  *
                  */
-                public function wine_generate_optimized_element(
+                public function wine_generate_optimized_element_method(
                     string $t = null,
                     string|callable|array $c = null,
                     string|array $a = null,
@@ -106,7 +107,7 @@ if (file_exists($require_file)) {
                  *  Init local provider value /content
                  *  DT: 06.11.2023
                  *  Defined: wine method ***/
-                public function wine_local_provider_assigned_value(
+                public function wine_local_provider_assigned_hook(
                     object $t = null,
                     string|callable $c = null,
                     mixed ...$a
@@ -114,14 +115,14 @@ if (file_exists($require_file)) {
                     return $this->wine->optimized_html(
                         __,
                         null,
-                        $this->wine->wine_cb_method($t, $c, ...$a)
+                        $this->wine->wine_attribute_hook(false, $t, $c, ...$a)
                     );
                 }
                 /**
                  *  Init local provider magic filter
                  *  DT: 06.11.2023
                  *  Defined: wine method ***/
-                public function wine_local_provider_filter_content(
+                public function wine_local_provider_filter_hook(
                     object $t = null,
                     string|callable $c = null,
                     mixed ...$a
@@ -136,7 +137,12 @@ if (file_exists($require_file)) {
                         return $this->optimized_html(
                             __,
                             null,
-                            $this->wine->wine_cb_method($t, $c, ...$a)
+                            $this->wine->wine_attribute_hook(
+                                false,
+                                $t,
+                                $c,
+                                ...$a
+                            )
                         );
                     } else {
                         /**
@@ -148,41 +154,97 @@ if (file_exists($require_file)) {
                         return $this->optimized_html(__, null, ...$a);
                     }
                 }
+                /**
+                 *  Init local provider magic filter
+                 *  DT: 06.11.2023
+                 *  Defined: wine method ***/
+                public function wine_local_provider_attr_hook(
+                    object $t = null,
+                    string|callable $c = null,
+                    mixed ...$a
+                ) {
+                    if (method_exists($t, $c)) {
+                        /**
+                         * @method
+                         * Defined : call back value from method if exist and current value as argument
+                         * @since: v1.0
+                         * DT: 10.30.2023 *
+                         */
+                        return $this->wine->wine_attribute_hook(
+                            true,
+                            $t,
+                            $c,
+                            ...$a
+                        );
+                    } elseif (function_exists($c)) {
+                        /**
+                         * @condition
+                         * Defined : call back value from function if exist and current value as argument
+                         * @since: v1.3.7
+                         * DT: 11.08.2023 *
+                         */
+                        return call_user_func($c, ...$a);
+                    } else {
+                        /**
+                         * @method
+                         * Defined : Only if the emthod is not exist then this is the current value
+                         * @since: v1.0
+                         * DT: 10.30.2023 *
+                         * If the attribute in hook is a string then print as is
+                         */
+                        if (is_string(...$a)) {
+                            return implode("", $a);
+                        } elseif (is_array($a[0])) {
+                            return $this->set_attributes_html($a[0]);
+                        }
+                    }
+                }
             };
             if (array_key_exists($wine::LP[2], $__w)) {
-                $cbv = $wine->wine_local_provider_assigned_value(
+                $cbv = $wine->wine_local_provider_assigned_hook(
                     $__w[$wine::LP[2]][0] ?? "",
                     $__w[$wine::LP[2]][1] ?? "",
                     ...$vm
                 );
             }
             if (array_key_exists($wine::LP[3], $__w)) {
-                $cbm = $wine->wine_local_provider_filter_content(
+                $cbm = $wine->wine_local_provider_filter_hook(
                     $__w[$wine::LP[3]][0] ?? "",
                     $__w[$wine::LP[3]][1] ?? "",
                     ...$vm
                 );
             }
+            if (array_key_exists($wine::LP[4], $__w)) {
+                $cba = $wine->wine_local_provider_attr_hook(
+                    $__w[$wine::LP[4]][0] ?? "",
+                    $__w[$wine::LP[4]][1] ?? "",
+                    ...$vm
+                );
+            }
             return [
                 $wine::LP[0] => $wine->get_section_element_from_provider(),
-                $wine::LP[1] => $wine->wine_generate_optimized_element(__, [
-                    child => [
-                        please => function () use ($wine, $__w) {
-                            $init = [];
-                            if (array_key_exists($wine::LP[1], $__w)) {
-                                $init[] = $wine->wine_generate_optimized_element(
-                                    $__w[$wine::LP[1]][0] ?? "",
-                                    $__w[$wine::LP[1]][1] ?? "",
-                                    $__w[$wine::LP[1]][2] ?? "",
-                                    $__w[$wine::LP[1]][3] ?? false
-                                );
-                            }
-                            return $init;
-                        },
-                    ],
-                ]),
+                $wine::LP[1] => $wine->wine_generate_optimized_element_method(
+                    __,
+                    [
+                        child => [
+                            please => function () use ($wine, $__w) {
+                                $init = [];
+                                if (array_key_exists($wine::LP[1], $__w)) {
+                                    $init[] = $wine->wine_generate_optimized_element_method(
+                                        $__w[$wine::LP[1]][0] ?? "",
+                                        $__w[$wine::LP[1]][1] ?? "",
+                                        $__w[$wine::LP[1]][2],
+                                        $__w[$wine::LP[1]][3] ?? false
+                                    );
+                                }
+                                return $init;
+                            },
+                        ],
+                    ]
+                ),
                 $wine::LP[2] => $cbv ?? null,
                 $wine::LP[3] => $cbm ?? null,
+                $wine::LP[4] => $cba ?? null,
             ];
         }
         /**
@@ -281,7 +343,7 @@ if (file_exists($require_file)) {
             string|callable|null $call_back = null,
             // @param thordly arguments
             mixed ...$args
-        ) {
+        ): mixed {
             $located = "cbv";
             $optimized = local_provider(
                 [
@@ -318,7 +380,7 @@ if (file_exists($require_file)) {
             string|callable $call_back = null,
             // @param thordly arguments
             mixed ...$current_value
-        ) {
+        ): mixed {
             /**
              *  Init OptimizedHtml
              *  DT: 05.11.2023
@@ -334,6 +396,49 @@ if (file_exists($require_file)) {
                     ],
                 ],
                 ...$current_value
+            )[$located];
+            return $optimized;
+        }
+        /**
+         * @functions
+         *
+         * --------------------------------------------------------------------------------------------
+         * The attr method similar to value the different is the value is become
+         * areguments once the filter or call back method is already defined.
+         *
+         * @object
+         *
+         * @string|callable
+         *
+         * @argument which is mixed
+         *
+         * Defined : public method filtered current value and replace/
+         * @since: v1.2.8
+         * DT: 10.26.2023 *
+         */
+        function attr(
+            // @param first Object nullable
+            object $class = null,
+            // @param second string call back function
+            string|callable $call_back = null,
+            // @param thordly arguments
+            mixed ...$attr
+        ) : string|array {
+            /**
+             *  Init OptimizedHtml
+             *  DT: 05.11.2023
+             *  Defined: Value method function version
+             *
+             */
+            $located = "attr";
+            $optimized = local_provider(
+                [
+                    $located => [
+                        $class, // @param
+                        $call_back, // @param
+                    ],
+                ],
+                ...$attr
             )[$located];
             return $optimized;
         }
