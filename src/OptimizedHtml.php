@@ -959,7 +959,7 @@ class OptimizedHtml
                                     $array_child_entities[] = $ca_key[self::value][self::please]()[0];
                                    
                                 } else {
-;
+
                                     // I should use array element child ['div', attr => [] ... ]
                                     $array_child_entities = $this->array_child_element(
                                         $ca_key[self::value]
