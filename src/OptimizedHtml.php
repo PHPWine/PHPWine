@@ -808,7 +808,7 @@ class OptimizedHtml
      * @since: v1.0
      * DT: 11.08.2023 *
      */
-    private function wine_element_attribute_distributor($attribute_hooks) : array {
+    private function wine_element_attribute_provider($attribute_hooks) : array {
         
       $data_elem_attr = [];
 
@@ -905,12 +905,12 @@ class OptimizedHtml
                        if( is_array($attribute_hooks)) 
                        {
 
-                        $data_elem_attr[] = $this->wine_element_attribute_distributor($attribute_hooks)[0];
+                        $data_elem_attr[] = $this->wine_element_attribute_provider($attribute_hooks)[0];
                         
-                      } else 
-                       {
-                        $data_elem_attr[] = $this->space.$attribute_hooks;
-                       }
+                       } else 
+                        {
+                         $data_elem_attr[] = $this->space.$attribute_hooks;
+                        }
                     } elseif (!$this->wine_reserved_keyword_verifier(self::attr, $ca_key)) {
                         $data_elem_attr[] = "";
                     }
@@ -949,25 +949,27 @@ class OptimizedHtml
                                 ) &&
                                 is_callable($ca_key[self::value][self::please])
                             ) {
-                                // try third layer
-                               
-                                if (
+
+                               if (
                                     !is_array(
-                                        $ca_key[self::value][self::please]()[0]?? []
+                                        $ca_key[self::value][self::please]()[0]
                                     )
                                 ) {
-                                    return implode("",
-                                       $ca_key[self::value][self::please]()
-                                     );
+                                    
+                                    $array_child_entities[] = $ca_key[self::value][self::please]()[0];
+                                   
                                 } else {
+;
                                     // I should use array element child ['div', attr => [] ... ]
                                     $array_child_entities = $this->array_child_element(
                                         $ca_key[self::value]
                                     );
+                                    
                                     // If the array is 0 length then return string empty!
                                     return $this->wine_provide_rendered_result_string($array_child_entities);
                                 }
-                                // end of try third
+
+                                // end of  Tthird
                             } elseif (is_array($ca_key[self::value])) {
                                 $array_child_entities[] = sprintf(
                                     $__childElementValue,
@@ -998,8 +1000,8 @@ class OptimizedHtml
 
           return false;
 
-        } /* END Else from array try func! */
-    }
+      } /* END Else from array try func! */
+   }
 
     /**
      * @method
@@ -1110,7 +1112,7 @@ class OptimizedHtml
 
     /**
      * @method
-     * Defined : private inner Html method hand;er
+     * Defined : private inner Html method handler
      * @since: v1.2.2
      * DT: 10.29.2023 *
      */
@@ -1121,7 +1123,7 @@ class OptimizedHtml
     ): string {
         // Male inline html
         if ($inline !== false) {
-            return "<$elem / >";
+            return "<$elem />";
         } else {
             // return closing tag
             return "<$elem>$value</$elem>";
@@ -1136,33 +1138,16 @@ class OptimizedHtml
      */
     private function array_child_element(string|array $child_key_array): array
     {
-
-        // var_dump($child_key_array[self::please]()[3]);
-       
-        for ($i=0; $i < count($child_key_array[self::please]()); $i++) { 
-        
-
-            var_dump($child_key_array[self::please]()[$i]);
-           
-        }
-        exit;
-
         // I should use array element child ['div', attr => [] ... ]
         $array_child_entities = [];
         foreach ($child_key_array[self::please]() as $try_val) {
             // Get attribute assign from child array
             $data_elem_attr = [];
 
-            if ( $this->wine_reserved_keyword_verifier(self::value, $try_val) ) {
-                $data_elem_attr[] = $this->wine_element_attribute_distributor($try_val[self::value]);
-            } else {
-                $data_elem_attr[] = false;
-            }
             if ( $this->wine_reserved_keyword_verifier(self::attr, $try_val) ) {
-                $data_elem_attr[] = $this->wine_element_attribute_distributor($try_val[self::attr]);
-            } else {
-                $data_elem_attr[] = false;
-            }
+                
+                $data_elem_attr[] = $this->wine_element_attribute_provider($try_val[self::attr])[0];
+            } 
             // Sanitized and print string
             $__sanitizeString = "%s";
             $prepare_openingf = sprintf(

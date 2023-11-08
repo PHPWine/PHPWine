@@ -67,7 +67,7 @@ if (file_exists($require_file)) {
         {
             $wine = new class extends \PHPWineOptimizedHtml\OptimizedHtml {
                 public $wine;
-                public const LP = ["dp", "init", "cbv", "cbm","attr"];
+                public const LP = ["dp", "init", "cbv", "cbm","attr","wpd"];
                 /**
                  *  Init local provider wine
                  *  DT: 06.11.2023
@@ -146,7 +146,7 @@ if (file_exists($require_file)) {
                          * @since: v1.0
                          * DT: 10.30.2023 *
                          */
-                        return $this->optimized_html(__, null, ...$a);
+                        return $this->wine_local_provider($a[0],...$a);
                     }
                 }
                 /**
@@ -197,7 +197,26 @@ if (file_exists($require_file)) {
 
                     }
                 }
+
+                public function wine_local_provider(
+                    string|callable $func_provider = null,
+                    mixed ...$args 
+                ) : mixed {
+            
+                   if(function_exists($func_provider)) {
+            
+                     return call_user_func($func_provider, ...$args);
+                
+                   } else { 
+                    
+                     return false;
+
+                   }
+                 
+                }
+                
             };
+           
             /**
              * Defined : filter local provider public value
              * @since: v1.3.7
@@ -237,6 +256,19 @@ if (file_exists($require_file)) {
                 );
             }
 
+            /**
+             * Defined : local provider function
+             * @since: v1.3.7
+             * DT: 11.08.2023 *
+             */  
+            if (array_key_exists($wine::LP[5], $__w)) {
+                $cpd = $wine->wine_local_provider(
+                    $__w[$wine::LP[5]][0] ?? "",
+                    $__w[$wine::LP[5]][1] ?? "",
+                    ...$vm
+                );
+            }
+
             // provider
             $pdr = $wine->get_section_element_from_provider();
 
@@ -268,7 +300,8 @@ if (file_exists($require_file)) {
             $wine::LP[1] => $win ?? null,
             $wine::LP[2] => $cbv ?? null,
             $wine::LP[3] => $cbm ?? null,
-            $wine::LP[4] => $cba ?? null
+            $wine::LP[4] => $cba ?? null,
+            $wine::LP[5] => $cpd ?? null
             
           ];
 
@@ -469,6 +502,44 @@ if (file_exists($require_file)) {
             return $optimized;
         }
 
+        /**
+         * @function
+         *
+         * --------------------------------------------------------------------------------------------
+         * function provider no object require similar as magic | procedural
+         *
+         * The param first is
+         * @string || Callable
+         *
+         * @arguments which is mixed
+         *
+         * Defined : public method use value /instead value => []/
+         * @since: v1.2.6
+         * DT: 11.09.2023 
+         */
+        function later(
+            // @param first Object nullable
+            string|callable $function_name = null,
+            // @param thordly arguments
+            mixed ...$args
+        ) : string|array {
+            /**
+             *  Init OptimizedHtml
+             *  DT: 05.11.2023
+             *  Defined: Value method function version
+             *
+             */
+            $located = "wpd";
+            $optimized = local_provider(
+                [
+                  $located => [
+                    $function_name, // @param
+                  ],
+                ],
+                ...$args
+            )[$located];
+            return $optimized;
+        }
 
     } else {
         throw new \Exception("\wine class is already exists!");
