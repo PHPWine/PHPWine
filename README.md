@@ -91,7 +91,7 @@ print wine(__, [
 ]]);
 ```
 <br /> New :
-<br /> ``` @since 1.3.9 later(); no object require, call back function hook ```
+<br /> ``` @since v1.3.9 later(); no object require, call back function hook ```
 <br />
 Logs :
 <br /> ```v1.3.8 [FIXED] : Class name attribute space child array | 08.11.2023 ```
