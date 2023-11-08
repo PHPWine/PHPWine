@@ -40,7 +40,7 @@ $require_file = dirname(__DIR__) . "/OptimizedHtml.php";
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v1.3.8
+ * @version   v1.3.9
  * @since     10.26.2023
  * @since     11.05.2023
  *
@@ -198,6 +198,11 @@ if (file_exists($require_file)) {
                     }
                 }
             };
+            /**
+             * Defined : filter local provider public value
+             * @since: v1.3.7
+             * DT: 11.08.2023 *
+             */            
             if (array_key_exists($wine::LP[2], $__w)) {
                 $cbv = $wine->wine_local_provider_assigned_hook(
                     $__w[$wine::LP[2]][0] ?? "",
@@ -205,6 +210,12 @@ if (file_exists($require_file)) {
                     ...$vm
                 );
             }
+
+           /**
+             * Defined : filter local provider public magic
+             * @since: v1.3.7
+             * DT: 11.08.2023 *
+             */   
             if (array_key_exists($wine::LP[3], $__w)) {
                 $cbm = $wine->wine_local_provider_filter_hook(
                     $__w[$wine::LP[3]][0] ?? "",
@@ -212,6 +223,12 @@ if (file_exists($require_file)) {
                     ...$vm
                 );
             }
+
+           /**
+             * Defined : filter local provider public attr
+             * @since: v1.3.7
+             * DT: 11.08.2023 *
+             */   
             if (array_key_exists($wine::LP[4], $__w)) {
                 $cba = $wine->wine_local_provider_attr_hook(
                     $__w[$wine::LP[4]][0] ?? "",
@@ -219,28 +236,42 @@ if (file_exists($require_file)) {
                     ...$vm
                 );
             }
-            return [
-                $wine::LP[0] => $wine->get_section_element_from_provider(),
-                $wine::LP[1] => $wine->wine_generate_optimized_element_method(__, [
-                    child => [
-                        please => function () use ($wine, $__w) {
-                            $init = [];
-                            if (array_key_exists($wine::LP[1], $__w)) {
-                                $init[] = $wine->wine_generate_optimized_element_method(
-                                    $__w[$wine::LP[1]][0] ?? "",
-                                    $__w[$wine::LP[1]][1] ?? "",
-                                    $__w[$wine::LP[1]][2],
-                                    $__w[$wine::LP[1]][3] ?? false
-                                );
-                            }
-                            return $init;
-                        },
-                    ],
-                ]),
-                $wine::LP[2] => $cbv ?? null,
-                $wine::LP[3] => $cbm ?? null,
-                $wine::LP[4] => $cba ?? null,
-            ];
+
+            // provider
+            $pdr = $wine->get_section_element_from_provider();
+
+           /**
+             * Defined : filter local provider public wine
+             * @since: v1.3.7
+             * DT: 11.08.2023 *
+             */   
+            $win = $wine->wine_generate_optimized_element_method(__, [
+                child => [
+                    please => function () use ($wine, $__w) {
+                        $init = [];
+                        if (array_key_exists($wine::LP[1], $__w)) {
+                            $init[] = $wine->wine_generate_optimized_element_method(
+                                $__w[$wine::LP[1]][0] ?? "",
+                                $__w[$wine::LP[1]][1] ?? "",
+                                $__w[$wine::LP[1]][2],
+                                $__w[$wine::LP[1]][3] ?? false
+                            );
+                        }
+                        return $init;
+                    },
+                ],
+            ]);
+
+          return [
+            
+            $wine::LP[0] => $pdr ?? null,
+            $wine::LP[1] => $win ?? null,
+            $wine::LP[2] => $cbv ?? null,
+            $wine::LP[3] => $cbm ?? null,
+            $wine::LP[4] => $cba ?? null
+            
+          ];
+
         }
         /**
          * @function

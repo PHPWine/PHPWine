@@ -38,7 +38,7 @@
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v1.3.8
+ * @version   v1.3.9
  * @since     10.26.2023
  * @since     11.05.2023
  *
@@ -786,6 +786,76 @@ class OptimizedHtml
             return $__prepare;
         }
     }
+
+    /**
+     * @method
+     * Defined : Private method reserved keyword checker
+     * @since: v1.0
+     * DT: 11.08.2023 *
+     */
+    private function wine_reserved_keyword_verifier(string|array $key = '', array $containers = []) : bool {
+
+      if(array_key_exists($key, $containers)) { return true; } 
+      else {
+        return false;
+       }
+
+    }
+
+    /**
+     * @method
+     * Defined : Private method attribute loop
+     * @since: v1.0
+     * DT: 11.08.2023 *
+     */
+    private function wine_element_attribute_distributor($attribute_hooks) : array {
+        
+      $data_elem_attr = [];
+
+      foreach ($attribute_hooks as $key_attr => $output_rendered) { 
+         $data_elem_attr[] = $this->space . $key_attr . "=\"$output_rendered\""; 
+       }
+
+       return  $data_elem_attr;
+
+    }
+    /**
+     * @method
+     * Defined : Private method rendered result string return!
+     * @since: v1.0
+     * DT: 11.08.2023 *
+     */
+    private function wine_provide_rendered_result_string( array $array_child_entities) : string {
+     
+      if (count($array_child_entities) < 0) { return false; } 
+      else {
+         return implode("", $array_child_entities);
+       }
+
+    }
+    /**
+     * @method
+     * Defined : Private method asset check if the value string return!
+     * @since: v1.0
+     * DT: 11.08.2023 *
+     */
+    private function wine_verifyer_inspector_layer($wine_key, $data_containers) {
+        
+        $array_child_entities = array();
+
+        if (!is_array($data_containers[$wine_key]()[0]?? "")) {
+            return implode("", $data_containers[$wine_key]());
+        } else {
+            // I should use array element child ['div', attr => [] ... ]
+            $array_child_entities = $this->array_child_element(
+                $data_containers
+            );
+            // If the array is 0 length then return string empty!
+            return $this->wine_provide_rendered_result_string($array_child_entities);
+            
+        }
+       
+    }
     /**
      * @method
      * Defined : Private method filter array child html
@@ -795,65 +865,36 @@ class OptimizedHtml
     private function optimized_child_array(array $content): string
     {
         // Verify mandatory array key to make array child
-        if (array_key_exists(self::child, $content)) {
+        if ($this->wine_reserved_keyword_verifier(self::child, $content)) {
             // If there is then do loop those child and assign attr to the html
             $child_key_array = $content[self::child];
             // Check if the try is exist and callable ? means it is a function array
             if (
-                array_key_exists(self::please, $child_key_array) &&
+                $this->wine_reserved_keyword_verifier(self::please, $child_key_array) &&
                 is_callable($child_key_array[self::please])
             ) {
+
                 // if this key [0] which is "div" or element is not array
                 // means I can use method wine();
-                if (!is_array($child_key_array[self::please]()[0] ?? false)) {
-                    return implode("", $child_key_array[self::please]());
-                } else {
-                    // I should use array element child ['div', attr => [] ... ]
-                    $array_child_entities = $this->array_child_element(
-                        $child_key_array
-                    );
-                    // If the array is 0 length then return string empty!
-                    if (count($array_child_entities) < 0) {
-                        return "";
-                    }
-                    // elseimplode array to string!
-                    else {
-                        return implode("", $array_child_entities);
-                    }
-                    // End try
-                }
+                return $this->wine_verifyer_inspector_layer(self::please,$child_key_array);
+
             } else {
                 $array_child_entities = [];
                 // Iterate value and attributes
                 foreach ($child_key_array as $ca_key) {
                     // try first layer
                     if (
-                        array_key_exists(self::please, $ca_key) &&
+                        $this->wine_reserved_keyword_verifier(self::please, $ca_key) &&
                         is_callable($ca_key[self::please])
                     ) {
-                        if (!is_array($ca_key[self::please]()[0]?? "")) {
-                            return implode("", $ca_key[self::please]());
-                        } else {
-                            // One layer
-                            // I should use array element child ['div', attr => [] ... ]
-                            $array_child_entities = $this->array_child_element(
-                                $ca_key
-                            );
-                            // If the array is 0 length then return string empty!
-                            if (count($array_child_entities) < 0) {
-                                return "";
-                            }
-                            // else implode array to string!
-                            else {
-                                return implode("", $array_child_entities);
-                            }
-                            // END try first layer
-                        }
+
+                        return $this->wine_verifyer_inspector_layer(self::please,$ca_key);
+                    
                     }
-                    // end try
+                    
                     // Get attribute assign from child array
                     $data_elem_attr = [];
-                    if (array_key_exists(self::attr, $ca_key)) {
+                    if ($this->wine_reserved_keyword_verifier(self::attr, $ca_key)) {
 
                         if( isset($ca_key[self::attr][0])) {
                           $attribute_hooks = $ca_key[self::attr][0];
@@ -863,14 +904,14 @@ class OptimizedHtml
                            
                        if( is_array($attribute_hooks)) 
                        {
-                        foreach ($attribute_hooks as $key_attr => $v) { 
-                           $data_elem_attr[] = $this->space . $key_attr . "=\"$v\""; 
-                        }
+
+                        $data_elem_attr[] = $this->wine_element_attribute_distributor($attribute_hooks)[0];
+                        
                       } else 
                        {
                         $data_elem_attr[] = $this->space.$attribute_hooks;
                        }
-                    } elseif (!array_key_exists(self::attr, $ca_key)) {
+                    } elseif (!$this->wine_reserved_keyword_verifier(self::attr, $ca_key)) {
                         $data_elem_attr[] = "";
                     }
                     // Sanitized and print string
@@ -900,41 +941,31 @@ class OptimizedHtml
                         }
                         // sanitized value to string all child re-rendered
                         $__childElementValue = "%s";
-                        if (array_key_exists(self::value, $ca_key)) {
+                        if ($this->wine_reserved_keyword_verifier(self::value, $ca_key)) {
                             if (
-                                array_key_exists(
+                                $this->wine_reserved_keyword_verifier(
                                     self::please,
                                     $ca_key[self::value]
                                 ) &&
                                 is_callable($ca_key[self::value][self::please])
                             ) {
                                 // try third layer
+                               
                                 if (
                                     !is_array(
-                                        $ca_key[self::value][self::please]()[0]
+                                        $ca_key[self::value][self::please]()[0]?? []
                                     )
                                 ) {
-                                    return false;
                                     return implode("",
                                        $ca_key[self::value][self::please]()
                                      );
-                                   
                                 } else {
                                     // I should use array element child ['div', attr => [] ... ]
                                     $array_child_entities = $this->array_child_element(
                                         $ca_key[self::value]
                                     );
                                     // If the array is 0 length then return string empty!
-                                    if (count($array_child_entities) < 0) {
-                                        return "";
-                                    }
-                                    // else implode array to string!
-                                    else {
-                                        return implode(
-                                            "",
-                                            $array_child_entities
-                                        );
-                                    }
+                                    return $this->wine_provide_rendered_result_string($array_child_entities);
                                 }
                                 // end of try third
                             } elseif (is_array($ca_key[self::value])) {
@@ -949,11 +980,8 @@ class OptimizedHtml
                                 );
                             }
                         } elseif ($ca_key[0] === self::__) {
-                            if (count($array_child_entities) < 0) {
-                                return "";
-                            } else {
-                                return implode("", $array_child_entities);
-                            }
+                           
+                            return $this->wine_provide_rendered_result_string($array_child_entities);
                         }
                         if ($ca_key[0] !== self::__) {
                             // close html markup
@@ -963,15 +991,13 @@ class OptimizedHtml
                         }
                     }
                 }
-                if (count($array_child_entities) < 0) {
-                    return "";
-                } else {
-                    return implode("", $array_child_entities);
-                }
+                return $this->wine_provide_rendered_result_string($array_child_entities);
             } 
 
         }  else {
-            return "";
+
+          return false;
+
         } /* END Else from array try func! */
     }
 
@@ -1110,15 +1136,32 @@ class OptimizedHtml
      */
     private function array_child_element(string|array $child_key_array): array
     {
+
+        // var_dump($child_key_array[self::please]()[3]);
+       
+        for ($i=0; $i < count($child_key_array[self::please]()); $i++) { 
+        
+
+            var_dump($child_key_array[self::please]()[$i]);
+           
+        }
+        exit;
+
         // I should use array element child ['div', attr => [] ... ]
         $array_child_entities = [];
         foreach ($child_key_array[self::please]() as $try_val) {
             // Get attribute assign from child array
             $data_elem_attr = [];
-            if (array_key_exists(self::attr, $try_val)) {
-                foreach ($try_val[self::attr] as $key_attr => $v) {
-                    $data_elem_attr[] = $this->space. $key_attr . "=\"$v\"";
-                }
+
+            if ( $this->wine_reserved_keyword_verifier(self::value, $try_val) ) {
+                $data_elem_attr[] = $this->wine_element_attribute_distributor($try_val[self::value]);
+            } else {
+                $data_elem_attr[] = false;
+            }
+            if ( $this->wine_reserved_keyword_verifier(self::attr, $try_val) ) {
+                $data_elem_attr[] = $this->wine_element_attribute_distributor($try_val[self::attr]);
+            } else {
+                $data_elem_attr[] = false;
             }
             // Sanitized and print string
             $__sanitizeString = "%s";
@@ -1145,7 +1188,7 @@ class OptimizedHtml
                 }
                 // sanitized value to string all child re-rendered
                 $__childElementValue = "%s";
-                if (array_key_exists(self::value, $try_val)) {
+                if ($this->wine_reserved_keyword_verifier(self::value, $try_val)) {
                     if (is_array($try_val[self::value])) {
                         $array_child_entities[] = sprintf(
                             $__childElementValue,
