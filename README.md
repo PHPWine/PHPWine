@@ -5,8 +5,8 @@ NOTE: Class cannot be extended for security reasons. All properties and methods 
 
 ```PHP
  /* Installation via composer */ 
- /* required version *v1.3.8 */
- composer require phpwine/optimizedhtml v1.3.8
+ /* required version *v1.3.9 */
+ composer require phpwine/optimizedhtml v1.3.9
 ```
 ```PHP
  # Installation 
@@ -90,8 +90,11 @@ print wine(__, [
  
 ]]);
 ```
-Logs <br />
-```v1.3.8 [FIXED] : Class name attribute space child array | 08.11.2023 ```
+<br /> New :
+<br /> ``` later(); no object required call back function hook ```
+<br />
+Logs :
+<br /> ```v1.3.8 [FIXED] : Class name attribute space child array | 08.11.2023 ```
 
 <hr /> 
 
