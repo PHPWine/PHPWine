@@ -91,7 +91,6 @@ print wine(__, [
 ]]);
 ```
 <br /> New :
-<br /> ``` @since v1.3.9 later(); no object require, call back function hook ```
 <br /> 
 ``` PHP
 $this->wine::child => [
@@ -100,9 +99,12 @@ $this->wine::child => [
   ]
  ]);
 ```
+``` @since v1.3.9 later(); no object require, call back function hook ```
 <br />
+<hr />
+
 Logs :
-<br /> ```v1.3.8 [FIXED] : Class name attribute space child array | 08.11.2023 ```
+<br /> ``` v1.3.8 [FIXED] : Class name attribute space child array | 08.11.2023 ```
 
 <hr /> 
 
