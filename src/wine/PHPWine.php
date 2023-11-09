@@ -40,7 +40,7 @@ $require_file = dirname(__DIR__) . "/OptimizedHtml.php";
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v1.3.9
+ * @version   v1.4.0
  * @since     10.26.2023
  * @since     11.05.2023
  *
@@ -96,7 +96,7 @@ if (file_exists($require_file)) {
                  *  Defined: wine method
                  **/
                 public function wine_generate_optimized_element_method(
-                    string $t = null,
+                    object|string $t = null,
                     string|callable|array $c = null,
                     string|array $a = null,
                     bool $e = false
@@ -108,7 +108,7 @@ if (file_exists($require_file)) {
                  *  DT: 06.11.2023
                  *  Defined: wine method ***/
                 public function wine_local_provider_assigned_hook(
-                    object $t = null,
+                    object|string $t = null,
                     string|callable $c = null,
                     mixed ...$a
                 ) {
@@ -123,7 +123,7 @@ if (file_exists($require_file)) {
                  *  DT: 06.11.2023
                  *  Defined: wine method ***/
                 public function wine_local_provider_filter_hook(
-                    object $t = null,
+                    object|string $t = null,
                     string|callable $c = null,
                     mixed ...$a
                 ) {
@@ -154,7 +154,7 @@ if (file_exists($require_file)) {
                  *  DT: 06.11.2023
                  *  Defined: wine method ***/
                 public function wine_local_provider_attr_hook(
-                    object $t = null,
+                    string|object $t = null,
                     string|callable $c = null,
                     mixed ...$a
                 ) {
@@ -397,7 +397,7 @@ if (file_exists($require_file)) {
          */
         function value(
             // @param first Object nullable
-            object|null $class = null,
+            object|string|null $class = null,
             // @param second string call back function
             string|callable|null $call_back = null,
             // @param thordly arguments
@@ -434,7 +434,7 @@ if (file_exists($require_file)) {
          */
         function magic(
             // @param first Object nullable
-            object $class = null,
+            object|string $class = null,
             // @param second string call back function
             string|callable $call_back = null,
             // @param thordly arguments
@@ -477,7 +477,7 @@ if (file_exists($require_file)) {
          */
         function attr(
             // @param first Object nullable
-            object $class = null,
+            object|string $class = null,
             // @param second string call back function
             string|callable $call_back = null,
             // @param thordly arguments

@@ -38,7 +38,7 @@
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v1.3.9
+ * @version   v1.4.0
  * @since     10.26.2023
  * @since     11.05.2023
  *
@@ -285,7 +285,7 @@ class OptimizedHtml
      * @since: v1.2.5
      * DT: 10.29.2023 *
      */
-    protected const __CHILDKEY = [
+    protected const CHILDKEY = [
         // filter child array html element
         "CK" => "ARRAY_FIRST_CHILD_ELEMENT",
         // filter value array html element
@@ -348,7 +348,7 @@ class OptimizedHtml
      * @since: v1.0
      * DT: 10.26.2023 *
      */
-    public const child = self::__CHILDKEY["CK"];
+    public const child = self::CHILDKEY["CK"];
     /**
      * @var constant|Array child value html
      * @property
@@ -356,7 +356,7 @@ class OptimizedHtml
      * @since: v1.0
      * DT: 10.26.2023 *
      */
-    public const value = self::__CHILDKEY["CV"];
+    public const value = self::CHILDKEY["CV"];
     /**
      * @var constant|Array child html
      * @property
@@ -364,7 +364,7 @@ class OptimizedHtml
      * @since: v1.0
      * DT: 10.26.2023 *
      */
-    public const attr = self::__CHILDKEY["CA"];
+    public const attr = self::CHILDKEY["CA"];
     /**
      * @var String disable html
      * @property
@@ -454,7 +454,7 @@ class OptimizedHtml
          * DT: 10.29.2023 *
          */
         if (!defined("child")) {
-            define("child", self::__CHILDKEY["CK"]);
+            define("child", self::CHILDKEY["CK"]);
         }
         /**
          * @contant
@@ -463,7 +463,7 @@ class OptimizedHtml
          * DT: 10.29.2023 *
          */
         if (!defined("attr")) {
-            define("attr", self::__CHILDKEY["CA"]);
+            define("attr", self::CHILDKEY["CA"]);
         }
         /**
          * @constant
@@ -481,7 +481,7 @@ class OptimizedHtml
          * DT: 10.29.2023 *
          */
         if (!defined("value")) {
-            define("value", self::__CHILDKEY["CV"]);
+            define("value", self::CHILDKEY["CV"]);
         }
         /**
          * @contant
@@ -593,7 +593,7 @@ class OptimizedHtml
      * DT: 10.26.2023 *
      */
     public function value(
-        object $class = null,
+        string|object $class = null,
         string|callable $call_back = null,
         mixed ...$args
     ) : mixed {
@@ -606,7 +606,7 @@ class OptimizedHtml
         return $this->optimized_html(
             self::__,
             null,
-            call_user_func([$class, $call_back], ...$args)
+            call_user_func([$this->wine_check_object_class($class), $call_back], ...$args)
         );
     }
     /**
@@ -627,10 +627,11 @@ class OptimizedHtml
      * DT: 10.26.2023 *
      */
     public function magic(
-        object $class = null,
+        string|object $class = null,
         string|callable $call_back = null,
         mixed ...$current_value
     ) : mixed {
+
         if (method_exists($class, $call_back)) {
             /**
              * @method
@@ -641,7 +642,7 @@ class OptimizedHtml
             return $this->optimized_html(
                 self::__,
                 null,
-                call_user_func([$class, $call_back], ...$current_value)
+                call_user_func([$this->wine_check_object_class($class), $call_back], ...$current_value)
             );
 
         } else if( function_exists($call_back) ) {
@@ -683,7 +684,7 @@ class OptimizedHtml
      */
     public function attr(
     
-      object $object = null,
+      string|object $object = null,
       string|callable $call_back = null,
       mixed ...$attr 
       
@@ -697,12 +698,29 @@ class OptimizedHtml
          */        
          return $this->wine_attribute_hook(
           true, 
-          $object, 
+          $this->wine_check_object_class($object), 
           $call_back, 
           ...$attr
       
         );
           
+    }
+
+    /**
+     * @method
+     * Defined : protected object to string ?
+     * @since: v1.3.4
+     * DT: 11.10.2023 *
+     */
+    protected function wine_check_object_class($class) {
+       
+      if(is_object($class)) { $get_object_class = $class; } 
+      else {
+        $get_object_class = (new $class);
+      }
+
+      return $get_object_class;
+
     }
 
     /**
@@ -1058,7 +1076,7 @@ class OptimizedHtml
      * DT: 11.7.2023 **/
     protected function wine_attribute_hook( 
       bool $development = false,
-      object $object = null,
+      string|object $object = null,
       string|callable $method = null,
       mixed ...$args
     ) {
@@ -1073,7 +1091,7 @@ class OptimizedHtml
              * DT: 10.30.2023 *
              */
             /* hooks argment turn into value like magic wine */
-            return call_user_func([$object, $method], ...$args);
+            return call_user_func([$this->wine_check_object_class($object), $method], ...$args);
            
         } else if( function_exists($method) ) {
 
@@ -1105,7 +1123,7 @@ class OptimizedHtml
         }
        
       } else {
-        return call_user_func([$object, $method], ...$args);
+        return call_user_func([$this->wine_check_object_class($object), $method], ...$args);
       } 
       
     }
