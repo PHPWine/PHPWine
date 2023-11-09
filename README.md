@@ -92,6 +92,14 @@ print wine(__, [
 ```
 <br /> New :
 <br /> ``` @since v1.3.9 later(); no object require, call back function hook ```
+<br /> 
+``` PHP
+$this->wine::child => [
+/*  ['div', $this->wine::value=>[ $this->wine->value((new Branding),'component_top_logo_header')]], this still works anyway */
+    ['div', $this->wine::value=>[ $this->wine->value(MenuList::class,'component_top_right_menu', $this->links ) ]]
+  ]
+ ]);
+```
 <br />
 Logs :
 <br /> ```v1.3.8 [FIXED] : Class name attribute space child array | 08.11.2023 ```
