@@ -1,13 +1,9 @@
 <?php 
- 
+
  namespace PHPWineOptimizedHtml;
 
- ini_set("display_errors", 1);
- ini_set("display_startup_errors", 1);
- error_reporting(E_ALL);
-
  /**
- * @copyright (c) 2023 Optimized Html Cooked by nielsoffice
+ * @copyright (c) 2023 Optimized Html [DirectoryHandlerError] Cooked by nielsoffice
  *
  * MIT License
  *
@@ -38,59 +34,24 @@
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v2.0
+ * @version   v1.4.0
  * @since     10.26.2023
  * @since     11.05.2023
  *
  */
 
- class OptimizedHtml extends \PHPWineOptimizedHtml\Provider {
-   
-  public function __construct( bool $disable_html = false)
-  {
+ class DirectoryHandlerError {
 
- /**
-   * --------------------------------------------------------------------------------------------
-   * @var constant|String 
-   * @property
-   * -------------------------------------------------------------------------------------------- 
-   * Initialized Dicrectory registered for layout all constant  
-   * 
-   * @Defined : Constant Layout
-   * @since: v1.0 doctrine
-   * @since: v2.0 wine
-   * DT: 11.10.2023 
-   */
-   $require = dirname( __DIR__ ) .'/src/init.php';
-
-   if(file_exists($require)) {
-
-    require_once ($require);
-
-   }
-
-  /**
-   * --------------------------------------------------------------------------------------------
-   * @var constant|String 
-   * @property
-   * -------------------------------------------------------------------------------------------- 
-   * Initialized PHPWine optimizedHtml provider construct  
-   * 
-   * @Defined : Constant Wine
-   * @since: v1.0 doctrine
-   * @since: v2.0 wine
-   * DT: 11.10.2023 
-   */
-   parent::__construct(
-     child, 
-     attr, 
-     value, 
-     please, 
-     __, 
-     section, 
-     $disable_html
-   );
-
-  }
-
+    public function __construct( $hookDeault = [] )
+     {
+ 
+         print "<span style='background-color: #F5D9D9; color: #333; '>";
+         $container = [];  foreach($hookDeault as $hd) {
+             $container[] = "Directory " .$hd."<br />";
+         }
+         print implode("", $container);
+         print "</span>";
+                
+    }
+ 
  }
