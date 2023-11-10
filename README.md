@@ -92,6 +92,14 @@ print wine(__, [
 ```
 <br /> New :
 <br /> 
+```PHP
+ // New in v2.0 soon Hooks 
+  echo wine(h1,'Hello World', [ id => 'wine_id'], $hooks = [
+   ['your_hook_name_add_html_top',[ $one = 2, $two = 4] ],
+   ['your_hook_name_add_html_bottom',[ $one = 'A', $two = 'B']]
+  ]  
+);
+```
 ``` PHP
 @since v1.4.0OptimizedHtml
 $this->wine::child => [
