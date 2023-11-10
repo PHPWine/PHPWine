@@ -78,15 +78,42 @@ if (file_exists( $require_file)) {
                 public function __construct()
                 {
 
-                    $this->wine = new Provider( 
-                     child, 
-                     attr, 
-                     value, 
-                     please, 
-                     __, 
-                     section, 
-                     false 
+                   /**
+                    * --------------------------------------------------------------------------------------------
+                    * @var Array 
+                    * @property
+                    * -------------------------------------------------------------------------------------------- 
+                    * Initialized injection bypassing wine   
+                    * 
+                    * @Defined : throw array exception
+                    * @since: v1.0 doctrine
+                    * @since: v2.0 wine
+                    * DT: 11.11.2023 
+                    */
+                    array_push(
+                        
+                     // Init array error handler
+                     $this->errors,
+                        
+                     // passing message 
+                    'warning html injection detected!',
+
+                    'scan enable set $disable_html = true',
+                       
+                    'new \PHPWineOptimizedHtml\OptimizedHtml(true)'
+                    
                     );
+
+                    parent::__construct(
+                        child, 
+                        attr, 
+                        value, 
+                        please, 
+                        __, 
+                        section, 
+                        false 
+                    );
+
 
                 }
                 // get section
@@ -107,12 +134,30 @@ if (file_exists( $require_file)) {
                  *  Defined: wine method
                  **/
                 public function wine_generate_optimized_element_method(
-                    object|string $t = null,
-                    string|callable|array $c = null,
-                    string|array $a = null,
-                    bool $e = false
+                   string $t = '',
+                   string|callable|array $c = [],
+                   string|array $a = [],
+                   array $h = [],
+                   bool $e = false
+                    
                 ) {
-                    return $this->wine->optimized_html($t, $a, $c, $e);
+
+                /**
+                 * --------------------------------------------------------------------------------------------
+                 * @var constant|String 
+                 * @property
+                 * -------------------------------------------------------------------------------------------- 
+                 * Initialized Dicrectory registered for layout all constant  
+                 * 
+                 * @Defined : Constant Layout
+                 * @since: v1.0 doctrine
+                 * @since: v2.0 wine
+                 * DT: 11.10.2023 
+                 */
+                return $this->init_method_wine(
+                    $t, $c, $a, $h, $e
+                   );
+                   
                 }
                 /**
                  *  Init local provider value /content
@@ -125,7 +170,7 @@ if (file_exists( $require_file)) {
                 ) {
                     return $this->wine->optimized_html(
                        __,
-                       null,
+                       [],
                        $this->wine->wine_attribute_hook(false, $t, $c, ...$a)
                     );
                 }
@@ -138,27 +183,13 @@ if (file_exists( $require_file)) {
                     string|callable $c = null,
                     mixed ...$a
                 ) {
-                    if (method_exists($t, $c)) {
-                        /**
-                         * @method
-                         * Defined : call back value from method if exist and current value as argument
-                         * @since: v1.0
-                         * DT: 10.30.2023 *
-                         */
-                        return $this->optimized_html(
-                            __,
-                            null,
-                            $this->wine->wine_attribute_hook(false, $t, $c, ...$a)
-                        );
-                    } else {
-                        /**
-                         * @method
-                         * Defined : Only if the emthod is not exist then this is the current value
-                         * @since: v1.0
-                         * DT: 10.30.2023 *
-                         */
-                        return $this->wine_local_provider($a[0],...$a);
-                    }
+
+                 return $this->ini_magic_wine(
+                      $t,
+                      $c,
+                   ...$a
+                  );
+
                 }
                 /**
                  *  Init local provider magic filter
@@ -186,7 +217,12 @@ if (file_exists( $require_file)) {
                      * @since: v1.3.7
                      * DT: 11.08.2023 *
                      */
-                       return call_user_func($c,...$a);
+                       return call_user_func($this->optimized_html(
+                            __,
+                            [],
+                            $c
+                         )
+                       ,...$a);
 
                     } else {
                         
@@ -216,13 +252,14 @@ if (file_exists( $require_file)) {
             
                    if(function_exists($func_provider)) {
             
-                     return call_user_func($func_provider, ...$args);
+                     return call_user_func($this->optimized_html(
+                       __,
+                       [],
+                       $func_provider
+                     ), 
+                    ...$args);
                 
-                   } else { 
-                    
-                     return false;
-
-                   }
+                   } 
                  
                 }
                 
@@ -294,10 +331,11 @@ if (file_exists( $require_file)) {
                         $init = [];
                         if (array_key_exists($wine::LP[1], $__w)) {
                             $init[] = $wine->wine_generate_optimized_element_method(
-                                $__w[$wine::LP[1]][0] ?? "",
-                                $__w[$wine::LP[1]][1] ?? "",
-                                $__w[$wine::LP[1]][2],
-                                $__w[$wine::LP[1]][3] ?? false
+                                $__w[$wine::LP[1]][0] ?? '',
+                                $__w[$wine::LP[1]][1] ?? [],
+                                $__w[$wine::LP[1]][2] ?? [],
+                                $__w[$wine::LP[1]][3] ?? [],
+                                $__w[$wine::LP[1]][4] ?? false
                             );
                         }
                         return $init;

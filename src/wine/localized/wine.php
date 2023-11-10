@@ -48,13 +48,16 @@
  * DT: 10.26.2023 *
  */
 function wine(
-    string|null $tag,
+    string $tag = '',
     // @param first content string|callable|array
     string|callable|array $content = [],
     // @param second attr array
     string|array $attr = [],
+    // @param second attr array
+    array $hooks = [],
     // @param third < Optional >
     $enable_html = false
+    
 ) : mixed {
     if (is_null($tag) || empty($tag)) {
         $tag = local_provider()["dp"];
@@ -66,8 +69,8 @@ function wine(
             $tag, // @param
             $content, // @param
             $attr, // @param
-            $enable_html,
-            // @param
+            $hooks, // @param
+            $enable_html
         ],
     ])[$located];
     return $optimized;

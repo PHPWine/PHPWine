@@ -48,6 +48,32 @@
    
   public function __construct( bool $disable_html = false)
   {
+  
+ /**
+   * --------------------------------------------------------------------------------------------
+   * @var Array 
+   * @property
+   * -------------------------------------------------------------------------------------------- 
+   * Initialized injection bypassing wine   
+   * 
+   * @Defined : throw array exception
+   * @since: v1.0 doctrine
+   * @since: v2.0 wine
+   * DT: 11.11.2023 
+   */
+   array_push(
+    
+    // Init array error handler
+    $this->errors,
+    
+    // passing message 
+    'warning html injection detected!',
+
+    'scan enable set $disable_html = true',
+    
+    'new \PHPWineOptimizedHtml\OptimizedHtml(true)'
+ 
+   );
 
  /**
    * --------------------------------------------------------------------------------------------
