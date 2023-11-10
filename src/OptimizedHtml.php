@@ -67,6 +67,11 @@
 
     require_once ($require);
 
+   } else {
+    
+    throw new \Exception("\init.php source file not found!");
+    exit();
+
    }
 
   /**
