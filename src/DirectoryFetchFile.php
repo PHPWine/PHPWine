@@ -169,7 +169,7 @@
        * @method Directory Iterator class 
        * @protected 
        * -------------------------------------------------------------------------------------------- 
-       * loop file on here  
+       * localized file  
        * 
        * @Defined : Get source files
        * @since: v1.0 doctrine

@@ -324,6 +324,6 @@ if (file_exists( $require_file)) {
     }
 
 } else {
-    throw new \Exception("\PHPWineOptimizedHtml not found!");
+    throw new \Exception("\Provider Class not found!");
     exit();
 }
