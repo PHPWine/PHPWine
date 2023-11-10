@@ -234,14 +234,53 @@ class Provider
          * DT: 10.26.2023 *
          */
         $this->space = $entity[3];
-
+        /**
+         * @var String|Constant init child array 
+         * @property
+         * Defined : html entities
+         * @since: v2.0
+         * DT: 111.10.2023 *
+         */
         $this->child = $child;
+        /**
+         * @var String|Constant init attr array 
+         * @property
+         * Defined : html entities
+         * @since: v2.0
+         * DT: 111.10.2023 *
+         */
         $this->attr  = $attr;
+        /**
+         * @var String|Constant init value array 
+         * @property
+         * Defined : html entities
+         * @since: v2.0
+         * DT: 111.10.2023 *
+         */
         $this->value = $value;
-
+        /**
+         * @var String|Constant init please array 
+         * @property
+         * Defined : html entities
+         * @since: v2.0
+         * DT: 111.10.2023 *
+         */
         $this->please  = $please;
+        /**
+         * @var String|Constant init mentity array 
+         * @property
+         * Defined : html entities
+         * @since: v2.0
+         * DT: 111.10.2023 *
+         */
         $this->mentity = $mentity;
-
+        /**
+         * @var String|Constant init tag default to section  
+         * @property
+         * Defined : html entities
+         * @since: v2.0
+         * DT: 111.10.2023 *
+         */
         $this->tag = $section;
     
     }
