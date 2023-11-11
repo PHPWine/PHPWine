@@ -554,14 +554,217 @@ class Provider
 
              exit();
 
-            } else {
+            } else {            
                 
                 $wine_hooks = "";
+
+            /**
+             * --------------------------------------------------------------------------------------------
+             * @var: filter default checker top position 
+             * @property
+             * -------------------------------------------------------------------------------------------- 
+             * variable verifier
+             * 
+             * @since: v1.0 doctrine
+             * @since: v2.0 wine
+             * DT: 11.10.2023 
+             */
+                $top_text = "top_";
+
+            /**
+             * --------------------------------------------------------------------------------------------
+             * @var: filter default checker bottom position 
+             * @property
+             * -------------------------------------------------------------------------------------------- 
+             * variable verifier
+             * 
+             * @since: v1.0 doctrine
+             * @since: v2.0 wine
+             * DT: 11.10.2023 
+             */
+                $bottom_text = "bottom_"; 
+
+            /**
+             * --------------------------------------------------------------------------------------------
+             * @var: filter content replace empty 
+             * @property
+             * -------------------------------------------------------------------------------------------- 
+             * variable verifier
+             * 
+             * @since: v1.0 doctrine
+             * @since: v2.0 wine
+             * DT: 11.10.2023 
+             */
+                $spacing_empty = "";
+
+            /**
+             * --------------------------------------------------------------------------------------------
+             * @var: filter is ? bottom_ in top then replace
+             * @property
+             * -------------------------------------------------------------------------------------------- 
+             * variable verifier
+             * 
+             * @since: v1.0 doctrine
+             * @since: v2.0 wine
+             * DT: 11.10.2023 
+             */
+                $__do_bot   = str_replace(
+                   $bottom_text, 
+                   $spacing_empty,
+
+                   strtolower($hooks[0][0] ?? "")
+                );
+
+            /**
+             * --------------------------------------------------------------------------------------------
+             * @var: filter if not then default
+             * @property
+             * -------------------------------------------------------------------------------------------- 
+             * variable verifier
+             * 
+             * @since: v1.0 doctrine
+             * @since: v2.0 wine
+             * DT: 11.10.2023 
+             */
+                $__dfault   = str_replace(
+                    $bottom_text, 
+                    $spacing_empty,
+ 
+                    strtolower($hooks[1][0] ?? "")
+                 );
+
+            /**
+             * --------------------------------------------------------------------------------------------
+             * @var: filter else do top on hook
+             * @property
+             * -------------------------------------------------------------------------------------------- 
+             * variable verifier
+             * 
+             * @since: v1.0 doctrine
+             * @since: v2.0 wine
+             * DT: 11.10.2023 
+             */
+                $__do_top   = str_replace(
+                    $top_text, 
+                    $spacing_empty,
+ 
+                    strtolower($hooks[0][0] ?? "")
+                 );
+                
+            /**
+             * --------------------------------------------------------------------------------------------
+             * @var: verifier concat content filer top
+             * @property
+             * -------------------------------------------------------------------------------------------- 
+             * variable verifier
+             * 
+             * @since: v1.0 doctrine
+             * @since: v2.0 wine
+             * DT: 11.10.2023 
+             */
+                $__get_top = $top_text.$__do_top;
+            /**
+             * --------------------------------------------------------------------------------------------
+             * @var: verifier concat content filer bottom
+             * @property
+             * -------------------------------------------------------------------------------------------- 
+             * variable verifier
+             * 
+             * @since: v1.0 doctrine
+             * @since: v2.0 wine
+             * DT: 11.10.2023 
+             */
+                $__get_bot  = $bottom_text.$__do_bot;
+            /**
+             * --------------------------------------------------------------------------------------------
+             * @var: else default position array
+             * @property
+             * -------------------------------------------------------------------------------------------- 
+             * variable verifier
+             * 
+             * @since: v1.0 doctrine
+             * @since: v2.0 wine
+             * DT: 11.10.2023 
+             */ 
+                $__get_dfault = $bottom_text.$__dfault;
+
+            /**
+             * --------------------------------------------------------------------------------------------
+             * @define: check if those position are in place? means is top and bottom container true?
+             * @condition
+             * -------------------------------------------------------------------------------------------- 
+             * variable verifier
+             * 
+             * @since: v1.0 doctrine
+             * @since: v2.0 wine
+             * DT: 11.10.2023 
+             */
+                if(  $__get_top === $hooks[0][0]?? "" && $__get_dfault === $hooks[1][0]?? "" ) { 
+  
+                    if (function_exists($hooks[0][0]?? false)) {
+ 
+                        $wine_hooks .= $this->optimized_html(
+                          $this->mentity,
+                          null,
+                          $this->wine_callable_hook(
+                            $hooks[0][0]?? "", 
+                            ...$hooks[0][1]?? []
+                          )
+                       );
+                     }
+
+                     $wine_hooks .= $this->optimized_html( $tag, $attr, $content, $enable_html );
+
+                    if (function_exists($hooks[1][0]?? false)) {
+                        $wine_hooks .= $this->optimized_html(
+                            $this->mentity,
+                            null,
+                            $this->wine_callable_hook(
+                              $hooks[1][0]?? "", 
+                              ...$hooks[1][1]?? []
+                            )
+                        );
+                    }
+
+                   return (string) $wine_hooks;
+
+                } else {
 
                 /**
                  * --------------------------------------------------------------------------------------------
                  * @function
                  * Callable
+                 * --------------------------------------------------------------------------------------------
+                 * Position top
+                 *
+                 * @Defined : hook top later
+                 * @since: v1.0 doctrine
+                 * @since: v2.0 wine
+                 * DT: 11.10.2023
+                 */
+               
+                if( $__get_top == $hooks[0][0]) {
+                   
+                    if (function_exists($hooks[0][0]?? false)) {
+ 
+                        $wine_hooks .= $this->optimized_html(
+                          $this->mentity,
+                          null,
+                          $this->wine_callable_hook($hooks[0][0]?? "", ...$hooks[0][1]?? [])
+     
+                       );
+                     }
+
+                     $wine_hooks .= $this->optimized_html( $tag, $attr, $content,  $enable_html );
+
+                    return (string) $wine_hooks;
+
+                } else if ( $__get_bot === $hooks[0][0]) {
+
+               /**
+                 * --------------------------------------------------------------------------------------------
+                 * @condition
+                 * defined: position bottom
                  * --------------------------------------------------------------------------------------------
                  * verifying if the hook top later element @IF is active
                  *
@@ -570,56 +773,26 @@ class Provider
                  * @since: v2.0 wine
                  * DT: 11.10.2023
                  */
-                if (function_exists($hooks[0][0]?? false)) {
-                    $wine_hooks .= $this->optimized_html(
-                        $this->mentity,
-                        null,
-                        $this->wine_callable_hook($hooks[0][0]?? "", ...$hooks[0][1]?? [])
-                    );
-                }
+                    $wine_hooks .= $this->optimized_html( $tag, $attr, $content, $enable_html);
 
-                /**
-                 * --------------------------------------------------------------------------------------------
-                 * @method
-                 * OptimizedHtml wine Element
-                 * --------------------------------------------------------------------------------------------
-                 * Return element with or without hook being active
-                 *
-                 * @Defined : OptimizedHtml wine element
-                 * @since: v1.0 doctrine
-                 * @since: v2.0 wine
-                 * DT: 11.10.2023
-                 */
-                $wine_hooks .= $this->optimized_html(
-                    $tag,
-                    $attr,
-                    $content,
-                    $enable_html
-                );
+                    if (function_exists($hooks[0][0]?? false)) {
+ 
+                        $wine_hooks .= $this->optimized_html(
+                          $this->mentity,
+                          null,
+                          $this->wine_callable_hook($hooks[0][0]?? "", ...$hooks[0][1]?? [])
+     
+                       );
+                     }
 
-                /**
-                 * --------------------------------------------------------------------------------------------
-                 * @function
-                 * Callable
-                 * --------------------------------------------------------------------------------------------
-                 * verifying if the hook before element @IF is active
-                 *
-                 * @Defined : hook top later
-                 * @since: v1.0 doctrine
-                 * @since: v2.0 wine
-                 * DT: 11.10.2023
-                 */
-                if (function_exists($hooks[1][0]?? false)) {
-                    $wine_hooks .= $this->optimized_html(
-                        $this->mentity,
-                        null,
-                        $this->wine_callable_hook($hooks[1][0]?? "", ...$hooks[1][1]?? [])
-                    );
-                }
+                    return (string) $wine_hooks;
 
-                return (string) $wine_hooks;
+               }  
+
             }
-        }
+             
+         }
+       }
     }
 
     /**
