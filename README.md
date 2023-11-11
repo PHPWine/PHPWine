@@ -100,7 +100,7 @@ print wine(__, [
   ]  
 );
 
-// You can now | Using key "string" top_ OR bottom_ follow by your hook name ... 
+// You can now | Using key "string" top_ OR bottom_ followed by your hook name ... 
 // ex. [  bottom_your_hook_name_add_html_bottom, [ $argu_1, .... ] ]
  $hooks = [
    ['bottom_your_hook_name_add_html_bottom',[ $one = 'A', $two = 'B']] /* this will display in the bottom element html */
