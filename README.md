@@ -95,10 +95,16 @@ print wine(__, [
 ```PHP
  // New in v2.0 soon Hooks 
   echo wine(h1,'Hello World', [ id => 'wine_id'], $hooks = [
-   ['your_hook_name_add_html_top',[ $one = 2, $two = 4] ],
-   ['your_hook_name_add_html_bottom',[ $one = 'A', $two = 'B']]
+   ['top_your_hook_name_add_html_top',[ $one = 2, $two = 4] ],
+   ['bottom_your_hook_name_add_html_bottom',[ $one = 'A', $two = 'B']]
   ]  
 );
+
+// You can now | Using key "string" top_ OR bottom_ follow by your hook name ... 
+// ex. [  bottom_your_hook_name_add_html_bottom, [ $argu_1, .... ] ]
+ $hooks = [
+   ['bottom_your_hook_name_add_html_bottom',[ $one = 'A', $two = 'B']] /* this will display in the bottom element html */
+  ]  
 ```
 ``` PHP
 @since v1.4.0OptimizedHtml
