@@ -88,86 +88,85 @@ class Provider
      * @property
      * Defined : html entities
      * @since: v1.0
-     * DT: 10.26.2023 *
-     */
+     * DT: 10.26.2023 **/
     private $e_open;
+
     /**
      * @var String init closing html
      * @property
      * Defined : html entities
      * @since: v1.0
-     * DT: 10.26.2023 *
-     */
+     * DT: 10.26.2023 **/
     private $e_close;
+
     /**
      * @var String init end html
      * @property
      * Defined : html entities
      * @since: v1.0
-     * DT: 10.26.2023 *
-     */
+     * DT: 10.26.2023 **/
     private $e_end;
+
     /**
      * @var String init collection entity html
      * @property
      * Defined : html entities
      * @since: v1.0
-     * DT: 10.26.2023 *
-     */
+     * DT: 10.26.2023 **/
     private $space;
+
     /**
      * @var String|Array init erro message
      * @property
      * Defined : html error property
      * @since: v2.0
-     * DT: 11.11.2023 *
-     */
+     * DT: 11.11.2023 **/
     public array $errors = [];
+
     /**
      * @var Constant|String child html
      * @property
      * Defined : html child array key
      * @since: v1.0
-     * DT: 10.26.2023 *
-     */
+     * DT: 10.26.2023 **/
     public $child;
+
     /**
      * @var constant|String child value html
      * @property
      * Defined : html child value array key
      * @since: v1.0
-     * DT: 10.26.2023 *
-     */
+     * DT: 10.26.2023 **/
     public $value;
+
     /**
      * @var Array|String|Constant child html
      * @property
      * Defined : html child attribute array key
      * @since: v1.0
-     * DT: 10.26.2023 *
-     */
+     * DT: 10.26.2023 **/
     public $attr;
+
     /**
      * @var Constant|String child html
      * @property
-     * Defined : removed parent element when "try" is being warp with wine method
+     * Defined : magic entity removed parent tag
      * @since: v1.2.2
-     * DT: 10.26.2023 *
-     */
+     * DT: 10.26.2023 **/
     public $mentity;
-    /**
-     * @var constant|String Try callable
-     * @property
-     * Defined : callable key word "try" executed condition and statement inside array child html
-     * @since: v1.2.0
-     * DT: 10.26.2023 *
-     */
-    public $please;
 
     /**
      * @var constant|String Try callable
      * @property
      * Defined : callable key word "try" executed condition and statement inside array child html
+     * @since: v1.2.0
+     * DT: 10.26.2023 **/
+    public $please;
+
+    /**
+     * @var constant|String Try callable
+     * @property
+     * Defined : tag assigned default html in wine
      * @since: v1.2.0
      * DT: 10.26.2023 *
      */
@@ -183,21 +182,21 @@ class Provider
     public $disable_html;
 
     public function __construct(
-        $child,
-        $attr,
-        $value,
-        $please,
-        $mentity,
-        $section,
-        bool $disable_html = false
+
+       string $child,   string $attr,
+       string $value,   string $please,
+       string $mentity, string $section,
+      
+       bool $disable_html = false
+
     ) {
+
         /**
          * @var String init remove html
          * @property
          * Defined : Disable html
          * @since: v1.2.2
-         * DT: 10.29.2023 *
-         */
+         * DT: 10.29.2023 **/
         $this->disable_html = $disable_html;
 
         /**
@@ -205,88 +204,87 @@ class Provider
          * @property
          * Defined : html entities
          * @since: v1.0
-         * DT: 10.26.2023 *
-         */
+         * DT: 10.26.2023 **/
         $entity = ["&lt;", "&gt;", "/", " "];
+
         /**
          * @var String init property opening html
          * @property
          * Defined : html entities
          * @since: v1.0
-         * DT: 10.26.2023 *
-         */
+         * DT: 10.26.2023 **/
         $this->e_open = $entity[0];
+
         /**
          * @var String init property opening html
          * @property
          * Defined : html entities
          * @since: v1.0
-         * DT: 10.26.2023 *
-         */
+         * DT: 10.26.2023 **/
         $this->e_close = $entity[1];
+
         /**
          * @var String init closing html
          * @property
          * Defined : html entities
          * @since: v1.0
-         * DT: 10.26.2023 *
-         */
+         * DT: 10.26.2023 **/
         $this->e_end = $entity[2];
+
         /**
          * @var String init space html
          * @property
          * Defined : html entities
          * @since: v1.0
-         * DT: 10.26.2023 *
-         */
+         * DT: 10.26.2023 **/
         $this->space = $entity[3];
+
         /**
          * @var String|Constant init child array
          * @property
          * Defined : html entities
          * @since: v2.0
-         * DT: 111.10.2023 *
-         */
+         * DT: 111.10.2023 **/
         $this->child = $child;
+
         /**
          * @var String|Constant init attr array
          * @property
          * Defined : html entities
          * @since: v2.0
-         * DT: 111.10.2023 *
-         */
+         * DT: 111.10.2023 **/
         $this->attr = $attr;
+
         /**
          * @var String|Constant init value array
          * @property
          * Defined : html entities
          * @since: v2.0
-         * DT: 111.10.2023 *
-         */
+         * DT: 111.10.2023 **/
         $this->value = $value;
+
         /**
          * @var String|Constant init please array
          * @property
          * Defined : html entities
          * @since: v2.0
-         * DT: 111.10.2023 *
-         */
+         * DT: 111.10.2023 **/
         $this->please = $please;
+
         /**
          * @var String|Constant init mentity array
          * @property
          * Defined : html entities
          * @since: v2.0
-         * DT: 111.10.2023 *
-         */
+         * DT: 111.10.2023 **/
         $this->mentity = $mentity;
+
         /**
          * @var String|Constant init tag default to section
          * @property
          * Defined : html entities
          * @since: v2.0
-         * DT: 111.10.2023 *
-         */
+         * DT: 111.10.2023 **/
         $this->tag = $section;
 
     }
@@ -335,30 +333,35 @@ class Provider
      * DT: 10.26.2023 *
      */
     public function wine(
+
         string $tag = "",
+        
         string|callable|array $content = [],
+        
         string|array $attr = [],
+        
         array $hooks = [],
+        
         $enable_html = false
+
     ) {
         /**
          * @var
          * Defined : check mnandatory element assign for html
          * @since: v1.3.4
-         * DT: 11.06.2023 *
-         */
-        if (is_null($tag) || empty($tag)) {
-            $tag = "section";
+         * DT: 11.06.2023 **/
+        if (is_null($tag) || empty($tag)) 
+        {
+          $tag = $this->tag;
         }
         /**
          * @method
          * Defined : Perform wine in browser
          * @since: v1.0
-         * DT: 10.26.2023 *
-         */
-       return $this->init_method_wine(
-        $tag, $content, $attr, $hooks, $enable_html
-       );
+         * DT: 10.26.2023 **/
+        return $this->init_method_wine(
+          $tag, $content, $attr, $hooks, $enable_html
+        );
 
     }
 
@@ -384,22 +387,26 @@ class Provider
      * DT: 10.26.2023 *
      */
     public function value(
-        string|object $class = null,
-        string|callable $call_back = null,
-        mixed ...$args
-    ): mixed {
+     
+      string|object $class = null,
+      
+      string|callable $call_back = null,
+      
+      mixed ...$args
+
+    ): mixed 
+    {
         /**
          * @method
          * Defined : call back value from method
          * @since: v1.0
-         * DT: 10.26.2023 *
-         */
+         * DT: 10.26.2023 **/
         return $this->optimized_html(
             $this->mentity,
             null,
             call_user_func(
-                [$this->wine_check_object_class($class), $call_back],
-                ...$args
+              [$this->wine_check_object_class($class), $call_back],
+              ...$args
             )
         );
     }
@@ -420,15 +427,22 @@ class Provider
      * DT: 10.26.2023 *
      */
     public function magic(
-        string|object $class = null,
-        string|callable $call_back = null,
-        mixed ...$current_value
-    ): mixed {
+      
+      string|object $class = null,
+      
+      string|callable $call_back = null,
+      
+      mixed ...$current_value
+
+    ): mixed 
+    {
+      
       return  $this->ini_magic_wine( 
-           $class,
+          $class,
           $call_back,
     ...$current_value
         );
+
     }
 
     /**
@@ -446,23 +460,29 @@ class Provider
      *
      * Defined : public method filtered current value and replace/
      * @since: v1.2.8
-     * DT: 10.26.2023 *
-     */
+     * DT: 10.26.2023 **/
     public function attr(
-        string|object $object = null,
-        string|callable $call_back = null,
-        mixed ...$attr
+
+      string|object $object = null,
+      
+      string|callable $call_back = null,
+      
+      mixed ...$attr
+
     ): string|array {
         /**
          * @return
          * Defined : reutrn the value if the attribute method or function exists!
          * @since: v1.3.7
-         * DT: 11.08.2023 *
-         */
+         * DT: 11.08.2023 **/
         return $this->wine_attribute_hook(
+
             true,
+            
             $this->wine_check_object_class($object),
+            
             $call_back,
+            
             ...$attr
         );
     }
@@ -471,17 +491,12 @@ class Provider
      * @method
      * Defined : protected object to string ?
      * @since: v1.3.4
-     * DT: 11.10.2023 *
-     */
+     * DT: 11.10.2023 **/
     protected function wine_check_object_class($class)
     {
-        if (is_object($class)) {
-            $get_object_class = $class;
-        } else {
-            $get_object_class = new $class();
-        }
 
-        return $get_object_class;
+       return wine_object($class);
+
     }
 
     /**
@@ -491,17 +506,26 @@ class Provider
      * DT: 11.10.2023 *
      */
     protected function register_reserved_keyword(
-        string $key_name,
-        string $default = null
-    ): void {
-        if (is_null($default)) {
-            $key_name = $key_name;
-        } else {
-            $key_name = $default;
+
+      string $key_name,
+      
+      string $default = null
+    
+    ): void 
+    {
+
+        if (is_null($default)) 
+        {
+          $key_name = $key_name;
+        } 
+        else
+        {
+          $key_name = $default;
         }
 
-        if (!defined($key_name)) {
-            define($key_name, $key_name);
+        if (!defined($key_name)) 
+        {
+          define($key_name, $key_name);
         }
     }
 
@@ -528,11 +552,17 @@ class Provider
      * DT: 10.26.2023 *
      */
     protected function wine_hook_tag_selections(
-        string $tag = "",
-        string|callable|array $content = [],
-        string|array $attr = [],
-        array $hooks = [],
-        $enable_html = false
+
+       string $tag = "",
+       
+       string|callable|array $content = [],
+       
+       string|array $attr = [],
+       
+       array $hooks = [],
+       
+       $enable_html = false
+
     ) {
         /**
          * @var
@@ -540,10 +570,12 @@ class Provider
          * @since: v2.0
          * DT: 11.11.2023 *
          */
-        if (count($hooks) > 0) {
-            if (
-                !is_string($hooks[0][0] ?? "") ||
-                !is_string($hooks[1][0] ?? "")
+        if (count($hooks) > 0) 
+        {
+        
+           if (
+              !is_string($hooks[0][0] ?? "") ||
+              !is_string($hooks[1][0] ?? "")
             ) {
                 // processing look like
                 throw new \Exception(
@@ -554,7 +586,11 @@ class Provider
 
              exit();
 
-            } else {            
+            } 
+            
+            else 
+            
+            {            
                 
                 $wine_hooks = "";
 
@@ -699,25 +735,28 @@ class Provider
              * @since: v2.0 wine
              * DT: 11.10.2023 
              */
-                if(  $__get_top === $hooks[0][0]?? "" && $__get_dfault === $hooks[1][0]?? "" ) { 
+                if(  $__get_top === $hooks[0][0]?? "" && $__get_dfault === $hooks[1][0]?? "" ) 
+                { 
   
-                   if (function_exists($hooks[0][0]?? false)) {
+                   if (function_exists($hooks[0][0]?? false)) 
+                   {
                        $wine_hooks .= $this->optimized_html( $this->mentity, null,
                          $this->wine_callable_hook(
                             $hooks[0][0]?? "", 
                          ...$hooks[0][1]?? []
                           )
                        );
-                     }
+                   }
                      
-                     $wine_hooks .= $this->optimized_html( $tag, $attr, $content, $enable_html );
-                    if (function_exists($hooks[1][0]?? false)) {
-                        $wine_hooks .= $this->optimized_html( $this->mentity, null,
-                            $this->wine_callable_hook(
-                              $hooks[1][0]?? "", 
-                              ...$hooks[1][1]?? []
-                            )
-                        );
+                   $wine_hooks .= $this->optimized_html( $tag, $attr, $content, $enable_html );
+                   if (function_exists($hooks[1][0]?? false)) 
+                   {
+                       $wine_hooks .= $this->optimized_html( $this->mentity, null,
+                           $this->wine_callable_hook(
+                           $hooks[1][0]?? "", 
+                        ...$hooks[1][1]?? []
+                         )
+                      );
                     }
 
                    return (string) $wine_hooks;
@@ -737,17 +776,19 @@ class Provider
                  * DT: 11.10.2023
                  */
                
-                if( $__get_top == $hooks[0][0]) {
-                   if (function_exists($hooks[0][0]?? false)) {
+                if( $__get_top == $hooks[0][0]) 
+                {
+                   if (function_exists($hooks[0][0]?? false)) 
+                   {
                         $wine_hooks .= $this->optimized_html( $this->mentity,null,
                         $this->wine_callable_hook(
-                            $hooks[0][0]?? "", 
-                            ...$hooks[0][1]?? []
+                           $hooks[0][0]?? "", 
+                        ...$hooks[0][1]?? []
                           )
                        );
-                     }
+                   }
 
-                     $wine_hooks .= $this->optimized_html( $tag, $attr, $content,  $enable_html );
+                   $wine_hooks .= $this->optimized_html( $tag, $attr, $content,  $enable_html );
 
                     return (string) $wine_hooks;
 
@@ -766,22 +807,23 @@ class Provider
                  * DT: 11.10.2023
                  */
                     $wine_hooks .= $this->optimized_html( $tag, $attr, $content, $enable_html);
-                    if (function_exists($hooks[0][0]?? false)) {
+                    if (function_exists($hooks[0][0]?? false)) 
+                    {
+                    
                       $wine_hooks .= $this->optimized_html( $this->mentity, null,
                       $this->wine_callable_hook(
                         $hooks[0][0]?? "", 
                         ...$hooks[0][1]?? []
                       )
                     );
-                   }
+                   
+                    }
 
                     return (string) $wine_hooks;
 
                }  
-
             }
-             
-         }
+          }
        }
     }
 
@@ -794,15 +836,21 @@ class Provider
     protected function init_method_wine(
 
         string $tag = "",
+
         string|callable|array $content = [],
+        
         string|array $attr = [],
+        
         array $hooks = [],
+        
         $enable_html = false
 
     ) {
 
-        if (count($hooks) > 0) {
-            return $this->wine_hook_tag_selections( $tag, $content, $attr, $hooks, $enable_html );
+        if (count($hooks) > 0) 
+        {
+        
+          return $this->wine_hook_tag_selections( $tag, $content, $attr, $hooks, $enable_html );
 
         } else {
             /**
@@ -816,7 +864,8 @@ class Provider
              * @since: v2.0 wine
              * DT: 11.10.2023
              */
-            return $this->optimized_html($tag, $attr, $content, $enable_html);
+          return $this->optimized_html($tag, $attr, $content, $enable_html);
+
         }
 
     }
@@ -828,13 +877,18 @@ class Provider
      * DT: 11.11.2023 *
      */
     protected function ini_magic_wine(
-        string|object $class = null,
-        string|callable $call_back = null,
-        mixed ...$current_value
 
-    ) : mixed {
+       string|object $class = null,
+       
+       string|callable $call_back = null,
+       
+       mixed ...$current_value
 
-        if (method_exists($class, $call_back)) {
+    ) : mixed 
+    {
+
+        if (method_exists($class, $call_back)) 
+        {
             /**
              * @method
              * Defined : call back value from method if exist and current value as argument
@@ -883,10 +937,15 @@ class Provider
      * DT: 10.26.2023 *
      */
     protected function optimized_html(
+
         string $tag = "section",
+        
         string|array|null $attr = [],
+        
         string|callable|array|null $content = null,
+        
         bool $disable_html = false
+
     ) {
         // Verifying tag element required to assign!
         $element = (string) strtolower($tag);
@@ -894,18 +953,26 @@ class Provider
         $value = $this->optimized_content($content, $disable_html);
         // Sanitized array data attr from the method
         $attr_element = $this->set_attributes_html($attr);
+        // secured html
+        $_xmgs_anti = count($this->errors);
         /* Opening html */
-        if (empty($attr_element) || is_null($attr_element)) {
-            $__sanitizeString = preg_replace("/\s+/", "", "%s %s");
+        if (empty($attr_element) || is_null($attr_element)) 
+        {
+          $__sanitizeString = preg_replace("/\s+/", "", "%s %s");
         } else {
-            $__sanitizeString = "%s %s";
+          $__sanitizeString = "%s %s";
         }
+
         $__value = "%s";
+        
         $value_prepared = sprintf($__value, $value);
+        
         // print to string
         $prepare_openingf = sprintf($__sanitizeString, $element, $attr_element);
-        if (in_array($element, $this->end_tag)) {
-            return $this->___ilHtml($element, $attr_element);
+        
+        if (in_array($element, $this->end_tag)) 
+        {
+          return $this->___ilHtml($element, $attr_element);
         } elseif ($element === $this->mentity) {
             // append html content to string or html entity
             $prepare = "";
@@ -955,11 +1022,12 @@ class Provider
             }
             ob_end_clean();
             if (!is_string($__prepare)) {
-                for ($errors = 0; $errors < count($this->errors); $errors++) {
-                    throw new \Exception("\"" . $this->errors[$errors]);
-                    exit();
+                for ($__xmsg = 0; $__xmsg < $_xmgs_anti; $__xmsg++) {
+                    throw new \Exception("\"" . $_xmgs_anti[$__xmsg]);
+                    exit;
                 }
             } else {
+                filter_var($__prepare,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 return (string) $__prepare;
             }
         }
@@ -975,11 +1043,7 @@ class Provider
         string|array $key = "",
         array $containers = []
     ): bool {
-        if (array_key_exists($key, $containers)) {
-            return true;
-        } else {
-            return false;
-        }
+      return wine_key_verifier($key, $containers);
     }
 
     /**
@@ -988,7 +1052,7 @@ class Provider
      * @since: v1.0
      * DT: 11.08.2023 *
      */
-    private function wine_element_attribute_provider($attribute_hooks): array
+    private function wine_element_attribute_provider( array $attribute_hooks): array
     {
         $data_elem_attr = [];
 
@@ -1008,20 +1072,21 @@ class Provider
     private function wine_provide_rendered_result_string(
         array $array_child_entities
     ): string {
-        if (count($array_child_entities) < 0) {
-            return false;
-        } else {
-            return implode("", $array_child_entities);
-        }
+
+        return wine_rendered($array_child_entities);
     }
     /**
      * @method
      * Defined : Private method asset check if the value string return!
      * @since: v1.0
-     * DT: 11.08.2023 *
-     */
-    private function wine_verifyer_inspector_layer($wine_key, $data_containers)
-    {
+     * DT: 11.08.2023 **/
+    private function wine_verifyer_inspector_layer(
+       
+       string $wine_key, 
+       
+       array $data_containers
+
+    ) : string {
         $array_child_entities = [];
 
         if (!is_array($data_containers[$wine_key]()[0] ?? "")) {
@@ -1261,13 +1326,21 @@ class Provider
      * @since: v1.3.6
      * DT: 11.7.2023 **/
     protected function wine_attribute_hook(
-        bool $development = false,
-        string|object $object = null,
-        string|callable $method = null,
-        mixed ...$args
+
+       bool $development = false,
+       
+       string|object $object = null,
+       
+       string|callable $method = null,
+       
+       mixed ...$args
+
     ) {
-        if ($development === true) {
-            if (method_exists($object, $method)) {
+        if ($development === true) 
+        {
+        
+           if (method_exists($object, $method)) 
+           {
                 /**
                  * @method
                  * Defined : call back value from method if exist and current value as argument
@@ -1279,6 +1352,7 @@ class Provider
                     [$this->wine_check_object_class($object), $method],
                     ...$args
                 );
+
             } elseif (function_exists($method)) {
                 /**
                  * @condition
@@ -1290,21 +1364,30 @@ class Provider
                     $this->optimized_html($this->mentity, null, $method),
                     ...$args
                 );
+
             } else {
+
                 /**
                  * @method
                  * Defined : Only if the emthod is not exist then this is the current value
                  * @since: v1.0
-                 * DT: 10.30.2023 *
-                 */
+                 * DT: 10.30.2023 **/
                 //If the attribute in hook is a string then print as is
-                if (is_string(...$args)) {
-                    return implode("", $args);
+                if (is_string(...$args)) 
+                {
+
+                  return implode("", $args);
+
                 } elseif (is_array($args[0])) {
-                    return $this->set_attributes_html($args[0]);
+
+                  return $this->set_attributes_html($args[0]);
+
                 }
+
             }
+
         } else {
+
             return $this->optimized_html(
                 $this->mentity,
                 [],
@@ -1323,17 +1406,22 @@ class Provider
      * DT: 10.29.2023 *
      */
     private function wineHTML(
+
         string $elem = "",
+        
         $value = null,
+        
         $inline = false
+
     ): string {
-        // Male inline html
-        if ($inline !== false) {
-            return "<$elem />";
-        } else {
-            // return closing tag
-            return "<$elem>$value</$elem>";
-        }
+
+       // Male inline html
+       return eeg_checker(
+          $inline, 
+          $elem, 
+          $value
+       );
+
     }
 
     /**
@@ -1346,6 +1434,7 @@ class Provider
     {
         // I should use array element child ['div', attr => [] ... ]
         $array_child_entities = [];
+
         foreach ($child_key_array[$this->please]() as $try_val) {
             // Get attribute assign from child array
             $data_elem_attr = [];
@@ -1447,8 +1536,11 @@ class Provider
      * DT: 10.26.2023 *
      */
     private function optimized_content(
-        string|callable|array|null $content,
-        bool $disable_html = false
+
+      string|callable|array|null $content,
+     
+      bool $disable_html = false
+
     ) {
         // verify if content is array to create array child
         if (is_array($content)) {
@@ -1500,11 +1592,14 @@ class Provider
      * DT: 11.11.2023 *
      */
     private function wine_callable_hook(
-        string|callable $func_provider = null,
-        mixed ...$args
+
+      string|callable $func_provider = null,
+      
+      mixed ...$args
+
     ): mixed {
-        if (function_exists($func_provider)) {
-            return call_user_func($func_provider, ...$args);
-        }
+       
+     return wine_callable($func_provider, ...$args);
+        
     }
 }

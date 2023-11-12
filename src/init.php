@@ -45,9 +45,18 @@
   * @since: v2.0
   * DT: 11.10.2023 *
   */    
-  const DIRECTORY = [
+  $directories = [
+
     'layouts',
-    'localized'  
+
+    'localized',
+    
+    'filters',
+    
+    'engineI',
+    
+    'engineII'  // v2.0
+
   ]; 
  
   /**
@@ -55,14 +64,14 @@
    * @var constant|String 
    * @property
    * -------------------------------------------------------------------------------------------- 
-   * Initialized Dicrectory registered for layout all constant  
+   * Initialized Dicrectory registered for local function 
    * 
-   * @Defined : Constant Layout
+   * @Defined : all
    * @since: v1.0 doctrine
    * @since: v2.0 wine
    * DT: 11.10.2023 
    */
-  for ( $each = 0; $each < count(DIRECTORY); $each++ ) 
+  for ( $each = 0; $each < count($directories); $each++ ) 
   { 
 
     /**
@@ -78,7 +87,7 @@
      */
 
     new \PHPWineOptimizedHtml\DirectoryFetchFile(
-      DIRECTORY[$each]
+      $directories[$each]
     );
   
  }

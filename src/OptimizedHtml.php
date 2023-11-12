@@ -67,7 +67,7 @@
     $this->errors,
     
     // passing message 
-    'warning html injection detected!',
+    'warning anonymouse attemp inject!',
 
     'scan enable set $disable_html = true',
     

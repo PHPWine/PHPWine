@@ -11,7 +11,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $attributes = 'DOCTRINE_REGISTER_KEY_ATTR';
+   $attributes = 'DRKEY_ATTR';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -37,7 +37,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $hooks = 'DOCTRINE_REGISTER_KEY_HOOKS';
+   $hooks = 'DRKEY_HOOKS';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -64,7 +64,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $column = 'DOCTRINE_REGISTER_KEY_COLUMN';
+   $column = 'DRKEY_COLUMN';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -90,7 +90,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $columns = 'DOCTRINE_REGISTER_KEY_COLUMNS';
+   $columns = 'DRKEY_COLUMNS';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -115,7 +115,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $row = 'DOCTRINE_REGISTER_KEY_ROW';
+   $row = 'DRKEY_ROW';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -141,7 +141,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $rows = 'DOCTRINE_REGISTER_KEY_ROWS';
+   $rows = 'DRKEY_ROWS';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -167,7 +167,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $magic = 'DOCTRINE_REGISTER_KEY_MAGIC';
+   $magic = 'DRKEY_MAGIC';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -193,7 +193,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $window = 'DOCTRINE_REGISTER_KEY_WINDOW';
+   $window = 'DRKEY_WINDOW';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -219,7 +219,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $parent = 'DOCTRINE_REGISTER_KEY_PARENT';
+   $parent = 'DRKEY_PARENT';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -245,7 +245,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $mobile = 'DOCTRINE_REGISTER_KEY_MOBILE';
+   $mobile = 'DRKEY_MOBILE';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -271,7 +271,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $tablet = 'DOCTRINE_REGISTER_KEY_TABLET';
+   $tablet = 'DRKEY_TABLET';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -297,7 +297,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $laptop = 'DOCTRINE_REGISTER_KEY_LAPTOP';
+   $laptop = 'DRKEY_LAPTOP';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -323,7 +323,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $desktop = 'DOCTRINE_REGISTER_KEY_DESKTOP';
+   $desktop = 'DRKEY_DESKTOP';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -349,7 +349,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $top_later = 'DOCTRINE_REGISTER_KEY_TOPLATER';
+   $top_later = 'DRKEY_TLATER';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag
@@ -375,7 +375,7 @@
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-   $bottom_later = 'DOCTRINE_REGISTER_KEY_BOTTOMLATER';
+   $bottom_later = 'DRKEY_BLATER';
 
   /**
    * This is reserved keyword for doctrine class attribute will use to key for element tag

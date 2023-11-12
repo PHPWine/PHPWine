@@ -1,6 +1,6 @@
 <?php 
 
- namespace PHPWineOptimizedHtml;
+ namespace PHPWineOptimizedHtml\doctrine;
 
  /**
  * @copyright (c) 2023 Optimized Html Cooked by nielsoffice
@@ -40,149 +40,19 @@
  *
  */
 
- Class Doctrine extends \PHPWineOptimizedHtml\Provider  {
+ Class Doctrine extends \PHPWineOptimizedHtml\Doctrine\Layout  {
   
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : Parent Doctrine container attributes html
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */
-    private $attr;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : hooks Doctrine dynamic key for html
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */
-    private $hook;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : hooks Doctrine dynamic row for html
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */
-    private $x_axis;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : hooks Doctrine dynamic multiple row for html
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */
-    private $mx_axis;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : hooks Doctrine dynamic col for html
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */
-    private $y_axis;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : hooks Doctrine dynamic multiple cols for html
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */
-    private $my_axis;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : hooks Doctrine col key cols for hook cb
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */
-    private $magic;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : hooks top later element
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */
-    private $top_later;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : hooks bottom later element
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */
-    private $bottom_later;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : Visibility base on width window 
-     * Defined : Responsive base on width window 
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */
-    private $window;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : Visibility base on width parent element html 
-     * Defined : Responsive base on width parent element html 
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */
-    private $parent;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : Visibility rely on mobile 
-     * Defined : Responsive rely on mobile 
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */
-    private $mobile;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : Visibility rely on tablet 
-     * Defined : Responsive rely on tablet 
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */
-    private $tablet;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : Visibility rely on laptop 
-     * Defined : Responsive rely on laptop 
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */    
-    private $laptop;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : Visibility rely on desktop 
-     * Defined : Responsive rely on desktop 
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 *
-     */ 
-    private $desktop;
-     
+
+    public function __construct(array ...$wine_layout)
+    {
+
+      parent::__construct(
+      ...$wine_layout
+    );
+
+      
+    }     
 
  }
+
+    
