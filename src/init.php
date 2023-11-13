@@ -86,7 +86,7 @@
      * DT: 11.10.2023 
      */
 
-    new \PHPWineOptimizedHtml\DirectoryFetchFile(
+    new \PHPWineOptimizedHtml\DirectoryFile(
       $directories[$each]
     );
   

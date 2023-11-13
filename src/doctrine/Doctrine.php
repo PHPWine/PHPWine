@@ -42,16 +42,174 @@
 
  Class Doctrine extends \PHPWineOptimizedHtml\Doctrine\Layout  {
   
-
     public function __construct(array ...$wine_layout)
     {
 
       parent::__construct(
       ...$wine_layout
     );
-
       
-    }     
+  /**
+   * --------------------------------------------------------------------------------------------
+   * @condition
+   * @wine_compare function
+   * -------------------------------------------------------------------------------------------- 
+   * check current key and validate if true attributes property 
+   * 
+   * @Defined : return : attemp invalid key! 
+   * @since: v1.0 doctrine
+   * @since: v2.0 wine
+   * DT: 11.12.2023 */
+      if ( 
+       !wine_compare(
+
+          $this->attributes,
+        
+         'DOCTRINE_REGISTERED_KEY_ATTR') 
+      ) {
+      throw new \Exception("attempt invalid key : ".$this->attributes."!");
+      exit;
+     }
+
+  /**
+   * --------------------------------------------------------------------------------------------
+   * @condition
+   * @wine_compare function
+   * -------------------------------------------------------------------------------------------- 
+   * check current key and validate if true x_axis property 
+   * 
+   * @Defined : return : attemp invalid key! 
+   * @since: v1.0 doctrine
+   * @since: v2.0 wine
+   * DT: 11.12.2023 */
+  if ( 
+    !wine_compare(
+
+       $this->x_axis,
+      
+      'DOCTRINE_REGISTERED_KEY_ROW') 
+   ) {
+   throw new \Exception("attempt invalid key : ".$this->my_axis."!");
+   exit;
+  }
+
+
+  /**
+   * --------------------------------------------------------------------------------------------
+   * @condition
+   * @wine_compare function
+   * -------------------------------------------------------------------------------------------- 
+   * check current key and validate if true my_axis property 
+   * 
+   * @Defined : return : attemp invalid key! 
+   * @since: v1.0 doctrine
+   * @since: v2.0 wine
+   * DT: 11.12.2023 */
+  if ( 
+    !wine_compare(
+
+       $this->mx_axis,
+      
+      'DOCTRINE_REGISTERED_KEY_ROWS') 
+   ) {
+   throw new \Exception("attempt invalid key : ".$this->y_axis."!");
+   exit;
+  }
+
+  /**
+   * --------------------------------------------------------------------------------------------
+   * @condition
+   * @wine_compare function
+   * -------------------------------------------------------------------------------------------- 
+   * check current key and validate if true my_axis property 
+   * 
+   * @Defined : return : attemp invalid key! 
+   * @since: v1.0 doctrine
+   * @since: v2.0 wine
+   * DT: 11.12.2023 */
+  if ( 
+    !wine_compare(
+
+       $this->y_axis,
+      
+      'DOCTRINE_REGISTERED_KEY_COLUMN') 
+   ) {
+   throw new \Exception("attempt invalid key : ".$this->my_axis."!");
+   exit;
+  }
+
+
+  /**
+   * --------------------------------------------------------------------------------------------
+   * @condition
+   * @wine_compare function
+   * -------------------------------------------------------------------------------------------- 
+   * check current key and validate if true my_axis property 
+   * 
+   * @Defined : return : attemp invalid key! 
+   * @since: v1.0 doctrine
+   * @since: v2.0 wine
+   * DT: 11.12.2023 */
+  if ( 
+    !wine_compare(
+
+       $this->my_axis,
+      
+      'DOCTRINE_REGISTERED_KEY_COLUMNS') 
+   ) {
+   throw new \Exception("attempt invalid key : ".$this->y_axis."!");
+   exit;
+  }
+
+
+  /**
+   * --------------------------------------------------------------------------------------------
+   * @condition
+   * @wine_compare function
+   * -------------------------------------------------------------------------------------------- 
+   * check current key and validate if true top later hook 
+   * 
+   * @Defined : return : attemp invalid key! 
+   * @since: v1.0 doctrine
+   * @since: v2.0 wine
+   * DT: 11.12.2023 */
+     if ( 
+      !wine_compare(
+
+         $this->top_later,
+        
+        'DOCTRINE_REGISTERED_KEY_TOP_LATER')
+      ) {
+      throw new \Exception("attempt invalid key : ".$this->top_later."!");
+      exit;
+     }
+
+
+  /**
+   * --------------------------------------------------------------------------------------------
+   * @condition
+   * @wine_compare function
+   * -------------------------------------------------------------------------------------------- 
+   * check current key and validate if true bottom later hook
+   * 
+   * @Defined : return : attemp invalid key! 
+   * @since: v1.0 doctrine
+   * @since: v2.0 wine
+   * DT: 11.12.2023 */
+     if ( 
+      !wine_compare(
+
+         $this->bottom_later,
+        
+        'DOCTRINE_REGISTERED_KEY_BOTTOM_LATER') 
+     ) {
+
+      throw new \Exception("attempt invalid key : ".$this->bottom_later."!");
+      exit;
+     }
+
+  }     
+
 
  }
 

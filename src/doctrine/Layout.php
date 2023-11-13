@@ -40,7 +40,7 @@
  *
  */
 
- Class Layout  {
+ Class Layout extends \PHPWineOptimizedHtml\OptimizedHtml {
 
     /**
      * @var String|Array keys Doctrine 
@@ -49,7 +49,7 @@
      * @since: doctrine v1.0
      * @since: wine 2.0
      * DT: 11.11.2023 **/
-    private $attributes;
+    protected $attributes;
 
     /**
      * @var String|Array keys Doctrine 
@@ -67,7 +67,7 @@
      * @since: doctrine v1.0
      * @since: wine 2.0
      * DT: 11.11.2023 **/
-    private $x_axis;
+    protected $x_axis;
 
     /**
      * @var String|Array keys Doctrine 
@@ -76,7 +76,7 @@
      * @since: doctrine v1.0
      * @since: wine 2.0
      * DT: 11.11.2023 **/
-    private $mx_axis;
+    protected $mx_axis;
 
     /**
      * @var String|Array keys Doctrine 
@@ -85,7 +85,7 @@
      * @since: doctrine v1.0
      * @since: wine 2.0
      * DT: 11.11.2023 **/
-    private $y_axis;
+    protected $y_axis;
 
     /**
      * @var String|Array keys Doctrine 
@@ -94,7 +94,7 @@
      * @since: doctrine v1.0
      * @since: wine 2.0
      * DT: 11.11.2023 **/
-    private $my_axis;
+    protected $my_axis;
 
     /**
      * @var String|Array keys Doctrine 
@@ -112,7 +112,7 @@
      * @since: doctrine v1.0
      * @since: wine 2.0
      * DT: 11.11.2023 **/
-    private $top_later;
+    protected $top_later;
 
     /**
      * @var String|Array keys Doctrine 
@@ -121,7 +121,7 @@
      * @since: doctrine v1.0
      * @since: wine 2.0
      * DT: 11.11.2023 **/
-    private $bottom_later;
+    protected $bottom_later;
 
     /**
      * @var String|Array keys Doctrine 
@@ -173,6 +173,8 @@
      * DT: 11.11.2023 **/    
     private $laptop;
 
+    protected $client = [];
+
     /**
      * @var String|Array keys Doctrine 
      * @property
@@ -184,8 +186,154 @@
     private $desktop;
      
     public function __construct( array ...$wine_layout )
-    {
-     
+    { 
+
+      parent::__construct();
+
+    /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined check client end 
+     * -------------------------------------------------------------------------------------------- 
+     * Wine check if there's anonymouse keyword or invalid key the user use in doctrine
+     * this will help to figureout which and where is mistake from client
+     * 
+     * @Defined : verifying key from client end attributes
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.10.2023 
+     */
+      $this->attributes = $this->is_defined([
+        'DRKEY_ATTR'
+      ], 
+      ...$wine_layout
+      );  
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined check client end 
+     * -------------------------------------------------------------------------------------------- 
+     * Wine check if there's anonymouse keyword or invalid key the user use in doctrine
+     * this will help to figureout which and where is mistake from client
+     * 
+     * @Defined : verifying key from client end x_axis
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.10.2023 
+     */
+      $this->x_axis = $this->is_defined([
+        'DRKEY_HOOKS','DRKEY_ROW',
+        '','DRKEY_MAGIC'
+      ], 
+      ...$wine_layout
+      );
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined check client end 
+     * -------------------------------------------------------------------------------------------- 
+     * Wine check if there's anonymouse keyword or invalid key the user use in doctrine
+     * this will help to figureout which and where is mistake from client
+     * 
+     * @Defined : verifying key from client end multiple x axis
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.10.2023 
+     */
+      $this->mx_axis = $this->is_defined([
+        'DRKEY_HOOKS','DRKEY_ROWS'
+      ], 
+      ...$wine_layout
+      );
+
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined check client end 
+     * -------------------------------------------------------------------------------------------- 
+     * Wine check if there's anonymouse keyword or invalid key the user use in doctrine
+     * this will help to figureout which and where is mistake from client
+     * 
+     * @Defined : verifying key from client end y axis
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.10.2023 
+     */
+      $this->y_axis = $this->is_defined([
+        'DRKEY_HOOKS','DRKEY_COLUMN',
+        '','DRKEY_MAGIC'
+      ], 
+      ...$wine_layout
+      );
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined check client end 
+     * -------------------------------------------------------------------------------------------- 
+     * Wine check if there's anonymouse keyword or invalid key the user use in doctrine
+     * this will help to figureout which and where is mistake from client
+     * 
+     * @Defined : verifying key from client end multiple y axis
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.10.2023 
+     */
+      $this->my_axis = $this->is_defined([
+        'DRKEY_HOOKS','DRKEY_COLUMNS'
+      ], 
+      ...$wine_layout
+      );
+    
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined check client end 
+     * -------------------------------------------------------------------------------------------- 
+     * Wine check if there's anonymouse keyword or invalid key the user use in doctrine
+     * this will help to figureout which and where is mistake from client
+     * 
+     * @Defined : verifying key from client end top later hook set in doctrine
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.10.2023 
+     */
+      $this->top_later = $this->is_defined([
+        'DRKEY_TLATER'
+      ],
+      ...$wine_layout
+      );
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined check client end 
+     * -------------------------------------------------------------------------------------------- 
+     * Wine check if there's anonymouse keyword or invalid key the user use in doctrine
+     * this will help to figureout which and where is mistake from client
+     * 
+     * @Defined : verifying key from client end bottom top hook set in doctrine
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.10.2023 
+     */
+      $this->bottom_later = $this->is_defined([
+        'DRKEY_BLATER'
+      ], 
+      ...$wine_layout
+      );
+
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined check client end 
+     * -------------------------------------------------------------------------------------------- 
+     * Wine check if there's anonymouse keyword or invalid key the user use in doctrine
+     * this will help to figureout which and where is mistake from client
+     * 
+     * @Defined : sanizited data input and create template
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.10.2023 
+     */
+      $this->wine_template(...$wine_layout);
 
     }
 
@@ -250,11 +398,145 @@
 
     }
   
-    private function layout() {
-      
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined create template
+     * -------------------------------------------------------------------------------------------- 
+     * Wine check if there's anonymouse keyword or invalid key the user use in doctrine
+     * this will help to figureout which and where is mistake from client
+     * 
+     * @Defined : ''
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.10.2023 
+     */
+    private function wine_template(...$wine_layout) {
 
-    
-         
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined create sanitized falsy value array
+     * -------------------------------------------------------------------------------------------- 
+     * 
+     * @Defined : properties doctrine
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.10.2023 
+     */
+      $wine_mixing = [
+
+        // obviously attribute property from client
+        attributes   => isset($wine_layout[0][attributes]),
+
+        // obviously rows  property from client
+        xrow         => isset($wine_layout[0][hooks][xrow]),
+        
+        // obviously rows x12 property from client
+        xrows        => isset($wine_layout[0][hooks][xrows]),
+        
+        // obviously col property from client
+        column       => isset($wine_layout[0][hooks][column]),
+        
+        // obviously check columns property from client
+        columns      => isset($wine_layout[0][hooks][columns]),
+        
+        // hook top and bottom later
+        top_later    => isset($wine_layout[0][top_later]),
+        bottom_later => isset($wine_layout[0][bottom_later]),
+      
+      ];
+
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined client
+     * -------------------------------------------------------------------------------------------- 
+     * Wine check if there's anonymouse keyword or invalid key the user use in doctrine
+     * this will help to figureout which and where is mistake from client
+     * 
+     * @Defined : iterate and made raw into wine
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.10.2023 
+     */
+      $this->client = [
+
+      'content' => [
+        $wine_layout[0][attributes]?? [],
+
+        $wine_layout[0][hooks]?? [],
+        
+        $wine_layout[0][hooks][xrow]?? [],
+        
+        $wine_layout[0][hooks][xrows]?? [],
+        
+        $wine_layout[0][hooks][column]?? [],
+        
+        $wine_layout[0][hooks][columns]?? [],
+        
+        $wine_layout[0][top_later]?? [],
+        
+        $wine_layout[0][bottom_later]?? [],
+       ],
+
+       'attr'      => $wine_mixing[attributes],
+      
+       'hook_top'  => $wine_mixing[top_later],
+      
+       'hook_bot'  => $wine_mixing[bottom_later],
+      
+       'condition' => $wine_mixing 
+
+    ];
+
+
+    }
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined create layout
+     * -------------------------------------------------------------------------------------------- 
+     * 
+     * @Defined : get dynamic layout
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.10.2023 
+     */
+    public function layout() 
+    {
+
+
+    return $this->wine_hook_tag_selections( 
+        
+         div, 
+         [ child => [
+            please => function() {
+              $wine = [];
+              foreach ($this->client['content'][1] as $wine_key => $wine_val) {
+               foreach ($wine_val as $value) {
+
+                 $wine[] = $this->optimized_html(
+                  div,
+                  null, $this->wine_callable_hook(
+                    $value[0]
+                  )
+                 ); 
+                }
+              }
+              
+            return $wine;
+
+            }
+          ]
+         ],
+         $this->client['content'][0],
+         array(
+          ["top_".$this->client['content'][6]],
+          ["bottom_".$this->client['content'][7]]
+          ),
+
+        );
+
     }
 
     /**
@@ -281,9 +563,8 @@
         )[$get_valid_key];
 
         if( $get_valid_key == true || !empty($get_valid_key)) {
-          return $wine_layout[0][$is_valid];
+          return $get_valid_key;
         }
-
 
       }  else if(operations($keys, 2, SUPER)) {
 
@@ -293,34 +574,7 @@
         $get_valid_key = array_values($wine_registered_valid_keys)[$get_valid_key];
 
         if( $get_valid_key == true || !empty($get_valid_key)) {
-
-            $wine_key = []; 
-        
-            for ( $wine_set = 0; $wine_set < count($keys); $wine_set++) {  
-                
-               $wine_key[] = $keys[$wine_set]; 
-            
-            };
-    
-            $kk = []; 
-         if(isset($wine_layout[0][$wine_key[0]][xrows])) {
-           return [
-            'row_static'  => $wine_layout[0][$wine_key[0]][xrows],
-            'row_dynamic' => $wine_layout[0][$wine_key[0]][xrows][0][1] 
-           ];
- 
-         } else { $kk[] = null; }
- 
-         if(isset($wine_layout[0][$wine_key[0]][columns])) {
-            return [
-            'col_static'  => $wine_layout[0][$wine_key[0]][columns],
-            'col_dynamic' => $wine_layout[0][$wine_key[0]][columns][0][1] 
-           ];
- 
-         } else { $kk[] = null; }
- 
-         return $kk;
-           
+          return $get_valid_key;
         }
 
       } else if(operations($keys, 4, SUPER)) { 
@@ -337,40 +591,9 @@
          )[$get_valid_key];
        
         if( $get_valid_key == true || !empty($get_valid_key)) {
-
-        $wine_key = []; 
-        
-        for ( $wine_set = 0; $wine_set < count($keys); $wine_set++) {  
-            
-           $wine_key[] = $keys[$wine_set]; 
-        
-        };
-
-        $kk = []; 
-        
-        if(isset($wine_layout[0][$wine_key[0]][xrow])) {
-           return [
-           'row_magic'  => $wine_layout[0][$wine_key[0]][xrow][0][0],
-           'row_action' => $wine_layout[0][$wine_key[0]][xrow][0][1] 
-          ];
-
-        } else {
-           $kk[] = null;
+          return $get_valid_key;
         }
 
-        if(isset($wine_layout[0][$wine_key[0]][column])) {
-           return [
-           'col_magic'  => $wine_layout[0][$wine_key[0]][column][0][0],
-           'col_action' => $wine_layout[0][$wine_key[0]][column][0][1] 
-          ];
-
-        } else {
-            $kk[] = null;
-        }
-
-        return $kk;
-  
-       }
       }
     }
 
@@ -414,13 +637,15 @@
      * @since: doctrine v1.0
      * @since: wine 2.0
      * DT: 11.12.2023 **/    
-    private function is_valid_key( string|array $wine_key, array $valid_keys = []) {
+    protected function is_valid_key( string|array $wine_key, array $valid_keys = []) {
 
-      if(in_array($wine_key,array_keys($valid_keys))) { 
+      $valid_keys = (count($valid_keys) == 0 ) ? array_values(wine_valid_keys()) : array_keys($valid_keys);
+
+      if(in_array($wine_key,$valid_keys)) { 
         return true;
       }   
 
     }
-         
+    
 
  }

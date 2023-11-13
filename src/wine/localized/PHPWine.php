@@ -95,13 +95,13 @@ if (file_exists( $require_file)) {
                      // Init array error handler
                      $this->errors,
                         
-                     // passing message 
-                    'warning html injection detected!',
+                    // passing message 
+                    'warning anonymouse attemp inject!',
 
                     'scan enable set $disable_html = true',
-                       
-                    'new \PHPWineOptimizedHtml\OptimizedHtml(true)'
                     
+                    'new \PHPWineOptimizedHtml\OptimizedHtml(true)'
+
                     );
 
                     parent::__construct(
@@ -168,11 +168,13 @@ if (file_exists( $require_file)) {
                     string|callable $c = null,
                     mixed ...$a
                 ) {
-                    return $this->wine->optimized_html(
+                    return $this->optimized_html(
                        __,
-                       [],
-                       $this->wine->wine_attribute_hook(false, $t, $c, ...$a)
+                       null,
+                       $this->wine_attribute_hook(false, $t, $c, ...$a)
                     );
+
+                
                 }
                 /**
                  *  Init local provider magic filter
@@ -207,7 +209,7 @@ if (file_exists( $require_file)) {
                          * @since: v1.0
                          * DT: 10.30.2023 *
                          */
-                        return $this->wine->wine_attribute_hook(true, $t, $c, ...$a);
+                        return $this->wine_attribute_hook(true, $t, $c, ...$a);
                         
                     } elseif(function_exists($c)) {
 
@@ -259,7 +261,10 @@ if (file_exists( $require_file)) {
                      ), 
                     ...$args);
                 
-                   } 
+                   }  else {
+                    
+                    return false;
+                   }
                  
                 }
                 

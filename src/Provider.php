@@ -2,6 +2,8 @@
 
 namespace PHPWineOptimizedHtml;
 
+use PHPWineOptimizedHtml\doctrine\Doctrine;
+
 ini_set("display_errors", 1);
 ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
@@ -390,7 +392,7 @@ class Provider
      
       string|object $class = null,
       
-      string|callable $call_back = null,
+      string|callable|Doctrine $call_back = null,
       
       mixed ...$args
 
@@ -835,7 +837,7 @@ class Provider
      */
     protected function init_method_wine(
 
-        string $tag = "",
+        string $tag = "section",
 
         string|callable|array $content = [],
         
@@ -942,7 +944,7 @@ class Provider
         
         string|array|null $attr = [],
         
-        string|callable|array|null $content = null,
+        Doctrine|string|callable|array $content = null,
         
         bool $disable_html = false
 
@@ -1390,12 +1392,13 @@ class Provider
 
             return $this->optimized_html(
                 $this->mentity,
-                [],
+                null,
                 call_user_func(
                     [$this->wine_check_object_class($object), $method],
                     ...$args
                 )
             );
+
         }
     }
 
@@ -1537,7 +1540,7 @@ class Provider
      */
     private function optimized_content(
 
-      string|callable|array|null $content,
+      Doctrine|string|callable|array|null $content,
      
       bool $disable_html = false
 
@@ -1591,7 +1594,7 @@ class Provider
      * @since: v2.0
      * DT: 11.11.2023 *
      */
-    private function wine_callable_hook(
+    protected function wine_callable_hook(
 
       string|callable $func_provider = null,
       

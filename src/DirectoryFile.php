@@ -43,7 +43,7 @@
  *
  */
 
- class DirectoryFetchFile extends DataRequest {
+ class DirectoryFile extends DataRequest {
      
     public bool $stype;
     public function __construct( 

@@ -22,10 +22,13 @@
  */
  function wine_callable($wine_filter, ...$args) {
 
-    if (function_exists($wine_filter)) 
-    {
-      return call_user_func($wine_filter, ...$args);
-    }
+  if (function_exists($wine_filter)) 
+  {
+    return call_user_func($wine_filter, ...$args);
+  } else {
+      return false;
+  }
+  
  }
 
  
