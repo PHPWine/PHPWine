@@ -508,17 +508,16 @@
 
     return $this->wine_hook_tag_selections( 
         
-         div, 
-         [ child => [
+         div,[ 
+          child => [
             please => function() {
               $wine = [];
               foreach ($this->client['content'][1] as $wine_key => $wine_val) {
                foreach ($wine_val as $value) {
 
-                 $wine[] = $this->optimized_html(
-                  div,
-                  null, $this->wine_callable_hook(
-                    $value[0]
+                 $wine[] = $this->optimized_html(div,null, 
+                  $this->wine_callable_hook(
+                    $value[0], ...$value[1]
                   )
                  ); 
                 }
@@ -529,13 +528,15 @@
             }
           ]
          ],
-         $this->client['content'][0],
-         array(
-          ["top_".$this->client['content'][6]],
-          ["bottom_".$this->client['content'][7]]
-          ),
+         $this->client['content'][0]
+        ,array(
+          ["top_"
+          .$this->client['content'][6]]
+          ,["bottom_"
+          .$this->client['content'][7]]
+         ),
 
-        );
+      );
 
     }
 
