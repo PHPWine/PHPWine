@@ -20,7 +20,7 @@
  * @since: v1.2.8
  * DT: 10.26.2023 *
  */
- function eeg_checker($inline, $elem, $value) {
+ function wine_checker($inline, $elem, $value) {
 
     if ($inline !== false) 
     { return "<$elem />";} else {

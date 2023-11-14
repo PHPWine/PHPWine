@@ -2,8 +2,6 @@
 
 namespace PHPWineOptimizedHtml;
 
-use PHPWineOptimizedHtml\doctrine\Doctrine;
-
 ini_set("display_errors", 1);
 ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
@@ -85,6 +83,7 @@ class Provider
         "area",
         "DOCTYPE html",
     ];
+
     /**
      * @var String init opening html
      * @property
@@ -392,7 +391,7 @@ class Provider
      
       string|object $class = null,
       
-      string|callable|Doctrine $call_back = null,
+      string|callable $call_back = null,
       
       mixed ...$args
 
@@ -944,7 +943,7 @@ class Provider
         
         string|array|null $attr = [],
         
-        Doctrine|string|callable|array $content = null,
+        string|callable|array $content = null,
         
         bool $disable_html = false
 
@@ -1419,7 +1418,7 @@ class Provider
     ): string {
 
        // Male inline html
-       return eeg_checker(
+       return wine_checker(
           $inline, 
           $elem, 
           $value
@@ -1540,7 +1539,7 @@ class Provider
      */
     private function optimized_content(
 
-      Doctrine|string|callable|array|null $content,
+      string|callable|array|null $content,
      
       bool $disable_html = false
 

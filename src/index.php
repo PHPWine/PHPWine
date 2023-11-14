@@ -41,7 +41,7 @@ use  \PHPWineOptimizedHtml\Init;
  */
  
  /**
-  * @var constant|array Register Directory
+  * @var @object|array Register Directory
   * @property
   * Defined : file structure
   * @since: v2.0
@@ -59,8 +59,7 @@ use  \PHPWineOptimizedHtml\Init;
 
   /**
    * --------------------------------------------------------------------------------------------
-   * @var constant|String 
-   * @property
+   * @method
    * -------------------------------------------------------------------------------------------- 
    * Initialized Dicrectory registered for local function 
    * 

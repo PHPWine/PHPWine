@@ -35,13 +35,19 @@ namespace PHPWineOptimizedHtml;
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
  * @version   v1.4.0
- * @since     10.26.2023
- * @since     11.05.2023
+ * @since     11.14.2023
+ * @since     11.14.2023
  *
  */
 
 class Init {
  
+  /**
+   * @var array init html tag
+   * @property
+   * Defined : html entity
+   * @since: v1.0
+   * DT: 11.14.2023 **/  
    private $init;
 
    public function __construct(...$init) {
