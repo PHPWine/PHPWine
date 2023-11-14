@@ -1,5 +1,7 @@
 <?php 
 
+namespace PHPWineOptimizedHtml;
+
  /**
  * @copyright (c) 2023 Optimized Html [Intialized structure files] Cooked by nielsoffice
  *
@@ -38,42 +40,21 @@
  *
  */
 
-/**
-  * @var constant|array Register Directory
-  * @property
-  * Defined : file structure
-  * @since: v2.0
-  * DT: 11.10.2023 *
-  */    
-  $directories = [
-
-    'layouts',
-
-    'localized',
-    
-    'filters',
-    
-    'engineI',
-    
-    'engineII'  // v2.0
-
-  ]; 
+class Init {
  
-  /**
-   * --------------------------------------------------------------------------------------------
-   * @var constant|String 
-   * @property
-   * -------------------------------------------------------------------------------------------- 
-   * Initialized Dicrectory registered for local function 
-   * 
-   * @Defined : all
-   * @since: v1.0 doctrine
-   * @since: v2.0 wine
-   * DT: 11.10.2023 
-   */
-  for ( $each = 0; $each < count($directories); $each++ ) 
-  { 
+   private $init;
 
+   public function __construct(...$init) {
+
+     $this->init = $init;  
+
+   } 
+
+   public function init() {
+
+    for ( $each = 0; $each < count($this->init); $each++ ) 
+    { 
+      
     /**
      * --------------------------------------------------------------------------------------------
      * Defined: Registered file 
@@ -85,9 +66,23 @@
      * @since: v2.0 wine
      * DT: 11.10.2023 
      */
+     foreach ($this->init[$each] as $init) {
 
-    new \PHPWineOptimizedHtml\DirectoryFile(
-      $directories[$each]
-    );
-  
- }
+      if(realpath(__DIR__. "/wine/$init")) {
+        
+        new \PHPWineOptimizedHtml\DirectoryFile(
+          $init
+        );
+
+      } else {
+
+        throw new \Exception("\init failed please check structure files...");
+        exit();
+
+      }
+
+    }
+   }
+  }
+
+}

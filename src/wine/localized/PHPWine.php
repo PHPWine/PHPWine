@@ -4,8 +4,6 @@
  ini_set("display_startup_errors", 1);
  error_reporting(E_ALL);
 
- use PHPWineOptimizedHtml\Provider;
-
  $require_file = dirname(dirname(__DIR__)) . '/Provider.php';
 
 /**

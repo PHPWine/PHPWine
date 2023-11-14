@@ -87,7 +87,7 @@
    * @since: v2.0 wine
    * DT: 11.10.2023 
    */
-   $require = dirname( __DIR__ ) .'/src/init.php';
+   $require = dirname( __DIR__ ) .'/src/index.php';
 
    if(file_exists($require)) {
 
@@ -95,7 +95,7 @@
 
    } else {
     
-    throw new \Exception("\init.php source file not found!");
+    throw new \Exception("\index file not found!");
     exit();
 
    }
