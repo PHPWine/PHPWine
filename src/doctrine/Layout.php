@@ -173,6 +173,11 @@
      * DT: 11.11.2023 **/    
     private $laptop;
 
+    public $screen;
+    public $visibility;
+    public $responsive;
+    public $falsy;
+
     protected $client = [];
 
     /**
@@ -337,64 +342,78 @@
 
     }
 
+    public function screen( array $media_query = []) {
 
-    /**
-     * --------------------------------------------------------------------------------------------
-     * @method visibility 
-     * @public
-     * -------------------------------------------------------------------------------------------- 
-     * This method desifn for client to choose visibility of element in different size screen 
-     * might be select base on parent element or window grid  
-     * 
-     * @Defined : Constant Layout
-     * @since: v1.0 doctrine
-     * @since: v2.0 wine
-     * DT: 11.10.2023 
-     */
+      $this->screen = [
+        
+        $media_query['mobile']??    320
+       ,$media_query['ls_mobile']?? 540
+       ,$media_query['tablet']??    768
+       ,$media_query['ls_tablet']?? 992
+       ,$media_query['laptop']??    1024
+       ,$media_query['desktop']??   1280
+       ,$media_query['xl_screen']?? 1920
+
+      ];
+
+      return $this;
+
+    }
+
     public function visibility( 
             
-        string $base  = window,
-        array $config = [] 
+     //string $base  = window,
+     array|bool $config = []
         
-    ) 
-    
-    {
-    # Grid will base on ! 
-    if( $base !== window) 
-    {
-        $this->parent = $base; 
-    }
+    ) {
+     
+      # Grid will base on ! 
+      // if( $base !== window) 
+      // {
+      //  $this->parent = $base; 
+      // }
+
+      $this->visibility = [
         
+         $config['mobile']??    true
+        ,$config['ls_mobile']?? true
+        ,$config['tablet']??    true
+        ,$config['ls_tablet']?? true 
+        ,$config['laptop']??    true
+        ,$config['desktop']??   true
+        ,$config['xl_screen']?? true
+       
+      ];
 
+      return $this;
+        
     }
 
-  
-    /**
-     * --------------------------------------------------------------------------------------------
-     * @method responsive 
-     * @public
-     * -------------------------------------------------------------------------------------------- 
-     * This method desifn for client to choose responsive of element in different size screen 
-     * might be select base on parent element or window grid  
-     * 
-     * @Defined : Constant Layout
-     * @since: v1.0 doctrine
-     * @since: v2.0 wine
-     * DT: 11.10.2023 
-     */
     public function responsive( 
         
-        string $base  = window, 
-        array $config = [] 
+     // string $base  = window, 
+      array|bool $config = [] 
         
-    ) 
-    
-    {
+    ) {
     # Grid will base on !
-    if( $base !== window) 
-    {
-        $this->parent = $base; 
-    } 
+    // if( $base !== window) 
+    // {
+    //   $this->parent = $base; 
+    // } 
+
+    $this->responsive = [
+
+       $config['mobile']??    true
+      ,$config['ls_mobile']?? true
+      ,$config['tablet']??    true
+      ,$config['ls_tablet']?? true 
+      ,$config['laptop']??    true
+      ,$config['desktop']??   true
+      ,$config['xl_screen']?? true
+
+    ];
+
+    return $this;
 
     }
   
@@ -423,6 +442,7 @@
      * @since: v2.0 wine
      * DT: 11.10.2023 
      */
+    
       $wine_mixing = [
 
         // obviously attribute property from client
@@ -489,6 +509,7 @@
 
     ];
 
+      return $this;
 
     }
 
@@ -505,9 +526,43 @@
     public function layout() 
     {
 
+     $screen_mobile    = $this->screen[0]?? 320;
+     $screen_ls_mobile = $this->screen[1]?? 540;
+     $screen_tablet    = $this->screen[2]?? 768;
+     $screen_ls_tablet = $this->screen[3]?? 992;
+     $screen_laptop    = $this->screen[4]?? 1024;
+     $screen_desktop   = $this->screen[5]?? 1280;
+     $screen_xl_screen = $this->screen[6]?? 1920;
 
-    return $this->wine_hook_tag_selections( 
-        
+    //  var_dump(
+    //   $screen_mobile
+    //  .$screen_ls_mobile
+    //  .$screen_tablet
+    //  .$screen_ls_tablet
+    //  .$screen_laptop
+    //  .$screen_desktop
+    //  .$screen_xl_screen
+    // );
+
+     $responsive_mobile    = $this->responsive[0]?? true;
+     $responsive_ls_mobile = $this->responsive[1]?? true;
+     $responsive_tablet    = $this->responsive[2]?? true;
+     $responsive_ls_tablet = $this->responsive[3]?? true;
+     $responsive_laptop    = $this->responsive[4]?? true;
+     $responsive_desktop   = $this->responsive[5]?? true;
+     $responsive_xl_screen = $this->responsive[6]?? true;
+
+  //   var_dump(
+  //    $responsive_mobile
+  //   .$responsive_ls_mobile
+  //   .$responsive_tablet
+  //   .$responsive_ls_tablet
+  //   .$responsive_laptop
+  //   .$responsive_desktop
+  //   .$responsive_xl_screen
+  //  );
+  
+       $wine = $this->wine_hook_tag_selections(    
          div,[ 
           child => [
             please => function() {
@@ -517,7 +572,7 @@
 
                  $wine[] = $this->optimized_html(div,null, 
                   $this->wine_callable_hook(
-                    $value[0], ...$value[1]
+                    $value[0], ...$value[1]?? []
                   )
                  ); 
                 }
@@ -525,18 +580,144 @@
               
             return $wine;
 
-            }
+           }
           ]
          ],
          $this->client['content'][0]
-        ,array(
-          ["top_"
-          .$this->client['content'][6]]
-          ,["bottom_"
-          .$this->client['content'][7]]
-         ),
+         ,array(
+         ["top_"
+        .$this->client['content'][6]]
+        ,["bottom_"
+        .$this->client['content'][7]]
+        ),
 
       );
+
+
+      if($this->visibility[0]?? true ) {
+
+        $wine_hooks = '';
+        
+        if(
+          $this->client['condition'][xrows] || 
+          $this->client['condition'][xrow]) {
+          $wine_hooks .= $wine;
+        } else if (
+          $this->client['condition'][columns] || 
+          $this->client['condition'][column]) {
+          $wine_hooks .= $wine;
+        }
+
+        return $wine_hooks;
+        
+      } 
+
+      if($this->visibility[1]?? true) {
+
+        $wine_hooks = '';
+        
+        if(
+          $this->client['condition'][xrows] || 
+          $this->client['condition'][xrow]) {
+          $wine_hooks .= $wine;
+        } else if (
+          $this->client['condition'][columns] || 
+          $this->client['condition'][column]) {
+          $wine_hooks .= $wine;
+        }
+
+        return $wine_hooks;
+      }
+
+      if($this->visibility[2]?? true) {
+      
+        $wine_hooks = '';
+      
+        if(
+          $this->client['condition'][xrows] || 
+          $this->client['condition'][xrow]) {
+          $wine_hooks .= $wine;
+        } else if (
+          $this->client['condition'][columns] || 
+          $this->client['condition'][column]) {
+          $wine_hooks .= $wine;
+        }
+      
+        return $wine_hooks;
+
+      }
+      
+      if($this->visibility[3]?? true) {
+      
+        $wine_hooks = '';
+      
+        if(
+          $this->client['condition'][xrows] || 
+          $this->client['condition'][xrow]) {
+          $wine_hooks .= $wine;
+        } else if (
+          $this->client['condition'][columns] || 
+          $this->client['condition'][column]) {
+          $wine_hooks .= $wine;
+        }
+      
+        return $wine_hooks;
+
+      }
+      
+      if($this->visibility[4]?? true) {
+      
+        $wine_hooks = '';
+      
+        if(
+          $this->client['condition'][xrows] || 
+          $this->client['condition'][xrow]) {
+          $wine_hooks .= $wine;
+        } else if (
+          $this->client['condition'][columns] || 
+          $this->client['condition'][column]) {
+          $wine_hooks .= $wine;
+        }
+      
+        return $wine_hooks;
+      
+      }
+      
+      if($this->visibility[5]?? true) {
+      
+        $wine_hooks = '';
+      
+        if(
+          $this->client['condition'][xrows] || 
+          $this->client['condition'][xrow]) {
+          $wine_hooks .= $wine;
+        } else if (
+          $this->client['condition'][columns] || 
+          $this->client['condition'][column]) {
+          $wine_hooks .= $wine;
+        }
+      
+        return $wine_hooks;
+      
+      }
+      
+      if($this->visibility[6]?? true) {
+      
+        $wine_hooks = '';
+      
+        if(
+          $this->client['condition'][xrows] || 
+          $this->client['condition'][xrow]) {
+          $wine_hooks .= $wine;
+        } else if (
+          $this->client['condition'][columns] || 
+          $this->client['condition'][column]) {
+          $wine_hooks .= $wine;
+        }
+      
+        return $wine_hooks;
+      
+      }
 
     }
 
