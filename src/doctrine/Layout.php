@@ -570,7 +570,7 @@
               foreach ($this->client['content'][1] as $wine_key => $wine_val) {
                foreach ($wine_val as $value) {
 
-                 $wine[] = $this->optimized_html(div,null, 
+                 $wine[] = $this->optimized_html(__,null, 
                   $this->wine_callable_hook(
                     $value[0], ...$value[1]?? []
                   )
