@@ -148,6 +148,15 @@
      * @since: wine 2.0
      * DT: 11.16.2023 **/
     public $content_object;
+
+
+    /**
+     * @var Array config
+     * @property
+     * @since: doctrine v1.0
+     * @since: wine 2.0
+     * DT: 11.16.2023 **/
+    public $client = [];
      
     public function __construct( array ...$wine_layout )
     { 
