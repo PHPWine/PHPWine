@@ -2,6 +2,10 @@
 
 namespace PHPWineOptimizedHtml;
 
+ ini_set("display_errors", 1);
+ ini_set("display_startup_errors", 1);
+ error_reporting(E_ALL);
+ 
  /**
  * @copyright (c) 2023 Optimized Html [Wine HTML Elements] Cooked by nielsoffice
  *

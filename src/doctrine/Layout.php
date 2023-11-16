@@ -2,6 +2,10 @@
 
  namespace PHPWineOptimizedHtml\Doctrine;
 
+ ini_set("display_errors", 1);
+ ini_set("display_startup_errors", 1);
+ error_reporting(E_ALL);
+
  /**
  * @copyright (c) 2023 Optimized Html Cooked by nielsoffice
  *
@@ -54,15 +58,6 @@
     /**
      * @var String|Array keys Doctrine 
      * @property
-     * Defined : hooks Doctrine dynamic key for html
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 **/
-    private $hook;
-
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
      * Defined : hooks Doctrine dynamic row for html
      * @since: doctrine v1.0
      * @since: wine 2.0
@@ -99,15 +94,6 @@
     /**
      * @var String|Array keys Doctrine 
      * @property
-     * Defined : hooks Doctrine col key cols for hook cb
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 **/
-    private $magic;
-
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
      * Defined : hooks top later element
      * @since: doctrine v1.0
      * @since: wine 2.0
@@ -124,71 +110,44 @@
     protected $bottom_later;
 
     /**
-     * @var String|Array keys Doctrine 
+     * @var Array|Int media set for visibility 
      * @property
-     * Defined : Visibility base on width window 
-     * Defined : Responsive base on width window 
      * @since: doctrine v1.0
      * @since: wine 2.0
-     * DT: 11.11.2023 **/
-    private $window;
-
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : Visibility base on width parent element html 
-     * Defined : Responsive base on width parent element html 
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 **/
-    private $parent;
-
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : Visibility rely on mobile 
-     * Defined : Responsive rely on mobile 
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 **/
-
-    private $mobile;
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : Visibility rely on tablet 
-     * Defined : Responsive rely on tablet 
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 **/
-    private $tablet;
-
-    /**
-     * @var String|Array keys Doctrine 
-     * @property
-     * Defined : Visibility rely on laptop 
-     * Defined : Responsive rely on laptop 
-     * @since: doctrine v1.0
-     * @since: wine 2.0
-     * DT: 11.11.2023 **/    
-    private $laptop;
-
+     * DT: 11.16.2023 **/
     public $screen;
+
+    /**
+     * @var Mixed doctrine child container 
+     * @property
+     * @since: doctrine v1.0
+     * @since: wine 2.0
+     * DT: 11.16.2023 **/
+    public $screen_object;
+
+    /**
+     * @var Array|Bool media set for visibility 
+     * @property
+     * @since: doctrine v1.0
+     * @since: wine 2.0
+     * DT: 11.16.2023 **/
     public $visibility;
-    public $responsive;
+
+    /**
+     * @var Array|Bool condition 
+     * @property
+     * @since: doctrine v1.0
+     * @since: wine 2.0
+     * DT: 11.16.2023 **/
     public $falsy;
 
-    protected $client = [];
-
     /**
-     * @var String|Array keys Doctrine 
+     * @var Mixed object content
      * @property
-     * Defined : Visibility rely on desktop 
-     * Defined : Responsive rely on desktop 
      * @since: doctrine v1.0
      * @since: wine 2.0
-     * DT: 11.11.2023 **/ 
-    private $desktop;
+     * DT: 11.16.2023 **/
+    public $content_object;
      
     public function __construct( array ...$wine_layout )
     { 
@@ -342,81 +301,6 @@
 
     }
 
-    public function screen( array $media_query = []) {
-
-      $this->screen = [
-        
-        $media_query['mobile']??    320
-       ,$media_query['ls_mobile']?? 540
-       ,$media_query['tablet']??    768
-       ,$media_query['ls_tablet']?? 992
-       ,$media_query['laptop']??    1024
-       ,$media_query['desktop']??   1280
-       ,$media_query['xl_screen']?? 1920
-
-      ];
-
-      return $this;
-
-    }
-
-    public function visibility( 
-            
-     //string $base  = window,
-     array|bool $config = []
-        
-    ) {
-     
-      # Grid will base on ! 
-      // if( $base !== window) 
-      // {
-      //  $this->parent = $base; 
-      // }
-
-      $this->visibility = [
-        
-         $config['mobile']??    true
-        ,$config['ls_mobile']?? true
-        ,$config['tablet']??    true
-        ,$config['ls_tablet']?? true 
-        ,$config['laptop']??    true
-        ,$config['desktop']??   true
-        ,$config['xl_screen']?? true
-       
-      ];
-
-      return $this;
-        
-    }
-
-    public function responsive( 
-        
-     // string $base  = window, 
-      array|bool $config = [] 
-        
-    ) {
-    # Grid will base on !
-    // if( $base !== window) 
-    // {
-    //   $this->parent = $base; 
-    // } 
-
-    $this->responsive = [
-
-       $config['mobile']??    true
-      ,$config['ls_mobile']?? true
-      ,$config['tablet']??    true
-      ,$config['ls_tablet']?? true 
-      ,$config['laptop']??    true
-      ,$config['desktop']??   true
-      ,$config['xl_screen']?? true
-
-    ];
-
-    return $this;
-
-    }
-  
    /**
      * --------------------------------------------------------------------------------------------
      * @method is defined create template
@@ -430,7 +314,6 @@
      * DT: 11.10.2023 
      */
     private function wine_template(...$wine_layout) {
-
 
    /**
      * --------------------------------------------------------------------------------------------
@@ -494,16 +377,16 @@
         
         $wine_layout[0][hooks][columns]?? [],
         
-        $wine_layout[0][top_later]?? [],
+        $wine_layout[0][top_later]?? false,
         
-        $wine_layout[0][bottom_later]?? [],
+        $wine_layout[0][bottom_later]?? false,
        ],
 
        'attr'      => $wine_mixing[attributes],
       
-       'hook_top'  => $wine_mixing[top_later],
+       'hook_top'  => $wine_mixing[top_later]?? false,
       
-       'hook_bot'  => $wine_mixing[bottom_later],
+       'hook_bot'  => $wine_mixing[bottom_later]?? false,
       
        'condition' => $wine_mixing 
 
@@ -512,6 +395,7 @@
       return $this;
 
     }
+
 
    /**
      * --------------------------------------------------------------------------------------------
@@ -523,53 +407,66 @@
      * @since: v2.0 wine
      * DT: 11.10.2023 
      */
-    public function layout() 
-    {
+    public function visibility( 
+            
+      array $config = []
+         
+     ) {
+      
+    /**
+     * --------------------------------------------------------------------------------------------
+     * @properties 
+     * @array 
+     * -------------------------------------------------------------------------------------------- 
+     * front end visivility properties
+     * 
+     * @Defined : make doctraine container visible to screen size
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.16.2023 
+     */
+       $this->visibility = [
 
-     $screen_mobile    = $this->screen[0]?? 320;
-     $screen_ls_mobile = $this->screen[1]?? 540;
-     $screen_tablet    = $this->screen[2]?? 768;
-     $screen_ls_tablet = $this->screen[3]?? 992;
-     $screen_laptop    = $this->screen[4]?? 1024;
-     $screen_desktop   = $this->screen[5]?? 1280;
-     $screen_xl_screen = $this->screen[6]?? 1920;
+          // obviously by default doctrain container visibily to mobie 
+          $config['mobile']??    true
+          // obviously by default doctrain container visibily to landscape mobile
+         ,$config['ls_mobile']?? true
+         // obviously by default doctrain container visibily to tablet
+         ,$config['tablet']??    true
+         // obviously by default doctrain container visibily to landscape teblet
+         ,$config['ls_tablet']?? true 
+         // obviously by default doctrain container visibily to laptop
+         ,$config['laptop']??    true
+         // obviously by default doctrain container visibily to desktop
+         ,$config['desktop']??   true
+         // obviously by default doctrain container visibily to large screen size
+         ,$config['xl_screen']?? true
+        
+       ];
 
-    //  var_dump(
-    //   $screen_mobile
-    //  .$screen_ls_mobile
-    //  .$screen_tablet
-    //  .$screen_ls_tablet
-    //  .$screen_laptop
-    //  .$screen_desktop
-    //  .$screen_xl_screen
-    // );
-
-     $responsive_mobile    = $this->responsive[0]?? true;
-     $responsive_ls_mobile = $this->responsive[1]?? true;
-     $responsive_tablet    = $this->responsive[2]?? true;
-     $responsive_ls_tablet = $this->responsive[3]?? true;
-     $responsive_laptop    = $this->responsive[4]?? true;
-     $responsive_desktop   = $this->responsive[5]?? true;
-     $responsive_xl_screen = $this->responsive[6]?? true;
-
-  //   var_dump(
-  //    $responsive_mobile
-  //   .$responsive_ls_mobile
-  //   .$responsive_tablet
-  //   .$responsive_ls_tablet
-  //   .$responsive_laptop
-  //   .$responsive_desktop
-  //   .$responsive_xl_screen
-  //  );
-  
-       $wine = $this->wine_hook_tag_selections(    
+    /**
+     * --------------------------------------------------------------------------------------------
+     * @object 
+     * @main doctrine content
+     * -------------------------------------------------------------------------------------------- 
+     * child doctrain container
+     * 
+     * @Defined : makes a columns colum row and rows structure
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.16.2023 
+     */
+     $this->content_object = $this->wine_hook_tag_selections(    
+        // set by default for div
          div,[ 
           child => [
             please => function() {
+              // we gonna loop through it
               $wine = [];
               foreach ($this->client['content'][1] as $wine_key => $wine_val) {
                foreach ($wine_val as $value) {
 
+                 // assinged those hooks
                  $wine[] = $this->optimized_html(__,null, 
                   $this->wine_callable_hook(
                     $value[0], ...$value[1]?? []
@@ -577,149 +474,243 @@
                  ); 
                 }
               }
-              
+
+            // return the elements  
             return $wine;
 
            }
           ]
          ],
-         $this->client['content'][0]
+         $this->client['content'][0] /* set prperties */
          ,array(
          ["top_"
-        .$this->client['content'][6]]
+        .$this->client['content'][6]?? false] /* set prperties */
         ,["bottom_"
-        .$this->client['content'][7]]
+        .$this->client['content'][7]?? false] /* set prperties */
         ),
 
       );
-
-
-      if($this->visibility[0]?? true ) {
-
-        $wine_hooks = '';
-        
-        if(
-          $this->client['condition'][xrows] || 
-          $this->client['condition'][xrow]) {
-          $wine_hooks .= $wine;
-        } else if (
-          $this->client['condition'][columns] || 
-          $this->client['condition'][column]) {
-          $wine_hooks .= $wine;
-        }
-
-        return $wine_hooks;
-        
-      } 
-
-      if($this->visibility[1]?? true) {
-
-        $wine_hooks = '';
-        
-        if(
-          $this->client['condition'][xrows] || 
-          $this->client['condition'][xrow]) {
-          $wine_hooks .= $wine;
-        } else if (
-          $this->client['condition'][columns] || 
-          $this->client['condition'][column]) {
-          $wine_hooks .= $wine;
-        }
-
-        return $wine_hooks;
-      }
-
-      if($this->visibility[2]?? true) {
       
-        $wine_hooks = '';
-      
-        if(
-          $this->client['condition'][xrows] || 
-          $this->client['condition'][xrow]) {
-          $wine_hooks .= $wine;
-        } else if (
-          $this->client['condition'][columns] || 
-          $this->client['condition'][column]) {
-          $wine_hooks .= $wine;
-        }
-      
-        return $wine_hooks;
-
-      }
-      
-      if($this->visibility[3]?? true) {
-      
-        $wine_hooks = '';
-      
-        if(
-          $this->client['condition'][xrows] || 
-          $this->client['condition'][xrow]) {
-          $wine_hooks .= $wine;
-        } else if (
-          $this->client['condition'][columns] || 
-          $this->client['condition'][column]) {
-          $wine_hooks .= $wine;
-        }
-      
-        return $wine_hooks;
-
-      }
-      
-      if($this->visibility[4]?? true) {
-      
-        $wine_hooks = '';
-      
-        if(
-          $this->client['condition'][xrows] || 
-          $this->client['condition'][xrow]) {
-          $wine_hooks .= $wine;
-        } else if (
-          $this->client['condition'][columns] || 
-          $this->client['condition'][column]) {
-          $wine_hooks .= $wine;
-        }
-      
-        return $wine_hooks;
-      
-      }
-      
-      if($this->visibility[5]?? true) {
-      
-        $wine_hooks = '';
-      
-        if(
-          $this->client['condition'][xrows] || 
-          $this->client['condition'][xrow]) {
-          $wine_hooks .= $wine;
-        } else if (
-          $this->client['condition'][columns] || 
-          $this->client['condition'][column]) {
-          $wine_hooks .= $wine;
-        }
-      
-        return $wine_hooks;
-      
-      }
-      
-      if($this->visibility[6]?? true) {
-      
-        $wine_hooks = '';
-      
-        if(
-          $this->client['condition'][xrows] || 
-          $this->client['condition'][xrow]) {
-          $wine_hooks .= $wine;
-        } else if (
-          $this->client['condition'][columns] || 
-          $this->client['condition'][column]) {
-          $wine_hooks .= $wine;
-        }
-      
-        return $wine_hooks;
-      
-      }
+      return $this;
 
     }
+
+    /**
+     * --------------------------------------------------------------------------------------------
+     * @object 
+     * @main doctrine screen size 
+     * -------------------------------------------------------------------------------------------- 
+     * we have 320 and 540px also 540 to 768px and  768 to 992
+     * we have 992 to 1024px we have also 1024 to 1280px
+     * 1280 to 1920 last but not the least is 1920px above
+     * 
+     * @Defined : those screen size are available by default to make out doctrine content visibility
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.16.2023 
+     */
+    public function screen( array $media_query = []) { 
+
+      $this->screen_object = wine(script,[
+
+            child => [
+
+             please => function() use ($media_query) {
+
+              $this->screen = [
+                
+                // default is 320 for mobile
+                $media_query['mobile']??    320
+                // default is 320 for mobile landscape
+               ,$media_query['ls_mobile']?? 540
+               // default is 320 for tablet
+               ,$media_query['tablet']??    768
+               // default is 320 for tablet landscpae
+               ,$media_query['ls_tablet']?? 992
+               // default is 320 for laptop
+               ,$media_query['laptop']??    1024
+               // default is 320 for desktop
+               ,$media_query['desktop']??   1280
+               // default is 320 for largescreen
+               ,$media_query['xl_screen']?? 1920
+        
+              ];
+
+             $script = [];
+
+             $script[] = "";
+             // get doctrine child id container
+             $doctrine_id = (string) $this->client['content'][0]['id'];
+
+             // return size modified restricted to be intigers
+             $mobile_id    = (int) $this->screen[0];
+             $xl_mobile_id = (int) $this->screen[1];
+             $tablet_id    = (int) $this->screen[2];
+             $xl_tablet_id = (int) $this->screen[3];
+             $laptop_id    = (int) $this->screen[4];
+             $desktop_id   = (int) $this->screen[5];
+             $xl_screen_id = (int) $this->screen[6];
+              
+             // invoke visibility in front end
+             if(
+               !$this->visibility[0] || !$this->visibility[1] || !$this->visibility[2] ||
+               !$this->visibility[3] || !$this->visibility[4] || !$this->visibility[5] ||
+               !$this->visibility[6]  
+               ) { 
+                
+                $script[] = " var __t = document.getElementById('$doctrine_id'); ";
+                $script[] = " const docID=document.body.id='app_id',childElem=document.getElementById('app_id'),appData=document.querySelectorAll('.wine-app');appData.forEach((e,d)=>{childElem.insertAdjacentElement('beforeend',e)}); ";
+            
+               }
+            
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @visibility mobile 
+               * @main media size screen 320 
+               * -------------------------------------------------------------------------------------------- 
+               * This will run when you set false which means to hide in mobile screen
+               * 
+               * @Defined : mobile screen
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.16.2023 
+               */
+               if(!$this->visibility[0]) {
+                 $script[] = " var wine_mobile = window.matchMedia('(min-width:".$mobile_id."px) and (max-width:".$xl_mobile_id."px)'); ";
+                 $script[] = " function handleMobile(e) { if (e.matches) { __t.style.display = 'none'; } else { __t.style.display = ''; } }
+                 wine_mobile.addListener(handleMobile);
+                 handleMobile(wine_mobile);";
+               }
+            
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @visibility mobile large 
+               * @main media size screen 540 
+               * -------------------------------------------------------------------------------------------- 
+               * This will run when you set false which means to hide in mobile screen
+               * 
+               * @Defined : mobile screen
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.16.2023 
+               */
+               if(!$this->visibility[1]) {
+                 $script[] = " var wine_lgmobile = window.matchMedia('(min-width:".$xl_mobile_id."px) and (max-width:".$tablet_id."px)'); ";
+                 $script[] = " function handleMobileLg(e) { if (e.matches) { __t.style.display = 'none'; } else {__t.style.display = '';}}
+                 wine_lgmobile.addListener(handleMobileLg);
+                 handleMobileLg(wine_lgmobile);";
+               }
+
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @visibility tablet 
+               * @main media size screen 768 
+               * -------------------------------------------------------------------------------------------- 
+               * This will run when you set false which means to hide in tablet screen
+               * 
+               * @Defined : tablet screen
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.16.2023 
+               */
+               if(!$this->visibility[2]) {
+                $script[] = " var wine_tablet   = window.matchMedia('(min-width:".$tablet_id."px) and (max-width:".$xl_tablet_id ."px)'); ";
+                $script[] = " function handleTablet(e) { if (e.matches) { __t.style.display = 'none'; } else {__t.style.display = '';}}
+                wine_tablet.addListener(handleTablet)
+                handleTablet(wine_tablet);";
+               }
+
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @visibility tablet large 
+               * @main media size screen 992 
+               * -------------------------------------------------------------------------------------------- 
+               * This will run when you set false which means to hide in tablet screen
+               * 
+               * @Defined : mobile screen
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.16.2023 
+               */
+               if(!$this->visibility[3]) {
+                $script[] = " var wine_lgtablet = window.matchMedia('(min-width:".$xl_tablet_id ."px) and (max-width:".$laptop_id."px)'); ";
+                $script[] = " function handleTabletLg(e) { if (e.matches) { __t.style.display = 'none'; } else {__t.style.display = '';}}
+                wine_lgtablet.addListener(handleTabletLg)
+                handleTabletLg(wine_lgtablet);";
+              }
+
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @visibility laptop large 
+               * @main media size screen 1024 
+               * -------------------------------------------------------------------------------------------- 
+               * This will run when you set false which means to hide in laptop screen
+               * 
+               * @Defined : laptop screen
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.16.2023 
+               */
+              if(!$this->visibility[4]) {
+                $script[] = " var wine_laptop   = window.matchMedia('(min-width:".$laptop_id."px) and (max-width:".$desktop_id."px)'); ";
+                $script[] = " function handleLaptop(e) { if (e.matches) { __t.style.display = 'none'; } else {__t.style.display = '';}}
+                wine_laptop.addListener(handleLaptop)
+                handleLaptop(wine_laptop);";
+              }
+
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @visibility desktop large 
+               * @main media size screen 1280 
+               * -------------------------------------------------------------------------------------------- 
+               * This will run when you set false which means to hide in desktop screen
+               * 
+               * @Defined : desktop screen
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.16.2023 
+               */
+              if(!$this->visibility[5]) {
+                $script[] = " var wine_desktop  = window.matchMedia('(min-width:".$desktop_id."px) and (max-width:". $xl_screen_id."px)'); ";
+                $script[] = " function handleDesktop(e) { if (e.matches) { __t.style.display = 'none'; } else {__t.style.display = '';}}
+                wine_desktop.addListener(handleDesktop)
+                handleDesktop(wine_desktop);";
+              }
+
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @visibility large screen  
+               * @main media size screen 1920 >  
+               * -------------------------------------------------------------------------------------------- 
+               * This will run when you set false which means to hide in large screen screen
+               * 
+               * @Defined : large screen
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.16.2023 
+               */
+              if(!$this->visibility[6]) {
+                $script[] = " var wine_xl_screen = window.matchMedia('(min-width:".$xl_screen_id."px)'); ";
+                $script[] = " function handleXlScreen(e) { if (e.matches) { __t.style.display = 'none'; } else {__t.style.display = '';}}
+                wine_xl_screen.addListener(handleXlScreen)
+                handleXlScreen(wine_xl_screen);";
+              }
+
+             return $script;
+             
+          }
+        ]
+      ],[classes=>'wine-app']);
+
+      return $this;    
+   
+    }
+
+     public function layout() {
+
+       return $this->content_object . $this->screen_object;
+
+     } 
 
     /**
      * @method is_defined client key ?  
