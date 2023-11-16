@@ -551,20 +551,37 @@
              // get doctrine child id container
              $doctrine_id = (string) $this->client['content'][0]['id'];
 
-             // return size modified restricted to be intigers
-             $mobile_id    = (int) $this->screen[0];
-             $xl_mobile_id = (int) $this->screen[1];
-             $tablet_id    = (int) $this->screen[2];
-             $xl_tablet_id = (int) $this->screen[3];
-             $laptop_id    = (int) $this->screen[4];
-             $desktop_id   = (int) $this->screen[5];
-             $xl_screen_id = (int) $this->screen[6];
+           /**
+             * --------------------------------------------------------------------------------------------
+             * @globalVariable 
+             * @visibility GLOBAL VARAIBLE return size modified restricted to be intigers 
+             * -------------------------------------------------------------------------------------------- */
+             $GLOBALS['w_mobile']    = $mobile_id    = (int) $this->screen[0];
+             $GLOBALS['w_ls_mobile'] = $xl_mobile_id = (int) $this->screen[1];
+             $GLOBALS['w_tablet']    = $tablet_id    = (int) $this->screen[2];
+             $GLOBALS['w_ls_tablet'] = $xl_tablet_id = (int) $this->screen[3];
+             $GLOBALS['w_laptop']    = $laptop_id    = (int) $this->screen[4];
+             $GLOBALS['w_desktop']   = $desktop_id   = (int) $this->screen[5];
+             $GLOBALS['w_xl_screen'] = $xl_screen_id = (int) $this->screen[6];
+
+           /**
+             * --------------------------------------------------------------------------------------------
+             * @globalVariable 
+             * @visibility GLOBAL VARAIBLE visibility boolean 
+             * -------------------------------------------------------------------------------------------- */
+             $GLOBALS['w_v_mobile']    = $v_mobile_id    = (bool) $this->visibility[0];
+             $GLOBALS['w_v_ls_mobile'] = $v_xl_mobile_id = (bool) $this->visibility[1];
+             $GLOBALS['w_v_tablet']    = $v_tablet_id    = (bool) $this->visibility[2];
+             $GLOBALS['w_v_ls_tablet'] = $v_xl_tablet_id = (bool) $this->visibility[3];
+             $GLOBALS['w_v_laptop']    = $v_laptop_id    = (bool) $this->visibility[4];
+             $GLOBALS['w_v_desktop']   = $v_desktop_id   = (bool) $this->visibility[5];
+             $GLOBALS['w_v_xl_screen'] = $v_xl_screen_id = (bool) $this->visibility[6];
               
              // invoke visibility in front end
              if(
-               !$this->visibility[0] || !$this->visibility[1] || !$this->visibility[2] ||
-               !$this->visibility[3] || !$this->visibility[4] || !$this->visibility[5] ||
-               !$this->visibility[6]  
+               !$v_mobile_id    || !$v_xl_mobile_id || !$v_tablet_id  ||
+               !$v_xl_tablet_id || !$v_laptop_id    || !$v_desktop_id ||
+               !$v_xl_screen_id  
                ) { 
                 
                 $script[] = " var __t = document.getElementById('$doctrine_id'); ";
@@ -584,7 +601,7 @@
                * @since: v2.0 wine
                * DT: 11.16.2023 
                */
-               if(!$this->visibility[0]) {
+               if(!$v_mobile_id) {
                  $script[] = " var wine_mobile = window.matchMedia('(min-width:".$mobile_id."px) and (max-width:".$xl_mobile_id."px)'); ";
                  $script[] = " function handleMobile(e) { if (e.matches) { __t.style.display = 'none'; } else { __t.style.display = ''; } }
                  wine_mobile.addListener(handleMobile);
@@ -603,7 +620,7 @@
                * @since: v2.0 wine
                * DT: 11.16.2023 
                */
-               if(!$this->visibility[1]) {
+               if(!$v_xl_mobile_id) {
                  $script[] = " var wine_lgmobile = window.matchMedia('(min-width:".$xl_mobile_id."px) and (max-width:".$tablet_id."px)'); ";
                  $script[] = " function handleMobileLg(e) { if (e.matches) { __t.style.display = 'none'; } else {__t.style.display = '';}}
                  wine_lgmobile.addListener(handleMobileLg);
@@ -622,7 +639,7 @@
                * @since: v2.0 wine
                * DT: 11.16.2023 
                */
-               if(!$this->visibility[2]) {
+               if(!$v_tablet_id) {
                 $script[] = " var wine_tablet   = window.matchMedia('(min-width:".$tablet_id."px) and (max-width:".$xl_tablet_id ."px)'); ";
                 $script[] = " function handleTablet(e) { if (e.matches) { __t.style.display = 'none'; } else {__t.style.display = '';}}
                 wine_tablet.addListener(handleTablet)
@@ -641,7 +658,7 @@
                * @since: v2.0 wine
                * DT: 11.16.2023 
                */
-               if(!$this->visibility[3]) {
+               if(!$v_xl_tablet_id) {
                 $script[] = " var wine_lgtablet = window.matchMedia('(min-width:".$xl_tablet_id ."px) and (max-width:".$laptop_id."px)'); ";
                 $script[] = " function handleTabletLg(e) { if (e.matches) { __t.style.display = 'none'; } else {__t.style.display = '';}}
                 wine_lgtablet.addListener(handleTabletLg)
@@ -660,7 +677,7 @@
                * @since: v2.0 wine
                * DT: 11.16.2023 
                */
-              if(!$this->visibility[4]) {
+              if(!$v_laptop_id) {
                 $script[] = " var wine_laptop   = window.matchMedia('(min-width:".$laptop_id."px) and (max-width:".$desktop_id."px)'); ";
                 $script[] = " function handleLaptop(e) { if (e.matches) { __t.style.display = 'none'; } else {__t.style.display = '';}}
                 wine_laptop.addListener(handleLaptop)
@@ -679,7 +696,7 @@
                * @since: v2.0 wine
                * DT: 11.16.2023 
                */
-              if(!$this->visibility[5]) {
+              if(!$v_desktop_id) {
                 $script[] = " var wine_desktop  = window.matchMedia('(min-width:".$desktop_id."px) and (max-width:". $xl_screen_id."px)'); ";
                 $script[] = " function handleDesktop(e) { if (e.matches) { __t.style.display = 'none'; } else {__t.style.display = '';}}
                 wine_desktop.addListener(handleDesktop)
@@ -698,7 +715,7 @@
                * @since: v2.0 wine
                * DT: 11.16.2023 
                */
-              if(!$this->visibility[6]) {
+              if(!$v_xl_screen_id) {
                 $script[] = " var wine_xl_screen = window.matchMedia('(min-width:".$xl_screen_id."px)'); ";
                 $script[] = " function handleXlScreen(e) { if (e.matches) { __t.style.display = 'none'; } else {__t.style.display = '';}}
                 wine_xl_screen.addListener(handleXlScreen)
