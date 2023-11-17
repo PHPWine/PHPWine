@@ -480,16 +480,16 @@
               $wine = [];
               foreach ($this->client['content'][1] as $wine_key => $wine_val) {
                foreach ($wine_val as $value) {
-                if(is_object($value[0])) {
+                if(is_object($value[0]?? false)) {
                    $wine[] = $this->optimized_html(__,null,
-                     $this->value($value[0], 
-                     $value[1], ...$value[2]?? []
+                     $this->value($value[0]?? '', 
+                     $value[1]?? false, ...$value[2]?? []
                     )
                   );
                 } else {
                   $wine[] = $this->optimized_html(__,null, 
                     $this->wine_callable_hook(
-                    $value[0], ...$value[1]?? []
+                    $value[0]?? '', ...$value[1]?? []
                   )
                 ); 
                }
@@ -563,7 +563,7 @@
 
              $script[] = "";
              // get doctrine child id container
-             $doctrine_id = (string) $this->client['content'][0]['id']?? '';
+             $doctrine_id = (string) (isset($this->client['content'][0]['id']))? $this->client['content'][0]['id'] : '';
               
            /**
              * --------------------------------------------------------------------------------------------
