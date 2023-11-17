@@ -743,7 +743,7 @@ class Provider
                    {
                        $wine_hooks .= $this->optimized_html( $this->mentity, null,
                          $this->wine_callable_hook(
-                            $hooks[0][0]?? "", 
+                            $hooks[0][0]?? "",      
                          ...$hooks[0][1]?? []
                           )
                        );
