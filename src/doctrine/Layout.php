@@ -338,23 +338,23 @@
       $wine_mixing = [
 
         // obviously attribute property from client
-        attributes   => isset($wine_layout[0][attributes]),
+        attributes   => isset($wine_layout[attributes]),
 
         // obviously rows  property from client
-        xrow         => isset($wine_layout[0][hooks][xrow]),
+        xrow         => isset($wine_layout[hooks][xrow]),
         
         // obviously rows x12 property from client
-        xrows        => isset($wine_layout[0][hooks][xrows]),
+        xrows        => isset($wine_layout[hooks][xrows]),
         
         // obviously col property from client
-        column       => isset($wine_layout[0][hooks][column]),
+        column       => isset($wine_layout[hooks][column]),
         
         // obviously check columns property from client
-        columns      => isset($wine_layout[0][hooks][columns]),
+        columns      => isset($wine_layout[hooks][columns]),
         
         // hook top and bottom later
-        top_later    => isset($wine_layout[0][top_later]),
-        bottom_later => isset($wine_layout[0][bottom_later]),
+        top_later    => isset($wine_layout[top_later]),
+        bottom_later => isset($wine_layout[bottom_later]),
       
       ];
 
@@ -374,6 +374,7 @@
       $this->client = [
 
       'content' => [
+        
         $wine_layout[attributes]?? [],
 
         $wine_layout[hooks]?? [],
@@ -386,9 +387,14 @@
         
         $wine_layout[hooks][columns]?? [],
         
-        $wine_layout[top_later]?? false,
+        $wine_layout[top_later][0]?? false,
         
-        $wine_layout[bottom_later]?? false,
+        $wine_layout[bottom_later][0]?? false,
+
+        $wine_layout[top_later][1]?? [],
+
+        $wine_layout[bottom_later][1]?? []
+
        ],
 
        'attr'      => $wine_mixing[attributes],
@@ -499,13 +505,15 @@
          $this->client['content'][0] /* set prperties */
          ,array(
          ["top_"
-        .$this->client['content'][6]?? false] /* set prperties */
+        .$this->client['content'][6]?? '',
+        [...$this->client['content'][8]?? []]] /* set prperties */
         ,["bottom_"
-        .$this->client['content'][7]?? false] /* set prperties */
+        .$this->client['content'][7]?? '',
+        [...$this->client['content'][9]?? []]] /* set prperties */
         ),
 
       );
-      
+     
       return $this;
 
     }
