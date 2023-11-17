@@ -506,10 +506,10 @@
          ,array(
          ["top_"
         .$this->client['content'][6]?? '',
-        [...$this->client['content'][8]?? []]] /* set prperties */
+         [...$this->client['content'][8]?? []]] /* set prperties */
         ,["bottom_"
         .$this->client['content'][7]?? '',
-        [...$this->client['content'][9]?? []]] /* set prperties */
+         [...$this->client['content'][9]?? []]] /* set prperties */
         ),
 
       );
