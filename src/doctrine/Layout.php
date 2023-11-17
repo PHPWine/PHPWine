@@ -158,7 +158,7 @@
      * DT: 11.16.2023 **/
     public $client = [];
      
-    public function __construct( array ...$wine_layout )
+    public function __construct( array $wine_layout )
     { 
 
       parent::__construct();
@@ -178,7 +178,7 @@
       $this->attributes = $this->is_defined([
         'DRKEY_ATTR'
       ], 
-      ...$wine_layout
+        $wine_layout
       );  
 
    /**
@@ -197,7 +197,7 @@
         'DRKEY_HOOKS','DRKEY_ROW',
         '','DRKEY_MAGIC'
       ], 
-      ...$wine_layout
+        $wine_layout
       );
 
    /**
@@ -215,7 +215,7 @@
       $this->mx_axis = $this->is_defined([
         'DRKEY_HOOKS','DRKEY_ROWS'
       ], 
-      ...$wine_layout
+       $wine_layout
       );
 
 
@@ -235,7 +235,7 @@
         'DRKEY_HOOKS','DRKEY_COLUMN',
         '','DRKEY_MAGIC'
       ], 
-      ...$wine_layout
+       $wine_layout
       );
 
    /**
@@ -253,7 +253,7 @@
       $this->my_axis = $this->is_defined([
         'DRKEY_HOOKS','DRKEY_COLUMNS'
       ], 
-      ...$wine_layout
+        $wine_layout
       );
     
 
@@ -272,7 +272,7 @@
       $this->top_later = $this->is_defined([
         'DRKEY_TLATER'
       ],
-      ...$wine_layout
+        $wine_layout
       );
 
    /**
@@ -290,7 +290,7 @@
       $this->bottom_later = $this->is_defined([
         'DRKEY_BLATER'
       ], 
-      ...$wine_layout
+        $wine_layout
       );
 
 
@@ -306,7 +306,7 @@
      * @since: v2.0 wine
      * DT: 11.10.2023 
      */
-      $this->wine_template(...$wine_layout);
+      $this->wine_template($wine_layout);
 
     }
 
@@ -322,7 +322,7 @@
      * @since: v2.0 wine
      * DT: 11.10.2023 
      */
-    private function wine_template(...$wine_layout) {
+    private function wine_template(array $wine_layout = []) {
 
    /**
      * --------------------------------------------------------------------------------------------
@@ -374,21 +374,21 @@
       $this->client = [
 
       'content' => [
-        $wine_layout[0][attributes]?? [],
+        $wine_layout[attributes]?? [],
 
-        $wine_layout[0][hooks]?? [],
+        $wine_layout[hooks]?? [],
         
-        $wine_layout[0][hooks][xrow]?? [],
+        $wine_layout[hooks][xrow]?? [],
         
-        $wine_layout[0][hooks][xrows]?? [],
+        $wine_layout[hooks][xrows]?? [],
         
-        $wine_layout[0][hooks][column]?? [],
+        $wine_layout[hooks][column]?? [],
         
-        $wine_layout[0][hooks][columns]?? [],
+        $wine_layout[hooks][columns]?? [],
         
-        $wine_layout[0][top_later]?? false,
+        $wine_layout[top_later]?? false,
         
-        $wine_layout[0][bottom_later]?? false,
+        $wine_layout[bottom_later]?? false,
        ],
 
        'attr'      => $wine_mixing[attributes],
@@ -416,7 +416,7 @@
      * @since: v2.0 wine
      * DT: 11.10.2023 
      */
-    public function visibility( 
+    public function visible( 
             
       array $config = []
          
@@ -474,15 +474,21 @@
               $wine = [];
               foreach ($this->client['content'][1] as $wine_key => $wine_val) {
                foreach ($wine_val as $value) {
-
-                 // assinged those hooks
-                 $wine[] = $this->optimized_html(__,null, 
-                  $this->wine_callable_hook(
+                if(is_object($value[0])) {
+                   $wine[] = $this->optimized_html(__,null,
+                     $this->value($value[0], 
+                     $value[1], ...$value[2]?? []
+                    )
+                  );
+                } else {
+                  $wine[] = $this->optimized_html(__,null, 
+                    $this->wine_callable_hook(
                     $value[0], ...$value[1]?? []
                   )
-                 ); 
-                }
-              }
+                ); 
+               }
+             }
+            }
 
             // return the elements  
             return $wine;
@@ -549,8 +555,8 @@
 
              $script[] = "";
              // get doctrine child id container
-             $doctrine_id = (string) $this->client['content'][0]['id'];
-
+             $doctrine_id = (string) $this->client['content'][0]['id']?? '';
+              
            /**
              * --------------------------------------------------------------------------------------------
              * @globalVariable 

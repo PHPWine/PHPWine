@@ -46,11 +46,11 @@
 
  Class Doctrine extends \PHPWineOptimizedHtml\Doctrine\Layout  {
   
-    public function __construct(array ...$wine_layout)
+    public function __construct(array $wine_layout = [])
     {
 
       parent::__construct(
-      ...$wine_layout
+      $wine_layout
     );
       
   /**
