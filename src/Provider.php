@@ -188,7 +188,7 @@ class Provider
        string $value,   string $please,
        string $mentity, string $section,
       
-       bool $disable_html = false
+       bool $disable_html
 
     ) {
 
@@ -1161,10 +1161,12 @@ class Provider
                             $attribute_hooks = $ca_key[$this->attr];
                         }
 
-                        if (is_array($attribute_hooks)) {
-                            $data_elem_attr[] = $this->wine_element_attribute_provider(
-                                $attribute_hooks
-                            )[0];
+                         if (is_array($attribute_hooks)) {
+                        
+                         foreach ($attribute_hooks as $key_attr => $output_rendered) {
+                          $data_elem_attr[] = $this->space . $key_attr . "=\"$output_rendered\"";
+                         }
+
                         } else {
                             $data_elem_attr[] = $this->space . $attribute_hooks;
                         }
@@ -1176,6 +1178,7 @@ class Provider
                     ) {
                         $data_elem_attr[] = "";
                     }
+
                     // Sanitized and print string
                     $__sanitizeString = "%s";
                     $prepare_openingf = sprintf(
@@ -1286,7 +1289,8 @@ class Provider
     ): string {
         $__element =
             $this->e_open .
-            $element_tag .
+            $element_tag  .
+            $this->space  .
             $element_attr .
             $this->space .
             $this->e_end .

@@ -597,10 +597,7 @@
                !$v_xl_tablet_id || !$v_laptop_id    || !$v_desktop_id ||
                !$v_xl_screen_id  
                ) { 
-                
-                $script[] = " var __t = document.getElementById('$doctrine_id'); ";
-                $script[] = " const docID=document.body.id='app_id',childElem=document.getElementById('app_id'),appData=document.querySelectorAll('.wine-app');appData.forEach((e,d)=>{childElem.insertAdjacentElement('beforeend',e)}); ";
-            
+                $script[] = " const __t_$doctrine_id = document.getElementById('$doctrine_id'); ";
                }
             
               /**
@@ -617,7 +614,7 @@
                */
                if(!$v_mobile_id) {
                  $script[] = " var wine_mobile = window.matchMedia('(min-width:".$mobile_id."px) and (max-width:".$xl_mobile_id."px)'); ";
-                 $script[] = " function e(e){if(e.matches){__t.style.display='none'}else{__t.style.display=''}}wine_mobile.addListener(e);e(wine_mobile);";
+                 $script[] = " function e(e){if(e.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_mobile.addListener(e);e(wine_mobile);";
                }
             
               /**
@@ -634,7 +631,7 @@
                */
                if(!$v_xl_mobile_id) {
                  $script[] = " var wine_lgmobile = window.matchMedia('(min-width:".$xl_mobile_id."px) and (max-width:".$tablet_id."px)'); ";
-                 $script[] = " function e(e){if(e.matches){__t.style.display='none'}else{__t.style.display=''}}wine_lgmobile.addListener(e);e(wine_lgmobile);";
+                 $script[] = " function e(e){if(e.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_lgmobile.addListener(e);e(wine_lgmobile);";
                }
 
               /**
@@ -651,7 +648,7 @@
                */
                if(!$v_tablet_id) {
                 $script[] = " var wine_tablet   = window.matchMedia('(min-width:".$tablet_id."px) and (max-width:".$xl_tablet_id ."px)'); ";
-                $script[] = " function e(e){if(e.matches){__t.style.display='none'}else{__t.style.display=''}}wine_tablet.addListener(e);e(wine_tablet);";
+                $script[] = " function e(e){if(e.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_tablet.addListener(e);e(wine_tablet);";
                }
 
               /**
@@ -668,7 +665,7 @@
                */
                if(!$v_xl_tablet_id) {
                 $script[] = " var wine_lgtablet = window.matchMedia('(min-width:".$xl_tablet_id ."px) and (max-width:".$laptop_id."px)'); ";
-                $script[] = " function e(e){if(e.matches){__t.style.display='none'}else{__t.style.display=''}}wine_lgtablet.addListener(e);e(wine_lgtablet);";
+                $script[] = " function e(e){if(e.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_lgtablet.addListener(e);e(wine_lgtablet);";
               }
 
               /**
@@ -685,7 +682,7 @@
                */
               if(!$v_laptop_id) {
                 $script[] = " var wine_laptop   = window.matchMedia('(min-width:".$laptop_id."px) and (max-width:".$desktop_id."px)'); ";
-                $script[] = " function n(n){if(n.matches){__t.style.display='none'}else{__t.style.display=''}}wine_laptop.addListener(n);n(wine_laptop);";
+                $script[] = " function n(n){if(n.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_laptop.addListener(n);n(wine_laptop);";
               }
 
               /**
@@ -702,7 +699,7 @@
                */
               if(!$v_desktop_id) {
                 $script[] = " var wine_desktop  = window.matchMedia('(min-width:".$desktop_id."px) and (max-width:". $xl_screen_id."px)'); ";
-                $script[] = " function e(e){if(e.matches){__t.style.display='none'}else{__t.style.display=''}}wine_desktop.addListener(e);e(wine_desktop);";
+                $script[] = " function e(e){if(e.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_desktop.addListener(e);e(wine_desktop);";
               }
 
               /**
@@ -719,14 +716,14 @@
                */
               if(!$v_xl_screen_id) {
                 $script[] = " var wine_xl_screen = window.matchMedia('(min-width:".$xl_screen_id."px)'); ";
-                $script[] = " function e(e){if(e.matches){__t.style.display='none'}else{__t.style.display=''}}wine_xl_screen.addListener(e);e(wine_xl_screen);";
+                $script[] = " function e(e){if(e.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_xl_screen.addListener(e);e(wine_xl_screen);";
               }
 
              return $script;
              
           }
         ]
-      ],[classes=>'wine-app']);
+      ],[classes=>'app-response']);
 
       return $this;    
    

@@ -465,7 +465,7 @@ if(!defined($target))
  * @property
  * -------------------------------------------------------------------------------------------- */
 
-$val = 'val';
+$val = 'value';
 
 /**
  * This is reserved keyword for doctrine class attribute will use to key for element tag
