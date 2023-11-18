@@ -480,7 +480,7 @@
               $wine = [];
               foreach ($this->client['content'][1] as $wine_key => $wine_val) {
                foreach ($wine_val as $value) {
-                if(is_object($value[0]?? false)) {
+                if(is_object($value[0]?? false) || class_exists($value[0]?? false)) {
                    $wine[] = $this->optimized_html(__,null,
                      $this->value($value[0]?? '', 
                      $value[1]?? false, ...$value[2]?? []
