@@ -252,12 +252,11 @@ if (file_exists( $require_file)) {
             
                    if(function_exists($func_provider)) {
             
-                     return call_user_func($this->optimized_html(
+                     return $this->optimized_html(
                        __,
                        [],
-                       $func_provider
-                     ), 
-                    ...$args);
+                       $this->wine_callable_hook($func_provider,...$args)
+                     );                    
                 
                    }  else {
                     
