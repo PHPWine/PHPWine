@@ -478,23 +478,75 @@
             please => function() {
               // we gonna loop through it
               $wine = [];
-              foreach ($this->client['content'][1] as $wine_key => $wine_val) {
-               foreach ($wine_val as $value) {
-                if(is_object($value[0]?? false) || class_exists($value[0]?? false)) {
-                   $wine[] = $this->optimized_html(__,null,
-                     $this->value($value[0]?? '', 
-                     $value[1]?? false, ...$value[2]?? []
-                    )
-                  );
-                } else {
-                  $wine[] = $this->optimized_html(__,null, 
-                    $this->wine_callable_hook(
-                    $value[0]?? '', ...$value[1]?? []
-                  )
-                ); 
+
+              if( array_key_exists(please,$this->client['content'][1]) && 
+              is_callable($this->client['content'][1][please])) {
+                 
+                return $this->wine_doctrine_magic_content($this->client['content'][1][please]());
+
+              } else {
+
+                  if(
+                      array_key_exists(please, $this->client['content'][2]) &&
+                      is_callable($this->client['content'][2][please])
+                  ) {
+
+                      return $this-> wine_doctrine_magic_content($this->client['content'][2][please]());
+
+                  } elseif(
+                      array_key_exists(please, $this->client['content'][3]) &&
+                      is_callable($this->client['content'][3][please])
+                  ) {
+
+                      return $this-> wine_doctrine_magic_content($this->client['content'][3][please]());
+
+                  } elseif(
+                      array_key_exists(please, $this->client['content'][4]) &&
+                      is_callable($this->client['content'][4][please])
+                  ) {
+
+                      return $this-> wine_doctrine_magic_content($this->client['content'][4][please]());
+
+                  } elseif(
+
+                      array_key_exists(please, $this->client['content'][5]) &&
+                      is_callable($this->client['content'][5][please])
+
+                  ) {
+
+                      return $this-> wine_doctrine_magic_content($this->client['content'][5][please]());
+
+                  } else {
+
+                      foreach ($this->client['content'][1] as $wine_key => $wine_val) {
+
+                        foreach ($wine_val as $value) {
+
+                            if(is_object($value[0] ?? false) || class_exists($value[0] ?? false)) {
+                                $wine[] = $this->optimized_html(
+                                  __,
+                                  null,
+                                  $this->value(
+                                    $value[0] ?? '',
+                                    $value[1] ?? false,
+                                    ...$value[2] ?? []
+                                  )
+                               );
+                            } else {
+                              $wine[] = $this->optimized_html(
+                                   __,
+                                  null,
+                                  $this->wine_callable_hook(
+                                    $value[0] ?? '',
+                                    ...$value[1] ?? []
+                                  )
+                              );
+                          }
+
+                       }
+                    }
+                  }
                }
-             }
-            }
 
             // return the elements  
             return $wine;
@@ -734,6 +786,46 @@
        return $this->content_object . $this->screen_object;
 
      } 
+
+    /**
+     * @method doctrine please and try ?  
+     * Defined : check condition at doctrine layout
+     * @since: doctrine v1.0
+     * @since: wine 2.0
+     * DT: 11.19.2023 **/   
+     private function wine_doctrine_magic_content( ...$wine_result ) : array {
+
+      for ($please = 0; $please < count($wine_result[0]); $please++) {
+
+        foreach ($wine_result[$please]?? [] as $value) {
+
+          if(is_object($value[0] ?? false) || class_exists($value[0] ?? false)) {
+            $wine[] = $this->optimized_html(
+                __,
+                null,
+                $this->value(
+                $value[0] ?? '',
+                $value[1] ?? false,
+             ...$value[2]?? []
+           )
+         );
+        } else {
+         $wine[] = $this->optimized_html(
+            __,
+            null,
+            $this->wine_callable_hook(
+              $value[0] ?? '',
+          ...$value[1] ?? []
+
+           )
+         );
+        }
+      }
+    }
+
+    return (array) $wine;
+
+  }
 
     /**
      * @method is_defined client key ?  
