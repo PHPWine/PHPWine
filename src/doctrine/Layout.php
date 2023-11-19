@@ -492,9 +492,10 @@
      * @since: v2.0 wine
      * DT: 11.16.2023 
      */
+
      $this->content_object = $this->wine_hook_tag_selections(    
         // set by default for div
-         div,[ 
+        ($this->client['condition'][those]) ? __ : div,[ 
           child => [
             please => function() {
               // we gonna loop through it
