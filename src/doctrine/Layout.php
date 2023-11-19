@@ -479,6 +479,18 @@
               // we gonna loop through it
               $wine = [];
 
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @hook default 
+               * @implement please condition to before hooks
+               * -------------------------------------------------------------------------------------------- 
+               * This will run a method call back from doctrine base on condition before hook
+               * 
+               * @Defined : doctrine hooks for [ xrow xrows, column, columns ]
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.19.2023 
+               */
               if( $this->wine_reserved_keyword_verifier(please,$this->client['content'][1]) && 
               is_callable($this->client['content'][1][please])) {
                  
@@ -486,6 +498,18 @@
 
               } else {
 
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @hook xrow 
+               * @implement please condition to xrow 
+               * -------------------------------------------------------------------------------------------- 
+               * This will run a method call back from doctrine base on condition
+               * 
+               * @Defined : doctrine xrow
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.19.2023 
+               */
                   if(
                       $this->wine_reserved_keyword_verifier(please, $this->client['content'][2]) &&
                       is_callable($this->client['content'][2][please])
@@ -493,6 +517,18 @@
 
                       return $this-> wine_doctrine_magic_content($this->client['content'][2][please]());
 
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @hook xrows 
+               * @implement please condition to xrows 
+               * -------------------------------------------------------------------------------------------- 
+               * This will run a method call back from doctrine base on condition
+               * 
+               * @Defined : doctrine xrows
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.19.2023 
+               */
                   } elseif(
                       $this->wine_reserved_keyword_verifier(please, $this->client['content'][3]) &&
                       is_callable($this->client['content'][3][please])
@@ -500,6 +536,18 @@
 
                       return $this-> wine_doctrine_magic_content($this->client['content'][3][please]());
 
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @hook column 
+               * @implement please condition to column 
+               * -------------------------------------------------------------------------------------------- 
+               * This will run a method call back from doctrine base on condition
+               * 
+               * @Defined : doctrine column
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.19.2023 
+               */
                   } elseif(
                       $this->wine_reserved_keyword_verifier(please, $this->client['content'][4]) &&
                       is_callable($this->client['content'][4][please])
@@ -507,6 +555,18 @@
 
                       return $this-> wine_doctrine_magic_content($this->client['content'][4][please]());
 
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @hook columns 
+               * @implement please condition to columns 
+               * -------------------------------------------------------------------------------------------- 
+               * This will run a method call back from doctrine base on condition
+               * 
+               * @Defined : doctrine columns
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.19.2023 
+               */
                   } elseif(
 
                       $this->wine_reserved_keyword_verifier(please, $this->client['content'][5]) &&
@@ -518,6 +578,17 @@
 
                   } else {
 
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @default hook execution 
+               * -------------------------------------------------------------------------------------------- 
+               * This will run a method call back from doctrine without condition
+               * 
+               * @Defined : doctrine default 
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.19.2023 
+               */
                       foreach ($this->client['content'][1] as $wine_key => $wine_val) {
 
                         foreach ($wine_val as $value) {
@@ -782,10 +853,26 @@
     }
 
      public function layout() {
-
+     
        return $this->content_object . $this->screen_object;
 
      } 
+
+     public function only() {
+
+      $vm_only = $this->visibility[0]; 
+
+      var_dump($vm_only);
+
+      if(!$vm_only) {
+        wine(script,[
+         child => [
+        
+         ]
+        ],[classes=>'app-response']);
+      }
+       
+     }
 
     /**
      * @method doctrine please and try ?  
