@@ -1040,7 +1040,7 @@ class Provider
      * @since: v1.0
      * DT: 11.08.2023 *
      */
-    private function wine_reserved_keyword_verifier(
+    protected function wine_reserved_keyword_verifier(
         string|array $key = "",
         array $containers = []
     ): bool {

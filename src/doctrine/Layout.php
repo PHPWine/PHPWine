@@ -479,7 +479,7 @@
               // we gonna loop through it
               $wine = [];
 
-              if( array_key_exists(please,$this->client['content'][1]) && 
+              if( $this->wine_reserved_keyword_verifier(please,$this->client['content'][1]) && 
               is_callable($this->client['content'][1][please])) {
                  
                 return $this->wine_doctrine_magic_content($this->client['content'][1][please]());
@@ -487,21 +487,21 @@
               } else {
 
                   if(
-                      array_key_exists(please, $this->client['content'][2]) &&
+                      $this->wine_reserved_keyword_verifier(please, $this->client['content'][2]) &&
                       is_callable($this->client['content'][2][please])
                   ) {
 
                       return $this-> wine_doctrine_magic_content($this->client['content'][2][please]());
 
                   } elseif(
-                      array_key_exists(please, $this->client['content'][3]) &&
+                      $this->wine_reserved_keyword_verifier(please, $this->client['content'][3]) &&
                       is_callable($this->client['content'][3][please])
                   ) {
 
                       return $this-> wine_doctrine_magic_content($this->client['content'][3][please]());
 
                   } elseif(
-                      array_key_exists(please, $this->client['content'][4]) &&
+                      $this->wine_reserved_keyword_verifier(please, $this->client['content'][4]) &&
                       is_callable($this->client['content'][4][please])
                   ) {
 
@@ -509,7 +509,7 @@
 
                   } elseif(
 
-                      array_key_exists(please, $this->client['content'][5]) &&
+                      $this->wine_reserved_keyword_verifier(please, $this->client['content'][5]) &&
                       is_callable($this->client['content'][5][please])
 
                   ) {
