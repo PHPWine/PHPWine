@@ -744,8 +744,8 @@
                ) { 
                 $doctrine_idot   = str_replace(".","",$doctrine_idt);
                 $doctrine_idhush = str_replace("#","",$doctrine_idot);  
-                $doctrine_all    = str_replace("-","_",$doctrine_idhush);  
-                if(!is_null($doctrine_all))
+                $doctrine_all    = str_replace("-","_",$doctrine_idhush); 
+                if($doctrine_idt)
                 { $script[] = "var those_$doctrine_all=document.querySelectorAll('$doctrine_idt');"; }
                 if(!is_null($doctrine_id))
                 { $script[] = "var __t_$doctrine_id=document.getElementById('$doctrine_id');"; }
@@ -767,12 +767,12 @@
                  $script[] = "var wm=window.matchMedia('(min-width:".$mobile_id."px) and (max-width:".$xl_mobile_id."px)');";
                  $script[] = "function e(e){ if(e.matches){";
                            if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
-                           if(!is_null($doctrine_all)) {
+                           if($doctrine_idt) {
                             $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
                            }
                  $script[] = "}else{";
                            if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
-                           if(!is_null($doctrine_all)){
+                           if($doctrine_idt){
                              $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
                            }
                  $script[] = "}}wm.addListener(e);e(wm);";
@@ -794,12 +794,12 @@
                  $script[] = "var wmlg=window.matchMedia('(min-width:".$xl_mobile_id."px) and (max-width:".$tablet_id."px)'); ";
                  $script[] = "function e(e){ if(e.matches){";
                             if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
-                            if(!is_null($doctrine_all)) {
+                            if($doctrine_idt) {
                             $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
                             }
                  $script[] = "}else{";
                             if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
-                            if(!is_null($doctrine_all)) {
+                            if($doctrine_idt) {
                              $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
                             }
                  $script[] = "}}wmlg.addListener(e);e(wmlg);";
@@ -822,12 +822,12 @@
                 $script[] = "var wt=window.matchMedia('(min-width:".$tablet_id."px) and (max-width:".$xl_tablet_id ."px)');";
                 $script[] = "function e(e){ if(e.matches){";
                           if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
-                          if(!is_null($doctrine_all)) {
+                          if($doctrine_idt) {
                           $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
                           }
                 $script[] = "}else{";
                           if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
-                          if(!is_null($doctrine_all)){
+                          if($doctrine_idt){
                             $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
                           }
                 $script[] = "}}wt.addListener(e);e(wt);";
@@ -849,12 +849,12 @@
                  $script[] = "var wlgt=window.matchMedia('(min-width:".$xl_tablet_id ."px) and (max-width:".$laptop_id."px)'); ";
                  $script[] = "function e(e){if(e.matches){";
                           if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
-                          if(!is_null($doctrine_all)) {
+                          if($doctrine_idt) {
                           $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
                           }
                 $script[] = "}else{";
                           if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
-                          if(!is_null($doctrine_all)){
+                          if($doctrine_idt){
                             $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
                           }
                 $script[] = "}}wlgt.addListener(e);e(wlgt);";
@@ -876,12 +876,12 @@
                 $script[] = "var wlap=window.matchMedia('(min-width:".$laptop_id."px) and (max-width:".$desktop_id."px)'); ";
                 $script[] = "function e(e){if(e.matches){";
                           if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
-                          if(!is_null($doctrine_all)) {
+                          if($doctrine_idt) {
                           $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
                           }
                 $script[] = "}else{";
                           if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
-                          if(!is_null($doctrine_all)){
+                          if($doctrine_idt){
                             $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
                           }
                 $script[] = "}}wlap.addListener(e);e(wlap);";
@@ -903,12 +903,12 @@
                 $script[] = "var wdtp=window.matchMedia('(min-width:".$desktop_id."px) and (max-width:". $xl_screen_id."px)'); ";
                 $script[] = "function e(e){if(e.matches){";
                           if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
-                          if(!is_null($doctrine_all)) {
+                          if($doctrine_idt) {
                           $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
                           }
                 $script[] = "}else{";
                           if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
-                          if(!is_null($doctrine_all)){
+                          if($doctrine_idt){
                             $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
                           }
                 $script[] = "}}wdtp.addListener(e);e(wdtp);";
@@ -930,12 +930,12 @@
                 $script[] = "var wxls=window.matchMedia('(min-width:".$xl_screen_id."px)'); ";
                 $script[] = "function e(e){if(e.matches){";
                           if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
-                          if(!is_null($doctrine_all)) {
+                          if($doctrine_idt) {
                           $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
                           }
                 $script[] = "}else{";
                           if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
-                          if(!is_null($doctrine_all)){
+                          if($doctrine_idt){
                             $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
                           }
                 $script[] = "}}wxls.addListener(e);e(wxls);";
