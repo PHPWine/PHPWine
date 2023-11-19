@@ -860,18 +860,7 @@
 
      public function only() {
 
-      $vm_only = $this->visibility[0]; 
 
-      var_dump($vm_only);
-
-      if(!$vm_only) {
-        wine(script,[
-         child => [
-        
-         ]
-        ],[classes=>'app-response']);
-      }
-       
      }
 
     /**
