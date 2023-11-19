@@ -30,6 +30,31 @@
 
   }
 
+/**
+ * --------------------------------------------------------------------------------------------
+ * @var constant|String 
+ * @property
+ * -------------------------------------------------------------------------------------------- */
+
+$those = 'DRKEY_THOSE';
+
+/**
+ * This is reserved keyword for doctrine class attribute will use to key for element tag
+ * The main use is for localized the function in array.  
+ * 
+ * 
+ * @Defined : Constant Doctrine Class key Registered those select elements 
+ * @since: v1.0 doctrine
+ * @since: v2.0 wine
+ * DT: 11.10.2023 
+ */
+if(!defined('those')) 
+{ 
+  
+ define('those',$those); 
+
+}
+
 
 /**
  * --------------------------------------------------------------------------------------------

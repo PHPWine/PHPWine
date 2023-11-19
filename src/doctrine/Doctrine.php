@@ -75,6 +75,29 @@
       exit;
      }
 
+      
+  /**
+   * --------------------------------------------------------------------------------------------
+   * @condition
+   * @wine_compare function
+   * -------------------------------------------------------------------------------------------- 
+   * check current key and validate if true attributes property 
+   * 
+   * @Defined : return : attemp invalid key! 
+   * @since: v1.0 doctrine
+   * @since: v2.0 wine
+   * DT: 11.12.2023 */
+  if ( 
+   !wine_compare(
+
+      $this->those,
+    
+     'DOCTRINE_REGISTERED_KEY_THOSE') 
+  ) {
+  throw new \Exception("attempt invalid key : ".$this->those."!");
+  exit;
+ }
+
   /**
    * --------------------------------------------------------------------------------------------
    * @condition

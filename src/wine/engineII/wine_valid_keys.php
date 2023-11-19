@@ -38,7 +38,23 @@
  * @since: v2.0 wine
  * DT: 11.12.2023 
  */
- 'DRKEY_ATTR'  => 'DOCTRINE_REGISTERED_KEY_ATTR',
+'DRKEY_ATTR'  => 'DOCTRINE_REGISTERED_KEY_ATTR',
+
+/**
+ * --------------------------------------------------------------------------------------------
+ * @array key valid hook for those 
+ * -------------------------------------------------------------------------------------------- 
+ * This key is design for doctrine class to verify if the user input valid key in order to doctrine
+ * response properly, in public function store the array to be easily 
+ * get in the developer incase needed.  
+ * 
+ * 
+ * @Defined : Constant Doctrine Class key Registered those
+ * @since: v1.0 doctrine
+ * @since: v2.0 wine
+ * DT: 11.12.2023 
+ */
+ 'DRKEY_THOSE'  => 'DOCTRINE_REGISTERED_KEY_THOSE',
 
 /**
  * --------------------------------------------------------------------------------------------

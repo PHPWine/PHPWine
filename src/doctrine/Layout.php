@@ -56,6 +56,15 @@
     protected $attributes;
 
     /**
+     * @var String keys Doctrine 
+     * @property
+     * Defined : Sekect all Doctrine container those html
+     * @since: doctrine v1.0
+     * @since: wine 2.0
+     * DT: 11.11.2023 **/
+    protected $those;
+
+    /**
      * @var String|Array keys Doctrine 
      * @property
      * Defined : hooks Doctrine dynamic row for html
@@ -180,6 +189,24 @@
       ], 
         $wine_layout
       );  
+
+    /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined check client end 
+     * -------------------------------------------------------------------------------------------- 
+     * Wine check if there's anonymouse keyword or invalid key the user use in doctrine
+     * this will help to figureout which and where is mistake from client
+     * 
+     * @Defined : verifying key from client end those
+     * @since: v1.0 doctrine
+     * @since: v2.0 wine
+     * DT: 11.10.2023 
+     */
+    $this->those = $this->is_defined([
+      'DRKEY_THOSE'
+    ], 
+      $wine_layout
+    );  
 
    /**
      * --------------------------------------------------------------------------------------------
@@ -339,6 +366,9 @@
 
         // obviously attribute property from client
         attributes   => isset($wine_layout[attributes]),
+        
+        // obviously those property from client
+        those        => isset($wine_layout[those]),
 
         // obviously rows  property from client
         xrow         => isset($wine_layout[hooks][xrow]),
@@ -376,25 +406,16 @@
       'content' => [
         
         $wine_layout[attributes]?? [],
-
-        $wine_layout[hooks]?? [],
-        
+        $wine_layout[hooks]?? [],      
         $wine_layout[hooks][xrow]?? [],
-        
-        $wine_layout[hooks][xrows]?? [],
-        
+        $wine_layout[hooks][xrows]?? [], 
         $wine_layout[hooks][column]?? [],
-        
         $wine_layout[hooks][columns]?? [],
-        
         $wine_layout[top_later][0]?? false,
-        
         $wine_layout[bottom_later][0]?? false,
-
         $wine_layout[top_later][1]?? [],
-
-        $wine_layout[bottom_later][1]?? []
-
+        $wine_layout[bottom_later][1]?? [],
+        $wine_layout[those]?? false
        ],
 
        'attr'      => $wine_mixing[attributes],
@@ -667,27 +688,28 @@
                 
                 // default is 320 for mobile
                 $media_query['mobile']??    320
-                // default is 320 for mobile landscape
+                // default is 540 for mobile landscape
                ,$media_query['ls_mobile']?? 540
-               // default is 320 for tablet
+               // default is 768 for tablet
                ,$media_query['tablet']??    768
-               // default is 320 for tablet landscpae
+               // default is 992 for tablet landscpae
                ,$media_query['ls_tablet']?? 992
-               // default is 320 for laptop
+               // default is 1024 for laptop
                ,$media_query['laptop']??    1024
-               // default is 320 for desktop
+               // default is 1280 for desktop
                ,$media_query['desktop']??   1280
-               // default is 320 for largescreen
+               // default is 1920 for largescreen
                ,$media_query['xl_screen']?? 1920
         
               ];
 
              $script = [];
-
              $script[] = "";
+             
              // get doctrine child id container
-             $doctrine_id = (string) (isset($this->client['content'][0]['id']))? $this->client['content'][0]['id'] : '';
-              
+             $doctrine_id  = (string) (isset($this->client['content'][0]['id']))? $this->client['content'][0]['id'] : null;
+             $doctrine_idt = (string) (isset($this->client['content'][10]))? $this->client['content'][10] : null;
+ 
            /**
              * --------------------------------------------------------------------------------------------
              * @globalVariable 
@@ -720,9 +742,15 @@
                !$v_xl_tablet_id || !$v_laptop_id    || !$v_desktop_id ||
                !$v_xl_screen_id  
                ) { 
-                $script[] = " const __t_$doctrine_id = document.getElementById('$doctrine_id'); ";
-               }
-            
+                $doctrine_idot   = str_replace(".","",$doctrine_idt);
+                $doctrine_idhush = str_replace("#","",$doctrine_idot);  
+                $doctrine_all    = str_replace("-","_",$doctrine_idhush);  
+                if(!is_null($doctrine_all))
+                { $script[] = "var those_$doctrine_all=document.querySelectorAll('$doctrine_idt');"; }
+                if(!is_null($doctrine_id))
+                { $script[] = "var __t_$doctrine_id=document.getElementById('$doctrine_id');"; }
+             }
+              
               /**
                * --------------------------------------------------------------------------------------------
                * @visibility mobile 
@@ -736,8 +764,18 @@
                * DT: 11.16.2023 
                */
                if(!$v_mobile_id) {
-                 $script[] = " var wine_mobile = window.matchMedia('(min-width:".$mobile_id."px) and (max-width:".$xl_mobile_id."px)'); ";
-                 $script[] = " function e(e){if(e.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_mobile.addListener(e);e(wine_mobile);";
+                 $script[] = "var wm=window.matchMedia('(min-width:".$mobile_id."px) and (max-width:".$xl_mobile_id."px)');";
+                 $script[] = "function e(e){ if(e.matches){";
+                           if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
+                           if(!is_null($doctrine_all)) {
+                            $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
+                           }
+                 $script[] = "}else{";
+                           if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
+                           if(!is_null($doctrine_all)){
+                             $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
+                           }
+                 $script[] = "}}wm.addListener(e);e(wm);";
                }
             
               /**
@@ -753,9 +791,20 @@
                * DT: 11.16.2023 
                */
                if(!$v_xl_mobile_id) {
-                 $script[] = " var wine_lgmobile = window.matchMedia('(min-width:".$xl_mobile_id."px) and (max-width:".$tablet_id."px)'); ";
-                 $script[] = " function e(e){if(e.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_lgmobile.addListener(e);e(wine_lgmobile);";
-               }
+                 $script[] = "var wmlg=window.matchMedia('(min-width:".$xl_mobile_id."px) and (max-width:".$tablet_id."px)'); ";
+                 $script[] = "function e(e){ if(e.matches){";
+                            if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
+                            if(!is_null($doctrine_all)) {
+                            $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
+                            }
+                 $script[] = "}else{";
+                            if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
+                            if(!is_null($doctrine_all)) {
+                             $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
+                            }
+                 $script[] = "}}wmlg.addListener(e);e(wmlg);";
+            
+                }
 
               /**
                * --------------------------------------------------------------------------------------------
@@ -770,9 +819,19 @@
                * DT: 11.16.2023 
                */
                if(!$v_tablet_id) {
-                $script[] = " var wine_tablet   = window.matchMedia('(min-width:".$tablet_id."px) and (max-width:".$xl_tablet_id ."px)'); ";
-                $script[] = " function e(e){if(e.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_tablet.addListener(e);e(wine_tablet);";
-               }
+                $script[] = "var wt=window.matchMedia('(min-width:".$tablet_id."px) and (max-width:".$xl_tablet_id ."px)');";
+                $script[] = "function e(e){ if(e.matches){";
+                          if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
+                          if(!is_null($doctrine_all)) {
+                          $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
+                          }
+                $script[] = "}else{";
+                          if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
+                          if(!is_null($doctrine_all)){
+                            $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
+                          }
+                $script[] = "}}wt.addListener(e);e(wt);";
+              }
 
               /**
                * --------------------------------------------------------------------------------------------
@@ -787,8 +846,18 @@
                * DT: 11.16.2023 
                */
                if(!$v_xl_tablet_id) {
-                $script[] = " var wine_lgtablet = window.matchMedia('(min-width:".$xl_tablet_id ."px) and (max-width:".$laptop_id."px)'); ";
-                $script[] = " function e(e){if(e.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_lgtablet.addListener(e);e(wine_lgtablet);";
+                 $script[] = "var wlgt=window.matchMedia('(min-width:".$xl_tablet_id ."px) and (max-width:".$laptop_id."px)'); ";
+                 $script[] = "function e(e){if(e.matches){";
+                          if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
+                          if(!is_null($doctrine_all)) {
+                          $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
+                          }
+                $script[] = "}else{";
+                          if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
+                          if(!is_null($doctrine_all)){
+                            $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
+                          }
+                $script[] = "}}wlgt.addListener(e);e(wlgt);";
               }
 
               /**
@@ -804,8 +873,18 @@
                * DT: 11.16.2023 
                */
               if(!$v_laptop_id) {
-                $script[] = " var wine_laptop   = window.matchMedia('(min-width:".$laptop_id."px) and (max-width:".$desktop_id."px)'); ";
-                $script[] = " function n(n){if(n.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_laptop.addListener(n);n(wine_laptop);";
+                $script[] = "var wlap=window.matchMedia('(min-width:".$laptop_id."px) and (max-width:".$desktop_id."px)'); ";
+                $script[] = "function e(e){if(e.matches){";
+                          if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
+                          if(!is_null($doctrine_all)) {
+                          $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
+                          }
+                $script[] = "}else{";
+                          if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
+                          if(!is_null($doctrine_all)){
+                            $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
+                          }
+                $script[] = "}}wlap.addListener(e);e(wlap);";
               }
 
               /**
@@ -821,8 +900,18 @@
                * DT: 11.16.2023 
                */
               if(!$v_desktop_id) {
-                $script[] = " var wine_desktop  = window.matchMedia('(min-width:".$desktop_id."px) and (max-width:". $xl_screen_id."px)'); ";
-                $script[] = " function e(e){if(e.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_desktop.addListener(e);e(wine_desktop);";
+                $script[] = "var wdtp=window.matchMedia('(min-width:".$desktop_id."px) and (max-width:". $xl_screen_id."px)'); ";
+                $script[] = "function e(e){if(e.matches){";
+                          if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
+                          if(!is_null($doctrine_all)) {
+                          $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
+                          }
+                $script[] = "}else{";
+                          if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
+                          if(!is_null($doctrine_all)){
+                            $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
+                          }
+                $script[] = "}}wdtp.addListener(e);e(wdtp);";
               }
 
               /**
@@ -838,8 +927,18 @@
                * DT: 11.16.2023 
                */
               if(!$v_xl_screen_id) {
-                $script[] = " var wine_xl_screen = window.matchMedia('(min-width:".$xl_screen_id."px)'); ";
-                $script[] = " function e(e){if(e.matches){__t_$doctrine_id.style.display='none'}else{__t_$doctrine_id.style.display=''}}wine_xl_screen.addListener(e);e(wine_xl_screen);";
+                $script[] = "var wxls=window.matchMedia('(min-width:".$xl_screen_id."px)'); ";
+                $script[] = "function e(e){if(e.matches){";
+                          if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
+                          if(!is_null($doctrine_all)) {
+                          $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";
+                          }
+                $script[] = "}else{";
+                          if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
+                          if(!is_null($doctrine_all)){
+                            $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";
+                          }
+                $script[] = "}}wxls.addListener(e);e(wxls);";
               }
 
              return $script;
@@ -857,11 +956,6 @@
        return $this->content_object . $this->screen_object;
 
      } 
-
-     public function only() {
-
-
-     }
 
     /**
      * @method doctrine please and try ?  
@@ -893,10 +987,10 @@
               $value[0] ?? '',
           ...$value[1] ?? []
 
-           )
-         );
-        }
-      }
+            )
+          );
+         }
+       }
     }
 
     return (array) $wine;
