@@ -48,7 +48,6 @@
   
     public function __construct(array $wine_layout = [])
     {
-
       parent::__construct(
       $wine_layout
     );

@@ -688,18 +688,18 @@
               $this->screen = [
                 
                 // default is 320 for mobile
-                $media_query['mobile']??    320
+                $media_query['mobile']??    280
                 // default is 540 for mobile landscape
                ,$media_query['ls_mobile']?? 540
-               // default is 768 for tablet
+                // default is 768 for tablet
                ,$media_query['tablet']??    768
-               // default is 992 for tablet landscpae
+                // default is 992 for tablet landscpae
                ,$media_query['ls_tablet']?? 992
-               // default is 1024 for laptop
+                // default is 1024 for laptop
                ,$media_query['laptop']??    1024
-               // default is 1280 for desktop
+                // default is 1280 for desktop
                ,$media_query['desktop']??   1280
-               // default is 1920 for largescreen
+                // default is 1920 for largescreen
                ,$media_query['xl_screen']?? 1920
         
               ];
@@ -910,8 +910,8 @@
                            if($doctrine_idt) { $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";}
                            else if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
                 $script[] = "}else{";
-                          if($doctrine_idt){ $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";}
-                          else if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
+                           if($doctrine_idt){ $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";}
+                           else if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
                 $script[] = "}}wxls.addListener(e);e(wxls);";
               }
 
