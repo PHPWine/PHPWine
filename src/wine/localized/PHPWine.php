@@ -359,11 +359,11 @@ if (file_exists( $require_file)) {
         }
 
     } else {
-        throw new \Exception("\wine class is already exists!");
+        throw new \Exception(wine_failed_to()['wine_class']);
         exit();
     }
 
 } else {
-    throw new \Exception("\Provider Class not found!");
+    throw new \Exception(wine_failed_to()['provider']);
     exit();
 }

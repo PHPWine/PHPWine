@@ -1206,6 +1206,7 @@ class Provider
                         }
                         // sanitized value to string all child re-rendered
                         $__childElementValue = "%s";
+
                         if (
                             $this->wine_reserved_keyword_verifier(
                                 $this->value,
@@ -1216,34 +1217,27 @@ class Provider
                                 $this->wine_reserved_keyword_verifier(
                                     $this->please,
                                     $ca_key[$this->value]
-                                ) &&
-                                is_callable(
-                                    $ca_key[$this->value][$this->please]
-                                )
+                                ) 
                             ) {
-                                if (
-                                    !is_array(
-                                        $ca_key[$this->value][
-                                            $this->please
-                                        ]()[0]
-                                    )
-                                ) {
-                                    $array_child_entities[] = $ca_key[
-                                        $this->value
-                                    ][$this->please]()[0];
-                                } else {
-                                    // I should use array element child ['div', attr => [] ... ]
-                                    $array_child_entities = $this->array_child_element(
-                                        $ca_key[$this->value]
-                                    );
 
-                                    // If the array is 0 length then return string empty!
-                                    return $this->wine_provide_rendered_result_string(
-                                        $array_child_entities
-                                    );
-                                }
+                               if(is_callable($ca_key[$this->value][$this->please])) {
 
-                                // end of  Tthird
+                                throw new \Exception(wine_failed_to()['try_failed']);
+                                exit();
+
+                               }
+                           
+                              // I should use array element child ['div', attr => [] ... ]
+                              $array_child_entities = $this->array_child_element(
+                                $ca_key[$this->value][$this->please]() 
+                              );
+
+                              // If the array is 0 length then return string empty!
+                              return $this->wine_provide_rendered_result_string(
+                                $array_child_entities
+                              );  
+
+                             // end of  Tthird
                             } elseif (is_array($ca_key[$this->value])) {
                                 $array_child_entities[] = sprintf(
                                     $__childElementValue,
@@ -1441,7 +1435,7 @@ class Provider
         // I should use array element child ['div', attr => [] ... ]
         $array_child_entities = [];
 
-        foreach ($child_key_array[$this->please]() as $try_val) {
+        foreach ($child_key_array as $try_val) {
             // Get attribute assign from child array
             $data_elem_attr = [];
 
