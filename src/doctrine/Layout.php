@@ -119,7 +119,7 @@
     protected $bottom_later;
 
     /**
-     * @var Array|Int media set for visibility 
+     * @var String|Array media set for visibility 
      * @property
      * @since: doctrine v1.0
      * @since: wine 2.0
@@ -364,26 +364,47 @@
     
       $wine_mixing = [
 
-        // obviously attribute property from client
-        attributes   => isset($wine_layout[attributes]),
-        
-        // obviously those property from client
-        those        => isset($wine_layout[those]),
+      /**
+       * -----------------------------------------------------------------
+       * @Defined client/Dev: falsy value obviously attribute property from client
+       * ----------------------------------------------------------------- */
+        attributes => isset($wine_layout[attributes]),
+      
+      /**
+       * -----------------------------------------------------------------
+       * @Defined client/Dev: falsy value  obviously those property from client
+       * ----------------------------------------------------------------- */
+        those => isset($wine_layout[those]),
 
-        // obviously rows  property from client
-        xrow         => isset($wine_layout[hooks][xrow]),
+      /**
+       * -----------------------------------------------------------------
+       * @Defined client/Dev: falsy value obviously rows  property from client
+       * ----------------------------------------------------------------- */
+        xrow => isset($wine_layout[hooks][xrow]),
         
-        // obviously rows x12 property from client
-        xrows        => isset($wine_layout[hooks][xrows]),
+      /**
+       * -----------------------------------------------------------------
+       * @Defined client/Dev: falsy value obviously rows x12 property from client
+       * ----------------------------------------------------------------- */
+        xrows => isset($wine_layout[hooks][xrows]),
         
-        // obviously col property from client
-        column       => isset($wine_layout[hooks][column]),
-        
-        // obviously check columns property from client
-        columns      => isset($wine_layout[hooks][columns]),
-        
-        // hook top and bottom later
-        top_later    => isset($wine_layout[top_later]),
+      /**
+       * -----------------------------------------------------------------
+       * @Defined client/Dev: falsy value obviously col property from client
+       * ----------------------------------------------------------------- */
+        column => isset($wine_layout[hooks][column]),
+
+      /**
+       * -----------------------------------------------------------------
+       * @Defined client/Dev: falsy value obviously check columns property from client
+       * ----------------------------------------------------------------- */
+        columns => isset($wine_layout[hooks][columns]),
+
+      /**
+       * -----------------------------------------------------------------
+       * @Defined client/Dev: falsy value hook top and bottom later
+       * ----------------------------------------------------------------- */
+        top_later => isset($wine_layout[top_later]),
         bottom_later => isset($wine_layout[bottom_later]),
       
       ];
@@ -403,6 +424,10 @@
      */
       $this->client = [
 
+      /**
+       * -----------------------------------------------------------------
+       * @Defined client/Dev: Contents doctrine 
+       * ----------------------------------------------------------------- */
       'content' => [
         
         $wine_layout[attributes]?? [],
@@ -418,12 +443,28 @@
         $wine_layout[those]?? false
        ],
 
+      /**
+       * -----------------------------------------------------------------
+       * @Defined client/Dev:  function_hooks later attributes
+       * ----------------------------------------------------------------- */
        'attr'      => $wine_mixing[attributes],
       
+      /**
+       * -----------------------------------------------------------------
+       * @Defined client/Dev:  function_hooks later top
+       * ----------------------------------------------------------------- */ 
        'hook_top'  => $wine_mixing[top_later]?? false,
-      
+
+      /**
+       * -----------------------------------------------------------------
+       * @Defined client/Dev:  function_hooks later bottom
+       * ----------------------------------------------------------------- */ 
        'hook_bot'  => $wine_mixing[bottom_later]?? false,
       
+      /**
+       * -----------------------------------------------------------------
+       * @Defined client/Dev:  falsy value
+       * ----------------------------------------------------------------- */ 
        'condition' => $wine_mixing 
 
     ];
@@ -463,20 +504,53 @@
      */
        $this->visibility = [
 
-          // obviously by default doctrain container visibily to mobie 
-          $config['mobile']??    true
-          // obviously by default doctrain container visibily to landscape mobile
-         ,$config['ls_mobile']?? true
-         // obviously by default doctrain container visibily to tablet
-         ,$config['tablet']??    true
-         // obviously by default doctrain container visibily to landscape teblet
-         ,$config['ls_tablet']?? true 
-         // obviously by default doctrain container visibily to laptop
-         ,$config['laptop']??    true
-         // obviously by default doctrain container visibily to desktop
-         ,$config['desktop']??   true
-         // obviously by default doctrain container visibily to large screen size
-         ,$config['xl_screen']?? true
+        /**
+         * -----------------------------------------------------------------
+         * @Defined screen: obviously by default doctrain container visibily to mobie super small devices
+         * ----------------------------------------------------------------- */
+         $config['sm_mobile']?? true    
+
+        /**
+         * -----------------------------------------------------------------
+         * @Defined screen: obviously by default doctrain container visibily to mobie
+         * ----------------------------------------------------------------- */      
+        ,$config['mobile']?? true
+
+        /**
+         * -----------------------------------------------------------------
+         * @Defined screen: obviously by default doctrain container visibily to landscape mobile
+         * ----------------------------------------------------------------- */  
+        ,$config['ls_mobile']?? true
+
+        /**
+         * -----------------------------------------------------------------
+         * @Defined screen:  obviously by default doctrain container visibily to tablet
+         * ----------------------------------------------------------------- */ 
+        ,$config['tablet']?? true
+
+        /**
+         * -----------------------------------------------------------------
+         * @Defined screen:  obviously by default doctrain container visibily to landscape teblet
+         * ----------------------------------------------------------------- */ 
+        ,$config['ls_tablet']?? true 
+
+        /**
+         * -----------------------------------------------------------------
+         * @Defined screen:  obviously by default doctrain container visibily to laptop
+         * ----------------------------------------------------------------- */ 
+        ,$config['laptop']?? true
+
+        /**
+         * -----------------------------------------------------------------
+         * @Defined screen:  obviously by default doctrain container visibily to desktop
+         * ----------------------------------------------------------------- */ 
+        ,$config['desktop']?? true
+
+        /**
+         * -----------------------------------------------------------------
+         * @Defined screen:  obviously by default doctrain container visibily to large screen size
+         * ----------------------------------------------------------------- */ 
+        ,$config['xl_screen']?? true
         
        ];
 
@@ -537,7 +611,7 @@
                       is_callable($this->client['content'][2][please])
                   ) {
 
-                      return $this-> wine_doctrine_magic_content($this->client['content'][2][please]());
+                   return $this-> wine_doctrine_magic_content($this->client['content'][2][please]());
 
               /**
                * --------------------------------------------------------------------------------------------
@@ -556,7 +630,7 @@
                       is_callable($this->client['content'][3][please])
                   ) {
 
-                      return $this-> wine_doctrine_magic_content($this->client['content'][3][please]());
+                    return $this-> wine_doctrine_magic_content($this->client['content'][3][please]());
 
               /**
                * --------------------------------------------------------------------------------------------
@@ -575,7 +649,7 @@
                       is_callable($this->client['content'][4][please])
                   ) {
 
-                      return $this-> wine_doctrine_magic_content($this->client['content'][4][please]());
+                    return $this-> wine_doctrine_magic_content($this->client['content'][4][please]());
 
               /**
                * --------------------------------------------------------------------------------------------
@@ -596,7 +670,7 @@
 
                   ) {
 
-                      return $this-> wine_doctrine_magic_content($this->client['content'][5][please]());
+                     return $this-> wine_doctrine_magic_content($this->client['content'][5][please]());
 
                   } else {
 
@@ -634,27 +708,51 @@
                                     ...$value[1] ?? []
                                   )
                               );
-                          }
+                            }
 
                        }
                     }
                   }
                }
 
-            // return the elements  
             return $wine;
 
            }
           ]
          ],
+
+        /**
+         * -----------------------------------------------------------------
+         * @Defined attributes:  hook 
+         * Here your attributes goes in you can esily add attribute in client side 
+         * doctrine class dynamically
+         * ----------------------------------------------------------------- */ 
          $this->client['content'][0] /* set prperties */
          ,array(
-         ["top_"
-        .$this->client['content'][6]?? '',
-         [...$this->client['content'][8]?? []]] /* set prperties */
-        ,["bottom_"
-        .$this->client['content'][7]?? '',
-         [...$this->client['content'][9]?? []]] /* set prperties */
+
+        /**
+         * -----------------------------------------------------------------
+         * @Defined hook: top_ hook 
+         * Doctrine remove the "top_" keyword from client and assigned itself
+         * but you have to add this key when you create a call back function
+         * ex. top_followed_by_your_hook_name 
+         * ----------------------------------------------------------------- */  
+         [
+         "top_"
+         .$this->client['content'][6]?? '',[...$this->client['content'][8]?? []]
+         ] /* set prperties */
+
+        /**
+         * -----------------------------------------------------------------
+         * @Defined hook: bottom_ hook 
+         * Doctrine remove the "bottom_" keyword from client and assigned itself
+         * but you have to add this key when you create a call back function
+         * ex. bottom_followed_by_your_hook_name 
+         * ----------------------------------------------------------------- */ 
+        ,[
+        "bottom_"
+        .$this->client['content'][7]?? '',[...$this->client['content'][9]?? []]
+        ] /* set prperties */
         ),
 
       );
@@ -681,26 +779,82 @@
 
       $this->screen_object = wine(script,[
 
-            child => [
+          child => [
 
              please => function() use ($media_query) {
 
               $this->screen = [
+             
+              /**
+               * -----------------------------------------------------------------
+               * @Defined screen: is max 375 for mobile [max-width]
+               * @from 375 screen to 0 media size doctrine implemented...
+               * @media_key : sm_mobile
+               * ----------------------------------------------------------------- */
+               $media_query['sm_mobile']?? 375
+
+              /**
+               * -----------------------------------------------------------------
+               * @Defined screen: is min 375 for mobile [min-width]
+               * @from 375 screen to 540 media size doctrine implemented...
+               * @between 375, 390, 393, 412, 414, 428 and 480 to 540
+               * @media_key : mobile
+               * ----------------------------------------------------------------- */
+               ,$media_query['mobile']?? 375
+        
+              /**
+               * -----------------------------------------------------------------
+               * @Defined screen: is max 540 for mobile [min-width] of 375 & [min-width]
+               * @from 540 screen to 768 media size doctrine implemented...
+               * @between 540, 600, 653, 667, 720, 740 to 768
+               * @media_key : ls_mobile
+               * ----------------------------------------------------------------- */
+               ,$media_query['ls_mobile']?? 540 
                 
-                // default is 320 for mobile
-                $media_query['mobile']??    280
-                // default is 540 for mobile landscape
-               ,$media_query['ls_mobile']?? 540
-                // default is 768 for tablet
-               ,$media_query['tablet']??    768
-                // default is 992 for tablet landscpae
+              /**
+               * -----------------------------------------------------------------
+               * @Defined screen: is max 768 for mobile [min-width] of 540 & [min-width]
+               * @from 768 screen to 768 media size doctrine implemented...
+               * @between 768, 800, 820, 844, 851, 896, 915 to 992
+               * @media_key : tablet
+               * ----------------------------------------------------------------- */
+               ,$media_query['tablet']?? 768
+ 
+              /**
+               * -----------------------------------------------------------------
+               * @Defined screen: is max 992 for mobile [min-width] of 768 & [min-width]
+               * @from 992 screen to 1024 media size doctrine implemented...
+               * @between 992 to 1024
+               * @media_key : ls_tablet
+               * ----------------------------------------------------------------- */  
                ,$media_query['ls_tablet']?? 992
-                // default is 1024 for laptop
-               ,$media_query['laptop']??    1024
-                // default is 1280 for desktop
-               ,$media_query['desktop']??   1280
-                // default is 1920 for largescreen
-               ,$media_query['xl_screen']?? 1920
+              
+              /**
+               * -----------------------------------------------------------------
+               * @Defined screen: is max 1024 for mobile [min-width] of 992 & [min-width]
+               * @from 1024 screen to 1280 media size doctrine implemented...
+               * @between 1024, 1100, 1180 to 12800
+               * @media_key : laptop
+               * ----------------------------------------------------------------- */   
+               ,$media_query['laptop']?? 1024
+                
+              /**
+               * -----------------------------------------------------------------
+               * @Defined screen: is max 1280 for mobile [min-width] of 1024 & [min-width]
+               * @from 12800 screen to 1920 media size doctrine implemented...
+               * @between 12800, 1300, 1386, 1400 to 1920
+               * @media_key : desktop
+               * ----------------------------------------------------------------- */   
+               ,$media_query['desktop']?? 1280
+                
+              /**
+               * -----------------------------------------------------------------
+               * @Defined screen: is only min 1920 for mobile larger like 2k or 4k screen and higher
+               * @from 1920 screen to 4k or higher media size doctrine implemented...
+               * @between 1920, 2k, 4k, or higher
+               * @media_key : xl_screen
+               * ----------------------------------------------------------------- */     
+               ,$media_query['xl_screen']?? 1920   
         
               ];
 
@@ -716,42 +870,68 @@
              * @globalVariable 
              * @visibility GLOBAL VARAIBLE return size modified restricted to be intigers 
              * -------------------------------------------------------------------------------------------- */
-             $GLOBALS['w_mobile']    = $mobile_id    = (int) $this->screen[0];
-             $GLOBALS['w_ls_mobile'] = $xl_mobile_id = (int) $this->screen[1];
-             $GLOBALS['w_tablet']    = $tablet_id    = (int) $this->screen[2];
-             $GLOBALS['w_ls_tablet'] = $xl_tablet_id = (int) $this->screen[3];
-             $GLOBALS['w_laptop']    = $laptop_id    = (int) $this->screen[4];
-             $GLOBALS['w_desktop']   = $desktop_id   = (int) $this->screen[5];
-             $GLOBALS['w_xl_screen'] = $xl_screen_id = (int) $this->screen[6];
+             $GLOBALS['w_sm_mobile'] = $sm_mobile_id = (int) $this->screen[0];
+             $GLOBALS['w_mobile']    = $mobile_id    = (int) $this->screen[1];
+             $GLOBALS['w_ls_mobile'] = $xl_mobile_id = (int) $this->screen[2];
+             $GLOBALS['w_tablet']    = $tablet_id    = (int) $this->screen[3];
+             $GLOBALS['w_ls_tablet'] = $xl_tablet_id = (int) $this->screen[4];
+             $GLOBALS['w_laptop']    = $laptop_id    = (int) $this->screen[5];
+             $GLOBALS['w_desktop']   = $desktop_id   = (int) $this->screen[6];
+             $GLOBALS['w_xl_screen'] = $xl_screen_id = (int) $this->screen[7];
 
            /**
              * --------------------------------------------------------------------------------------------
              * @globalVariable 
              * @visibility GLOBAL VARAIBLE visibility boolean 
              * -------------------------------------------------------------------------------------------- */
-             $GLOBALS['w_v_mobile']    = $v_mobile_id    = (bool) $this->visibility[0];
-             $GLOBALS['w_v_ls_mobile'] = $v_xl_mobile_id = (bool) $this->visibility[1];
-             $GLOBALS['w_v_tablet']    = $v_tablet_id    = (bool) $this->visibility[2];
-             $GLOBALS['w_v_ls_tablet'] = $v_xl_tablet_id = (bool) $this->visibility[3];
-             $GLOBALS['w_v_laptop']    = $v_laptop_id    = (bool) $this->visibility[4];
-             $GLOBALS['w_v_desktop']   = $v_desktop_id   = (bool) $this->visibility[5];
-             $GLOBALS['w_v_xl_screen'] = $v_xl_screen_id = (bool) $this->visibility[6];
+             $GLOBALS['w_v_sm_mobile'] = $v_sm_mobile_id = (bool) $this->visibility[0];
+             $GLOBALS['w_v_mobile']    = $v_mobile_id    = (bool) $this->visibility[1];
+             $GLOBALS['w_v_ls_mobile'] = $v_xl_mobile_id = (bool) $this->visibility[2];
+             $GLOBALS['w_v_tablet']    = $v_tablet_id    = (bool) $this->visibility[3];
+             $GLOBALS['w_v_ls_tablet'] = $v_xl_tablet_id = (bool) $this->visibility[4];
+             $GLOBALS['w_v_laptop']    = $v_laptop_id    = (bool) $this->visibility[5];
+             $GLOBALS['w_v_desktop']   = $v_desktop_id   = (bool) $this->visibility[6];
+             $GLOBALS['w_v_xl_screen'] = $v_xl_screen_id = (bool) $this->visibility[7];
               
-             // invoke visibility in front end
+             // enable visibility in front end
              if(
-               !$v_mobile_id    || !$v_xl_mobile_id || !$v_tablet_id  ||
-               !$v_xl_tablet_id || !$v_laptop_id    || !$v_desktop_id ||
-               !$v_xl_screen_id  
-               ) { 
+               !$v_sm_mobile_id || !$v_mobile_id || !$v_xl_mobile_id || !$v_tablet_id    ||
+               !$v_xl_tablet_id || !$v_laptop_id || !$v_desktop_id   || !$v_xl_screen_id  
+              ) { 
+
                 $doctrine_idot   = str_replace(".","",$doctrine_idt);
                 $doctrine_idhush = str_replace("#","",$doctrine_idot);  
                 $doctrine_all    = str_replace("-","_",$doctrine_idhush); 
+                
                 if($doctrine_idt) { 
                   $script[] = "var those_$doctrine_all=document.querySelectorAll('$doctrine_idt');"; } 
                  else if(!is_null($doctrine_id)) {
                   $script[] = "var __t_$doctrine_id=document.getElementById('$doctrine_id');"; 
                 }
              }
+
+              /**
+               * --------------------------------------------------------------------------------------------
+               * @visibility mobile 
+               * @main media size screen max 375 to 0 screen such watch and super small devices 
+               * -------------------------------------------------------------------------------------------- 
+               * This will run when you set false which means to hide in mobile screen
+               * 
+               * @Defined : mobile screen
+               * @since: v1.0 doctrine
+               * @since: v2.0 wine
+               * DT: 11.16.2023 
+               */
+              if(!$v_sm_mobile_id) {
+                $script[] = "var wm=window.matchMedia('(max-width:".$sm_mobile_id."px)');";
+                $script[] = "function e(e){ if(e.matches){";
+                          if($doctrine_idt) { $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";}
+                          else if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='none';"; }
+                $script[] = "}else{";
+                          if($doctrine_idt){ $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";}
+                          else if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
+                $script[] = "}}wm.addListener(e);e(wm);";
+              }
               
               /**
                * --------------------------------------------------------------------------------------------
@@ -794,8 +974,8 @@
                             if($doctrine_idt) { $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='none';});";}
                             else if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
                  $script[] = "}else{";
-                             if($doctrine_idt) { $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";}
-                             else if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
+                            if($doctrine_idt) { $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";}
+                            else if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
                  $script[] = "}}wmlg.addListener(e);e(wmlg);";
             
                 }
@@ -865,7 +1045,7 @@
                           else if(!is_null($doctrine_id))  { $script[] = "__t_$doctrine_id.style.display='none';"; }
                 $script[] = "}else{";
                           if($doctrine_idt){ $script[] = "those_$doctrine_all.forEach(function(v,k){v.style.display='';});";}
-                         else if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
+                          else if(!is_null($doctrine_id)) { $script[] = "__t_$doctrine_id.style.display='';"; }
                 $script[] = "}}wlap.addListener(e);e(wlap);";
               }
 
@@ -927,7 +1107,7 @@
 
      public function layout() {
      
-       return $this->content_object . $this->screen_object;
+      return $this->content_object . $this->screen_object;
 
      } 
 
@@ -951,8 +1131,9 @@
                 $value[0] ?? '',
                 $value[1] ?? false,
              ...$value[2]?? []
-           )
-         );
+            )
+          );
+
         } else {
          $wine[] = $this->optimized_html(
             __,
@@ -960,12 +1141,11 @@
             $this->wine_callable_hook(
               $value[0] ?? '',
           ...$value[1] ?? []
-
             )
           );
          }
        }
-    }
+      }
 
     return (array) $wine;
 
