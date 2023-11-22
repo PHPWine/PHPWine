@@ -66,7 +66,7 @@ if (file_exists( $require_file)) {
             $wine = new class extends \PHPWineOptimizedHtml\Provider {
                 
                 public $wine;
-                public const LP = ["dp", "init", "cbv", "cbm","attr","wpd"];
+                public const LP = ["dp", "init", "cbv", "cbm","attr","wpd","wsf"];
                 /**
                  *  Init local provider wine
                  *  DT: 06.11.2023
@@ -89,17 +89,17 @@ if (file_exists( $require_file)) {
                     * DT: 11.11.2023 
                     */
                     array_push(
+    
+                      // Init array error handler
+                      $this->errors,
                         
-                     // Init array error handler
-                     $this->errors,
-                        
-                    // passing message 
-                    'warning anonymouse attemp inject!',
-
-                    'scan enable set $disable_html = true',
+                      // passing message 
+                      wine_handler_response()['e_warning'],
                     
-                    'new \PHPWineOptimizedHtml\OptimizedHtml(true)'
-
+                      wine_handler_response()['e_scan'],
+                        
+                      wine_handler_response()['e_wine']
+                     
                     );
 
                     parent::__construct(
@@ -245,6 +245,115 @@ if (file_exists( $require_file)) {
                     }
                 }
 
+                /**
+                 * @method
+                 * Defined : wine_sanitized valid content
+                 * @since: v2.0
+                 * DT: 11.21.2023 
+                 **/
+                public function wine_cleaned_sanitized(string $to_clean ) {
+                    
+                    
+                /**
+                 * --------------------------------------------------------------------------------------------
+                 * @var Array
+                 * @property
+                 * -------------------------------------------------------------------------------------------- 
+                 * filter and removed special char invalid for html  
+                 * 
+                 * @Defined : filter lists
+                 * @since: v1.0 doctrine
+                 * @since: v2.0 wine
+                 * DT: 11.22.2023 
+                 */
+                    $find_lists = array(
+
+                        "&quot;",
+                        "&lt;/",
+                        "&lt;",
+                        "&gt;",
+                        "/",
+                        "/&gt;",
+                        "/&gt;",
+                        "&lt;",
+                        "&lt;/",
+                        "&lt;/ ",
+                        "&lt; /",
+                        "&lt; / "
+
+                     );
+                    
+                    /**
+                     * -----------------------------------------------------------------
+                     * @Defined : get list of html entities collections
+                     * ----------------------------------------------------------------- */
+                     $valid_lists = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES | ENT_HTML5);
+
+                    /**
+                     * -----------------------------------------------------------------
+                     * @Defined : merger collection and filter lists for sure!
+                     * ----------------------------------------------------------------- */
+                     $filtered    = array_merge($valid_lists,$find_lists);
+                    
+                    /**
+                     * -----------------------------------------------------------------
+                     * @Defined : convert those entries into entitites
+                     * ----------------------------------------------------------------- */
+                     $converted   = htmlentities($to_clean);
+
+                    /**
+                     * -----------------------------------------------------------------
+                     * @Defined : check if there any of those are being present then 
+                     * return error message !
+                     * ----------------------------------------------------------------- */
+                     if(in_array($converted, $filtered)) {
+                  
+                      throw new \Exception(wine_failed_to()['inValid']);
+                      exit;
+                   
+                    }
+
+                    /**
+                     * -----------------------------------------------------------------
+                     * @Defined : make sure those entities are string
+                     * ----------------------------------------------------------------- */
+                    if(!is_string($converted)) {
+                  
+                      $valid_string = "%s";
+                      $to_clean = sprintf($valid_string, $converted);
+  
+                     /**
+                      * -----------------------------------------------------------------
+                      * @Defined : sanitized varchar list into valid entities
+                      * ----------------------------------------------------------------- */
+                      $is_valid = str_ireplace($filtered,'',$to_clean);
+
+                      $wcleared = (string) $is_valid;
+
+                      return $wcleared;
+                  
+                    } else {
+
+                     /**
+                      * -----------------------------------------------------------------
+                      * @Defined : If everything is expected then return valid content
+                      * ----------------------------------------------------------------- */
+                       $is_valid = str_ireplace($filtered,'',$converted);
+
+                       $wcleared = (string) $is_valid;
+
+                       return $wcleared;
+
+                    }
+
+                }
+
+                /**
+                 * @method
+                 * Defined : wine local provder hook functions
+                 * @since: v2.0
+                 * DT: 11.21.2023 
+                 **/
                 public function wine_local_provider(
                     string|callable $func_provider = null,
                     mixed ...$args 
@@ -319,6 +428,15 @@ if (file_exists( $require_file)) {
                 );
             }
 
+            /**
+             * Defined : local provider function hook winer safe value
+             * @since: v1.3.7
+             * DT: 11.08.2023 *
+             */  
+            $wsf = $wine->wine_cleaned_sanitized(
+                $__w[$wine::LP[6]][0] ?? ""
+            );
+
             // provider
             $pdr = $wine->get_section_element_from_provider();
 
@@ -352,7 +470,8 @@ if (file_exists( $require_file)) {
             $wine::LP[2] => $cbv ?? null,
             $wine::LP[3] => $cbm ?? null,
             $wine::LP[4] => $cba ?? null,
-            $wine::LP[5] => $cpd ?? null
+            $wine::LP[5] => $cpd ?? null,
+            $wine::LP[6] => $wsf ?? null
             
           ];
 

@@ -158,7 +158,6 @@
      * DT: 11.16.2023 **/
     public $content_object;
 
-
     /**
      * @var Array config
      * @property
@@ -814,7 +813,7 @@
               /**
                * -----------------------------------------------------------------
                * @Defined screen: is max 768 for mobile [min-width] of 540 & [min-width]
-               * @from 768 screen to 768 media size doctrine implemented...
+               * @from 768 screen to 992 media size doctrine implemented...
                * @between 768, 800, 820, 844, 851, 896, 915 to 992
                * @media_key : tablet
                * ----------------------------------------------------------------- */

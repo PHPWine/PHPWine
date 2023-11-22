@@ -20,7 +20,8 @@
       'try_failed' => "Cannot use please or 'try' accept only string!",
       'wine_class' => "\wine class is already exists!",
       'provider' => 'Provider Class not found!',
-      'index' => '\index file not found!'
+      'index' => '\index file not found!',
+      'inValid' => 'This is not valid content special character has found!'
     ];    
 
  }

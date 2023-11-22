@@ -54,7 +54,7 @@ use  \PHPWineOptimizedHtml\Init;
   $init = new Init([
 
     'layouts',
-    'localized',
+    'hooks',
     'filters',
     'engineI',
     'engineII' 

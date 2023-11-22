@@ -951,7 +951,7 @@ class Provider
         // Verifying tag element required to assign!
         $element = (string) strtolower($tag);
         // Sanitizes content from the method
-        $value = $this->optimized_content($content, $disable_html);
+        $value =  $this->optimized_content($content, $disable_html);
         // Sanitized array data attr from the method
         $attr_element = $this->set_attributes_html($attr);
         // secured html
