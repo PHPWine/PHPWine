@@ -848,6 +848,7 @@ class Provider
 
     ) {
 
+
         if (count($hooks) > 0) 
         {
         

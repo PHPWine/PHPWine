@@ -251,8 +251,7 @@ if (file_exists( $require_file)) {
                  * @since: v2.0
                  * DT: 11.21.2023 
                  **/
-                public function wine_cleaned_sanitized(string $to_clean ) {
-                    
+                public function wine_cleaned_sanitized(string $to_clean ) : mixed {
                     
                 /**
                  * --------------------------------------------------------------------------------------------
@@ -282,19 +281,7 @@ if (file_exists( $require_file)) {
                         "&lt; / "
 
                      );
-                    
-                    /**
-                     * -----------------------------------------------------------------
-                     * @Defined : get list of html entities collections
-                     * ----------------------------------------------------------------- */
-                     $valid_lists = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES | ENT_HTML5);
-
-                    /**
-                     * -----------------------------------------------------------------
-                     * @Defined : merger collection and filter lists for sure!
-                     * ----------------------------------------------------------------- */
-                     $filtered    = array_merge($valid_lists,$find_lists);
-                    
+                
                     /**
                      * -----------------------------------------------------------------
                      * @Defined : convert those entries into entitites
@@ -306,45 +293,44 @@ if (file_exists( $require_file)) {
                      * @Defined : check if there any of those are being present then 
                      * return error message !
                      * ----------------------------------------------------------------- */
-                     if(in_array($converted, $filtered)) {
+                     foreach ($find_lists as $list ) {
+
+                      if(str_contains($list, $converted)) {
                   
-                      throw new \Exception(wine_failed_to()['inValid']);
-                      exit;
-                   
+                         throw new \Exception(wine_failed_to()['inValid']);
+                         exit;
+                         
+                      }
+                        
                     }
 
-                    /**
-                     * -----------------------------------------------------------------
-                     * @Defined : make sure those entities are string
-                     * ----------------------------------------------------------------- */
-                    if(!is_string($converted)) {
-                  
-                      $valid_string = "%s";
-                      $to_clean = sprintf($valid_string, $converted);
-  
                      /**
                       * -----------------------------------------------------------------
                       * @Defined : sanitized varchar list into valid entities
                       * ----------------------------------------------------------------- */
-                      $is_valid = str_ireplace($filtered,'',$to_clean);
-
-                      $wcleared = (string) $is_valid;
-
-                      return $wcleared;
-                  
-                    } else {
-
+                      $__content_type = "%s"; $entity_decode = sprintf($__content_type, $converted);
                      /**
                       * -----------------------------------------------------------------
-                      * @Defined : If everything is expected then return valid content
+                      * @Defined : Prevented output
                       * ----------------------------------------------------------------- */
-                       $is_valid = str_ireplace($filtered,'',$converted);
+                      $wcleared = str_ireplace(  $find_lists,'',$converted);
+                     /**
+                      * -----------------------------------------------------------------
+                      * @Defined : falsy status there is malicious
+                      * ----------------------------------------------------------------- */
+                      $is_valid = str_contains(str_ireplace(  $find_lists,'true',$converted),'true');
+                      $wcleared = $wcleared; 
 
-                       $wcleared = (string) $is_valid;
+                      return [
+                       // get Origin result 
+                       'origin'  => $entity_decode,
+  
+                       // get prevent result
+                       'prevent' => $wcleared,
 
-                       return $wcleared;
-
-                    }
+                       // get status result                       
+                       'status'  => (bool) $is_valid,
+                      ];
 
                 }
 
