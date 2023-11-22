@@ -319,7 +319,6 @@ if (file_exists( $require_file)) {
                       * @Defined : falsy status there is malicious
                       * ----------------------------------------------------------------- */
                       $is_valid = str_contains(str_ireplace(  $find_lists,'true',$converted),'true');
-                      $wcleared = $wcleared; 
 
                       return [
                        // get Origin result 
