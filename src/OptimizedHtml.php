@@ -61,20 +61,28 @@
    * @since: v2.0 wine
    * DT: 11.10.2023 
    */
-   $require = dirname( __DIR__ ) .'/src/index.php';
 
-   if(file_exists($require)) {
-
-    require_once ($require);
-
-   } else {
+    $root_file  = dirname(__DIR__);
     
-    throw new \Exception(wine_failed_to()['index']);
-    exit();
+    $wine_files = ['/src/index.php','/../../hooks.php'];
 
+     foreach($wine_files as $file) {
+
+      $require = $root_file . $file;
+      $hook    = dirname($root_file) . $file;
+
+      /**
+      * -----------------------------------------------------------------
+      * @Defined : require file hooks and init
+      * ----------------------------------------------------------------- */      
+      if(file_exists($require)) { require_once($require); } 
+       elseif(file_exists($hook)) 
+       {
+        require_once($hook);
+      }
+ 
    }
 
-  
  /**
    * --------------------------------------------------------------------------------------------
    * @var Array 

@@ -571,3 +571,32 @@ if(!defined('those'))
      define('value',$value); 
 
     }    
+
+
+
+/**
+ * --------------------------------------------------------------------------------------------
+ * @var constant|String 
+ * @property
+ * -------------------------------------------------------------------------------------------- */
+
+    $php =  ".PHP";
+
+    /**
+    * This is reserved keyword for doctrine class value will use to key for element tag
+    * The main use is for localized the function in array.  
+    * 
+    * 
+    * @Defined : Constant Doctrine Class key value
+    * @since: v1.0 doctrine
+    * @since: v2.0 wine
+    * DT: 11.10.2023 
+    */
+    if(!defined('VALID_PHP')) 
+    { 
+    
+     define('VALID_PHP',$php); 
+
+    }    
+
+    
