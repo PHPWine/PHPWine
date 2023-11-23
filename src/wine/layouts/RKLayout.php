@@ -3713,7 +3713,7 @@ $origin = 'origin';
 if(!defined($origin)) 
 { 
   
-  define('PREVENT_GET_FAILED',$origin); 
+  define('WINE_ORIGIN',$origin); 
 
 }
 
@@ -3738,7 +3738,7 @@ $prevent = 'prevent';
 if(!defined($prevent)) 
 { 
   
-  define('WINE_CLEARED',$prevent); 
+  define('WINE_PREVENT',$prevent); 
 
 }
 
@@ -3763,6 +3763,31 @@ $status = 'status';
 if(!defined($status)) 
 { 
   
-  define('WINE_BOOL',$status); 
+  define('WINE_STATUS',$status); 
+
+}
+
+/**
+ * --------------------------------------------------------------------------------------------
+ * @var constant|String 
+ * @property
+ * -------------------------------------------------------------------------------------------- */
+
+$error = 'error';
+
+/**
+ * This is reserved keyword for doctrine class attribute will use to key for element tag
+ * The noscript use is for localized the function in array.  
+ * 
+ * 
+ * @Defined : Constant Doctrine Class key Registered wbr
+ * @since: v1.0 doctrine
+ * @since: v2.0 wine
+ * DT: 11.10.2023 
+ */
+if(!defined($error)) 
+{ 
+  
+  define('WINE_ERROR',$error); 
 
 }

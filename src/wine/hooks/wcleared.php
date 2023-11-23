@@ -23,7 +23,7 @@ function wcleared(
  
   string $clean_up_before_wine 
  
- ) : mixed {
+ ) : array|string {
     /**
      *  Sanitized only Valid wine content
      *  DT: 11.21.2023

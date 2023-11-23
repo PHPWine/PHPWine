@@ -251,7 +251,7 @@ if (file_exists( $require_file)) {
                  * @since: v2.0
                  * DT: 11.21.2023 
                  **/
-                public function wine_cleaned_sanitized(string $to_clean ) : mixed {
+                public function wine_cleaned_sanitized(string $to_clean = null ) : array|string {
                     
                 /**
                  * --------------------------------------------------------------------------------------------
@@ -267,8 +267,7 @@ if (file_exists( $require_file)) {
                  */
                     $find_lists = array(
 
-                       "&quot;"
-                      ,"&lt;/"
+                       "&lt;/"
                       ,"&lt;"
                       ,"&gt;"
                       ,"/"
@@ -286,23 +285,7 @@ if (file_exists( $require_file)) {
                      * -----------------------------------------------------------------
                      * @Defined : convert those entries into entitites
                      * ----------------------------------------------------------------- */
-                     $converted   = htmlentities($to_clean);
-
-                    /**
-                     * -----------------------------------------------------------------
-                     * @Defined : check if there any of those are being present then 
-                     * return error message !
-                     * ----------------------------------------------------------------- */
-                     foreach ($find_lists as $list ) {
-
-                      if(str_contains($list, $converted)) {
-                  
-                         throw new \Exception(wine_failed_to()['in_valid']);
-                         exit;
-                         
-                      }
-                        
-                    }
+                     $converted = htmlentities($to_clean);
 
                      /**
                       * -----------------------------------------------------------------
@@ -320,16 +303,34 @@ if (file_exists( $require_file)) {
                       * ----------------------------------------------------------------- */
                       $is_valid = str_contains(str_ireplace($find_lists,'true',$converted),'true');
 
-                      return [
-                       // get Origin result 
-                       PREVENT_GET_FAILED  => $entity_decode,
-  
-                       // get prevent result
-                       WINE_CLEARED => $wcleared,
+                    /**
+                     * -----------------------------------------------------------------
+                     * @Defined : check if there any of those are being present then 
+                     * return error message !
+                     * ----------------------------------------------------------------- */              
+                    if($is_valid) {
 
-                       // get status result                       
-                       WINE_BOOL  => (bool) $is_valid,
+                      return [
+                         // get Origin result 
+                         WINE_ORIGIN  => $entity_decode,
+    
+                         // get prevent result
+                         WINE_PREVENT => $wcleared,
+    
+                         // get status result                       
+                         WINE_STATUS  => (bool) $is_valid,
+
+                         // get status result                       
+                         WINE_ERROR  => wine_failed_to()['in_valid']
+
                       ];
+                      
+            
+                    } else {
+
+                       return (string) $wcleared;
+
+                    }     
 
                 }
 
