@@ -44,7 +44,7 @@
  *
  */
 
- Class Doctrine extends \PHPWineOptimizedHtml\Doctrine\Layout  {
+ Class Doctrine extends \PHPWineOptimizedHtml\Layout  {
   
     public function __construct(array $wine_layout = [])
     {

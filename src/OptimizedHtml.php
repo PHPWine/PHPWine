@@ -66,7 +66,7 @@
     
     $wine_files = ['/src/index.php','/../../hooks.php'];
 
-     foreach($wine_files as $file) {
+    foreach($wine_files as $file) {
 
       $require = $root_file . $file;
       $hook    = dirname($root_file) . $file;
@@ -132,5 +132,6 @@
    );
 
   }
+  
 
  }
