@@ -5,8 +5,8 @@ NOTE: Class cannot be extended for security reasons. All properties and methods 
 
 ```PHP
  /* Installation via composer */ 
- /* required version *v1.4.0 */
- composer require phpwine/optimizedhtml v1.4.0
+ /* required version *v2.0 */
+ composer require phpwine/optimizedhtml v2.0
 ```
 ```PHP
  # Installation 
