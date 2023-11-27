@@ -2,18 +2,14 @@
 
 
 # Optimized PHPHtml
-Optimized HTML this will use for view section can also be used within your business logic. 
-
-NOTE: Class cannot be extended for security reasons. All properties and methods are private.
+HTML Frontend Framework Design for backend OptimizedHTML PHPWine written in PHP (Hypertext Preprocessor) 
 
 ```PHP
 /* Installation via composer */ 
 /* required version *v2.0 */
 composer require phpwine/optimizedhtml v2.0
 ```
-
 <br /> New :
-<br /> 
 ```PHP
 // New in v2.0 soon Hooks 
 echo wine(h1,'Hello World', [ id => 'wine_id'], $hooks = [
@@ -36,10 +32,10 @@ $this->wine::child => [
   ]
  ]);
 ```
-``` @since v1.3.9 later(); no object require, call back function hook ```
-<br />
-<hr />
 
+Features :
+<br /> ``` @since v1.3.9 later(); no object require, call back function hook ```
+<br />
 Logs :
 <br /> ``` v1.3.8 [FIXED] : Class name attribute space child array | 08.11.2023 ```
 
