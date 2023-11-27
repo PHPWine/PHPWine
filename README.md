@@ -9,6 +9,10 @@ HTML Frontend Framework Design for backend OptimizedHTML PHPWine written in PHP 
 /* required version *v2.0 */
 composer require phpwine/optimizedhtml v2.0
 ```
+<br /> Collections 
+
+<a href="https://github.com/PHPWine/WineWPMenuWalker"> WP WineWPMenuWalker (Custom Menu w/Hooks)</a>
+
 <br /> New :
 ```PHP
 // New in v2.0 soon Hooks 
