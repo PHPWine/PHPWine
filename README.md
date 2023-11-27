@@ -9,9 +9,8 @@ HTML Frontend Framework Design for backend OptimizedHTML PHPWine written in PHP 
 /* required version *v2.0 */
 composer require phpwine/optimizedhtml v2.0
 ```
-<a href="https://phpwine.github.io/documents/#w_quickstart">Quick Start > </a>
-<br />
-<br /> Collections : 
+Collections : 
+<br /> <a href="https://phpwine.github.io/documents/#w_quickstart">Quick Start </a>
 <br /> <a href="https://github.com/PHPWine/WineWPMenuWalker"> WP WineWPMenuWalker (Custom Menu w/Hooks)</a>
 
 <br /> New :
