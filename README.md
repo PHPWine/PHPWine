@@ -11,45 +11,6 @@ NOTE: Class cannot be extended for security reasons. All properties and methods 
  /* required version *v2.0 */
  composer require phpwine/optimizedhtml v2.0
 ```
-```PHP
- # Installation 
-  add_action('init', function() {
-     __initActions(' classes ', true ); /* set true second argument if the file is class */
- });
-
-# Structure
- |- init
-     |- classes
-         |- OptimizedHtml.php  /* If class not found rename to: AOptimizedHtml.php | alphabetical higher is "A" */ 
-         |- init-custom-action.php /* Here put all HTML */
-            ...
-
-```
- <br /> For more information installation link here : https://github.com/WPExtension/WPSPATheme
- <br /> <a href="https://github.com/WPExtension/WPSPATheme"> Installation guide > </a>
-
-
-```PHP
- // Procedures:
- // 1) Build your doctrine.
-    /* Here you will create a reusable element such as a parent, a parent with a child, it base on layout structure etc...  */
-    /* Might be each project or page have own doctrine it depends on consistency of the layout structure  */
-    Class YourDoctrineName { ... } 
- 
- // 2) Build your main App class 
-   /* This is the complete structure of the main component like header, hero section etc... Extend your doctrine so you can supply to your component  */
-   Class YourMainApp extends YourDoctrineName { ... }  
-   // Class Header extends YourDoctrineName { ... } 
-   // Class Hero extends YourDoctrineName { ... }
-   ...
- // 3) Build your component      
-   /* Here is your component to complete your HTML sections */
-   YourComponents Extends YourMainApp { ... } 
-   // Branding Extend Header { ... }
-   // Menu Extend Header { ... }
-   ...
-
-```
 
 ```PHP
  // What's New in v1.2.2
