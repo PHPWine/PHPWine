@@ -1,3 +1,8 @@
+<img src="https://img.shields.io/badge/license-MIT-blue">  [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/PHPWine/PHPWine/graphs/commit-activity) ![GitHub Release Date](https://img.shields.io/github/release-date/PHPWine/PHPWine) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/PHPWine/PHPWine) ![GitHub repo size](https://img.shields.io/github/repo-size/PHPWine/PHPWine) [![GitHub Release](https://img.shields.io/github/release/PHPWine/PHPWine.svg?style=flat)](https://github.com/PHPWine/PHPWine/releases) ![Packagist Version (custom server)](https://img.shields.io/packagist/v/phpwine/optimizedhtml?color=orange) [![Issues](https://img.shields.io/github/issues-raw/PHPWine/PHPWine.svg?maxAge=25000)](https://github.com/PHPWine/PHPWine/issues) 
+
+![Maintainer](https://img.shields.io/badge/maintainer-LeinnerZednanref-green) ![GitHub last commit](https://img.shields.io/github/last-commit/PHPWine/PHPWine) [![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://github.com/PHPWine/PHPWine/issues/new) 
+
+
 # Optimized PHPHtml
 Optimized HTML this will use for view section can also be used within your business logic. 
 
