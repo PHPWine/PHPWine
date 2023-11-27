@@ -7,71 +7,29 @@ Optimized HTML this will use for view section can also be used within your busin
 NOTE: Class cannot be extended for security reasons. All properties and methods are private.
 
 ```PHP
- /* Installation via composer */ 
- /* required version *v2.0 */
- composer require phpwine/optimizedhtml v2.0
+/* Installation via composer */ 
+/* required version *v2.0 */
+composer require phpwine/optimizedhtml v2.0
 ```
 
-```PHP
- // What's New in v1.2.2
- // * Disable HTML into string 
- $wine = OptimizedHtml(true);
- ... 
-```
-```HTML
- !-- Result @since v1.2.2 --> 
- <div> Hello World </div>
-```
-
-```PHP
-// Procedural extends app or component | coffee no sugar
-print wine(__, [ 
-        
-  child => [ 
-  
-  ['div', value => [ please => function() {
-
-    $new = new class () extends \Namespace\Classname {
-
-      public function my_value_in_array() {
-        return "Coffee";
-      }
-
-      public function my_filter() {
-        return "No sugar!";
-      }
-
-    };
-
-    return [
-      
-      ['div', value => [value($new,'my_value_in_array')]],
-      ['div', value => [magic($new,'my_filter',value($new,'my_value_in_array'))]]
-  
-    ];
-
-  }]]
- 
-]]);
-```
 <br /> New :
 <br /> 
 ```PHP
- // New in v2.0 soon Hooks 
-  echo wine(h1,'Hello World', [ id => 'wine_id'], $hooks = [
-   ['top_your_hook_name_add_html_top',[ $one = 2, $two = 4] ],
-   ['bottom_your_hook_name_add_html_bottom',[ $one = 'A', $two = 'B']]
-  ]  
+// New in v2.0 soon Hooks 
+echo wine(h1,'Hello World', [ id => 'wine_id'], $hooks = [
+  ['top_your_hook_name_add_html_top',[ $one = 2, $two = 4] ],
+  ['bottom_your_hook_name_add_html_bottom',[ $one = 'A', $two = 'B']]
+ ]  
 );
 
 // You can now | Using key "string" top_ OR bottom_ followed by your hook name ... 
 // ex. [  bottom_your_hook_name_add_html_bottom, [ $argu_1, .... ] ]
- $hooks = [
-   ['bottom_your_hook_name_add_html_bottom',[ $one = 'A', $two = 'B']] /* this will display in the bottom element html */
-  ]  
+$hooks = [
+ ['bottom_your_hook_name_add_html_bottom',[ $one = 'A', $two = 'B']] /* this will display in the bottom element html */
+]  
 ```
 ``` PHP
-@since v1.4.0OptimizedHtml
+@since v1.4.0 OptimizedHtml
 $this->wine::child => [
 /*  ['div', $this->wine::value=>[ $this->wine->value((new Branding),'component_top_logo_header')]], this still works anyway */
     ['div', $this->wine::value=>[ $this->wine->value(MenuList::class,'component_top_right_menu', $this->links ) ]]
