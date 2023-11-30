@@ -48,6 +48,7 @@ interface AccordionInterface
    * This method is a hook to execute the new instance of accordion 
    * 
    * $wine = new WineAccordion([
+   *  prefix => 'wine_',
    *  icon => [
    *    'position' => 'right', // right or Left you can also top and bottom via css flex : direction
    *    'default'  => '+',     // default 
