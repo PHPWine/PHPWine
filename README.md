@@ -1,123 +1,45 @@
-# Optimized PHPHtml
-Optimized HTML this will use for view section can also be used within your business logic. 
+<img src="https://img.shields.io/badge/license-MIT-blue">  [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/PHPWine/PHPWine/graphs/commit-activity) [![GitHub Release](https://img.shields.io/github/release/PHPWine/PHPWine.svg?style=flat)](https://github.com/PHPWine/PHPWine/releases) ![Packagist Version (custom server)](https://img.shields.io/packagist/v/phpwine/optimizedhtml?color=orange) ![GitHub Release Date](https://img.shields.io/github/release-date/PHPWine/PHPWine) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/PHPWine/PHPWine) ![GitHub repo size](https://img.shields.io/github/repo-size/PHPWine/PHPWine) ![Maintainer](https://img.shields.io/badge/maintainer-nielsoffice-green) ![GitHub last commit](https://img.shields.io/github/last-commit/PHPWine/PHPWine) [![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://github.com/PHPWine/PHPWine/issues/new) [![Issues](https://img.shields.io/github/issues-raw/PHPWine/PHPWine.svg?maxAge=25000)](https://github.com/PHPWine/PHPWine/issues)
 
-NOTE: Class cannot be extended for security reasons. All properties and methods are private.
 
-```PHP
- /* Installation via composer */ 
- /* required version *v1.4.0 */
- composer require phpwine/optimizedhtml v1.4.0
-```
-```PHP
- # Installation 
-  add_action('init', function() {
-     __initActions(' classes ', true ); /* set true second argument if the file is class */
- });
-
-# Structure
- |- init
-     |- classes
-         |- OptimizedHtml.php  /* If class not found rename to: AOptimizedHtml.php | alphabetical higher is "A" */ 
-         |- init-custom-action.php /* Here put all HTML */
-            ...
-
-```
- <br /> For more information installation link here : https://github.com/WPExtension/WPSPATheme
- <br /> <a href="https://github.com/WPExtension/WPSPATheme"> Installation guide > </a>
-
+# PHPWine (OptimizedHtml)
+HTML Frontend Framework Design for backend OptimizedHTML PHPWine written in PHP (Hypertext Preprocessor) 
 
 ```PHP
- // Procedures:
- // 1) Build your doctrine.
-    /* Here you will create a reusable element such as a parent, a parent with a child, it base on layout structure etc...  */
-    /* Might be each project or page have own doctrine it depends on consistency of the layout structure  */
-    Class YourDoctrineName { ... } 
- 
- // 2) Build your main App class 
-   /* This is the complete structure of the main component like header, hero section etc... Extend your doctrine so you can supply to your component  */
-   Class YourMainApp extends YourDoctrineName { ... }  
-   // Class Header extends YourDoctrineName { ... } 
-   // Class Hero extends YourDoctrineName { ... }
-   ...
- // 3) Build your component      
-   /* Here is your component to complete your HTML sections */
-   YourComponents Extends YourMainApp { ... } 
-   // Branding Extend Header { ... }
-   // Menu Extend Header { ... }
-   ...
-
+/* Installation via composer */ 
+/* required version *v2.0 */
+composer require phpwine/optimizedhtml v2.0
 ```
+Collections : 
+<br /> <a href="https://phpwine.github.io/documents/#w_quickstart">Quick Start </a>
+<br /> <a href="https://github.com/PHPWine/WineWPMenuWalker"> WP WineWPMenuWalker (Custom Menu w/Hooks)</a>
 
-```PHP
- // What's New in v1.2.2
- // * Disable HTML into string 
- $wine = OptimizedHtml(true);
- ... 
-```
-```HTML
- !-- Result @since v1.2.2 --> 
- <div> Hello World </div>
-```
-
-```PHP
-// Procedural extends app or component | coffee no sugar
-print wine(__, [ 
-        
-  child => [ 
-  
-  ['div', value => [ please => function() {
-
-    $new = new class () extends \Namespace\Classname {
-
-      public function my_value_in_array() {
-        return "Coffee";
-      }
-
-      public function my_filter() {
-        return "No sugar!";
-      }
-
-    };
-
-    return [
-      
-      ['div', value => [value($new,'my_value_in_array')]],
-      ['div', value => [magic($new,'my_filter',value($new,'my_value_in_array'))]]
-  
-    ];
-
-  }]]
- 
-]]);
-```
 <br /> New :
-<br /> 
 ```PHP
- // New in v2.0 soon Hooks 
-  echo wine(h1,'Hello World', [ id => 'wine_id'], $hooks = [
-   ['top_your_hook_name_add_html_top',[ $one = 2, $two = 4] ],
-   ['bottom_your_hook_name_add_html_bottom',[ $one = 'A', $two = 'B']]
-  ]  
+// New in v2.0 soon Hooks 
+echo wine(h1,'Hello World', [ id => 'wine_id'], $hooks = [
+  ['top_your_hook_name_add_html_top',[ $one = 2, $two = 4] ],
+  ['bottom_your_hook_name_add_html_bottom',[ $one = 'A', $two = 'B']]
+ ]  
 );
 
 // You can now | Using key "string" top_ OR bottom_ followed by your hook name ... 
 // ex. [  bottom_your_hook_name_add_html_bottom, [ $argu_1, .... ] ]
- $hooks = [
-   ['bottom_your_hook_name_add_html_bottom',[ $one = 'A', $two = 'B']] /* this will display in the bottom element html */
-  ]  
+$hooks = [
+ ['bottom_your_hook_name_add_html_bottom',[ $one = 'A', $two = 'B']] /* this will display in the bottom element html */
+]  
 ```
 ``` PHP
-@since v1.4.0OptimizedHtml
+@since v1.4.0 OptimizedHtml
 $this->wine::child => [
 /*  ['div', $this->wine::value=>[ $this->wine->value((new Branding),'component_top_logo_header')]], this still works anyway */
     ['div', $this->wine::value=>[ $this->wine->value(MenuList::class,'component_top_right_menu', $this->links ) ]]
   ]
  ]);
 ```
-``` @since v1.3.9 later(); no object require, call back function hook ```
-<br />
-<hr />
 
+Features :
+<br /> ``` @since v1.3.9 later(); no object require, call back function hook ```
+<br />
 Logs :
 <br /> ``` v1.3.8 [FIXED] : Class name attribute space child array | 08.11.2023 ```
 
