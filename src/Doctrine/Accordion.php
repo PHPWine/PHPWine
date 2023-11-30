@@ -70,25 +70,7 @@ extends \PHPWineOptimizedHtml\Layout {
    * @since: doctrine v1.0
    * @since: v2.5.0 wine
    * DT: 11.29.2023 **/
-   protected $label;
-
-  /**
-   * @var String keys Accordion 
-   * @property
-   * Defined : stored label for accordion
-   * @since: doctrine v1.0
-   * @since: v2.5.0 wine
-   * DT: 11.29.2023 **/
   protected $lists_menu;
-
-  /**
-   * @var String keys Accordion 
-   * @property
-   * Defined : stored content for accordion
-   * @since: doctrine v1.0
-   * @since: v2.5.0 wine
-   * DT: 11.29.2023 **/
-   protected $content;
 
   /**
    * @var String|Bool|Array keys Accordion 
