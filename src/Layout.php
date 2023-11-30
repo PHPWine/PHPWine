@@ -483,7 +483,7 @@
      * @since: v2.0 wine
      * DT: 11.10.2023 
      */
-    public function visible( 
+    protected function wine_action_visible( 
             
       array $config = []
          
@@ -774,7 +774,7 @@
      * @since: v2.0 wine
      * DT: 11.16.2023 
      */
-    public function screen( array $media_query = []) { 
+    protected function wine_action_screen( array $media_query = []) { 
 
       $this->screen_object = wine(script,[
 
@@ -1104,7 +1104,7 @@
    
     }
 
-     public function layout() {
+     protected function wine_action_layout() : string {
      
       return $this->content_object . $this->screen_object;
 
@@ -1156,7 +1156,7 @@
      * @since: doctrine v1.0
      * @since: wine 2.0
      * DT: 11.12.2023 **/    
-    private function is_defined( array $keys = [], array ...$wine_layout ) {
+    protected function is_defined( array $keys = [], array ...$wine_layout ) {
 
       $wine_registered_valid_keys = wine_valid_keys();
 
@@ -1257,6 +1257,15 @@
       }   
 
     }
+
+    protected function valid_hook( string $item) : string {
+    
+      $hooked = preg_replace('/\s+/','',$item);
+      $hooked = preg_replace('/[^a-zA-Z0-9_ -]/s','',$hooked);
+      $hooked = strtolower($hooked);
+      return (string) $hooked;
+   }
+   
     
 
  }

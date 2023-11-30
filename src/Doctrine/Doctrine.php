@@ -45,12 +45,60 @@
  */
 
  Class Doctrine extends \PHPWineOptimizedHtml\Layout  {
-  
-    public function __construct(array $wine_layout = [])
-    {
-      parent::__construct(
+
+ /**
+   * --------------------------------------------------------------------------------------------
+   * @method
+   * @visible public visible to required
+   * -------------------------------------------------------------------------------------------- 
+   * return layout html to the browser
+   * 
+   * @Defined : return : attemp invalid key! 
+   * @since: v1.0 doctrine
+   * @since: v2.0 wine
+   * DT: 11.29.2023 */
+   public function visible(
+      array $config = []
+   ) { 
+      return $this->wine_action_visible($config);
+   }
+   
+ /**
+   * --------------------------------------------------------------------------------------------
+   * @method
+   * @visible public screen to required
+   * -------------------------------------------------------------------------------------------- 
+   * set screen visibility output for doctrine
+   * 
+   * @Defined : return : attemp invalid key! 
+   * @since: v1.0 doctrine
+   * @since: v2.0 wine
+   * DT: 11.29.2023 */
+   public function screen(
+     array $media_query = []
+    ) {
+    return $this->wine_action_screen($media_query);
+   }
+
+   /**
+    * --------------------------------------------------------------------------------------------
+   * @method
+   * @visible public visible to required
+   * -------------------------------------------------------------------------------------------- 
+   * get all configuration in public
+   * 
+   * @Defined : return : attemp invalid key! 
+   * @since: v1.0 doctrine
+   * @since: v2.0 wine
+   * DT: 11.29.2023 */
+   public function layout() {
+    return $this->wine_action_layout();
+   }
+
+   public function __construct(array $wine_layout = [])
+   { parent::__construct(
       $wine_layout
-    );
+   );
       
   /**
    * --------------------------------------------------------------------------------------------
@@ -210,7 +258,6 @@
       exit;
      }
 
-
   /**
    * --------------------------------------------------------------------------------------------
    * @condition
@@ -234,8 +281,7 @@
       exit;
      }
 
-  }     
-
+  } 
 
  }
 

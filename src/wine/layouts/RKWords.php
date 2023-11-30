@@ -571,3 +571,125 @@ if(!defined('those'))
      define('value',$value); 
 
     }    
+
+/**
+ * --------------------------------------------------------------------------------------------
+ * @var constant|String 
+ * @property
+ * -------------------------------------------------------------------------------------------- */
+
+  $icon =  "DRKEY_ICON";
+
+  /**
+  * This is reserved keyword for doctrine class icon will use to key for element tag
+  * The main use is for localized the function in array.  
+  * 
+  * 
+  * @Defined : Constant Doctrine Class key icon
+  * @since: v1.0 doctrine
+  * @since: v2.5.0 wine
+  * DT: 11.29.2023 
+  */
+  if(!defined('icon')) 
+  { 
+  
+    define('icon',$icon); 
+
+  }    
+
+/**
+ * --------------------------------------------------------------------------------------------
+ * @var constant|String 
+ * @property
+ * -------------------------------------------------------------------------------------------- */
+
+  $prefix =  "DRKEY_PREFIX";
+
+  /**
+  * This is reserved keyword for doctrine class prefix will use to key for element tag
+  * The main use is for localized the function in array.  
+  * 
+  * 
+  * @Defined : Constant Doctrine Class key prefix
+  * @since: v1.0 doctrine
+  * @since: v2.5.0 wine
+  * DT: 11.29.2023 */
+  if(!defined('prefix')) 
+  { 
+  
+    define('prefix',$prefix); 
+
+  }        
+
+/**
+ * --------------------------------------------------------------------------------------------
+ * @var constant|String 
+ * @property
+ * -------------------------------------------------------------------------------------------- */
+
+$lists_menu =  "DRKEY_LABELACCORDION";
+
+/**
+* This is reserved keyword for doctrine class prefix will use to key for element tag
+* The main use is for localized the function in array.  
+* 
+* 
+* @Defined : Constant Doctrine Class key prefix
+* @since: v1.0 doctrine
+* @since: v2.5.0 wine
+* DT: 11.29.2023 */
+if(!defined('lists_menu')) 
+{ 
+
+  define('lists_menu',$lists_menu); 
+
+}     
+
+/**
+ * --------------------------------------------------------------------------------------------
+ * @var constant|String 
+ * @property
+ * -------------------------------------------------------------------------------------------- */
+
+$lists_content =  "DRKEY_CONTENTSACCORDION";
+
+/**
+* This is reserved keyword for doctrine class prefix will use to key for element tag
+* The main use is for localized the function in array.  
+* 
+* 
+* @Defined : Constant Doctrine Class key prefix
+* @since: v1.0 doctrine
+* @since: v2.5.0 wine
+* DT: 11.29.2023 */
+if(!defined('lists_content')) 
+{ 
+
+  define('lists_content',$lists_content); 
+
+}  
+
+
+/**
+ * --------------------------------------------------------------------------------------------
+ * @var constant|String 
+ * @property
+ * -------------------------------------------------------------------------------------------- */
+
+$accordion =  "DRKEY_ACCORDION";
+
+/**
+* This is reserved keyword for doctrine class prefix will use to key for element tag
+* The main use is for localized the function in array.  
+* 
+* 
+* @Defined : Constant Doctrine Class key prefix
+* @since: v1.0 doctrine
+* @since: v2.5.0 wine
+* DT: 11.29.2023 */
+if(!defined('accordion')) 
+{ 
+
+  define('accordion',$accordion); 
+
+}  
