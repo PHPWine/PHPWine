@@ -42,96 +42,236 @@ error_reporting(E_ALL);
 *
 */
 
-class Accordion extends \PHPWineOptimizedHtml\Layout
-{
-    protected $icon;
-    protected $prefix;
-    protected $label;
-    protected $lists_menu;
-    protected $content;
-    public $falsy;
-    protected $events = [];
-    protected $left;
-    protected $right;
-    public function __construct($wine_accordion)
-    {
-        $this->icon = $this->is_defined(
-            ["\x44\122\113\105\131\x5f\111\103\x4f\116"],
-            $wine_accordion
-        );
-        $this->prefix = $this->is_defined(
-            ["\x44\122\113\105\x59\x5f\x50\122\x45\106\x49\130"],
-            $wine_accordion
-        );
-        $this->wine_actions_template($wine_accordion);
-    }
-    private function wine_actions_template($properties)
-    {
-        $this->falsy = [
-            prefix => isset($properties[prefix]),
-            icon => isset($properties[icon]),
-            accordion => isset($properties[accordion]),
-            "\160\162\157\160\145\162\x74\151\x65\x73" => [
-                $properties[icon]["\160\x6f\163\x69\164\x69\157\x6e"] ?? false,
-                $properties[icon]["\144\x65\146\x61\x75\x6c\x74"] ?? false,
-                $properties[icon]["\143\x6c\x69\143\x6b\145\x64"] ?? false,
-            ],
-            "\x63\x6f\156\164\145\x6e\x74" => [
-                $properties[accordion] ?? [],
-                $properties[prefix] ?? false,
-            ],
-        ];
-    }
-    protected function wine_action()
-    {
-        $is_true_menu = $this->falsy[accordion];
-        if ($is_true_menu) {
-            $this->lists_menu = wine(__, [
-                child => [
-                    please => function () {
-                        $prefix =
-                            $this->falsy["\143\157\x6e\x74\x65\x6e\x74"][1];
-                        $iconPosition = strtolower(
-                            $this->falsy[
-                                "\160\x72\x6f\x70\145\x72\164\x69\145\x73"
-                            ][0]
-                        );
-                        if ($iconPosition === "\x6c\x65\146\164") {
-                            $this->left = $iconPosition;
-                            $menu_items = (array) array_unique(
-                                $this->falsy["\143\x6f\156\x74\145\156\x74"][0]
-                            );
-                            $leftIcon_con = new \PHPWineOptimizedHtml\Doctrine\Layouts\LeftIcon();
-                            $leftIcon = $leftIcon_con->Position(
-                                $menu_items,
-                                $prefix,
-                                $this->falsy
-                            );
-                            $this->events = $leftIcon_con->event();
-                            return $leftIcon;
-                        } else {
-                            if ($iconPosition === "\x72\151\147\150\x74") {
-                                $this->right = $iconPosition;
-                                $menu_items = (array) array_unique(
-                                    $this->falsy[
-                                        "\x63\157\156\x74\145\156\x74"
-                                    ][0]
-                                );
-                                $rightIcon_con = new \PHPWineOptimizedHtml\Doctrine\Layouts\RightIcon();
-                                $rightIcon = $rightIcon_con->Position(
-                                    $menu_items,
-                                    $prefix,
-                                    $this->falsy
-                                );
-                                $this->events = $rightIcon_con->event();
-                                return $rightIcon;
-                            }
-                        }
-                    },
-                ],
-            ]);
-        }
-        return $this->lists_menu .
+class Accordion 
+extends \PHPWineOptimizedHtml\Layout {
+
+  /**
+   * @var String|Array keys Accordion 
+   * @property
+   * Defined : check if icon exist
+   * @since: doctrine v1.0
+   * @since: v2.5.0 wine
+   * DT: 11.11.2023 **/
+   protected $icon;
+
+  /**
+   * @var String keys Accordion 
+   * @property
+   * Defined : check if prefix exist
+   * @since: doctrine v1.0
+   * @since: v2.5.0 wine
+   * DT: 11.11.2023 **/
+  protected $prefix;
+
+  /**
+   * @var String keys Accordion 
+   * @property
+   * Defined : stored label for accordion
+   * @since: doctrine v1.0
+   * @since: v2.5.0 wine
+   * DT: 11.29.2023 **/
+   protected $label;
+
+  /**
+   * @var String keys Accordion 
+   * @property
+   * Defined : stored label for accordion
+   * @since: doctrine v1.0
+   * @since: v2.5.0 wine
+   * DT: 11.29.2023 **/
+  protected $lists_menu;
+
+  /**
+   * @var String keys Accordion 
+   * @property
+   * Defined : stored content for accordion
+   * @since: doctrine v1.0
+   * @since: v2.5.0 wine
+   * DT: 11.29.2023 **/
+   protected $content;
+
+  /**
+   * @var String|Bool|Array keys Accordion 
+   * @property
+   * Defined : stored content for accordion
+   * @since: doctrine v1.0
+   * @since: v2.5.0 wine
+   * DT: 11.29.2023 **/
+   public $falsy;
+
+  /**
+   * @var Array keys Accordion 
+   * @property
+   * Defined : stored content for accordion
+   * @since: doctrine v1.0
+   * @since: v2.5.0 wine
+   * DT: 11.29.2023 **/
+  protected $events = [];
+
+  /**
+   * @var String keys new instance Accordion Left
+   * @property
+   * Defined : check property icon position in new instance
+   * @since: doctrine v1.0
+   * @since: v2.5.0 wine
+   * DT: 11.29.2023 **/
+  protected  $left;
+
+  /**
+   * @var String keys new instance Accordion Right
+   * @property
+   * Defined : check property icon position in new instance
+   * @since: doctrine v1.0
+   * @since: v2.5.0 wine
+   * DT: 11.29.2023 **/
+  protected  $right;
+
+   public function __construct($wine_accordion)
+   {
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined check client end 
+     * -------------------------------------------------------------------------------------------- 
+     * Wine check if there's anonymouse keyword or invalid key the user use in doctrine
+     * this will help to figureout which and where is mistake from client
+     * 
+     * @Defined : check if accordion key is valid
+     * @since: v1.0 doctrine
+     * @since: v2.5.0 wine
+     * DT: 11.29.2023 **/
+    $this->icon = $this->is_defined([
+      'DRKEY_ICON'
+    ], 
+     $wine_accordion
+    );
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method is defined check client end 
+     * -------------------------------------------------------------------------------------------- 
+     * Wine check if there's anonymouse keyword or invalid key the user use in doctrine
+     * this will help to figureout which and where is mistake from client
+     * 
+     * @Defined : check if accordion key is valid
+     * @since: v1.0 doctrine
+     * @since: v2.5.0 wine
+     * DT: 11.29.2023 **/
+    $this->prefix = $this->is_defined([
+      'DRKEY_PREFIX'
+    ], 
+     $wine_accordion
+    );
+      
+    $this->wine_actions_template($wine_accordion);
+
+  }
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method Templates
+     * -------------------------------------------------------------------------------------------- 
+     * This method preparing stuff
+     * 
+     * @since: v1.0 doctrine
+     * @since: v2.5.0 wine
+     * DT: 11.29.2023 **/
+   private function wine_actions_template($properties) {
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @condition falsy value 
+     * -------------------------------------------------------------------------------------------- */
+    $this->falsy = [
+
+     // IF this is set the return true not return false 
+     prefix => isset($properties[prefix]),
+     icon   => isset($properties[icon]),
+     accordion => isset($properties[accordion]),
+     
+     /**
+      * -------------------------------------------------------------------------------------------
+      * @properties new instance accordion properties 
+      * ------------------------------------------------------------------------------------------- */
+      'properties' => [
+
+     /**
+      * -------------------------------------------------------------------------------------------
+      * @properties new instance accordion Position | Left or Right [You can Top and Bottom with css flex direction ]
+      * ------------------------------------------------------------------------------------------- */
+       $properties[icon]['position']?? false,
+     /**
+      * -------------------------------------------------------------------------------------------
+      * @properties new instance accordion Default icon this is when the page load icon 
+      * ------------------------------------------------------------------------------------------- */
+       $properties[icon]['default'] ?? false,
+     /**
+      * -------------------------------------------------------------------------------------------
+      * @properties new instance accordion Clicked icon that will show when the accordion had been clicked 
+      * ------------------------------------------------------------------------------------------- */
+       $properties[icon]['clicked'] ?? false
+
+      ],
+
+     /**
+      * -------------------------------------------------------------------------------------------
+      * @properties new instance accordion Content of accordion must be associated of array
+      * key value pair 
+      * ------------------------------------------------------------------------------------------- */
+      'content' => [
+
+        $properties[accordion]?? [],
+        // prefix required in every new ionstance
+        $properties[prefix]?? false,
+
+      ]
+    
+    ];
+
+   }
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @method wine_action
+     * -------------------------------------------------------------------------------------------- 
+     * Is where the main accordion file are stored in order to having icons position 
+     * 
+     * @Defined : check if accordion key is valid
+     * @since: v1.0 doctrine
+     * @since: v2.5.0 wine */
+   protected function wine_action() { 
+    $is_true_menu = $this->falsy[accordion];
+    if($is_true_menu) {
+      $this->lists_menu = wine(__,[
+        child=>[
+          please => function() {
+            $prefix       = $this->falsy['content'][1];   
+            $iconPosition = strtolower($this->falsy['properties'][0]);    
+            if($iconPosition === 'left') {
+              $this->left = $iconPosition;
+              $menu_items = (array) array_unique($this->falsy['content'][0]);
+              $leftIcon_con = new \PHPWineOptimizedHtml\Doctrine\Layouts\LeftIcon;
+              $leftIcon     = $leftIcon_con->Position($menu_items, $prefix, $this->falsy);
+              $this->events = $leftIcon_con->event();
+              return $leftIcon;
+          } else if($iconPosition === 'right') {
+              $this->right = $iconPosition;
+              $menu_items = (array) array_unique($this->falsy['content'][0]);
+              $rightIcon_con = new \PHPWineOptimizedHtml\Doctrine\Layouts\RightIcon;
+              $rightIcon     = $rightIcon_con->Position($menu_items, $prefix, $this->falsy);
+              $this->events  = $rightIcon_con->event();
+              return $rightIcon;
+          }  
+         } 
+       ]
+     ]);
+    }   
+
+   /**
+     * --------------------------------------------------------------------------------------------
+     * @execute return the accordion with script !
+     * -------------------------------------------------------------------------------------------- */
+     return $this->lists_menu .
             wine(
                 script,
                 [
