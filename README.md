@@ -11,8 +11,8 @@ composer require phpwine/optimizedhtml v2.0
 ```
 Collections : 
 <br /> <a href="https://phpwine.github.io/documents/#w_quickstart">Quick Start </a>
-<br /> <a href="https://github.com/PHPWine/WineWPMenuWalker"> WP WineWPMenuWalker (Custom Menu w/Hooks)</a>
-<br /> <a href="https://github.com/PHPWine/WineAccordion"> WineAccordion </a>
+<br /> <a href="https://github.com/PHPWine/WineWPMenuWalker"> WP WineWPMenuWalker (Custom Menu w/Hooks) <sup>v2.0</sup> </a>
+<br /> <a href="https://github.com/PHPWine/WineAccordion"> WineAccordion <sup>v2.5.0</sup> </a>
 
 <br /> New :
 ```PHP
