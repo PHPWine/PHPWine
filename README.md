@@ -13,6 +13,10 @@ Collections :
 <br /> <a href="https://phpwine.github.io/documents/#w_quickstart">Quick Start </a>
 <br /> <a href="https://github.com/PHPWine/WineWPMenuWalker"> WP WineWPMenuWalker (Custom Menu w/Hooks)</a>
 
+PHPTool Protection/Minifier <i>(use for production) </i>:
+<br /> <a href="https://php-minify.com/php-obfuscator/">PHP-Obfuscator</a>
+<br /> <a href="https://codebeautify.org/php-beautifier">PHP-Beutifier</a>
+
 <br /> New :
 ```PHP
 // New in v2.0 soon Hooks 
