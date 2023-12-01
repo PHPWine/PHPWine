@@ -253,22 +253,20 @@ extends \PHPWineOptimizedHtml\Layout {
             $prefix       = $this->falsy['content'][1];   
             $iconPosition = strtolower($this->falsy['properties'][0]);    
             $menu_items   = (array) array_unique($this->falsy['content'][0]);
-
-            if($iconPosition==='left') {
-              $this->left=$iconPosition;
-              $leftIcon_con = new \PHPWineOptimizedHtml\Doctrine\Layouts\LeftIcon;
-              $leftIcon     = $leftIcon_con->Position($menu_items,$prefix,$this->falsy);
-              $this->events = $leftIcon_con->event();
-              return $leftIcon;
+  
+           if($iconPosition==='left') { 
+            $this->left=$iconPosition; 
+            $wineIcon = new \PHPWineOptimizedHtml\Doctrine\Layouts\AccordionIcons;
+            $icon     = $wineIcon->Position($menu_items,$prefix,$this->falsy,$iconPosition);
+            $this->events = $wineIcon->event();
+            return $icon;
            } else if($iconPosition==='right') {
-              $this->right=$iconPosition;
-              $rightIcon_con = new \PHPWineOptimizedHtml\Doctrine\Layouts\RightIcon;
-              $rightIcon     = $rightIcon_con->Position($menu_items,$prefix,$this->falsy);
-              $this->events  = $rightIcon_con->event();
-              return $rightIcon;
-
+             $this->right=$iconPosition;
+             $wineIcon = new \PHPWineOptimizedHtml\Doctrine\Layouts\AccordionIcons;
+             $icon     = $wineIcon->Position($menu_items,$prefix,$this->falsy,$iconPosition);
+             $this->events = $wineIcon->event();
+             return $icon;
            } else {
-      
             $none_menu = [];
 
             foreach ($menu_items as $value => $content) {

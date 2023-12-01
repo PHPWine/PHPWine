@@ -38,7 +38,7 @@ namespace PHPWineOptimizedHtml\Doctrine\Layouts;
 *
 */
 
-class LeftIcon extends \PHPWineOptimizedHtml\Doctrine\Accordion
+class AccordionIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
 {
     public $event = [];
 
@@ -47,7 +47,7 @@ class LeftIcon extends \PHPWineOptimizedHtml\Doctrine\Accordion
         $wine = new \PHPWineOptimizedHtml\OptimizedHtml();
     }
 
-    public function Position($menu_items, $prefix, $falsy)
+    public function Position($menu_items, $prefix, $falsy, $iconPosition)
     {
         $acdn_menu = [];
 
@@ -65,10 +65,35 @@ class LeftIcon extends \PHPWineOptimizedHtml\Doctrine\Accordion
 
             array_push($this->event, "$valid_hook");
 
-            $acdn_menu[] =
-                wine(
-                    div,
-
+            $acdn_menu[] = wine(div,[
+              child => [
+          
+                [__, value=>[
+                   wine(__, [
+                     child=>[
+                        please => function() use (
+                            $prefix,
+                            $valid_hook,
+                            $value,
+                            $iconPosition
+                         ) {
+                          if($iconPosition === 'right') {
+                              return [
+                               wine(span,
+                                $value, 
+                                [classes=>$prefix.$valid_hook])
+                              ];
+                          } else {
+                              return [];
+                          }
+                       }
+                     ]
+                   ]) 
+                ]],
+                [__, 
+                
+                value =>[
+                    
                     wine(__, [
                         child => [
                             please => function () use (
@@ -172,24 +197,49 @@ class LeftIcon extends \PHPWineOptimizedHtml\Doctrine\Accordion
                                 return $iconLeft;
                             },
                         ],
-                    ]) . wine(span, $value, [classes => $prefix . $valid_hook]),
-                    [
-                        classes => $prefix . "list-item",
-                        id => $valid_hook,
-                    ],
-                    [[$hook_item_top], [$hook_item_bot]]
-                ) .
-                wine(
-                    div,
-                    $content,
-                    [classes => "content"],
-                    [[$hook_content_top], [$hook_content_bot]]
-                );
+                    ])
+                ]],
+                [__, value=>[
+                   wine(__, [
+                     child=>[
+                        please => function() use (
+                            $prefix,
+                            $valid_hook,
+                            $value,
+                            $iconPosition
+                          ) {
+                            if($iconPosition === 'left') {
+                              return [
+                                wine( span,
+                                $value, 
+                                [classes=>$prefix.$valid_hook])
+                              ];
+                            } else {
+                                return [];
+                            }
+                        }
+                     ]
+                   ]) 
+                ]]
+              ] 
+            ],[
+                classes => $prefix . "list-item",
+                id => $valid_hook,
+            ],
+            [[$hook_item_top], [$hook_item_bot]])
+
+            .   wine(
+                  div,
+                  $content,
+                  [classes => "content"],
+                  [[$hook_content_top], [$hook_content_bot]]
+               );
         }
 
         return [
-            wine(div, implode("", $acdn_menu), [id => $prefix . "menu_item"]),
+         wine(div, implode("", $acdn_menu), [id => $prefix . "menu_item"]),
         ];
+        
     }
 
     public function event(): array
