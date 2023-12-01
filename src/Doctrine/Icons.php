@@ -3,11 +3,11 @@
 namespace PHPWineOptimizedHtml\Doctrine;
 
 /**
-* @copyright (c) 2023 PHPWine Component Accordion Cooked by nielsoffice
+* @copyright (c) 2023 PHPWine Component Cooked by nielsoffice
 *
 * MIT License
 *
-* PHPWine Component Accordion free software: you can redistribute it and/or modify.
+* PHPWine Component free software: you can redistribute it and/or modify.
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
@@ -26,7 +26,7 @@ namespace PHPWineOptimizedHtml\Doctrine;
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 *
-* @category   PHPWine Component Accordion
+* @category   PHPWine Component 
 *
 *
 * @author    Leinner Zednanref <syncdevprojects@gmail.com>
@@ -38,7 +38,7 @@ namespace PHPWineOptimizedHtml\Doctrine;
 *
 */
 
-class AccordionIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
+class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
 {
     public $event = [];
 
@@ -47,7 +47,7 @@ class AccordionIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
         $wine = new \PHPWineOptimizedHtml\OptimizedHtml();
     }
 
-    public function Position($menu_items, $prefix, $falsy, $iconPosition)
+    public function Position($instance, $menu_items, $prefix, $falsy, $iconPosition)
     {
         $acdn_menu = [];
 
@@ -224,20 +224,29 @@ class AccordionIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
               ] 
             ],[
                 classes => $prefix . "list-item",
-                id => $valid_hook,
+                id => wine_valid_id($valid_hook),
             ],
-            [[$hook_item_top], [$hook_item_bot]])
+            [[$hook_item_top], [$hook_item_bot]]);
 
-            .   wine(
-                  div,
-                  $content,
-                  [classes => "content"],
-                  [[$hook_content_top], [$hook_content_bot]]
-               );
+            
+            if($instance === 'PHPWineOptimizedHtml\Doctrine\PHPWineTab\WineTab' ) {
+              $content = "";
+            }
+            if($instance === 'PHPWineOptimizedHtml\Doctrine\PHPWineAccordion\WineAccordion') {
+              $content = $content;
+            }
+
+            $acdn_menu[] =  wine(
+                div,
+                $content,
+                [classes => "content"],
+                [[$hook_content_top], [$hook_content_bot]]
+            );
+
         }
 
         return [
-         wine(div, implode("", $acdn_menu), [id => $prefix . "menu_item"]),
+         wine(div, implode("", $acdn_menu), [id =>wine_valid_id($prefix."menu_item")]),
         ];
         
     }
@@ -246,4 +255,5 @@ class AccordionIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
     {
         return $this->event;
     }
+
 }
