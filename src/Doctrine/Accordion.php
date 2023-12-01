@@ -236,12 +236,12 @@ extends \PHPWineOptimizedHtml\Layout {
     $is_true_prefix = $this->falsy[prefix];
 
     if(!$is_true_prefix) {
-      throw new \Exception('prefix => (string) "", property WineAccordion require!');
+      throw new \Exception('prefix => (string) "wine_", property WineAccordion require!');
       exit;
     }
 
     if(!$is_true_menu) {
-      throw new \Exception('accordion = (array) [] property and contents WineAccordion cannot be emppty!');
+      throw new \Exception('accordion = (array) [] property and contents WineAccordion cannot be empty!');
       exit;
     }
 
@@ -272,6 +272,7 @@ extends \PHPWineOptimizedHtml\Layout {
             $none_menu = [];
 
             foreach ($menu_items as $value => $content) {
+
              // clean up to make vbalid hook
              $valid_hook = $this->valid_hook($value);
 
