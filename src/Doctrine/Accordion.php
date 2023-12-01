@@ -256,13 +256,13 @@ extends \PHPWineOptimizedHtml\Layout {
   
            if($iconPosition==='left') { 
             $this->left=$iconPosition; 
-            $wineIcon = new \PHPWineOptimizedHtml\Doctrine\Layouts\AccordionIcons;
+            $wineIcon = new \PHPWineOptimizedHtml\Doctrine\AccordionIcons;
             $icon     = $wineIcon->Position($menu_items,$prefix,$this->falsy,$iconPosition);
             $this->events = $wineIcon->event();
             return $icon;
            } else if($iconPosition==='right') {
              $this->right=$iconPosition;
-             $wineIcon = new \PHPWineOptimizedHtml\Doctrine\Layouts\AccordionIcons;
+             $wineIcon = new \PHPWineOptimizedHtml\Doctrine\AccordionIcons;
              $icon     = $wineIcon->Position($menu_items,$prefix,$this->falsy,$iconPosition);
              $this->events = $wineIcon->event();
              return $icon;

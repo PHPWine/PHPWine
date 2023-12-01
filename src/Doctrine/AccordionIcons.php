@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPWineOptimizedHtml\Doctrine\Layouts;
+namespace PHPWineOptimizedHtml\Doctrine;
 
 /**
 * @copyright (c) 2023 PHPWine Component Accordion Cooked by nielsoffice
