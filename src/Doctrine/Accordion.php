@@ -108,15 +108,6 @@ extends \PHPWineOptimizedHtml\Layout {
    * DT: 11.29.2023 **/
   protected  $right;
 
-  /**
-   * @var String|Array keys new instance Accordion Right
-   * @property
-   * Defined : check property icon position in new instance
-   * @since: doctrine v1.0
-   * @since: v2.5.0 wine
-   * DT: 11.29.2023 **/
-   protected  $width;
-
    public function __construct($wine_accordion)
    {
 
