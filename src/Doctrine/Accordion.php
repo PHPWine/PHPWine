@@ -108,6 +108,15 @@ extends \PHPWineOptimizedHtml\Layout {
    * DT: 11.29.2023 **/
   protected  $right;
 
+  /**
+   * @var String|Array keys new instance Accordion Right
+   * @property
+   * Defined : check property icon position in new instance
+   * @since: doctrine v1.0
+   * @since: v2.5.0 wine
+   * DT: 11.29.2023 **/
+   protected  $width;
+
    public function __construct($wine_accordion)
    {
 
@@ -222,33 +231,95 @@ extends \PHPWineOptimizedHtml\Layout {
      * @since: v1.0 doctrine
      * @since: v2.5.0 wine */
    protected function wine_action() { 
-    $is_true_menu = $this->falsy[accordion];
+    
+    $is_true_menu   = $this->falsy[accordion];
+    $is_true_prefix = $this->falsy[prefix];
+
+    if(!$is_true_prefix) {
+      throw new \Exception('prefix => (string) "", property WineAccordion require!');
+      exit;
+    }
+
+    if(!$is_true_menu) {
+      throw new \Exception('accordion = (array) [] property and contents WineAccordion cannot be emppty!');
+      exit;
+    }
+
     if($is_true_menu) {
       $this->lists_menu = wine(__,[
         child=>[
           please => function() {
+
             $prefix       = $this->falsy['content'][1];   
             $iconPosition = strtolower($this->falsy['properties'][0]);    
-            if($iconPosition === 'left') {
-              $this->left = $iconPosition;
-              $menu_items = (array) array_unique($this->falsy['content'][0]);
+            $menu_items   = (array) array_unique($this->falsy['content'][0]);
+
+            if($iconPosition==='left') {
+              $this->left=$iconPosition;
               $leftIcon_con = new \PHPWineOptimizedHtml\Doctrine\Layouts\LeftIcon;
-              $leftIcon     = $leftIcon_con->Position($menu_items, $prefix, $this->falsy);
+              $leftIcon     = $leftIcon_con->Position($menu_items,$prefix,$this->falsy);
               $this->events = $leftIcon_con->event();
               return $leftIcon;
-          } else if($iconPosition === 'right') {
-              $this->right = $iconPosition;
-              $menu_items = (array) array_unique($this->falsy['content'][0]);
+           } else if($iconPosition==='right') {
+              $this->right=$iconPosition;
               $rightIcon_con = new \PHPWineOptimizedHtml\Doctrine\Layouts\RightIcon;
-              $rightIcon     = $rightIcon_con->Position($menu_items, $prefix, $this->falsy);
+              $rightIcon     = $rightIcon_con->Position($menu_items,$prefix,$this->falsy);
               $this->events  = $rightIcon_con->event();
               return $rightIcon;
-          }  
+
+           } else {
+      
+            $none_menu = [];
+
+            foreach ($menu_items as $value => $content) {
+             // clean up to make vbalid hook
+             $valid_hook = $this->valid_hook($value);
+
+             // Hook for list item
+             $hook_item_top="top_item_list".$valid_hook;
+             $hook_item_bot="bottom_item_list".$valid_hook;
+
+             // Hook for list item content
+             $hook_content_top="top_content".$valid_hook;
+             $hook_content_bot="bottom_content".$valid_hook;
+
+             array_push($this->events, "$valid_hook");
+
+             $none_menu[] = wine(div,[
+               child => [
+                    
+                 [ span, 
+                   attr=>[[classes=>$prefix.$valid_hook]], 
+                   value=>[$value]
+                 ]
+
+               ] 
+             ],[
+              classes=>$prefix."list-item",
+              id=>$valid_hook,
+             ],
+              [[$hook_item_top],[$hook_item_bot]])  
+              . wine( div,
+                 $content,
+                [classes=>"content"],
+                [[$hook_content_top],[$hook_content_bot]]
+              );
+            }
+
+           return [
+             wine(div,
+              implode("",$none_menu),
+              [id=>$prefix."menu_item"]
+           )];
+
+          } 
          } 
        ]
      ]);
-    }   
-
+    } else {
+      return false;   
+    }
+ 
    /**
      * --------------------------------------------------------------------------------------------
      * @execute return the accordion with script !
@@ -259,6 +330,7 @@ extends \PHPWineOptimizedHtml\Layout {
             [
                 child => [
                     please => function () {
+                      if($this->falsy[icon]) {
                         $script = [];
                         $menu_list = array_unique($this->events);
                         $script[] =
@@ -298,11 +370,21 @@ extends \PHPWineOptimizedHtml\Layout {
                             "\40\151\146\x28\x63\157\156\x74\x65\x6e\x74\x2e\163\x74\x79\x6c\x65\56\144\151\163\160\x6c\x61\171\75\x3d\x3d\x27\x62\154\157\x63\153\x27\51\x7b\143\157\156\x74\145\156\164\56\x73\164\171\x6c\145\56\x64\151\163\160\x6c\141\x79\x3d\47\156\157\x6e\x65\x27\x3b\175\x65\154\163\x65\x7b\x63\157\156\x74\145\156\x74\x2e\163\164\x79\154\x65\56\x64\x69\x73\160\154\x61\171\75\x27\x62\154\157\x63\x6b\x27\73\x7d\x20";
                         $script[] = "\40\x7d\x29\73\40";
                         $script[] = "\40\x7d\40";
-                        return $script;
-                    },
-                ],
+                      } else {
+                        $script[] =
+                            "\40\166\141\x72\40\141\x63\143\x20\x3d\40\144\157\143\x75\155\145\156\x74\56\161\x75\145\162\x79\123\145\x6c\145\x63\164\157\162\x41\x6c\x6c\x28\47\56\167\151\156\145\137\154\151\x73\164\55\x69\164\145\x6d\47\x29\73\40\x76\141\x72\x20\167\151\x6e\145\x3b\x20\x61\143\143\x2e\146\x6f\162\x45\141\143\x68\50\x66\165\156\x63\164\151\x6f\x6e\50\x76\143\54\152\153\x29\x7b\x76\x63\56\156\x65\x78\164\105\x6c\x65\155\x65\x6e\x74\123\x69\142\x6c\x69\156\147\x2e\x73\164\x79\154\x65\56\x64\x69\x73\x70\x6c\141\171\x20\75\x27\x6e\x6f\x6e\145\x27\73\40\x7d\x29\73\x20";
+                        $script[] =
+                            "\x20\146\157\162\50\x77\x69\x6e\x65\40\x3d\40\x30\x3b\x20\167\151\x6e\145\40\x3c\40\141\143\x63\x2e\x6c\x65\x6e\147\x74\150\x3b\40\167\x69\156\145\x2b\x2b\x29\173\x61\x63\x63\x5b\x77\151\x6e\x65\x5d\x2e\141\144\x64\x45\x76\145\x6e\x74\114\151\x73\x74\x65\x6e\x65\162\x28\47\x63\x6c\x69\143\x6b\47\54\146\165\156\x63\164\151\x6f\156\x28\51\173\164\x68\x69\163\56\x63\154\x61\163\163\x4c\x69\x73\x74\56\x74\x6f\x67\147\154\x65\50\x27\x61\143\164\151\x76\x65\47\x29\73\40\x76\141\x72\x20\143\x6f\x6e\164\145\x6e\x74\x20\x3d\x74\150\151\x73\x2e\156\145\170\164\x45\154\x65\x6d\145\156\164\x53\x69\x62\154\x69\x6e\147\x3b\x20";
+                        $script[] =
+                            "\40\151\146\x28\x63\157\156\x74\x65\x6e\x74\x2e\163\x74\x79\x6c\x65\56\144\151\163\160\x6c\x61\171\75\x3d\x3d\x27\x62\154\157\x63\153\x27\51\x7b\143\157\156\x74\145\156\164\56\x73\164\171\x6c\145\56\x64\151\163\160\x6c\141\x79\x3d\47\156\157\x6e\x65\x27\x3b\175\x65\154\163\x65\x7b\x63\157\156\x74\145\156\x74\x2e\163\164\x79\154\x65\56\x64\x69\x73\160\154\x61\171\75\x27\x62\154\157\x63\x6b\x27\73\x7d\x20";
+                        $script[] = "\40\x7d\x29\73\40";
+                        $script[] = "\40\x7d\40";                        
+                      }
+                     return $script;
+                   },
+               ],
             ],
-            [classes => "\141\x70\160\x2d\162\x65\x73\x70\x6f\156\x73\x65"]
+        [classes => "\141\x70\160\x2d\162\x65\x73\x70\x6f\156\x73\x65"]
     );
 
   }
