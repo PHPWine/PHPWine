@@ -47,7 +47,7 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
         $wine = new \PHPWineOptimizedHtml\OptimizedHtml();
     }
 
-    public function Position($instance, $menu_items, $prefix, $falsy, $iconPosition)
+    public function Position($menu_items, $prefix, $falsy, $iconPosition)
     {
         $acdn_menu = [];
 
@@ -227,14 +227,6 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                 id => wine_valid_id($valid_hook),
             ],
             [[$hook_item_top], [$hook_item_bot]]);
-
-            
-            if($instance === 'PHPWineOptimizedHtml\Doctrine\PHPWineTab\WineTab' ) {
-              $content = "";
-            }
-            if($instance === 'PHPWineOptimizedHtml\Doctrine\PHPWineAccordion\WineAccordion') {
-              $content = $content;
-            }
 
             $acdn_menu[] =  wine(
                 div,
