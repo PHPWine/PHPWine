@@ -38,7 +38,7 @@ namespace PHPWineOptimizedHtml\Doctrine;
 *
 */
 
-class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
+class TabIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
 {
     public $event = [];
 
@@ -52,25 +52,27 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
         $acdn_menu = [];
 
         foreach ($menu_items as $value => $content) {
-            
-            // clean up to make vbalid hook
-            $valid_hook = $this->valid_hook($value);
 
-            // static hook collections
-            $hooks_data = [
-              'top_item_list',
-              'bottom_item_list',
-              'top_content',
-              'bottom_content'
+            $hook_data = [
+              'top_tab_',
+              'bottom_tab_',
+              'top_main_',
+              'bottom_main_'
             ];
 
+            // clean up to make vbalid hook
+            $valid_hook = $this->valid_hook($value);
+              
+            $hook_tab_item    = wine_valid_hook($value,3);
+            $hook_tab_content = wine_valid_hook($content,3);
+
             // Hook for list item
-            $hook_item_top=$hooks_data[0].$valid_hook;
-            $hook_item_bot=$hooks_data[1].$valid_hook;
+            $hook_item_top=$hook_data[0].$hook_tab_item;
+            $hook_item_bot=$hook_data[1].$hook_tab_item;
 
             // Hook for list item content
-            $hook_content_top=$hooks_data[2].$valid_hook;
-            $hook_content_bot=$hooks_data[3].$valid_hook;
+            $hook_content_top=$hook_data[2].$hook_tab_content;
+            $hook_content_bot=$hook_data[3].$hook_tab_content;
 
             array_push($this->event, "$valid_hook");
 
@@ -110,22 +112,11 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                                 $valid_hook,
                                 $falsy
                             ) {
-
-                                // static hook collections
-                                $hooks_data = [
-                                  'top_defualt_',
-                                  'bottom_defualt_',
-                                  'top_clicked_',
-                                  'bottom_clicked_'
-                                ];
-  
-                                // Hook for icon before click
-                                $hook_icon_default_top=$hooks_data[0].$prefix.$valid_hook;
-                                $hook_icon_default_bot=$hooks_data[1].$prefix.$valid_hook;
-
-                                // after clicked
-                                $hook_icon_clicked_top=$hooks_data[2].$prefix.$valid_hook;
-                                $hook_icon_clicked_bot=$hooks_data[3].$prefix.$valid_hook;
+                                // Hook for icon item
+                                $hook_icon_default_top =
+                                    "top_defualt_" . $prefix . $valid_hook;
+                                $hook_icon_default_bot =
+                                    "bottom_defualt_" . $prefix . $valid_hook;
 
                                 $default = $falsy["properties"][1] ?? false;
                                 $clicked = $falsy["properties"][2] ?? false;
@@ -144,70 +135,7 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                                         [$hook_icon_default_top],
                                         [$hook_icon_default_bot],
                                     ]
-                                );
-
-                                if (function_exists($hook_icon_default_top)) {
-                                    $iconLeft[] = wine(
-                                        span,
-                                        $clicked,
-                                        [
-                                            classes =>
-                                                $prefix .
-                                                "icon-left c$valid_hook",
-                                        ],
-                                        [
-                                            [$hook_icon_default_top],
-                                            [$hook_icon_clicked_bot],
-                                        ]
-                                    );
-                                } elseif (
-                                    function_exists($hook_icon_default_bot)
-                                ) {
-                                    $iconLeft[] = wine(
-                                        span,
-                                        $clicked,
-                                        [
-                                            classes =>
-                                                $prefix .
-                                                "icon-left c$valid_hook",
-                                        ],
-                                        [
-                                            [$hook_icon_clicked_top],
-                                            [$hook_icon_default_bot],
-                                        ]
-                                    );
-                                } elseif (
-                                    function_exists($hook_icon_default_top) ||
-                                    function_exists($hook_icon_default_bot)
-                                ) {
-                                    $iconLeft[] = wine(
-                                        span,
-                                        $clicked,
-                                        [
-                                            classes =>
-                                                $prefix .
-                                                "icon-left c$valid_hook",
-                                        ],
-                                        [
-                                            [$hook_icon_default_top],
-                                            [$hook_icon_default_bot],
-                                        ]
-                                    );
-                                } else {
-                                    $iconLeft[] = wine(
-                                        span,
-                                        $clicked,
-                                        [
-                                            classes =>
-                                                $prefix .
-                                                "icon-left c$valid_hook",
-                                        ],
-                                        [
-                                            [$hook_icon_clicked_top],
-                                            [$hook_icon_clicked_bot],
-                                        ]
-                                    );
-                                }
+                                );                          
 
                                 return $iconLeft;
                             },
@@ -243,17 +171,10 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
             ],
             [[$hook_item_top], [$hook_item_bot]]);
 
-            $acdn_menu[] =  wine(
-                div,
-                $content,
-                [classes => "content"],
-                [[$hook_content_top], [$hook_content_bot]]
-            );
-
         }
 
         return [
-         wine(div, implode("", $acdn_menu), [id =>wine_valid_id($prefix."menu_item")]),
+            wine(div, implode("", $acdn_menu), [id =>wine_valid_id($prefix."tab_item")])
         ];
         
     }
