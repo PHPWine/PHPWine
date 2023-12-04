@@ -1266,6 +1266,53 @@
       return (string) $hooked;
    }
    
+   protected function is_valid_object($attr,$method,$_id,$_class) : array {
+    
+    if(isset($attr[0])) {
+      $filered_attr = $attr[0];  
+    } else {
+      $filered_attr = $this;
+    }
+
+    // filter attr menu lists item 
+    if(method_exists($filered_attr,$method)) {
+      return attr($filered_attr,$method,$_id,$_class);
+    } else {
+      return [id=>$_id,classes=>$_class];
+    }  
+
+   }
+
+   protected function hook_inside($prefix, $value, $states = 0, $not = false) {
+
+    $p = $prefix;
+    if($not === true) {
+      return wine_valid_id($value);
+    } else {
+
+      $wine_valid_hook = '';
+
+      if($states === 0) { $wine_valid_hook = $prefix.wine_valid_id($value);
+      } else if($states === 1)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$value);
+      } else if($states === 2)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$prefix.$value);
+      } else if($states === 3)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$value);
+      } else if($states === 4)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$value);
+      } else if($states === 5)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$value);
+      } else if($states === 6)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$p.$value);
+      } else if($states === 7)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$p.$p.$value);
+      } else if($states === 8)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$p.$p.$p.$value);
+      } else if($states === 9)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$p.$p.$p.$p.$value);
+      } else if($states === 10) { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$p.$p.$p.$p.$p.$value);}
+ 
+      if(function_exists($wine_valid_hook)) {
+        $value = later($wine_valid_hook, $value);
+      }
+  
+      return $value;
+  
+    } 
+   
+   }
     
 
  }
