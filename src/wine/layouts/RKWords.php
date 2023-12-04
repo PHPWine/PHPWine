@@ -653,6 +653,7 @@ if(!defined('lists_menu'))
 
 $lists_content =  "DRKEY_CONTENTSACCORDION";
 
+
 /**
 * This is reserved keyword for doctrine class prefix will use to key for element tag
 * The main use is for localized the function in array.  
@@ -668,7 +669,6 @@ if(!defined('lists_content'))
   define('lists_content',$lists_content); 
 
 }  
-
 
 /**
  * --------------------------------------------------------------------------------------------
@@ -691,5 +691,30 @@ if(!defined('accordion'))
 { 
 
   define('accordion',$accordion); 
+
+}  
+
+
+/**
+ * --------------------------------------------------------------------------------------------
+ * @var constant|String 
+ * @property
+ * -------------------------------------------------------------------------------------------- */
+
+$tab =  "DRKEY_TAB";
+
+/**
+* This is reserved keyword for doctrine class prefix will use to key for element tag
+* The main use is for localized the function in array.  
+* 
+* 
+* @Defined : Constant Doctrine Class key prefix
+* @since: v1.0 doctrine
+* @since: v2.5.0 wine
+* DT: 11.29.2023 */
+if(!defined('tab')) 
+{ 
+
+  define('tab',$tab); 
 
 }  

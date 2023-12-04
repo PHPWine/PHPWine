@@ -287,7 +287,7 @@
    * @since: v2.0 wine
    * DT: 11.12.2023 
    */
-  'DRKEY_ICON'  => 'COMPONENT_REGISTERED_KEY_ACCORDION',
+  'DRKEY_ICON'  => 'COMPONENT_REGISTERED_KEY_COMPONENT',
 
   /**
    * --------------------------------------------------------------------------------------------
