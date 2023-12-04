@@ -409,7 +409,6 @@ if (file_exists( $require_file)) {
             if (array_key_exists($wine::LP[5], $__w)) {
                 $cpd = $wine->wine_local_provider(
                     $__w[$wine::LP[5]][0] ?? "",
-                    $__w[$wine::LP[5]][1] ?? "",
                     ...$vm
                 );
             }
