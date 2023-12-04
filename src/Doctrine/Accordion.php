@@ -108,6 +108,8 @@ extends \PHPWineOptimizedHtml\Layout {
    * DT: 11.29.2023 **/
   protected  $right;
 
+  protected $hook;  
+
    public function __construct($wine_accordion)
    {
 
@@ -144,6 +146,12 @@ extends \PHPWineOptimizedHtml\Layout {
     ], 
      $wine_accordion
     );
+
+    $this->hook = $this->is_defined([
+     'DRKEY_HOOKS'
+    ],
+     $wine_accordion
+    );
       
     $this->wine_actions_template($wine_accordion);
 
@@ -160,6 +168,7 @@ extends \PHPWineOptimizedHtml\Layout {
      * DT: 11.29.2023 **/
    private function wine_actions_template($properties) {
 
+
    /**
      * --------------------------------------------------------------------------------------------
      * @condition falsy value 
@@ -170,6 +179,7 @@ extends \PHPWineOptimizedHtml\Layout {
      prefix => isset($properties[prefix]),
      icon   => isset($properties[icon]),
      accordion => isset($properties[accordion]),
+     hooks => isset($properties[hooks]),
      
      /**
       * -------------------------------------------------------------------------------------------
@@ -203,8 +213,8 @@ extends \PHPWineOptimizedHtml\Layout {
       'content' => [
 
         $properties[accordion]?? [],
-        // prefix required in every new ionstance
         $properties[prefix]?? false,
+        $properties[hooks]?? []
 
       ]
     
@@ -244,7 +254,7 @@ extends \PHPWineOptimizedHtml\Layout {
             $prefix       = $this->falsy['content'][1];   
             $iconPosition = strtolower($this->falsy['properties'][0]);    
             $menu_items   = (array) array_unique($this->falsy['content'][0]);
-  
+ 
            if($iconPosition==='left') { 
             $this->left=$iconPosition; 
             $wineIcon = new \PHPWineOptimizedHtml\Doctrine\Icons;
@@ -252,7 +262,8 @@ extends \PHPWineOptimizedHtml\Layout {
                 $menu_items,
                 $prefix,
                 $this->falsy,
-                $iconPosition
+                $iconPosition,
+                $this->falsy['content'][2]
              );
             $this->events = $wineIcon->event();
             return $icon;
@@ -263,7 +274,8 @@ extends \PHPWineOptimizedHtml\Layout {
                  $menu_items,
                  $prefix,
                  $this->falsy,
-                 $iconPosition
+                 $iconPosition,
+                 $this->falsy['content'][2]
              );
              $this->events = $wineIcon->event();
              return $icon;
@@ -299,33 +311,73 @@ extends \PHPWineOptimizedHtml\Layout {
 
              array_push($this->events, "$valid_hook");
 
+             // filteer attr lists menu
+             $id     = wine_valid_id($valid_hook);
+             $class  = $prefix."list-item";
+             $methods = $prefix.$id;
+             $filered_attr_child_lists = $this->is_valid_object(
+              $this->falsy['content'][2],
+              $methods,
+              $id,
+              $class
+            );
+
+             // filter attr Container 
+             $con_id = wine_valid_id($content);
+             $con_class = "content";
+             $con_methods = $prefix.$con_id;
+             $filered_attr_container_lists = $this->is_valid_object(
+              $this->falsy['content'][2],
+              $con_methods,
+              $con_id,
+              $con_class
+             );
+
+             // menu lists title items
+             $title_id = wine_valid_id($prefix.$value);
+             $title_class = $prefix.$valid_hook;
+             $title_methods = $prefix.$title_id;
+             $filered_attr_lists_title = $this->is_valid_object(
+              $this->falsy['content'][2],
+              $title_methods,
+              $title_id,
+              $title_class
+            );
+
              $menu_accordion[] = wine(div,[
                child => [
                     
-                 [ __, 
-                   value=>[wine(span,$value,[classes=>$prefix.$valid_hook],[
-                    [$hook_top_menu],[$hook_bottom_menu]
-                   ])]
-                 ]
+               [ __, 
+                 value=>[wine(span,$this->hook_inside($prefix,$value,1),$filered_attr_lists_title,[
+                  [$hook_top_menu],[$hook_bottom_menu]
+                 ])]
+               ]
 
-               ] 
-             ],[
-              classes=>$prefix."list-item",
-              id=>wine_valid_id($valid_hook),
-             ],
-              [[$hook_item_top],[$hook_item_bot]])  
-              . wine( div,
-                 $content,
-                [classes=>"content"],
-                [[$hook_content_top],[$hook_content_bot]]
-              );
-            }
-            
+             ]],$filered_attr_child_lists,
+              [[$hook_item_top],[$hook_item_bot]]) .
+
+              wine(div,$this->hook_inside($prefix,$content),
+               $filered_attr_container_lists,[
+               [$hook_content_top],[$hook_content_bot]
+              ]);
+
+           }
+
+           // filter accordion main and parent container
+           $id    = wine_valid_id($prefix."menu_item");
+           $class = 'a-wine';
+           $main_method = $prefix.$id;
+
+           $filered_attr = $this->is_valid_object(
+             $this->falsy['content'][2],
+             $main_method,
+             $id,
+             $class
+           );
+   
            return [
-             wine(div,implode("",$menu_accordion),[id=>wine_valid_id(
-              $prefix."menu_item"
-            )]
-           )];
+            wine(div,implode("",$menu_accordion),$filered_attr),
+           ];
 
           } 
          } 
@@ -339,7 +391,7 @@ extends \PHPWineOptimizedHtml\Layout {
      * --------------------------------------------------------------------------------------------
      * @execute return the accordion with script !
      * -------------------------------------------------------------------------------------------- */
-   return $this->lists_menu.wine(script,[child=>[please=>function(){$script=[];$menu_list=array_unique($this->events);if($this->falsy[icon]){$script[]=" const currentIconOne = function(list) { ";$script[]=" if(list.children[1].style.display==='none' || list.children[0].style.display===''){list.children[1].style.display=''; list.children[0].style.display='none';}else{list.children[1].style.display='none'; list.children[0].style.display='';} ";$script[]=" }; ";$script[]=" const currentIconTwo = function(list) { ";$script[]=" if(list.children[2].style.display==='none' || list.children[1].style.display===''){list.children[2].style.display=''; list.children[1].style.display='none'; }else{list.children[2].style.display='none'; list.children[1].style.display='';} ";$script[]=" }; ";if($this->left==="left"){foreach($menu_list as $list){$list=wine_valid_id("{$list}");$script[]=" var menu{$list}=document.getElementById('{$list}'); ";$script[]=" menu{$list}.children[1].style.display='none'; ";$script[]=" menu{$list}.addEventListener('click',function(){currentIconOne(menu{$list});}); ";}}else{if($this->right==="right"){foreach($menu_list as $list){$list=wine_valid_id("{$list}");$script[]=" var menu{$list} =document.getElementById('{$list}'); ";$script[]=" menu{$list}.children[2].style.display ='none'; ";$script[]=" menu{$list}.addEventListener('click',function(){currentIconTwo(menu{$list})}); ";}}}$script[]=" var acc = document.querySelectorAll('.wine_list-item'); var wine; acc.forEach(function(vc,jk){vc.nextElementSibling.style.display ='none'; }); ";$script[]=" for(wine = 0; wine < acc.length; wine++){acc[wine].addEventListener('click',function(){this.classList.toggle('active'); var content =this.nextElementSibling; ";$script[]=" if(content.style.display==='block'){content.style.display='none';}else{content.style.display='block';} ";$script[]=" }); ";$script[]=" } ";}else{$script[]=" var acc = document.querySelectorAll('.wine_list-item'); var wine; acc.forEach(function(vc,jk){vc.nextElementSibling.style.display ='none'; });";$script[]="for(wine = 0; wine < acc.length; wine++){acc[wine].addEventListener('click',function(){this.classList.toggle('active'); var content =this.nextElementSibling;";$script[]="if(content.style.display==='block'){content.style.display='none';}else{content.style.display='block';}";$script[]="});";$script[]="}";}return $script;},],],[classes=>"app-response"]);
+   return $this->lists_menu.wine(script,[child=>[please=>function(){$script=[];$menu_list=array_unique($this->events);if($this->falsy[icon]){$script[]=" const currentIconOne = function(list) { ";$script[]=" if(list.children[1].style.display==='none' || list.children[0].style.display===''){list.children[1].style.display=''; list.children[0].style.display='none';}else{list.children[1].style.display='none'; list.children[0].style.display='';} ";$script[]=" }; ";$script[]=" const currentIconTwo = function(list) { ";$script[]=" if(list.children[2].style.display==='none' || list.children[1].style.display===''){list.children[2].style.display=''; list.children[1].style.display='none'; }else{list.children[2].style.display='none'; list.children[1].style.display='';} ";$script[]=" }; ";if($this->left==="left"){foreach($menu_list as $list){$list=wine_valid_id("{$list}");$script[]=" var menu{$list}=document.getElementById('{$list}'); ";$script[]=" menu{$list}.children[1].style.display='none'; ";$script[]=" menu{$list}.addEventListener('click',function(){currentIconOne(menu{$list});}); ";}}else{if($this->right==="right"){foreach($menu_list as $list){$list=wine_valid_id("{$list}");$script[]=" var menu{$list} =document.getElementById('{$list}'); ";$script[]=" menu{$list}.children[2].style.display ='none'; ";$script[]=" menu{$list}.addEventListener('click',function(){currentIconTwo(menu{$list})}); ";}}}$script[]=" var acc = document.querySelectorAll('.wine_list-item'); var wine; acc.forEach(function(vc,jk){vc.nextElementSibling.style.display ='none'; }); ";$script[]=" for(wine = 0; wine < acc.length; wine++){acc[wine].addEventListener('click',function(){this.classList.toggle('w-active'); var content =this.nextElementSibling; ";$script[]=" if(content.style.display==='block'){content.style.display='none';}else{content.style.display='block';} ";$script[]=" }); ";$script[]=" } ";}else{$script[]=" var acc = document.querySelectorAll('.wine_list-item'); var wine; acc.forEach(function(vc,jk){vc.nextElementSibling.style.display ='none'; });";$script[]="for(wine = 0; wine < acc.length; wine++){acc[wine].addEventListener('click',function(){this.classList.toggle('w-active'); var content =this.nextElementSibling;";$script[]="if(content.style.display==='block'){content.style.display='none';}else{content.style.display='block';}";$script[]="});";$script[]="}";}return $script;},],],[classes=>"app-response"]);
 
   }
 
