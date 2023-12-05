@@ -334,7 +334,8 @@ extends \PHPWineOptimizedHtml\Layout {
                   $title_id,
                   $title_class
                 ),[
-                  ["top_$title_methods"],["bottom_$title_methods"]
+                  ["top_$title_methods"],
+                  ["bottom_$title_methods"]
                  ])]
                ]
 
@@ -348,7 +349,10 @@ extends \PHPWineOptimizedHtml\Layout {
                $id,
                $class
               ),
-             [["top_$methods"],["bottom_$methods"]]) .
+             [
+              ["top_$methods"],
+              ["bottom_$methods"]
+             ]) .
 
               wine(div,$this->hook_inside($prefix,$content),
                attr(
