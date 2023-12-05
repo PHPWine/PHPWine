@@ -95,7 +95,7 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                           if($iconPosition === 'right') {
                               return [
                                wine(span,
-                               $this->hook_inside($prefix,$value,1),attr(
+                               $this->wine_get_value($prefix,$value,1),attr(
                                  $filered_attr,
                                  $right_methods,
                                  [ 
@@ -255,7 +255,7 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                             if($iconPosition === 'left') {
                               return [
                                 wine( span,
-                                 $this->hook_inside($prefix,$value,1),attr(
+                                 $this->wine_get_value($prefix,$value,1),attr(
                                    $filered_attr,
                                    $left_methods,
                                    [
@@ -304,7 +304,7 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
 
              $acdn_menu[] = wine(
               div,
-              $this->hook_inside($prefix,$content),attr(
+              $this->wine_get_value($prefix,$content),attr(
                $filered_attr,
                $icon_methods,
                [id=>$icon_id,classes=>$icon_class],

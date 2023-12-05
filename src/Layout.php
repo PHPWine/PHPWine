@@ -1266,7 +1266,7 @@
       return (string) $hooked;
    }
    
-   protected function hook_inside($prefix, $value, $states = 0, $not = false) {
+   protected function wine_get_value($prefix, $value, $states = 0, $not = false) {
 
     $p = $prefix;
     if($not === true) {

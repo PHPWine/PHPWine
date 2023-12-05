@@ -324,7 +324,7 @@ extends \PHPWineOptimizedHtml\Layout {
                child => [
                     
                [ __, 
-                 value=>[wine(span,$this->hook_inside($prefix,$value,1),attr(
+                 value=>[wine(span,$this->wine_get_value($prefix,$value,1),attr(
                   $filered_attr,
                   $title_methods,
                   [ 
@@ -354,7 +354,7 @@ extends \PHPWineOptimizedHtml\Layout {
               ["bottom_$methods"]
              ]) .
 
-              wine(div,$this->hook_inside($prefix,$content),
+              wine(div,$this->wine_get_value($prefix,$content),
                attr(
                  $filered_attr,
                  $con_methods,
