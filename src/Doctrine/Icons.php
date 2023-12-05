@@ -64,7 +64,7 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
 
             $left_list_id = wine_valid_id($valid_hook);
             $left_list_classes = $prefix . "list-item";
-            $left_list_method  = $prefix . $left_list_id;
+            $left_list_method  = "attr_".$prefix . $left_list_id;
 
             array_push($this->event, "$valid_hook");
 
@@ -90,20 +90,24 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                           // menu lists title items
                           $right_id = wine_valid_id($prefix.$value);
                           $right_class = $prefix.$valid_hook;
-                          $right_methods = $prefix.$right_id;
+                          $right_methods = "attr_".$prefix.$right_id;
 
                           if($iconPosition === 'right') {
                               return [
-                               wine(span,
-                               $this->wine_get_value($prefix,$value,1),attr(
-                                 $filered_attr,
-                                 $right_methods,
-                                 [ 
-                                   id=>$right_id,
-                                   classes=>$right_class
-                                 ],
-                                 $right_id,
-                                 $right_class
+                              wine(span, $this->wine_get_value(
+                                $filered_attr,
+                                $prefix,
+                                $value,1
+                               ),
+                              attr(
+                                $filered_attr,
+                                $right_methods,
+                                [ 
+                                  id=>$right_id,
+                                  classes=>$right_class
+                                ],
+                                $right_id,
+                                $right_class
                                ),[
                                 ["top_$right_methods"],
                                 ["bottom_$right_methods"]
@@ -250,20 +254,24 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                             // menu lists title items
                             $left_id = wine_valid_id($prefix.$value);
                             $left_class = $prefix.$valid_hook;
-                            $left_methods = $prefix.$left_id;
+                            $left_methods = "attr_".$prefix.$left_id;
 
                             if($iconPosition === 'left') {
                               return [
-                                wine( span,
-                                 $this->wine_get_value($prefix,$value,1),attr(
+                                wine( span, $this->wine_get_value(
                                    $filered_attr,
-                                   $left_methods,
-                                   [
-                                     id=>$left_id,
-                                     classes=>$left_class
-                                   ],
-                                   $left_id,
-                                   $left_class
+                                   $prefix,
+                                   $value,1
+                                ),
+                                attr(
+                                  $filered_attr,
+                                  $left_methods,
+                                  [
+                                    id=>$left_id,
+                                    classes=>$left_class
+                                  ],
+                                  $left_id,
+                                  $left_class
                                  ),[
                                   ["top_$left_methods"],
                                   ["bottom_$left_methods"]
@@ -300,11 +308,15 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
              // contents attr hook
              $icon_id = wine_valid_id($content);
              $icon_class = "content";
-             $icon_methods = $prefix.$icon_id;
+             $icon_methods = "attr_".$prefix.$icon_id;
 
              $acdn_menu[] = wine(
-              div,
-              $this->wine_get_value($prefix,$content),attr(
+              div,$this->wine_get_value(
+                $filered_attr,
+                $prefix,
+                $content
+              ),
+              attr(
                $filered_attr,
                $icon_methods,
                [id=>$icon_id,classes=>$icon_class],
@@ -324,7 +336,7 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
 
         $id    = wine_valid_id($prefix."menu_item");
         $class = 'a-wine';
-        $icon_method = $prefix.$id;
+        $icon_method = "attr_".$prefix.$id;
         
         return [
          wine(div,implode("",$acdn_menu),attr(

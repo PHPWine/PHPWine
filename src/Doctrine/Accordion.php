@@ -298,33 +298,37 @@ extends \PHPWineOptimizedHtml\Layout {
 
              array_push($this->events, "$valid_hook");
 
-             $obj_filtered = $this->falsy['content'][2][0];
-
-             if(isset($obj_filtered)) { $filered_attr = $obj_filtered; } 
+             if(isset($this->falsy['content'][2][0])) { $filered_attr = $this->falsy['content'][2][0]; } 
              else {
-               $filered_attr = $this;
+               $filered_attr = false;
              }
 
              // filteer attr lists menu
              $id     = wine_valid_id($valid_hook);
              $class  = $prefix."list-item";
-             $methods = $prefix.$id;
+             $methods = "attr_".$prefix.$id;
 
              // filter attr Container 
              $con_id = wine_valid_id($content);
              $con_class = "content";
-             $con_methods = $prefix.$con_id;
+             $con_methods = "attr_".$prefix.$con_id;
 
              // menu lists title items
              $title_id = wine_valid_id($prefix.$value);
              $title_class = $prefix.$valid_hook;
-             $title_methods = $prefix.$title_id;
+             $title_methods = "attr_".$prefix.$title_id;
 
              $menu_accordion[] = wine(div,[
                child => [
                     
                [ __, 
-                 value=>[wine(span,$this->wine_get_value($prefix,$value,1),attr(
+                 value=>[wine(span,
+                  $this->wine_get_value(
+                    $filered_attr,
+                    $prefix,
+                    $value,1
+                  ),
+                  attr(
                   $filered_attr,
                   $title_methods,
                   [ 
@@ -354,17 +358,22 @@ extends \PHPWineOptimizedHtml\Layout {
               ["bottom_$methods"]
              ]) .
 
-              wine(div,$this->wine_get_value($prefix,$content),
-               attr(
-                 $filered_attr,
-                 $con_methods,
-                 [ 
-                   id =>$con_id,
-                   classes=>$con_class
-                 ],
-                 $con_id,
-                 $con_class
-                ),[
+              wine( div,
+                $this->wine_get_value(
+                  $filered_attr,
+                  $prefix,
+                  $content
+                 ),
+                 attr(
+                  $filered_attr,
+                  $con_methods,
+                  [ 
+                    id =>$con_id,
+                    classes=>$con_class
+                  ],
+                  $con_id,
+                  $con_class
+                 ),[
                ["top_$con_methods"],
                ["bottom_$con_methods"]
               ]);
@@ -372,13 +381,11 @@ extends \PHPWineOptimizedHtml\Layout {
            }
 
            // filter accordion main and parent container
-           $obj_filtered = $this->falsy['content'][2][0];
            $id    = wine_valid_id($prefix."menu_item");
            $class = 'a-wine';
-           $main_method = $prefix.$id;
-           
+           $main_method = "attr_".$prefix.$id;
 
-           if(isset($obj_filtered)) { $filered_attr = $obj_filtered; } 
+           if(isset($this->falsy['content'][2][0])) { $filered_attr = $this->falsy['content'][2][0]; } 
            else {
              $filered_attr = $this;
            }
