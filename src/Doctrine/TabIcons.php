@@ -44,35 +44,33 @@ class TabIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
 
     public function __construct()
     {
-        $wine = new \PHPWineOptimizedHtml\OptimizedHtml();
+       new \PHPWineOptimizedHtml\OptimizedHtml();
     }
 
-    public function Position($menu_items, $prefix, $falsy, $iconPosition)
+    public function Position($menu_items, $prefix, $falsy, $iconPosition, $obj)
     {
         $acdn_menu = [];
+
+        if($obj) { $filered_attr = $obj; } 
+        else {
+          $filered_attr = $this;
+        }
 
         foreach ($menu_items as $value => $content) {
 
             $hook_data = [
               'top_tab_',
               'bottom_tab_',
-              'top_main_',
-              'bottom_main_'
             ];
 
             // clean up to make vbalid hook
             $valid_hook = $this->valid_hook($value);
               
             $hook_tab_item    = wine_valid_hook($value,3);
-            $hook_tab_content = wine_valid_hook($content,3);
-
+    
             // Hook for list item
             $hook_item_top=$hook_data[0].$hook_tab_item;
             $hook_item_bot=$hook_data[1].$hook_tab_item;
-
-            // Hook for list item content
-            $hook_content_top=$hook_data[2].$hook_tab_content;
-            $hook_content_bot=$hook_data[3].$hook_tab_content;
 
             array_push($this->event, "$valid_hook");
 
@@ -86,14 +84,37 @@ class TabIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                             $prefix,
                             $valid_hook,
                             $value,
-                            $iconPosition
+                            $iconPosition,
+                            $filered_attr
                          ) {
+
+                          // menu lists title items
+                          $right_id = wine_valid_id($prefix.$value);
+                          $right_class = $prefix.$valid_hook;
+                          $right_methods = "attr_".$prefix.$right_id;
+
                           if($iconPosition === 'right') {
+
                               return [
-                               wine(span,
-                                $value, 
-                                [classes=>$prefix.$valid_hook])
-                              ];
+                               wine(span,$this->wine_get_value(
+                                $filered_attr,
+                                $prefix,
+                                $value,1
+                               ), 
+                              attr(
+                                $filered_attr,
+                                $right_methods,
+                                [
+                                  id =>$right_id,
+                                  classes=> $right_class
+                                ],
+                                $right_id,
+                                $right_class
+                               ),[
+                                ["top_$right_methods"],
+                                ["bottom_$right_methods"]
+                              ])];
+
                           } else {
                               return [];
                           }
@@ -119,7 +140,6 @@ class TabIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                                     "bottom_defualt_" . $prefix . $valid_hook;
 
                                 $default = $falsy["properties"][1] ?? false;
-                                $clicked = $falsy["properties"][2] ?? false;
 
                                 // $default
                                 $iconLeft = [];
@@ -149,16 +169,31 @@ class TabIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                             $prefix,
                             $valid_hook,
                             $value,
-                            $iconPosition
+                            $iconPosition,
+                            $filered_attr
                           ) {
+
+                            // menu lists title items
+                            $left_id = wine_valid_id($prefix.$value);
+                            $left_class = $prefix.$valid_hook;
+                            $left_methods = "attr_".$prefix.$left_id;
+
                             if($iconPosition === 'left') {
                               return [
                                 wine( span,
-                                $value, 
-                                [classes=>$prefix.$valid_hook])
-                              ];
+                                 $this->wine_get_value(
+                                   $filered_attr,
+                                   $prefix,
+                                   $value,1
+                                ),[
+                                  id => $left_id,  
+                                  classes=>$left_class 
+                                ],[
+                                 ["top_$left_methods"],
+                                 ["bottom_$left_methods"]   
+                             ])];
                             } else {
-                                return [];
+                               return [];
                             }
                         }
                      ]
@@ -166,16 +201,31 @@ class TabIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                 ]]
               ] 
             ],[
-                classes => $prefix . "list-item",
                 id => wine_valid_id($valid_hook),
+                classes => $prefix . "list-item",
             ],
             [[$hook_item_top], [$hook_item_bot]]);
 
         }
 
+        $tab_lists_id = wine_valid_id($prefix."tab_item");
+        $tab_method_lists = "attr_".$prefix.$tab_lists_id;
+        
         return [
-            wine(div, implode("", $acdn_menu), [id =>wine_valid_id($prefix."tab_item")])
-        ];
+          wine(div,implode("",$acdn_menu),
+           attr(
+            $filered_attr,
+            $tab_method_lists,
+            [  
+               id=>$tab_lists_id, 
+               classes=>'t-wine-lists'
+            ],
+            $tab_lists_id,
+            't-wine-lists'
+        ),[
+         ["top_$tab_method_lists"],
+         ["bottom_$tab_method_lists"] 
+       ])];
         
     }
 

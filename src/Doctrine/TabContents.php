@@ -44,102 +44,88 @@ class TabContents extends \PHPWineOptimizedHtml\Doctrine\Tab
 
     public function __construct()
     {
-        $wine = new \PHPWineOptimizedHtml\OptimizedHtml();
+       new \PHPWineOptimizedHtml\OptimizedHtml();
     }
 
-    public function content($menu_items, $prefix)
+    public function content($menu_items, $prefix, $obj)
     {
         $tab_content = array();
      
         foreach ($menu_items as $value => $content) {
 
-          // static hoook function
-           $hook_data = [
-            'top_tab_',
-            'bottom_tab_'
-           ];
-  
-           $hook_tab_item    = wine_valid_hook($value,3);
-           $hook_tab_content = wine_valid_hook($content,3);
-
-           // clean up to make vbalid hook
+            //clean up to make vbalid hook
             $valid_hook = $this->valid_hook($value);
-            // Hook for list item
-            $hook_item_top=$hook_data[0].$hook_tab_item;
-            $hook_item_bot=$hook_data[1].$hook_tab_item;
-            // Hook for list item content
-            $hook_content_top=$hook_data[0].$hook_tab_content;
-            $hook_content_bot=$hook_data[1].$hook_tab_content;
 
+            // push array hook val for events 
             array_push($this->events,"$valid_hook");
 
-            $none_menu[] = wine(div,[
-              child => [
-                   
-                [ __,
-                value =>[later(
-                 $hook_item_top,
-                 $valid_hook,
-                 $value,
-                 $content
-                )]
-                ],
-                [ span, 
-                  attr =>[[classes=>$prefix.$valid_hook]], 
-                  value=>[$value]
-                ],
-                [ __,
-                 value =>[later(
-                  $hook_item_bot,
-                  $valid_hook,
-                  $value,
-                  $content
-                )]
-                ]
+            // Container and contents
+            $tab_con_item_id = wine_valid_id($prefix.$content);
+            $tab_con_item_class = $prefix.$valid_hook."_tab";
+            // hook for filter attributes
+            $tab_method_items = "attr_".$prefix.$tab_con_item_id;
+            // hook inert top and bottom
+            $tab_hook_insert  = $prefix.$tab_con_item_id;
 
-            ]],[
-              classes=>$prefix."tab-item",id=>wine_valid_id(
-               $valid_hook
-            )]);
+            // conatiner of contents
+            $container_id = wine_valid_id($valid_hook."_tab");
+            $containerClass = $prefix."tab-content";
+            // hook insert top and bottom
+            $con_hook_insert = $prefix.$container_id;
 
-            $tab_content[] = wine(div,[
-             child => [
-                  
-               [ __,
-                value =>[later(
-                 $hook_content_top,
-                 $valid_hook,
-                 $value,
-                 $content
-                )]
-               ],
-               [ div, 
-                 attr =>[[classes=>$prefix.$valid_hook."_tab"]], 
-                 value=>[$content]
-               ],
-               [ __,
-                value =>[later(
-                 $hook_content_bot,
-                 $valid_hook,
-                 $value,
-                 $content
-                )]
-               ],
-
-             ] 
+            $tab_content[] = wine(div,
+            wine(div,
+             $this->wine_get_value(
+              $obj,
+              $prefix,
+              $content,1
+            ),
+            attr(
+              $obj,
+              $tab_method_items,
+              [
+                 id=>$tab_con_item_id,
+                 classes=>$tab_con_item_class
+              ],
+              $tab_con_item_id,
+              $tab_con_item_class
+            ),[
+              ["top_$tab_hook_insert"],
+              ["bottom_$tab_hook_insert"]
+            ]),[
+             id=>$container_id,
+             classes=>$containerClass,
             ],[
-             classes=>$prefix."tab-content",
-             id=>wine_valid_id(
-              $valid_hook."_tab"
-            )]);
+             ["top_$con_hook_insert"],
+             ["bottom_$con_hook_insert"] 
+            ]);
            
           }
 
+          // Dynamic vaid ID
+          $tab_container_id = wine_valid_id($prefix."tab_content");
+
+          // filter hook attr
+          $tab_method_items = "attr_".$prefix.$tab_container_id;
+
+          // hook for top and bottom
+          $tab_hook_insert  = $prefix.$tab_container_id;
+
           return [
-            wine(div,implode("",$tab_content),[id=>wine_valid_id(
-             $prefix."tab_content"
-           )])
-          ];
+            wine(div,implode("",$tab_content),
+            attr(
+              $obj,
+              $tab_method_items,
+              [
+                id=>$tab_container_id,
+                classes=>'t-wine-content'
+              ],
+              $tab_container_id,
+              't-wine-content'
+             ),[
+              ["top_$tab_hook_insert"],
+              ["bottom_$tab_hook_insert"]
+         ])];
 
     }
 

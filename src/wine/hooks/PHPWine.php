@@ -233,7 +233,7 @@ if (file_exists( $require_file)) {
                      * DT: 10.30.2023 *
                      * If the attribute in hook is a string then print as is
                      */
-                    if( is_string(...$a) ) 
+                    if( is_string($a) ) 
                         {
                         return implode("",$a); 
                         } 

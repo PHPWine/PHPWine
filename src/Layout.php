@@ -1266,7 +1266,7 @@
       return (string) $hooked;
    }
    
-   protected function wine_get_value($prefix, $value, $states = 0, $not = false) {
+   protected function wine_get_value($obj, $prefix, $value, $states = 0, $not = false) : string {
 
     $p = $prefix;
     if($not === true) {
@@ -1287,12 +1287,14 @@
       } else if($states === 9)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$p.$p.$p.$p.$value);
       } else if($states === 10) { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$p.$p.$p.$p.$p.$value);}
  
-      if(function_exists($wine_valid_hook)) {
-        $value = later($wine_valid_hook, $value);
+      if($obj) {
+        if(method_exists($obj,$wine_valid_hook)) {
+          $value=magic($obj,$wine_valid_hook,$value);
+        }
       }
-  
-      return $value;
-  
+
+     return (string) $value;
+
     } 
    
    }

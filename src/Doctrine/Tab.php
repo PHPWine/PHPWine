@@ -108,6 +108,8 @@ extends \PHPWineOptimizedHtml\Layout {
    * DT: 11.29.2023 **/
   protected  $right;
 
+  protected $hook;
+
   public function __construct($wine_tab)
   {
       
@@ -144,6 +146,12 @@ extends \PHPWineOptimizedHtml\Layout {
     ], 
      $wine_tab
     );
+
+    $this->hook = $this->is_defined([
+      'DRKEY_HOOKS'
+     ],
+      $wine_tab
+    );
       
     $this->wine_actions_template($wine_tab);
 
@@ -170,7 +178,7 @@ extends \PHPWineOptimizedHtml\Layout {
           prefix => isset($properties[prefix]),
           icon   => isset($properties[icon]),
           tab => isset($properties[tab]),
-        
+          hooks => isset($properties[hooks]),
          /**
           * -------------------------------------------------------------------------------------------
           * @properties new instance accordion properties 
@@ -203,6 +211,7 @@ extends \PHPWineOptimizedHtml\Layout {
            $properties[tab]?? [],
            // prefix required in every new ionstance
            $properties[prefix]?? false,
+           $properties[hooks]?? []
          ]
        ];
    
@@ -241,6 +250,11 @@ extends \PHPWineOptimizedHtml\Layout {
               $iconPosition = strtolower($this->falsy['properties'][0]);    
               $menu_items   = (array) array_unique($this->falsy['content'][0]);
 
+              if($this->falsy[hooks]) { $filered_attr = $this->falsy['content'][2][0]; } 
+              else {
+                $filered_attr = $this;
+              }
+
              if($iconPosition==='left') { 
               $this->left=$iconPosition; 
               $wineIcon = new \PHPWineOptimizedHtml\Doctrine\TabIcons;
@@ -248,11 +262,12 @@ extends \PHPWineOptimizedHtml\Layout {
                  $menu_items,
                  $prefix,
                  $this->falsy,
-                 $iconPosition
+                 $iconPosition,
+                 $filered_attr
               );
               $this->events = $wineIcon->event();
               $left_content = new \PHPWineOptimizedHtml\Doctrine\TabContents;
-              $tab = $left_content->content($menu_items, $prefix);
+              $tab = $left_content->content($menu_items, $prefix, $filered_attr);
               $this->events = $left_content->event();
               return [$icon[0] . $tab[0]];
 
@@ -263,122 +278,175 @@ extends \PHPWineOptimizedHtml\Layout {
                   $menu_items,
                   $prefix,
                   $this->falsy,
-                  $iconPosition
+                  $iconPosition,
+                  $filered_attr
                );
                $this->events = $wineIcon->event();
                $right_content = new \PHPWineOptimizedHtml\Doctrine\TabContents;
-               $tab = $right_content->content($menu_items, $prefix);
+               $tab = $right_content->content($menu_items, $prefix, $filered_attr);
                $this->events = $right_content->event();
                return [$icon[0] . $tab[0]];
 
              } else {
+ 
+              $tab_list=array();
+              $tab_content=array();
 
-              $tab_list = array();
-              $tab_content = array();
+              if($this->falsy[hooks]) { $filered_attr = $this->falsy['content'][2][0]; } 
+              else {
+                $filered_attr = $this;
+              }
+
+              $tab_lists_id  =wine_valid_id($prefix."tab_item");
+              $tab_content_id=wine_valid_id($prefix."tab_content");
   
               foreach ($menu_items as $value => $content) {
-  
-                $hook_data = [
-                  'top_tab_',
-                  'bottom_tab_',
-                  'top_main_',
-                  'bottom_main_'
-                ];
 
                // clean up to make vbalid hook
                $valid_hook = $this->valid_hook($value);
-               
-               $hook_tab_item = wine_valid_hook($value,3);
-               $hook_tab_content = wine_valid_hook($content,3);
-
-               // Hook for list item
-               $hook_item_top=$hook_data[0].$hook_tab_item;
-               $hook_item_bot=$hook_data[1].$hook_tab_item;
-               // Hook for list item content
-               $hook_content_top=$hook_data[0].$hook_tab_content;
-               $hook_content_bot=$hook_data[1].$hook_tab_content;
-               // Hook for main tab and lists containers
-               $hook_btn_container_top=$hook_data[2].wine_valid_id($prefix."tab_item");
-               $hook_btn_container_bot=$hook_data[3].wine_valid_id($prefix."tab_item");
-               $hook_con_container_top=$hook_data[2].wine_valid_id($prefix."tab_content");
-               $hook_con_container_bot=$hook_data[3].wine_valid_id($prefix."tab_content");
 
                array_push($this->events,"$valid_hook");
+
+                // iDs for dynamic container and values
+               $tab_lists_ids=wine_valid_id($prefix.$value);
+               $tab_parent_lists_ids=wine_valid_id($valid_hook);
+
+               // iDs for dynamic container and contents
+               $tab_contents_ids=wine_valid_id($prefix.$content);
+               $tab_content_ids=wine_valid_id($valid_hook."_tab");
+
+               // hook for attr filter
+               $tab_contents_method_ids = "attr_".$prefix.$tab_contents_ids;
+               $tab_content_method_ids  = "attr_".$prefix.$tab_content_ids;
+
+               // hook for insert top and bottom
+               $tab_contents_hook = $prefix.$tab_contents_ids;
+               $tab_content_hook  = $prefix.$tab_content_ids;
+
+               // hook for attri filter
+               $tab_list_method = "attr_".$prefix.$tab_lists_ids;
+               $tab_cons_method = "attr_".$prefix.$tab_parent_lists_ids;
+
+               // hook for insert top ad bottom
+               $tab_list_hook = $prefix.$tab_lists_ids;
+               $tab_cons_hook = $prefix.$tab_parent_lists_ids;
                
-               $tab_list[] = wine(div,[
-                 child => [
-                   
-                  [ __,
-                    value =>[later(
-                     $hook_item_top,
-                     $valid_hook,
-                     $value,
-                     $content
-                    )]
-                  ],
-                  [ span, 
-                    attr =>[[classes=>$prefix.$valid_hook]], 
-                    value=>[$value]
-                  ],
-                  [ __,
-                    value =>[later(
-                      $hook_item_bot,
-                      $valid_hook,
-                      $value,
-                      $content
-                    )]
+               $tab_list[] = wine(div,
+                wine(
+                  span,
+                  $this->wine_get_value(
+                    $filered_attr,
+                    $prefix,
+                    $value,1
+                  ),
+                  attr(
+                   $filered_attr,
+                   $tab_list_method,
+                   [
+                     id=>$tab_lists_ids,
+                     classes=>$prefix.$valid_hook
+                   ],
+                   $tab_lists_ids,
+                   $prefix.$valid_hook
+                  ), [
+                    ["top_$tab_list_hook"],
+                    ["bottom_$tab_list_hook"]
                   ]
-  
-               ]],[
-                 classes=>$prefix."tab-item",id=>wine_valid_id(
-                   $valid_hook
-                 ),
-               ]);
+                  ),
+                  attr(
+                   $filered_attr,
+                   $tab_cons_method,
+                   [
+                    id=>$tab_parent_lists_ids,
+                    classes=>$prefix."tab-item"
+                   ],
+                   $tab_parent_lists_ids,
+                   $prefix."tab-item"
+                  ),[
+                    ["top_$tab_cons_hook"],
+                    ["bottom_$tab_cons_hook"]
+                  ]);
 
-                $tab_content[] = wine(div,[
-                child => [
-                     
-                  [ __,
-                    value =>[later(
-                     $hook_content_top,
-                     $valid_hook,
-                     $value,
-                     $content
-                    )]
+               $tab_content[] = wine(div,
+                wine(
+                 div,
+                 $this->wine_get_value(
+                  $filered_attr,
+                  $prefix,
+                  $content,1
+                ),
+                attr(
+                  $filered_attr,
+                  $tab_contents_method_ids,
+                  [
+                    id=>$tab_contents_ids,
+                    classes=>$prefix.$valid_hook."_tab"
                   ],
-                  [ div, 
-                    attr =>[[classes=>$prefix.$valid_hook."_tab"]], 
-                    value=>[$content]
+                  $tab_contents_ids,
+                  $prefix.$valid_hook."_tab"
+                ),[
+                  ["top_$tab_contents_hook"],
+                  ["bottom_$tab_contents_hook"]
+                ]),
+                 attr(
+                  $filered_attr,
+                  $tab_content_method_ids,
+                  [
+                    id=>$tab_content_ids,
+                    classes=>$prefix."tab-content"                 
                   ],
-                  [ __,
-                    value =>[later(
-                     $hook_content_bot,
-                     $valid_hook,
-                     $value,
-                     $content
-                    )]
-                  ]
-
-                ] 
-               ],[
-                 classes=>$prefix."tab-content",
-                 id=>wine_valid_id($valid_hook."_tab"),
-               ]);
+                  $tab_content_ids,
+                  $prefix."tab-content"
+                ),[
+                  ["top_$tab_content_hook"],
+                  ["bottom_$tab_content_hook"]
+                ]);
               
              }
-  
+
+             if($this->falsy[hooks]) { $filered_attr = $this->falsy['content'][2][0]; } 
+             else {
+               $filered_attr = $this;
+             }
+
+              // filter method hookf for attr
+              $tab_method_lists = "attr_".$prefix.$tab_lists_id;
+              $tab_method_items = "attr_".$prefix.$tab_content_id;
+
+              // hooks for top and bottom
+              $tab_hook_lists = $prefix.$tab_lists_id;
+              $tab_hook_items = $prefix.$tab_content_id;
+
              return [
-               wine(div,implode("",$tab_list),[id=>wine_valid_id(
-                $prefix."tab_item"
-              )],[
-                [$hook_btn_container_top],
-                [$hook_btn_container_bot]
-              ])
-              .wine(div,implode("",$tab_content),[id=>wine_valid_id(
-                $prefix."tab_content"
-              )],[
-                [$hook_con_container_top],
-                [$hook_con_container_bot]
+               wine(div,implode("",$tab_list),
+               attr(
+                $filered_attr,
+                $tab_method_lists,
+                [
+                  id=>$tab_lists_id,
+                  classes=>'t-wine-lists'
+                ],
+                $tab_lists_id,
+                't-wine-lists'
+               )
+               ,[
+                ["top_$tab_hook_lists"],
+                ["bottom_$tab_hook_lists"]
+               ])
+               .wine(div,implode("",$tab_content),
+               attr(
+                $filered_attr,
+                $tab_method_items,
+                [
+                  id=>$tab_content_id,
+                  classes=>'t-wine-content'
+                ],
+                $tab_content_id,
+                't-wine-content'
+               )
+               ,[
+                ["top_$tab_hook_items"],
+                ["bottom_$tab_hook_items"]
               ]) 
             ];
            } 
