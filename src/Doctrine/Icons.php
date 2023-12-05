@@ -55,23 +55,7 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
         foreach ($menu_items as $value => $content) {
             
             // clean up to make vbalid hook
-            $valid_hook = $this->valid_hook($value);
-
-            // static hook collections
-            $hooks_data = [
-              'top_item_list',
-              'bottom_item_list',
-              'top_content',
-              'bottom_content'
-            ];
-
-            // Hook for list item
-            $hook_item_top=$hooks_data[0].$valid_hook;
-            $hook_item_bot=$hooks_data[1].$valid_hook;
-
-            // Hook for list item content
-            $hook_content_top=$hooks_data[2].$valid_hook;
-            $hook_content_bot=$hooks_data[3].$valid_hook;
+            $valid_hook = $this->valid_hook($value);     
 
             if(isset($attr)) { $filered_attr = $attr; } 
             else {
@@ -114,10 +98,16 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                                $this->hook_inside($prefix,$value,1),attr(
                                  $filered_attr,
                                  $right_methods,
-                                 [id=>$right_id,classes=>$right_class],
+                                 [ 
+                                   id=>$right_id,
+                                   classes=>$right_class
+                                 ],
                                  $right_id,
                                  $right_class
-                               ))
+                               ),[
+                                ["top_$right_methods"],
+                                ["bottom_$right_methods"]
+                               ])
                              ];
                           } else {
                              return [];
@@ -266,12 +256,18 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                               return [
                                 wine( span,
                                  $this->hook_inside($prefix,$value,1),attr(
-                                  $filered_attr,
-                                  $left_methods,
-                                  [id=>$left_id,classes=>$left_class],
-                                  $left_id,
-                                  $left_class
-                                ))
+                                   $filered_attr,
+                                   $left_methods,
+                                   [
+                                     id=>$left_id,
+                                     classes=>$left_class
+                                   ],
+                                   $left_id,
+                                   $left_class
+                                 ),[
+                                  ["top_$left_methods"],
+                                  ["bottom_$left_methods"]
+                                 ])
                               ];
                             } else {
                               return [];
@@ -284,11 +280,17 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
             ],attr(
               $attr,
               $left_list_method,
-              [id=>$left_list_id,classes=>$left_list_classes],
+              [ 
+                id=>$left_list_id,
+                classes=>$left_list_classes
+              ],
               $left_list_id,
               $left_list_classes
             ),
-            [[$hook_item_top],[$hook_item_bot]]);
+            [
+             ["top_$left_list_method"],
+             ["bottom_$left_list_method"]
+           ]);
 
             if(isset($attr)) { $filered_attr = $attr; } 
             else {
@@ -308,8 +310,10 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                [id=>$icon_id,classes=>$icon_class],
                $icon_id,
                $icon_class
-              ),[[$hook_content_top], [$hook_content_bot]]
-            );
+              ),[
+               ["top_$icon_methods"], 
+               ["bottom_$icon_methods"]
+             ]);
 
         }
 
@@ -329,7 +333,10 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
            [id=>$id,classes=>$class],
            $id,
            $class
-         ))
+         ),[
+          ["top_$icon_method"],
+          ["bottom_$icon_method"]
+         ])
         ];
 
     }

@@ -291,30 +291,10 @@ extends \PHPWineOptimizedHtml\Layout {
 
             $menu_accordion = array();
 
-            // static hook collections
-            $hooks_data = [
-              'top_item_list',
-              'bottom_item_list',
-              'top_content',
-              'bottom_content',
-              'top_menu_',
-              'bottom_menu_'
-            ];
-
             foreach ($menu_items as $value => $content) {
 
              // clean up to make valid hook
              $valid_hook = $this->valid_hook($value);
-
-             // Hook for list item
-             $hook_item_top=$hooks_data[0].$valid_hook;
-             $hook_item_bot=$hooks_data[1].$valid_hook;
-             // Hook for list item content
-             $hook_content_top=$hooks_data[2].$valid_hook;
-             $hook_content_bot=$hooks_data[3].$valid_hook;
-             // Hook content item menu
-             $hook_top_menu=$hooks_data[4].$prefix.$valid_hook;
-             $hook_bottom_menu=$hooks_data[5].$prefix.$valid_hook;
 
              array_push($this->events, "$valid_hook");
 
@@ -354,7 +334,7 @@ extends \PHPWineOptimizedHtml\Layout {
                   $title_id,
                   $title_class
                 ),[
-                  [$hook_top_menu],[$hook_bottom_menu]
+                  ["top_$title_methods"],["bottom_$title_methods"]
                  ])]
                ]
 
@@ -368,7 +348,7 @@ extends \PHPWineOptimizedHtml\Layout {
                $id,
                $class
               ),
-             [[$hook_item_top],[$hook_item_bot]]) .
+             [["top_$methods"],["bottom_$methods"]]) .
 
               wine(div,$this->hook_inside($prefix,$content),
                attr(
@@ -381,8 +361,8 @@ extends \PHPWineOptimizedHtml\Layout {
                  $con_id,
                  $con_class
                 ),[
-               [$hook_content_top],
-               [$hook_content_bot]
+               ["top_$con_methods"],
+               ["bottom_$con_methods"]
               ]);
 
            }
@@ -392,6 +372,7 @@ extends \PHPWineOptimizedHtml\Layout {
            $id    = wine_valid_id($prefix."menu_item");
            $class = 'a-wine cz';
            $main_method = $prefix.$id;
+           
 
            if(isset($obj_filtered)) { $filered_attr = $obj_filtered; } 
            else {
@@ -408,7 +389,10 @@ extends \PHPWineOptimizedHtml\Layout {
               ],
               $id,
               $class
-            )),
+            ),[
+              ["top_$main_method"],
+              ["bottom_$main_method"]
+            ]),
            ];
 
           } 
