@@ -73,6 +73,15 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
             $hook_content_top=$hooks_data[2].$valid_hook;
             $hook_content_bot=$hooks_data[3].$valid_hook;
 
+            if(isset($attr)) { $filered_attr = $attr; } 
+            else {
+              $filered_attr = $this;
+            }
+
+            $left_list_id = wine_valid_id($valid_hook);
+            $left_list_classes = $prefix . "list-item";
+            $left_list_method  = $prefix . $left_list_id;
+
             array_push($this->event, "$valid_hook");
 
             $acdn_menu[] = wine(div,[
@@ -89,22 +98,29 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                             $attr
                          ) {
 
+                          if(isset($attr)) { $filered_attr = $attr; } 
+                          else {
+                            $filered_attr = $this;
+                          }
+
                           // menu lists title items
-                          $filered_attr_right_icon = array();
                           $right_id = wine_valid_id($prefix.$value);
                           $right_class = $prefix.$valid_hook;
                           $right_methods = $prefix.$right_id;
 
-                          $filered_attr_right_icon = $this->is_valid_object($attr,$right_methods,$right_id,$right_class);
-
                           if($iconPosition === 'right') {
                               return [
                                wine(span,
-                               $this->hook_inside($prefix,$value,1), 
-                               $filered_attr_right_icon)
-                              ];
+                               $this->hook_inside($prefix,$value,1),attr(
+                                 $filered_attr,
+                                 $right_methods,
+                                 [id=>$right_id,classes=>$right_class],
+                                 $right_id,
+                                 $right_class
+                               ))
+                             ];
                           } else {
-                              return [];
+                             return [];
                           }
                        }
                      ]
@@ -236,18 +252,26 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                             $attr
                           ) {
 
+                            if(isset($attr)) { $filered_attr = $attr; } 
+                            else {
+                              $filered_attr = $this;
+                            }
+
                             // menu lists title items
                             $left_id = wine_valid_id($prefix.$value);
                             $left_class = $prefix.$valid_hook;
                             $left_methods = $prefix.$left_id;
 
-                            $filered_attr_left_icon = $this->is_valid_object($attr,$left_methods,$left_id,$left_class);
-
                             if($iconPosition === 'left') {
                               return [
                                 wine( span,
-                                $this->hook_inside($prefix,$value,1), 
-                                $filered_attr_left_icon)
+                                 $this->hook_inside($prefix,$value,1),attr(
+                                  $filered_attr,
+                                  $left_methods,
+                                  [id=>$left_id,classes=>$left_class],
+                                  $left_id,
+                                  $left_class
+                                ))
                               ];
                             } else {
                               return [];
@@ -257,36 +281,55 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                    ]) 
                 ]]
               ] 
-            ],[
-                id => wine_valid_id($valid_hook),
-                classes => $prefix . "list-item"
-            ],
-            [[$hook_item_top], [$hook_item_bot]]);
+            ],attr(
+              $attr,
+              $left_list_method,
+              [id=>$left_list_id,classes=>$left_list_classes],
+              $left_list_id,
+              $left_list_classes
+            ),
+            [[$hook_item_top],[$hook_item_bot]]);
+
+            if(isset($attr)) { $filered_attr = $attr; } 
+            else {
+              $filered_attr = $this;
+            }
 
              // contents attr hook
              $icon_id = wine_valid_id($content);
              $icon_class = "content";
              $icon_methods = $prefix.$icon_id;
 
-             $filered_attr_icon_lists = $this->is_valid_object($attr,$icon_methods,$icon_id,$icon_class);
-
              $acdn_menu[] = wine(
               div,
-              $this->hook_inside($prefix,$content),
-              $filered_attr_icon_lists,
-              [[$hook_content_top], [$hook_content_bot]]
+              $this->hook_inside($prefix,$content),attr(
+               $filered_attr,
+               $icon_methods,
+               [id=>$icon_id,classes=>$icon_class],
+               $icon_id,
+               $icon_class
+              ),[[$hook_content_top], [$hook_content_bot]]
             );
 
+        }
+
+        if(isset($attr)) { $filered_attr = $attr; } 
+        else {
+          $filered_attr = $this;
         }
 
         $id    = wine_valid_id($prefix."menu_item");
         $class = 'a-wine';
         $icon_method = $prefix.$id;
-
-        $filered_attr = $this->is_valid_object($attr,$icon_method,$id,$class);
         
         return [
-         wine(div,implode("",$acdn_menu),$filered_attr)
+         wine(div,implode("",$acdn_menu),attr(
+           $filered_attr,
+           $icon_method, 
+           [id=>$id,classes=>$class],
+           $id,
+           $class
+         ))
         ];
 
     }

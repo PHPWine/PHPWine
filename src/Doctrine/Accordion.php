@@ -108,6 +108,13 @@ extends \PHPWineOptimizedHtml\Layout {
    * DT: 11.29.2023 **/
   protected  $right;
 
+  /**
+   * @var Array|String keys new instance attribute/ html properties filtered
+   * @property
+   * Defined : check property icon position in new instance
+   * @since: doctrine v1.0
+   * @since: v2.5.0 wine
+   * DT: 11.29.2023 **/
   protected $hook;  
 
    public function __construct($wine_accordion)
@@ -196,12 +203,12 @@ extends \PHPWineOptimizedHtml\Layout {
       * -------------------------------------------------------------------------------------------
       * @properties new instance accordion Default icon this is when the page load icon 
       * ------------------------------------------------------------------------------------------- */
-       $properties[icon]['default'] ?? false,
+       $properties[icon]['default']?? false,
      /**
       * -------------------------------------------------------------------------------------------
       * @properties new instance accordion Clicked icon that will show when the accordion had been clicked 
       * ------------------------------------------------------------------------------------------- */
-       $properties[icon]['clicked'] ?? false
+       $properties[icon]['clicked']?? false
 
       ],
 
@@ -263,7 +270,7 @@ extends \PHPWineOptimizedHtml\Layout {
                 $prefix,
                 $this->falsy,
                 $iconPosition,
-                $this->falsy['content'][2]
+                $this->falsy['content'][2][0]
              );
             $this->events = $wineIcon->event();
             return $icon;
@@ -275,7 +282,7 @@ extends \PHPWineOptimizedHtml\Layout {
                  $prefix,
                  $this->falsy,
                  $iconPosition,
-                 $this->falsy['content'][2]
+                 $this->falsy['content'][2][0]
              );
              $this->events = $wineIcon->event();
              return $icon;
@@ -311,72 +318,97 @@ extends \PHPWineOptimizedHtml\Layout {
 
              array_push($this->events, "$valid_hook");
 
+             $obj_filtered = $this->falsy['content'][2][0];
+
+             if(isset($obj_filtered)) { $filered_attr = $obj_filtered; } 
+             else {
+               $filered_attr = $this;
+             }
+
              // filteer attr lists menu
              $id     = wine_valid_id($valid_hook);
              $class  = $prefix."list-item";
              $methods = $prefix.$id;
-             $filered_attr_child_lists = $this->is_valid_object(
-              $this->falsy['content'][2],
-              $methods,
-              $id,
-              $class
-            );
 
              // filter attr Container 
              $con_id = wine_valid_id($content);
              $con_class = "content";
              $con_methods = $prefix.$con_id;
-             $filered_attr_container_lists = $this->is_valid_object(
-              $this->falsy['content'][2],
-              $con_methods,
-              $con_id,
-              $con_class
-             );
 
              // menu lists title items
              $title_id = wine_valid_id($prefix.$value);
              $title_class = $prefix.$valid_hook;
              $title_methods = $prefix.$title_id;
-             $filered_attr_lists_title = $this->is_valid_object(
-              $this->falsy['content'][2],
-              $title_methods,
-              $title_id,
-              $title_class
-            );
 
              $menu_accordion[] = wine(div,[
                child => [
                     
                [ __, 
-                 value=>[wine(span,$this->hook_inside($prefix,$value,1),$filered_attr_lists_title,[
+                 value=>[wine(span,$this->hook_inside($prefix,$value,1),attr(
+                  $filered_attr,
+                  $title_methods,
+                  [ 
+                    id=>$title_id,
+                    classes=>$title_class
+                  ],
+                  $title_id,
+                  $title_class
+                ),[
                   [$hook_top_menu],[$hook_bottom_menu]
                  ])]
                ]
 
-             ]],$filered_attr_child_lists,
-              [[$hook_item_top],[$hook_item_bot]]) .
+             ]],attr(
+               $filered_attr,
+               $methods,
+               [ 
+                 id=>$id,
+                 classes=>$class
+               ],
+               $id,
+               $class
+              ),
+             [[$hook_item_top],[$hook_item_bot]]) .
 
               wine(div,$this->hook_inside($prefix,$content),
-               $filered_attr_container_lists,[
-               [$hook_content_top],[$hook_content_bot]
+               attr(
+                 $filered_attr,
+                 $con_methods,
+                 [ 
+                   id =>$con_id,
+                   classes=>$con_class
+                 ],
+                 $con_id,
+                 $con_class
+                ),[
+               [$hook_content_top],
+               [$hook_content_bot]
               ]);
 
            }
 
            // filter accordion main and parent container
+           $obj_filtered = $this->falsy['content'][2][0];
            $id    = wine_valid_id($prefix."menu_item");
-           $class = 'a-wine';
+           $class = 'a-wine cz';
            $main_method = $prefix.$id;
 
-           $filered_attr = $this->is_valid_object(
-             $this->falsy['content'][2],
-             $main_method,
-             $id,
-             $class
-           );
-   
-           return [
-            wine(div,implode("",$menu_accordion),$filered_attr),
+           if(isset($obj_filtered)) { $filered_attr = $obj_filtered; } 
+           else {
+             $filered_attr = $this;
+           }
+
+            return [
+             wine(div,implode("",$menu_accordion),attr(
+              $filered_attr,
+              $main_method,
+              [
+                id=>$id,
+                classes=>$class
+              ],
+              $id,
+              $class
+            )),
            ];
 
           } 
