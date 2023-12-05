@@ -374,7 +374,7 @@ extends \PHPWineOptimizedHtml\Layout {
            // filter accordion main and parent container
            $obj_filtered = $this->falsy['content'][2][0];
            $id    = wine_valid_id($prefix."menu_item");
-           $class = 'a-wine cz';
+           $class = 'a-wine';
            $main_method = $prefix.$id;
            
 
