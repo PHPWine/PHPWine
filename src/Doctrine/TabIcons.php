@@ -64,9 +64,9 @@ class TabIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
             ];
 
             // clean up to make vbalid hook
-            $valid_hook = $this->valid_hook($value);
+            $valid_hook = wine_valid_hook($value,3);
               
-            $hook_tab_item    = wine_valid_hook($value,3);
+            $hook_tab_item = wine_valid_hook($value,3);
     
             // Hook for list item
             $hook_item_top=$hook_data[0].$hook_tab_item;
@@ -89,7 +89,7 @@ class TabIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                          ) {
 
                           // menu lists title items
-                          $right_id = wine_valid_id($prefix.$value);
+                          $right_id = wine_valid_id($prefix,$value);
                           $right_class = $prefix.$valid_hook;
                           $right_methods = "attr_".$prefix.$right_id;
 
@@ -174,7 +174,7 @@ class TabIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                           ) {
 
                             // menu lists title items
-                            $left_id = wine_valid_id($prefix.$value);
+                            $left_id = wine_valid_id($prefix,$value);
                             $left_class = $prefix.$valid_hook;
                             $left_methods = "attr_".$prefix.$left_id;
 
@@ -201,14 +201,14 @@ class TabIcons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                 ]]
               ] 
             ],[
-                id => wine_valid_id($valid_hook),
+                id => wine_valid_id(null,$valid_hook),
                 classes => $prefix . "list-item",
             ],
             [[$hook_item_top], [$hook_item_bot]]);
 
         }
 
-        $tab_lists_id = wine_valid_id($prefix."tab_item");
+        $tab_lists_id = wine_valid_id($prefix,"tab_item");
         $tab_method_lists = "attr_".$prefix.$tab_lists_id;
         
         return [

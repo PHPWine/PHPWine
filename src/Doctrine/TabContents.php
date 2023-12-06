@@ -54,13 +54,13 @@ class TabContents extends \PHPWineOptimizedHtml\Doctrine\Tab
         foreach ($menu_items as $value => $content) {
 
             //clean up to make vbalid hook
-            $valid_hook = $this->valid_hook($value);
+            $valid_hook = wine_valid_hook($value,3);
 
             // push array hook val for events 
             array_push($this->events,"$valid_hook");
 
             // Container and contents
-            $tab_con_item_id = wine_valid_id($prefix.$content);
+            $tab_con_item_id = wine_valid_id($prefix,$content);
             $tab_con_item_class = $prefix.$valid_hook."_tab";
             // hook for filter attributes
             $tab_method_items = "attr_".$prefix.$tab_con_item_id;
@@ -68,7 +68,7 @@ class TabContents extends \PHPWineOptimizedHtml\Doctrine\Tab
             $tab_hook_insert  = $prefix.$tab_con_item_id;
 
             // conatiner of contents
-            $container_id = wine_valid_id($valid_hook."_tab");
+            $container_id = wine_valid_id($valid_hook,"_tab");
             $containerClass = $prefix."tab-content";
             // hook insert top and bottom
             $con_hook_insert = $prefix.$container_id;
@@ -103,7 +103,7 @@ class TabContents extends \PHPWineOptimizedHtml\Doctrine\Tab
           }
 
           // Dynamic vaid ID
-          $tab_container_id = wine_valid_id($prefix."tab_content");
+          $tab_container_id = wine_valid_id($prefix,"tab_content");
 
           // filter hook attr
           $tab_method_items = "attr_".$prefix.$tab_container_id;

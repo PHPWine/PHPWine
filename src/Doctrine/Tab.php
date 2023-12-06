@@ -297,23 +297,23 @@ extends \PHPWineOptimizedHtml\Layout {
                 $filered_attr = $this;
               }
 
-              $tab_lists_id  =wine_valid_id($prefix."tab_item");
-              $tab_content_id=wine_valid_id($prefix."tab_content");
+              $tab_lists_id  =wine_valid_id($prefix,"tab_item");
+              $tab_content_id=wine_valid_id($prefix,"tab_content");
   
               foreach ($menu_items as $value => $content) {
 
                // clean up to make vbalid hook
-               $valid_hook = $this->valid_hook($value);
+               $valid_hook = wine_valid_hook($value,3);
 
                array_push($this->events,"$valid_hook");
 
                 // iDs for dynamic container and values
-               $tab_lists_ids=wine_valid_id($prefix.$value);
-               $tab_parent_lists_ids=wine_valid_id($valid_hook);
+               $tab_lists_ids=wine_valid_id($prefix,$value);
+               $tab_parent_lists_ids=wine_valid_id(null,$valid_hook);
 
                // iDs for dynamic container and contents
-               $tab_contents_ids=wine_valid_id($prefix.$content);
-               $tab_content_ids=wine_valid_id($valid_hook."_tab");
+               $tab_contents_ids=wine_valid_id($prefix,$content);
+               $tab_content_ids=wine_valid_id($valid_hook,"_tab");
 
                // hook for attr filter
                $tab_contents_method_ids = "attr_".$prefix.$tab_contents_ids;
@@ -458,7 +458,7 @@ extends \PHPWineOptimizedHtml\Layout {
         return false;   
       }
 
-      return $this->lists_menu . wine(script,[ child => [ please => function() { $script = array(); $menu_list = array_unique($this->events); $parent = wine_valid_id($this->falsy['content'][1].'tab_item'); $container = wine_valid_id($this->falsy['content'][1].'tab_content'); if($this->falsy[icon]) { if($this->left === 'left'){ foreach ($menu_list as $list){ $list=wine_valid_id("$list"); $script[] = "var menu$list=document.getElementById('$list');";} } else { if($this->right === 'right') { foreach ($menu_list as $list){ $list=wine_valid_id("$list"); $script[] = " var menu$list =document.getElementById('$list'); "; } }} $script[] = "const childTab=function(e,n){e.childNodes.forEach((function(e,t){t!==n&&(e.style.display='none')}))},parentTab=function(e,n){let t=document.getElementById(e),d=document.getElementById(n);t.childNodes.forEach((function(e,n){e.addEventListener('click',(function(e){e.preventDefault(),childTab(d,n),d.childNodes[n].style.display=''})),childTab(d,n),d.childNodes[0].style.display=''}))};parentTab('$parent','$container');"; } else { $script[] = "const childTab=function(e,n){e.childNodes.forEach((function(e,t){t!==n&&(e.style.display='none')}))},parentTab=function(e,n){let t=document.getElementById(e),d=document.getElementById(n);t.childNodes.forEach((function(e,n){e.addEventListener('click',(function(e){e.preventDefault(),childTab(d,n),d.childNodes[n].style.display=''})),childTab(d,n),d.childNodes[0].style.display=''}))};parentTab('$parent','$container');"; } return $script; } ]],[classes=>'app-response']);
+      return $this->lists_menu . wine(script,[ child => [ please => function() { $script = array(); $menu_list = array_unique($this->events); $parent = wine_valid_id($this->falsy['content'][1],'tab_item'); $container = wine_valid_id($this->falsy['content'][1],'tab_content'); if($this->falsy[icon]) { if($this->left === 'left'){ foreach ($menu_list as $list){ $list=wine_valid_id(null,"$list"); $script[] = "var menu$list=document.getElementById('$list');";} } else { if($this->right === 'right') { foreach ($menu_list as $list){ $list=wine_valid_id(null,"$list"); $script[] = " var menu$list =document.getElementById('$list'); "; } }} $script[] = "const childTab=function(e,n){e.childNodes.forEach((function(e,t){t!==n&&(e.style.display='none')}))},parentTab=function(e,n){let t=document.getElementById(e),d=document.getElementById(n);t.childNodes.forEach((function(e,n){e.addEventListener('click',(function(e){e.preventDefault(),childTab(d,n),d.childNodes[n].style.display=''})),childTab(d,n),d.childNodes[0].style.display=''}))};parentTab('$parent','$container');"; } else { $script[] = "const childTab=function(e,n){e.childNodes.forEach((function(e,t){t!==n&&(e.style.display='none')}))},parentTab=function(e,n){let t=document.getElementById(e),d=document.getElementById(n);t.childNodes.forEach((function(e,n){e.addEventListener('click',(function(e){e.preventDefault(),childTab(d,n),d.childNodes[n].style.display=''})),childTab(d,n),d.childNodes[0].style.display=''}))};parentTab('$parent','$container');"; } return $script; } ]],[classes=>'app-response']);
     
     }
   

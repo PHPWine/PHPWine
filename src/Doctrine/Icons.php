@@ -55,14 +55,14 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
         foreach ($menu_items as $value => $content) {
             
             // clean up to make vbalid hook
-            $valid_hook = $this->valid_hook($value);     
+            $valid_hook = wine_valid_hook($value,3);     
 
             if(isset($attr)) { $filered_attr = $attr; } 
             else {
               $filered_attr = $this;
             }
 
-            $left_list_id = wine_valid_id($valid_hook);
+            $left_list_id = wine_valid_id(null,$valid_hook);
             $left_list_classes = $prefix . "list-item";
 
             // filter hook attr
@@ -93,7 +93,7 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                           }
 
                           // menu lists title items
-                          $right_id = wine_valid_id($prefix.$value);
+                          $right_id = wine_valid_id($prefix,$value);
                           $right_class = $prefix.$valid_hook;
 
                           // attr filter hook
@@ -262,7 +262,7 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
                             }
 
                             // menu lists title items
-                            $left_id = wine_valid_id($prefix.$value);
+                            $left_id = wine_valid_id($prefix,$value);
                             $left_class = $prefix.$valid_hook;
 
                             // attr filter hook
@@ -321,7 +321,7 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
             }
 
              // contents attr hook
-             $icon_id = wine_valid_id($content);
+             $icon_id = wine_valid_id(null,$content);
              $icon_class = "content";
              // filter hook attr
              $icon_methods = "attr_".$prefix.$icon_id;
@@ -355,7 +355,7 @@ class Icons extends \PHPWineOptimizedHtml\Doctrine\Accordion
           $filered_attr = $this;
         }
 
-        $id    = wine_valid_id($prefix."menu_item");
+        $id    = wine_valid_id($prefix,"menu_item");
         $class = 'a-wine';
         // attr hook filter
         $icon_method = "attr_".$prefix.$id;

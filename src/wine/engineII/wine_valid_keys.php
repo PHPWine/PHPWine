@@ -352,6 +352,22 @@
    * DT: 11.12.2023 
    */
   'DRKEY_ACCORDION'  => 'COMPONENT_REGISTERED_KEY_ACCORDION',
+
+  /**
+   * --------------------------------------------------------------------------------------------
+   * @array key valid hook for component 
+   * -------------------------------------------------------------------------------------------- 
+   * This key is design for doctrine class to verify if the user input valid key in order to doctrine
+   * response properly, in public function store the array to be easily 
+   * get in the developer incase needed.  
+   * 
+   * 
+   * @Defined : Constant Doctrine Class key Registered component
+   * @since: v1.0 doctrine
+   * @since: v2.0 wine
+   * DT: 11.12.2023 
+   */
+  'DRKEY_POPUP'  => 'COMPONENT_REGISTERED_KEY_POPUP',
  
  ];
 

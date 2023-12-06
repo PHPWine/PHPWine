@@ -1257,35 +1257,27 @@
       }   
 
     }
-
-    protected function valid_hook( string $item) : string {
-    
-      $hooked = preg_replace('/\s+/','',$item);
-      $hooked = preg_replace('/[^a-zA-Z0-9_ -]/s','',$hooked);
-      $hooked = strtolower($hooked);
-      return (string) $hooked;
-   }
    
    protected function wine_get_value($obj, $prefix, $value, $states = 0, $not = false) : string {
 
     $p = $prefix;
     if($not === true) {
-      return wine_valid_id($value);
+      return wine_valid_id(null,$value);
     } else {
 
       $wine_valid_hook = '';
 
-      if($states === 0) { $wine_valid_hook = $prefix.wine_valid_id($value);
-      } else if($states === 1)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$value);
-      } else if($states === 2)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$value);
-      } else if($states === 3)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$value);
-      } else if($states === 4)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$value);
-      } else if($states === 5)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$value);
-      } else if($states === 6)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$p.$value);
-      } else if($states === 7)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$p.$p.$value);
-      } else if($states === 8)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$p.$p.$p.$value);
-      } else if($states === 9)  { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$p.$p.$p.$p.$value);
-      } else if($states === 10) { $wine_valid_hook = $prefix.wine_valid_id($prefix.$p.$p.$p.$p.$p.$p.$p.$p.$p.$value);}
+      if($states === 0) { $wine_valid_hook = $prefix.wine_valid_id(null,$value);
+      } else if($states === 1)  { $wine_valid_hook = $prefix.wine_valid_id($prefix,$value);
+      } else if($states === 2)  { $wine_valid_hook = $prefix.wine_valid_id($prefix,$p.$value);
+      } else if($states === 3)  { $wine_valid_hook = $prefix.wine_valid_id($prefix,$p.$p.$value);
+      } else if($states === 4)  { $wine_valid_hook = $prefix.wine_valid_id($prefix,$p.$p.$p.$value);
+      } else if($states === 5)  { $wine_valid_hook = $prefix.wine_valid_id($prefix,$p.$p.$p.$p.$value);
+      } else if($states === 6)  { $wine_valid_hook = $prefix.wine_valid_id($prefix,$p.$p.$p.$p.$p.$value);
+      } else if($states === 7)  { $wine_valid_hook = $prefix.wine_valid_id($prefix,$p.$p.$p.$p.$p.$p.$value);
+      } else if($states === 8)  { $wine_valid_hook = $prefix.wine_valid_id($prefix,$p.$p.$p.$p.$p.$p.$p.$value);
+      } else if($states === 9)  { $wine_valid_hook = $prefix.wine_valid_id($prefix,$p.$p.$p.$p.$p.$p.$p.$p.$value);
+      } else if($states === 10) { $wine_valid_hook = $prefix.wine_valid_id($prefix,$p.$p.$p.$p.$p.$p.$p.$p.$p.$value);}
  
       if($obj) {
         if(method_exists($obj,$wine_valid_hook)) {

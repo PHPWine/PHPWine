@@ -718,3 +718,28 @@ if(!defined('tab'))
   define('tab',$tab); 
 
 }  
+
+
+/**
+ * --------------------------------------------------------------------------------------------
+ * @var constant|String 
+ * @property
+ * -------------------------------------------------------------------------------------------- */
+
+$popup = "DRKEY_POPUP";
+
+/**
+* This is reserved keyword for doctrine class prefix will use to key for element tag
+* The main use is for localized the function in array.  
+* 
+* 
+* @Defined : Constant Doctrine Class key prefix
+* @since: v1.0 doctrine
+* @since: v2.5.0 wine
+* DT: 11.29.2023 */
+if(!defined('popup')) 
+{ 
+
+  define('popup',$popup); 
+
+}  
