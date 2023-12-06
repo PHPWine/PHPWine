@@ -70,24 +70,18 @@ interface AccordionInterface
    * ]
    * 
    * PREVIEW: 
-   * 
-   * <div class="wine_list-item" id="one">
-   *  <span class="wine_one">Only</span>
-   *  <span class="wine_icon-left done">+</span>
-   *  <span class="wine_icon-left cone" style="display: none;">X</span>
-   * </div>
-   * <div class="content" style="display: none;">Fear</div>
-   * 
    *
    * HOOKS:
    * 
-   * function top_defualt_wine_one() { return "icon Top"; }
-   * function bottom_defualt_wine_one() { return wine(span,"icon Bottom");}
+   * ATTR: @method
+   * public function attr_prefix_awssscca() {...}
    * 
-   * function top_clicked_wine_one() { return "icon Top clicked"; }
-   * function bottom_clicked_wine_one() { return "icon Bottom clicked";}
+   * VALUE: @method 
+   * public function prefix_awssscca() {...}
    * 
-   * function Only() { return "One"; }
+   * TOP and BOTTOM @function
+   * function top_prefix_awssscca() {...}
+   * function bottom_prefix_awssscca() {...}
    * 
    * @Defined : execute new instance accordion
    * @since: v1.0 doctrine
