@@ -14,7 +14,7 @@ Collections :
 <br /> <a href="https://github.com/PHPWine/WineWPMenuWalker"> WP WineWPMenuWalker (Custom Menu w/Hooks) <sup>v2.0</sup> </a>
 <br /> <a href="https://github.com/PHPWine/WineAccordion"> WineAccordion <sup>v2.2.0 soon!</sup> </a>
 <br /> <a href="https://github.com/PHPWine/WineTab"> WineTab <sup>v2.2.0 soon!</sup> </a>
-<br /> <a href="#"> WinePopup <sup>v2.2.0 soon!</sup> </a>
+<br /> <a href="https://github.com/PHPWine/WinePopup"> WinePopup <sup>v2.2.0 soon!</sup> </a>
 
 <br /> New :
 ```PHP
