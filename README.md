@@ -6,15 +6,15 @@ HTML Frontend Framework Design for backend OptimizedHTML PHPWine written in PHP 
 
 ```PHP
 /* Installation via composer */ 
-/* required version *v2.0 */
-composer require phpwine/optimizedhtml v2.0
+/* required version *v2.2.0 */
+composer require phpwine/optimizedhtml v2.2.0
 ```
 Collections : 
 <br /> <a href="https://phpwine.github.io/documents/#w_quickstart">Quick Start </a>
-<br /> <a href="https://github.com/PHPWine/WineWPMenuWalker"> WP WineWPMenuWalker (Custom Menu w/Hooks) <sup>v2.0</sup> </a>
-<br /> <a href="https://github.com/PHPWine/WineAccordion"> WineAccordion <sup>v2.2.0</sup> </a>
-<br /> <a href="https://github.com/PHPWine/WineTab"> WineTab <sup>v2.2.0</sup> </a>
-<br /> <a href="https://github.com/PHPWine/WinePopup"> WinePopup <sup>v2.2.0</sup> </a>
+<br /> <a href="https://github.com/PHPWine/WineWPMenuWalker"> WP WineWPMenuWalker (Custom Menu w/Hooks) <sup>@since v2.0</sup> </a>
+<br /> <a href="https://github.com/PHPWine/WineAccordion"> WineAccordion <sup>@since v2.2.0</sup> </a>
+<br /> <a href="https://github.com/PHPWine/WineTab"> WineTab <sup>@since v2.2.0</sup> </a>
+<br /> <a href="https://github.com/PHPWine/WinePopup"> WinePopup <sup>@since v2.2.0</sup> </a>
 
 <br /> New :
 ```PHP
