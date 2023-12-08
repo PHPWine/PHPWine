@@ -242,7 +242,7 @@ extends \PHPWineOptimizedHtml\Layout {
     
     $is_true_menu   = $this->falsy[accordion];
     $is_true_prefix = $this->falsy[prefix];
-
+    
     if(!$is_true_prefix) {
       throw new \Exception('prefix => (string) "wine_", property WineAccordion require!');
       exit;
@@ -270,7 +270,7 @@ extends \PHPWineOptimizedHtml\Layout {
                 $prefix,
                 $this->falsy,
                 $iconPosition,
-                $this->falsy['content'][2][0]
+                $this->falsy['content'][2][0]?? ''
              );
             $this->events = $wineIcon->event();
             return $icon;
@@ -282,7 +282,7 @@ extends \PHPWineOptimizedHtml\Layout {
                  $prefix,
                  $this->falsy,
                  $iconPosition,
-                 $this->falsy['content'][2][0]
+                 isset($this->falsy['content'][2][0])?? ''
              );
              $this->events = $wineIcon->event();
              return $icon;
@@ -418,7 +418,7 @@ extends \PHPWineOptimizedHtml\Layout {
      * --------------------------------------------------------------------------------------------
      * @execute return the accordion with script !
      * -------------------------------------------------------------------------------------------- */
-   return $this->lists_menu.wine(script,[child=>[please=>function(){$script=[];$menu_list=array_unique($this->events);if($this->falsy[icon]){$script[]=" const currentIconOne = function(list) { ";$script[]=" if(list.children[1].style.display==='none' || list.children[0].style.display===''){list.children[1].style.display=''; list.children[0].style.display='none';}else{list.children[1].style.display='none'; list.children[0].style.display='';} ";$script[]=" }; ";$script[]=" const currentIconTwo = function(list) { ";$script[]=" if(list.children[2].style.display==='none' || list.children[1].style.display===''){list.children[2].style.display=''; list.children[1].style.display='none'; }else{list.children[2].style.display='none'; list.children[1].style.display='';} ";$script[]=" }; ";if($this->left==="left"){foreach($menu_list as $list){$list=wine_valid_id(null,"{$list}");$script[]=" var menu{$list}=document.getElementById('{$list}'); ";$script[]=" menu{$list}.children[1].style.display='none'; ";$script[]=" menu{$list}.addEventListener('click',function(){currentIconOne(menu{$list});}); ";}}else{if($this->right==="right"){foreach($menu_list as $list){$list=wine_valid_id(null,"{$list}");$script[]=" var menu{$list} =document.getElementById('{$list}'); ";$script[]=" menu{$list}.children[2].style.display ='none'; ";$script[]=" menu{$list}.addEventListener('click',function(){currentIconTwo(menu{$list})}); ";}}}$script[]=" var acc = document.querySelectorAll('.wine_list-item'); var wine; acc.forEach(function(vc,jk){vc.nextElementSibling.style.display ='none'; }); ";$script[]=" for(wine = 0; wine < acc.length; wine++){acc[wine].addEventListener('click',function(){this.classList.toggle('w-active'); var content =this.nextElementSibling; ";$script[]=" if(content.style.display==='block'){content.style.display='none';}else{content.style.display='block';} ";$script[]=" }); ";$script[]=" } ";}else{$script[]=" var acc = document.querySelectorAll('.wine_list-item'); var wine; acc.forEach(function(vc,jk){vc.nextElementSibling.style.display ='none'; });";$script[]="for(wine = 0; wine < acc.length; wine++){acc[wine].addEventListener('click',function(){this.classList.toggle('w-active'); var content =this.nextElementSibling;";$script[]="if(content.style.display==='block'){content.style.display='none';}else{content.style.display='block';}";$script[]="});";$script[]="}";}return $script;},],],[classes=>"app-response"]);
+    return $this->lists_menu.wine(script,[child=>[please=>function(){$script=[];$menu_list=array_unique($this->events);if($this->falsy[icon]){$script[]=" const currentIconOne = function(list) { ";$script[]=" if(list.children[1].style.display==='none' || list.children[0].style.display===''){list.children[1].style.display=''; list.children[0].style.display='none';}else{list.children[1].style.display='none'; list.children[0].style.display='';} ";$script[]=" }; ";$script[]=" const currentIconTwo = function(list) { ";$script[]=" if(list.children[2].style.display==='none' || list.children[1].style.display===''){list.children[2].style.display=''; list.children[1].style.display='none'; }else{list.children[2].style.display='none'; list.children[1].style.display='';} ";$script[]=" }; ";if($this->left==="left"){foreach($menu_list as $list){$list=wine_valid_id(null,"{$list}");$script[]=" var menu{$list}=document.getElementById('{$list}'); ";$script[]=" menu{$list}.children[1].style.display='none'; ";$script[]=" menu{$list}.addEventListener('click',function(){currentIconOne(menu{$list});}); ";}}else{if($this->right==="right"){foreach($menu_list as $list){$list=wine_valid_id(null,"{$list}");$script[]=" var menu{$list} =document.getElementById('{$list}'); ";$script[]=" menu{$list}.children[2].style.display ='none'; ";$script[]=" menu{$list}.addEventListener('click',function(){currentIconTwo(menu{$list})}); ";}}}$script[]=" var acc = document.querySelectorAll('.".$this->falsy['content'][1]."list-item'); var wine; acc.forEach(function(vc,jk){vc.nextElementSibling.style.display ='none'; }); ";$script[]=" for(wine = 0; wine < acc.length; wine++){acc[wine].addEventListener('click',function(){this.classList.toggle('w-active'); var content =this.nextElementSibling; ";$script[]=" if(content.style.display==='block'){content.style.display='none';}else{content.style.display='block';} ";$script[]=" }); ";$script[]=" } ";}else{$script[]=" var acc = document.querySelectorAll('.".$this->falsy['content'][1]."list-item'); var wine; acc.forEach(function(vc,jk){vc.nextElementSibling.style.display ='none'; });";$script[]="for(wine = 0; wine < acc.length; wine++){acc[wine].addEventListener('click',function(){this.classList.toggle('w-active'); var content =this.nextElementSibling;";$script[]="if(content.style.display==='block'){content.style.display='none';}else{content.style.display='block';}";$script[]="});";$script[]="}";}return $script;},],],[classes=>"app-response"]);
 
   }
 
