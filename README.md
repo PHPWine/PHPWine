@@ -44,6 +44,7 @@ Features :
 <br /> ``` @since v1.3.9 later(); no object require, call back function hook ```
 <br />
 Logs :
+<br /> ``` v2.2.2 [FIXED] : Doctrine namespace to Doctrine from doctrine | 09.12.2023 ```
 <br /> ``` v2.2.1 [FIXED] : Dynamic prefix accordion | 08.12.2023 ```
 <br /> ``` v1.3.8 [FIXED] : Class name attribute space child array | 08.11.2023 ```
 
