@@ -10,7 +10,7 @@ the main goal is to lessen, minimize, optimize, and organize both HTML and workl
 There are a lot of ways to use Wine but I highly recommend using OOP for HTML applications with Doctrine and Components, through that you can easily
 add and update HTML that separates from your data.
 
-<strong>DOCTRINE:</strong> This class files and classes is the main source where the data are being used multiple times in single or different pages, for instance, 
+<strong>DOCTRINE:</strong> This files and classes is the main source where the data are being used multiple times in single or different pages, for instance, 
 your branding source file. That is possible to use in the main header and footer or menu arrays of data that are used both in the navigation and footer section
 you can store them in doctrine properties and pass them in your hook function as your arguments.
 
