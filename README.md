@@ -2,7 +2,31 @@
 
 
 # PHPWine (OptimizedHtml)
-HTML Frontend Framework Design for backend OptimizedHTML PHPWine written in PHP (Hypertext Preprocessor) 
+HTML Frontend Framework Design for Backend OptimizedHTML PHPWine written in PHP (Hypertext Preprocessor).
+
+PHPWine doesn't force developers not to use native HTML, in fact you feel super comfortable with native HTML you can stick to it,
+the main goal is to lessen and minimize the workload and optimize and organize HTML.
+
+There are a lot of ways to use Wine but I highly recommend using OOP for HTML applications with Doctrine and Components, through that you can easily
+add and update HTML that separates from your data.
+
+<strong>DOCTRINE:</strong> This class files and classes is the main source where the data are being used multiple times in single or different pages, for instance, 
+your branding source file. That is possible to use in the main header and footer or menu arrays of data that are used both in the navigation and footer section
+you can store them in doctrine properties and pass them in your hook function as your arguments.
+
+<strong>APPS:</strong> These are the main public classes that will invoke in public pages that display HTML and data to browser, With these files and classes you will
+prepared the layout of your HTML application base ok key hooks for column or columns and xrow or xrows as the HTML is not visible to you at least you have a proper 
+pointers that human-readable that can help you to analyzed your codes in php to HTML.   
+
+<strong>COMPONENTS:</strong> These are HTML that hold data information from your controller or classes like ul, li, img files that take care of specific data. 
+
+```PHP
+ // Structure 
+ views
+  |- Apps
+  |- Components
+  |- Doctrines
+```
 
 ```PHP
 /* Installation via composer */ 
