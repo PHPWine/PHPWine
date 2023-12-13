@@ -4,7 +4,7 @@
 # PHPWine (OptimizedHtml)
 HTML Frontend Framework Design for Backend OptimizedHTML PHPWine written in PHP (Hypertext Preprocessor).
 
-PHPWine doesn't force developers not to use native HTML, in fact you feel super comfortable with native HTML you can stick to it,
+PHPWine doesn't force developers not to use native HTML, in fact if you feel super comfortable with native HTML you can stick to it,
 the main goal is to lessen, minimize, optimize, and organize both HTML and workload.
 
 There are a lot of ways to use Wine but I highly recommend using OOP for HTML applications with Doctrine and Components, through that you can easily
