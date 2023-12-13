@@ -59,6 +59,15 @@ source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/wine.php
 ```
 
 ```PHP
+// Function Hooks @since v2.0
+wcleared()
+Source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/wcleared.php
+
+wine_doctrine_init();
+Source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/wine_doctrine_init.php
+```
+
+```PHP
 // Method Hooks @since v2.0
 attr( 
   object|string $class = null,
@@ -92,15 +101,6 @@ value(
 
 source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/value.php
 
-```
-
-```PHP
-// Function Hooks @since v2.0
-wcleared()
-Source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/wcleared.php
-
-wine_doctrine_init();
-Source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/wine_doctrine_init.php
 ```
 
 Collections : 
