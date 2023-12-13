@@ -15,8 +15,8 @@ your branding source file. That is possible to use in the main header and footer
 you can store them in doctrine properties and send back to your hooks as your arguments.
 
 <strong>APPS:</strong> These are the main public classes that will invoke in public pages that display HTML and data to browser, With these files and classes you will
-prepared the layout of your HTML application base ok key hooks for column or columns and xrow or xrows as the HTML is not visible to you at least you have a proper 
-pointers that human-readable that can help you to analyzed your codes in php to HTML.   
+prepared the layout of your HTML application base on your key hooks for column or columns and xrow or xrows as the HTML is not visible to you at least you have a proper 
+pointers that human-readable that can help you to analyze your codes in php to HTML.   
 
 <strong>COMPONENTS:</strong> These are HTML that hold data information from your controller or classes like ul, li, img files that take care of specific data. 
 
