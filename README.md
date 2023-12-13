@@ -19,6 +19,7 @@ prepared the layout of your HTML application base on your key hooks for column o
 pointers that human-readable that can help you to analyze your codes in php to HTML.   
 
 <strong>COMPONENTS:</strong> These are HTML that hold data information from your controller or classes like ul, li, img files that take care of specific data. 
+most of the time this is an inner second child of HTML and data.
 
 ```PHP
  // Structure 
