@@ -32,7 +32,6 @@ In addition: I don't recommend wine having more of a third child HTML in case I 
   |- Components
   |- Doctrines
 ```
-
 ```PHP
 /* Installation via composer */ 
 /* required version *v2.2.2 */
@@ -45,6 +44,40 @@ composer require phpwine/optimizedhtml v2.2.2
 
  new \PHPWineOptimizedHtml\OptimizedHtml;
 ```
+
+```PHP
+// Hooks @since v2.0
+wine(  
+  string $tag = '',
+  string|callable|array $content = [],
+  string|array $attr = []
+  array $hooks = []
+);
+
+source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/wine.php
+
+```
+
+```PHP
+// Hooks @since v2.0
+attr( 
+  object|string $class = null,
+  string|callable $call_back = null,
+  mixed ...$attr
+);
+
+source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/attr.php
+
+```
+
+
+magic()
+value()
+wcleared()
+
+wcleared()
+later()
+wine_doctrine_init();
 
 Collections : 
 <br /> <a href="https://phpwine.github.io/documents/#w_quickstart">Quick Start </a>
