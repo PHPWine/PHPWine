@@ -46,7 +46,7 @@ composer require phpwine/optimizedhtml v2.2.2
 ```
 
 ```PHP
-// Hooks @since v2.0
+// Function Hooks @since v2.0
 wine(  
   string $tag = '',
   string|callable|array $content = [],
@@ -59,7 +59,7 @@ source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/wine.php
 ```
 
 ```PHP
-// Hooks @since v2.0
+// Method Hooks @since v2.0
 attr( 
   object|string $class = null,
   string|callable $call_back = null,
@@ -70,14 +70,38 @@ source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/attr.php
 
 ```
 
+```PHP
+// Method Hooks @since v2.0
+magic(
+ object|string $class = null,
+ string|callable $call_back = null,
+ mixed ...$current_value
+);
 
-magic()
-value()
-wcleared()
+source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/magic.php
 
+```
+
+```PHP
+// Method Hooks @since v2.0
+value(
+ object|string|null $class = null,
+ string|callable|null $call_back = null,
+ mixed ...$args
+);
+
+source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/value.php
+
+```
+
+```PHP
+// Function Hooks @since v2.0
 wcleared()
-later()
+Source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/wcleared.php
+
 wine_doctrine_init();
+Source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/wine_doctrine_init.php
+```
 
 Collections : 
 <br /> <a href="https://phpwine.github.io/documents/#w_quickstart">Quick Start </a>
