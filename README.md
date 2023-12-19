@@ -2,13 +2,107 @@
 
 
 # PHPWine (OptimizedHtml)
-HTML Frontend Framework Design for backend OptimizedHTML PHPWine written in PHP (Hypertext Preprocessor) 
+HTML Frontend Framework Design for Backend OptimizedHTML PHPWine written in PHP (Hypertext Preprocessor).
+
+PHPWine doesn't force developers not to use native HTML, in fact if you feel super comfortable with native HTML you can stick to it,
+the main goal is to lessen, minimize, optimize, and organize both HTML and workload.
+
+There are a lot of ways to use Wine but I highly recommend using OOP for HTML applications with Doctrine and Components, through that you can easily
+add and update HTML that separates from your data.
+
+<strong>DOCTRINE:</strong> This files and classes is the main source where the data are being used multiple times in single or different pages, for instance, 
+your branding source file. That is possible to use in the main header and footer or menu arrays of data that are used both in the navigation and footer section
+you can store them in doctrine properties and send back to your hooks as your arguments. <i> In addition Doctrine is powerful enough to handle the visibility of elements based of the specific screen size you set, especially using the reserved key "those" Those having the class you assigned the visibility will respond based on your doctrine declaration. </i>
+
+
+
+<strong>APPS:</strong> These are the main public classes that will invoke in public pages that display HTML and data to browser, With these files and classes you will
+prepared the layout of your HTML application base on your key hooks for column or columns and xrow or xrows as the HTML is not visible to you at least you have a proper 
+pointers that human-readable that can help you to analyze your codes in php to HTML.   
+
+<strong>COMPONENTS:</strong> These are HTML that hold data information from your controller or classes like ul, li, img files that take care of specific data. 
+most of the time this is an inner second or third child of HTML and data.
+
+In addition: I don't recommend wine having more of a third child HTML in case I highly recommend to add a hook and creating a new method for the value of that child.
 
 ```PHP
-/* Installation via composer */ 
-/* required version *v2.2.1 */
-composer require phpwine/optimizedhtml v2.2.1
+ // Structure 
+ views
+  |- Apps
+  |- Components
+  |- Doctrines
 ```
+```PHP
+/* Installation via composer */ 
+/* required version *v2.2.2 */
+composer require phpwine/optimizedhtml v2.2.2
+```
+
+```PHP
+ /** Local file PHPWine **/
+ require_once __DIR__ . '/vendor/autoload.php';
+
+ new \PHPWineOptimizedHtml\OptimizedHtml;
+```
+
+```PHP
+// Function Hooks @since v2.0
+wine(  
+  string $tag = '',
+  string|callable|array $content = [],
+  string|array $attr = []
+  array $hooks = []
+);
+
+source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/wine.php
+
+```
+
+```PHP
+// Function Hooks @since v2.0
+wcleared()
+Source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/wcleared.php
+
+wine_doctrine_init();
+Source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/wine_doctrine_init.php
+```
+
+```PHP
+// Method Hooks @since v2.0
+attr( 
+  object|string $class = null,
+  string|callable $call_back = null,
+  mixed ...$attr
+);
+
+source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/attr.php
+
+```
+
+```PHP
+// Method Hooks @since v2.0
+magic(
+ object|string $class = null,
+ string|callable $call_back = null,
+ mixed ...$current_value
+);
+
+source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/magic.php
+
+```
+
+```PHP
+// Method Hooks @since v2.0
+value(
+ object|string|null $class = null,
+ string|callable|null $call_back = null,
+ mixed ...$args
+);
+
+source: https://github.com/PHPWine/PHPWine/blob/main/src/wine/hooks/value.php
+
+```
+
 Collections : 
 <br /> <a href="https://phpwine.github.io/documents/#w_quickstart">Quick Start </a>
 <br /> <a href="https://github.com/PHPWine/WineWPMenuWalker"> WP WineWPMenuWalker (Custom Menu w/Hooks) <sup>@since v2.0</sup> </a>
@@ -44,6 +138,7 @@ Features :
 <br /> ``` @since v1.3.9 later(); no object require, call back function hook ```
 <br />
 Logs :
+<br /> ``` v2.2.2 [FIXED] : Doctrine namespace to Doctrine from doctrine | 09.12.2023 ```
 <br /> ``` v2.2.1 [FIXED] : Dynamic prefix accordion | 08.12.2023 ```
 <br /> ``` v1.3.8 [FIXED] : Class name attribute space child array | 08.11.2023 ```
 
