@@ -31,8 +31,8 @@ namespace PHPWineOptimizedHtml\Doctrine;
 *
 * @author    Leinner Zednanref <syncdevprojects@gmail.com>
 * @license   MIT License
-* @link      https://github.com/PHPWine/WineAccordion/tree/main
-* @link      https://github.com/PHPWine/WineAccordion/README.md
+* @link      https://github.com/PHPWine/WineTab/tree/main
+* @link      https://github.com/PHPWine/WineTab/README.md
 * @version   v1.0
 * @since     11.29.2023
 *

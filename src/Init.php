@@ -38,9 +38,9 @@ error_reporting(E_ALL);
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v1.4.0
- * @since     11.14.2023
- * @since     11.14.2023
+ * @version   v2.3.0
+ * @since     10.26.2023
+ * @since     12.19.2023
  *
  */
 

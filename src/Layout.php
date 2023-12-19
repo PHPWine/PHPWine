@@ -38,9 +38,9 @@
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v2.0
+ * @version   v2.3.0
  * @since     10.26.2023
- * @since     11.05.2023
+ * @since     12.19.2023
  *
  */
 
@@ -684,11 +684,12 @@
                * @since: v2.0 wine
                * DT: 11.19.2023 
                */
-                      foreach ($this->client['content'][1] as $wine_key => $wine_val) {
 
-                        foreach ($wine_val as $value) {
-
-                            if(is_object($value[0] ?? false) || class_exists($value[0] ?? false)) {
+               foreach ($this->client['content'][1] as $wine_key => $wine_val) {
+                                         
+                      foreach ($wine_val as $value) {  
+ 
+                        if(is_object($value[0] ?? false) || class_exists($value[0] ?? false)) {
                                 $wine[] = $this->optimized_html(
                                   __,
                                   null,
@@ -703,7 +704,7 @@
                                    __,
                                   null,
                                   $this->wine_callable_hook(
-                                    $value[0] ?? '',
+                                       $value[0] ?? '',
                                     ...$value[1] ?? []
                                   )
                               );
@@ -711,6 +712,7 @@
 
                        }
                     }
+
                   }
                }
 
@@ -1139,7 +1141,7 @@
             null,
             $this->wine_callable_hook(
               $value[0] ?? '',
-          ...$value[1] ?? []
+           ...$value[1] ?? []
             )
           );
          }

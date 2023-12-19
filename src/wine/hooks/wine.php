@@ -56,9 +56,27 @@ function wine(
     // @param second attr array
     array $hooks = [],
     // @param third < Optional >
-    $enable_html = false
+    bool $enable_html = false,
+    // show object
+    bool $show_object = false
+
     
 ) : mixed {
+
+  if($show_object !== false ) {
+
+    $optimized = new \PHPWineOptimizedHtml\WineObjectData(
+      $tag,
+      $content,
+      $attr,
+      $hooks,
+      $enable_html
+   );
+   
+  return $optimized;   
+
+  } else {
+    
     if (is_null($tag) || empty($tag)) {
         $tag = local_provider()["dp"];
     }
@@ -75,4 +93,6 @@ function wine(
         ],
     ])[$located];
     return $optimized;
+  }
+
 }

@@ -1,6 +1,6 @@
 <?php 
 
- namespace PHPWineOptimizedHtml\doctrine;
+ namespace PHPWineOptimizedHtml\Doctrine;
 
  ini_set("display_errors", 1);
  ini_set("display_startup_errors", 1);
@@ -38,7 +38,7 @@
  * @link      https://github.com/PHPWine/PHPWine/tree/main
  * @link      https://github.com/PHPWine/PHPWine/README.md
  * @link      https://phpwine.github.io/documents/
- * @version   v2.0
+ * @version   v1.2.0
  * @since     10.26.2023
  * @since     11.05.2023
  *

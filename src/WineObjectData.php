@@ -7,7 +7,7 @@
  error_reporting(E_ALL);
 
  /**
- * @copyright (c) 2023 Optimized Html [DirectoryHandlerError] Cooked by nielsoffice
+ * @copyright (c) 2023 Optimized Html Cooked by nielsoffice
  *
  * MIT License
  *
@@ -44,18 +44,69 @@
  *
  */
 
- class DirectoryHandlerError {
+class WineObjectData {
 
-    public function __construct( $hookDeault = [] )
-     {
- 
-         print "<span style='background-color: #F5D9D9; color: #333; '>";
-         $container = [];  foreach($hookDeault as $hd) {
-             $container[] = "Directory " .$hd."<br />";
-         }
-         print implode("", $container);
-         print "</span>";
-                
-    }
- 
+/**
+ * @var String Html Element Tag 
+ * @property
+ * Defined : Assigned dynamic html tag for optimizedHtml
+ * @since: wine 2.3.0
+ * DT: 19.12.2023 **/  
+ public $element;
+
+/**
+ * @var String|Array Html Element Properties 
+ * @property
+ * Defined : Assigned dynamic html attributes for optimizedHtml
+ * @since: wine 2.3.0
+ * DT: 19.12.2023 **/  
+ public $attributes;
+
+/**
+ * @var String|Array|Callable Html Element Contents or value 
+ * @property
+ * Defined : Assigned dynamic html content for optimizedHtml
+ * @since: wine 2.3.0
+ * DT: 19.12.2023 **/  
+ public $content;
+
+/**
+ * @var Array Html Element Hooks 
+ * @property
+ * Defined : Assigned dynamic html Hooks for optimizedHtml
+ * @since: wine 2.3.0
+ * DT: 19.12.2023 **/  
+ public $hooks;
+
+/**
+ * @var Bool Html Element print trace 
+ * @property
+ * Defined : Assigned dynamic html tracing for optimizedHtml
+ * @since: wine 2.3.0
+ * DT: 19.12.2023 **/  
+ public $html;
+
+ public function __construct(
+
+   // html tag/element
+   string $element,
+   // value / content or html child elements
+   string|callable|array $content = [],
+   // html attributes
+   string|array $attributes = [],
+   // html dom hooks
+   array $hooks = [],
+   // html back trace
+   bool $html = false
+
+ ){
+
+    $this->element = $element;
+    $this->content = $content;
+    $this->attributes = $attributes;
+    $this->hooks = $hooks;
+    $this->html = $html;
+
  }
+
+}
